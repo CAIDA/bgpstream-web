@@ -3,8 +3,8 @@ set :instance, ENV['instance'] || 'dev'
 puts "Deploying bgpstream-#{instance}"
 
 set :application, "bgpstream-#{instance}"
-set :domain,      "charthouse-app-1.caida.org"
-set :deploy_to,   "/db/charthouse/#{application}"
+set :domain,      "bgpstream-app-1.caida.org"
+set :deploy_to,   "/db/bgp/#{application}"
 set :app_path,    "app"
 set :web_path,    "web"
 
@@ -39,7 +39,7 @@ set :instance_files,    [
                          ]
 
 # ssh settings
-set :user, "chrthous"
+set :user, "bgp"
 set :use_sudo, false
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
@@ -65,7 +65,7 @@ namespace :deploy do
     run "chmod -fR g+w #{deploy_to}/shared/#{web_path}/uploads"
     puts "Ownership/permissions set"
     run "sudo service php-fpm reload"
-    run "killall php" # cause the watcher to restart
+    #run "killall php" # cause the watcher to restart
     #		puts "--> Apache successfully restarted".green
   end
 
