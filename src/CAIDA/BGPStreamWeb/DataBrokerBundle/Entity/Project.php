@@ -54,19 +54,6 @@ class Project implements JsonSerializable
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Project
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get name
      *
      * @return string
@@ -74,19 +61,6 @@ class Project implements JsonSerializable
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Project
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
     }
 
     /**
@@ -100,19 +74,6 @@ class Project implements JsonSerializable
     }
 
     /**
-     * Set fileExt
-     *
-     * @param string $fileExt
-     * @return Project
-     */
-    public function setFileExt($fileExt)
-    {
-        $this->fileExt = $fileExt;
-
-        return $this;
-    }
-
-    /**
      * Get fileExt
      *
      * @return string
@@ -120,29 +81,6 @@ class Project implements JsonSerializable
     public function getFileExt()
     {
         return $this->fileExt;
-    }
-
-    /**
-     * Add bgpTypes
-     *
-     * @param \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpTypes
-     * @return Project
-     */
-    public function addBgpType(\CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpTypes)
-    {
-        $this->bgpTypes[] = $bgpTypes;
-
-        return $this;
-    }
-
-    /**
-     * Remove bgpTypes
-     *
-     * @param \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpTypes
-     */
-    public function removeBgpType(\CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpTypes)
-    {
-        $this->bgpTypes->removeElement($bgpTypes);
     }
 
     /**

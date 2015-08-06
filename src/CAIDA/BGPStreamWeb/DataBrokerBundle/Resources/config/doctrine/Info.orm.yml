@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Info:
     type: entity
     table: info
+    readOnly: true
     id:
         path:
             type: string

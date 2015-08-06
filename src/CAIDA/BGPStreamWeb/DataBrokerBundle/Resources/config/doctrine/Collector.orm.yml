@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
     type: entity
     table: collectors
+    readOnly: true
     indexes:
         project_id:
             columns:
@@ -44,4 +45,9 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
                 project_id:
                     referencedColumnName: id
             orphanRemoval: false
+    oneToMany:
+        data:
+            targetEntity: BgpData
+            cascade: {  }
+            mappedBy: collector
     lifecycleCallbacks: {  }

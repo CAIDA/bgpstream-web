@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
     type: entity
     table: bgp_types
+    readOnly: true
     uniqueConstraints:
         name:
             columns:
@@ -38,4 +39,9 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
             inversedBy: null
             joinTable: null
             orderBy: null
+    oneToMany:
+        data:
+            targetEntity: BgpData
+            cascade: {  }
+            mappedBy: bgpType
     lifecycleCallbacks: {  }

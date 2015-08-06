@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\FileStat:
     type: entity
     table: file_stats
+    readOnly: true
     indexes:
         project_id:
             columns:

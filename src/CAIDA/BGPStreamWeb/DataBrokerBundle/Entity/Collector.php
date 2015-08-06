@@ -29,11 +29,25 @@ class Collector
      */
     private $project;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $data;
+
+    /**
+     * Constructor
+     */
+    public
+    function __construct()
+    {
+        $this->data = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -41,22 +55,9 @@ class Collector
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Collector
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -64,22 +65,9 @@ class Collector
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     * @return Collector
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -87,25 +75,22 @@ class Collector
     }
 
     /**
-     * Set project
-     *
-     * @param \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project $project
-     * @return Collector
-     */
-    public function setProject(\CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project $project = null)
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
-    /**
      * Get project
      *
-     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project 
+     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project
      */
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Get data
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }

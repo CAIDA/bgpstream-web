@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
     type: entity
     table: projects
+    readOnly: true
     uniqueConstraints:
         name:
             columns:

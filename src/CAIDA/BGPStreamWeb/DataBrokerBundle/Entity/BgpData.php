@@ -34,24 +34,10 @@ class BgpData
      */
     private $bgpType;
 
-
-    /**
-     * Set fileTime
-     *
-     * @param integer $fileTime
-     * @return BgpData
-     */
-    public function setFileTime($fileTime)
-    {
-        $this->fileTime = $fileTime;
-
-        return $this;
-    }
-
     /**
      * Get fileTime
      *
-     * @return integer 
+     * @return integer
      */
     public function getFileTime()
     {
@@ -59,22 +45,9 @@ class BgpData
     }
 
     /**
-     * Set webSize
-     *
-     * @param string $webSize
-     * @return BgpData
-     */
-    public function setWebSize($webSize)
-    {
-        $this->webSize = $webSize;
-
-        return $this;
-    }
-
-    /**
      * Get webSize
      *
-     * @return string 
+     * @return string
      */
     public function getWebSize()
     {
@@ -82,22 +55,9 @@ class BgpData
     }
 
     /**
-     * Set ts
-     *
-     * @param \DateTime $ts
-     * @return BgpData
-     */
-    public function setTs($ts)
-    {
-        $this->ts = $ts;
-
-        return $this;
-    }
-
-    /**
      * Get ts
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTs()
     {
@@ -105,22 +65,9 @@ class BgpData
     }
 
     /**
-     * Set collector
-     *
-     * @param \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector $collector
-     * @return BgpData
-     */
-    public function setCollector(\CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector $collector = null)
-    {
-        $this->collector = $collector;
-
-        return $this;
-    }
-
-    /**
      * Get collector
      *
-     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector 
+     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector
      */
     public function getCollector()
     {
@@ -128,22 +75,9 @@ class BgpData
     }
 
     /**
-     * Set bgpType
-     *
-     * @param \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpType
-     * @return BgpData
-     */
-    public function setBgpType(\CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType $bgpType = null)
-    {
-        $this->bgpType = $bgpType;
-
-        return $this;
-    }
-
-    /**
      * Get bgpType
      *
-     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType 
+     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType
      */
     public function getBgpType()
     {

@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
     type: entity
     table: bgp_data
+    readOnly: true
     indexes:
         bgp_data_ibfk_2:
             columns:
@@ -42,12 +43,12 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             nullable: false
             comment: ''
             default: CURRENT_TIMESTAMP
-    oneToOne:
+    manyToOne:
         collector:
             targetEntity: Collector
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: data
             joinColumns:
                 collector_id:
                     referencedColumnName: id
@@ -56,7 +57,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             targetEntity: BgpType
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: data
             joinColumns:
                 bgp_type_id:
                     referencedColumnName: id
