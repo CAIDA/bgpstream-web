@@ -17,13 +17,13 @@ class DefaultController extends Controller
      *
      * @return DataResponse
      */
-    private function setupResponse($request)
+    private function setupResponse($request, $dataResponseType)
     {
         // quick, shutdown the session!
         //$request->getSession()->save();
         //session_write_close();
 
-        $response = new DataResponse();
+        $response = new DataResponse($dataResponseType);
 
         $this->cacheParams = [];
 
@@ -58,11 +58,11 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function metaAction($type, Request $request)
+    public function metaAction($project, $collector, Request $request)
     {
-        $response = $this->setupResponse($request);
+        $response = $this->setupResponse($request, DataResponse::TYPE_META);
 
-        if ($type == "projects") {
+        if ($project == "all" && $collector == "all") {
             $products =
                 $this->getDoctrine()
                     ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Project')
@@ -78,7 +78,7 @@ class DefaultController extends Controller
     public
     function dataAction(Request $request)
     {
-        $response = $this->setupResponse($request);
+        $response = $this->setupResponse($request, DataResponse::TYPE_DATA);
         $response->setData(['data' => true]);
         return $response;
     }
