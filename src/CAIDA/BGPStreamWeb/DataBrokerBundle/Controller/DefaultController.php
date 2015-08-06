@@ -3,6 +3,9 @@
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -10,6 +13,37 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class DefaultController extends Controller
 {
     private $cacheParams;
+
+    public function serializeProjects($projects)
+    {
+        $data = [];
+
+        foreach ($projects as $project) {
+            /* @var Project $project */
+
+            $types = [];
+            foreach($project->getBgpTypes() as $type) {
+                /* @var BgpType $type */
+                $types[] = $type->getName();
+            }
+
+            $collectors = [];
+            foreach($project->getCollectors() as $collector) {
+                /* @var BgpType $type */
+                $collectors[] = $collector->getName();
+            }
+
+            $data[] = [
+                'name'    => $project->getName(),
+                //'path'    => $project->getPath(),
+                //'fileExt' => $project->getFileExt(),
+                'dataTypes'   => $types,
+                'collectors' => $collectors,
+            ];
+        }
+
+        return $data;
+    }
 
     /**
      * @param Request $request
@@ -62,15 +96,13 @@ class DefaultController extends Controller
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_META);
 
-        if ($project == "all" && $collector == "all") {
-            $products =
-                $this->getDoctrine()
-                    ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Project')
-                    ->findAll();
-            $response->setData($products);
-        } else {
-            throw new NotFoundHttpException('Invalid metadata type');
-        }
+        // TODO: allow filtering of projects and collectors.
+        // TODO: use keyword "*" or "all" to get all projects and/or collectors
+        $projects =
+            $this->getDoctrine()
+                 ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Project')
+                 ->findAll();
+        $response->setData($this->serializeProjects($projects));
 
         return $response;
     }

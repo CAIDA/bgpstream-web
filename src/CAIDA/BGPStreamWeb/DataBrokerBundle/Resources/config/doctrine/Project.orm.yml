@@ -55,4 +55,9 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
                         name: bgp_type_id
                         referencedColumnName: id
             orderBy: null
+    oneToMany:
+        collectors:
+            targetEntity: Collector
+            cascade: {  }
+            mappedBy: project
     lifecycleCallbacks: {  }

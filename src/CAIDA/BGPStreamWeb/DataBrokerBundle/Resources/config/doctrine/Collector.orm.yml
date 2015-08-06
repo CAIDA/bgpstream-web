@@ -40,7 +40,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
             targetEntity: Project
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: collectors
             joinColumns:
                 project_id:
                     referencedColumnName: id

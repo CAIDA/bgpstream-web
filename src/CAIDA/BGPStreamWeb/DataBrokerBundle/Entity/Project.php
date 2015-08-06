@@ -2,13 +2,13 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Entity;
 
-use JsonSerializable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Project
  */
-class Project implements JsonSerializable
+class Project
 {
     /**
      * @var integer
@@ -36,11 +36,17 @@ class Project implements JsonSerializable
     private $bgpTypes;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $collectors;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->bgpTypes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bgpTypes = new ArrayCollection();
+        $this->collectors = new ArrayCollection();
     }
 
     /**
@@ -93,18 +99,13 @@ class Project implements JsonSerializable
         return $this->bgpTypes;
     }
 
-    public function jsonSerialize()
+    /**
+     * Get collectors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCollectors()
     {
-        $types = [];
-        foreach ($this->getBgpTypes() as $type) {
-            /* @var BgpType $type */
-            $types[] = $type->getName();
-        }
-        return [
-            'name' => $this->getName(),
-            'path' => $this->getPath(),
-            'fileExt' => $this->getFileExt(),
-            'types' => $types,
-        ];
+        return $this->collectors;
     }
 }
