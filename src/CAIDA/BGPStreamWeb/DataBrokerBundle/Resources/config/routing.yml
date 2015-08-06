@@ -1,6 +1,11 @@
 caidabgp_stream_web_data_broker_meta:
-    path:     /meta
-    defaults: { _controller: CAIDABGPStreamWebDataBrokerBundle:Default:meta }
+    path:     /meta/{type}
+    defaults:
+        _controller: CAIDABGPStreamWebDataBrokerBundle:Default:meta
+        type: projects
+    requirements:
+        type: projects|collectors
+
 
 caidabgp_stream_web_data_broker_data:
     path:     /data

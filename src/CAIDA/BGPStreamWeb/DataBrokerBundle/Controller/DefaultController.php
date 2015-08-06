@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-    public function metaAction()
+    public function metaAction($type)
     {
         // parse the request parameters, do a DB lookup and return the results
-        return new JsonResponse(['meta' => true]);
+        return new JsonResponse(['meta' => true, 'type' => $type]);
     }
 
     public
