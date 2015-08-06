@@ -1,0 +1,4 @@
+services:
+#    caidabgp_stream_web_data_broker.example:
+#        class: CAIDA\BGPStreamWeb\DataBrokerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

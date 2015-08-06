@@ -1,0 +1,5 @@
+caidabgp_stream_web_data_broker:
+    resource: "@CAIDABGPStreamWebDataBrokerBundle/Resources/config/routing.yml"
+    prefix:   /broker
+
+
