@@ -1,0 +1,41 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
+    type: entity
+    table: bgp_types
+    uniqueConstraints:
+        name:
+            columns:
+                - name
+        path:
+            columns:
+                - path
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        path:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+    manyToMany:
+        projects:
+            targetEntity: Project
+            cascade: {  }
+            mappedBy: bgpType
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

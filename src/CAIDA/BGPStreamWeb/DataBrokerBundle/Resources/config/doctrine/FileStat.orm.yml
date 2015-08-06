@@ -1,0 +1,87 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\FileStat:
+    type: entity
+    table: file_stats
+    indexes:
+        project_id:
+            columns:
+                - project_id
+        collector_id:
+            columns:
+                - collector_id
+        bgp_type_id:
+            columns:
+                - bgp_type_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fileTime:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: file_time
+        lastIndex:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: last_index
+        downloadStart:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: download_start
+        downloadStop:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: download_stop
+        inDb:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: in_db
+        ts:
+            type: datetime
+            nullable: false
+            comment: ''
+            default: CURRENT_TIMESTAMP
+    manyToOne:
+        project:
+            targetEntity: Project
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                project_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        collector:
+            targetEntity: Collector
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                collector_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        bgpType:
+            targetEntity: BgpType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                bgp_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,57 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
+    type: entity
+    table: projects
+    uniqueConstraints:
+        name:
+            columns:
+                - name
+        path:
+            columns:
+                - path
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        path:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        fileExt:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            column: file_ext
+    manyToMany:
+        bgpTypes:
+            targetEntity: BgpType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: project
+            joinTable:
+                name: on_web_frequency
+                joinColumns:
+                    -
+                        name: project_id
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: bgp_type_id
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

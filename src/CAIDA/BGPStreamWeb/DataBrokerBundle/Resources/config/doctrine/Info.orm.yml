@@ -1,0 +1,14 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Info:
+    type: entity
+    table: info
+    id:
+        path:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    lifecycleCallbacks: {  }
