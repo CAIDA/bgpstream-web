@@ -14,7 +14,7 @@ class DefaultController extends Controller
 {
     private $cacheParams;
 
-    public function serializeProjects($projects, $collectorFilter)
+    public function serializeProjects($projects)
     {
         $data = [];
 
@@ -28,7 +28,7 @@ class DefaultController extends Controller
             }
 
             $collectors = [];
-            foreach($project->getCollectorsByName($collectorFilter) as $collector) {
+            foreach($project->getCollectors() as $collector) {
                 /* @var BgpType $type */
                 $collectors[] = $collector->getName();
             }
@@ -43,6 +43,24 @@ class DefaultController extends Controller
         }
 
         return ['projects' => $data];
+    }
+
+    public
+    function serializeCollectors($collectors)
+    {
+        $data = [];
+
+        foreach($collectors as $collector) {
+            /* @var Collector $collector */
+
+            $data[] = [
+                'name'       => $collector->getName(),
+                //'path'    => $project->getPath(),
+                'project'  => $collector->getProject()->getName(),
+            ];
+        }
+
+        return ['collectors' => $data];
     }
 
     /**
@@ -92,22 +110,39 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function metaAction($project, $collector, Request $request)
+    public function metaProjectsAction($project, Request $request)
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_META);
 
         // handle wildcards
         $project = ($project == '*' || $project == 'all') ? null : $project;
-        $collector = ($collector == '*' || $collector == 'all') ? null : $collector;
 
         $response->addOption('project', $project);
-        $response->addOption('collector', $project);
 
         $projects =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Project')
                  ->findByName($project);
-        $response->setData($this->serializeProjects($projects, $collector));
+        $response->setData($this->serializeProjects($projects));
+
+        return $response;
+    }
+
+    public
+    function metaCollectorsAction($collector, Request $request)
+    {
+        $response = $this->setupResponse($request, DataResponse::TYPE_META);
+
+        // handle wildcards
+        $collector = ($collector == '*' || $collector == 'all') ? null : $collector;
+
+        $response->addOption('collector', $collector);
+
+        $projects =
+            $this->getDoctrine()
+                 ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Collector')
+                 ->findByName($collector);
+        $response->setData($this->serializeCollectors($projects));
 
         return $response;
     }

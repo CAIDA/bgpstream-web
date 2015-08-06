@@ -2,6 +2,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
     type: entity
     table: collectors
     readOnly: true
+    repositoryClass: CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\CollectorRepository
     indexes:
         project_id:
             columns:
