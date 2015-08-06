@@ -14,6 +14,7 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'],
                   array(
                       '192.172.226.97',  // gibi
+                      '192.172.226.172', // chiara-mbp
                       '127.0.0.1',
                       'fe80::1',
                       '::1'
