@@ -3,6 +3,7 @@
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -107,5 +108,23 @@ class Project
     public function getCollectors()
     {
         return $this->collectors;
+    }
+
+    /**
+     * Get collectors by name
+     *
+     * @param string $name
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCollectorsByName($name)
+    {
+        if ($name) {
+            $criteria = Criteria::create();
+            $criteria->where(Criteria::expr()->eq('name', $name));
+
+            return $this->collectors->matching($criteria);
+        } else {
+            return $this->getCollectors();
+        }
     }
 }

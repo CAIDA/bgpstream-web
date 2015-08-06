@@ -2,6 +2,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
     type: entity
     table: projects
     readOnly: true
+    repositoryClass: CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\ProjectRepository
     uniqueConstraints:
         name:
             columns:

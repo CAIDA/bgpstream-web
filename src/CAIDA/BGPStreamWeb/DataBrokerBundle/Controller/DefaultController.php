@@ -14,7 +14,7 @@ class DefaultController extends Controller
 {
     private $cacheParams;
 
-    public function serializeProjects($projects)
+    public function serializeProjects($projects, $collectorFilter)
     {
         $data = [];
 
@@ -28,7 +28,7 @@ class DefaultController extends Controller
             }
 
             $collectors = [];
-            foreach($project->getCollectors() as $collector) {
+            foreach($project->getCollectorsByName($collectorFilter) as $collector) {
                 /* @var BgpType $type */
                 $collectors[] = $collector->getName();
             }
@@ -42,7 +42,7 @@ class DefaultController extends Controller
             ];
         }
 
-        return $data;
+        return ['projects' => $data];
     }
 
     /**
@@ -96,13 +96,18 @@ class DefaultController extends Controller
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_META);
 
-        // TODO: allow filtering of projects and collectors.
-        // TODO: use keyword "*" or "all" to get all projects and/or collectors
+        // handle wildcards
+        $project = ($project == '*' || $project == 'all') ? null : $project;
+        $collector = ($collector == '*' || $collector == 'all') ? null : $collector;
+
+        $response->addOption('project', $project);
+        $response->addOption('collector', $project);
+
         $projects =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:Project')
-                 ->findAll();
-        $response->setData($this->serializeProjects($projects));
+                 ->findByName($project);
+        $response->setData($this->serializeProjects($projects, $collector));
 
         return $response;
     }
