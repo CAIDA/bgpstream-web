@@ -4,14 +4,12 @@ namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\OnWebFrequency;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -50,7 +48,7 @@ class DefaultController extends Controller
                 //'name'    => $project->getName(),
                 //'path'    => $project->getPath(),
                 //'fileExt' => $project->getFileExt(),
-                'dataTypes' => $this->serializeBgpTypes($project->getOnWebFrequencies()),
+                //'dataTypes' => $this->serializeBgpTypes($project->getOnWebFrequencies()),
                 'collectors' => $collectors,
             ];
         }
@@ -70,9 +68,9 @@ class DefaultController extends Controller
                 //'name'       => $collector->getName(),
                 //'path'    => $collector->getPath(),
                 'project'  => $collector->getProject()->getName(),
-                'dataTypes' =>
-                    $this->serializeBgpTypes($collector->getProject()
-                                                 ->getOnWebFrequencies()),
+                //'dataTypes' =>
+                //    $this->serializeBgpTypes($collector->getProject()
+                //                                 ->getOnWebFrequencies()),
             ];
         }
 
