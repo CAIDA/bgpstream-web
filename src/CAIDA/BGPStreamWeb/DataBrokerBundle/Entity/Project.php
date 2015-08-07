@@ -34,24 +34,13 @@ class Project
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $bgpTypes;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
     private $collectors;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $onWebFrequencies;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->bgpTypes = new ArrayCollection();
         $this->collectors = new ArrayCollection();
     }
 
@@ -96,16 +85,6 @@ class Project
     }
 
     /**
-     * Get bgpTypes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getBgpTypes()
-    {
-        return $this->bgpTypes;
-    }
-
-    /**
      * Get collectors
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -131,15 +110,5 @@ class Project
         } else {
             return $this->getCollectors();
         }
-    }
-
-    /**
-     * Get onWebFrequencies
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOnWebFrequencies()
-    {
-        return $this->onWebFrequencies;
     }
 }

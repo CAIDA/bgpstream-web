@@ -27,7 +27,7 @@ class BgpType
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $projects;
+    private $collectors;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -35,16 +35,11 @@ class BgpType
     private $data;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $onWebFrequencies;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->collectors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -78,13 +73,13 @@ class BgpType
     }
 
     /**
-     * Get projects
+     * Get collectors
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getProjects()
+    public function getCollectors()
     {
-        return $this->projects;
+        return $this->collectors;
     }
 
     /**
@@ -95,15 +90,5 @@ class BgpType
     public function getData()
     {
         return $this->data;
-    }
-
-    /**
-     * Get onWebFrequencies
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOnWebFrequencies()
-    {
-        return $this->onWebFrequencies;
     }
 }

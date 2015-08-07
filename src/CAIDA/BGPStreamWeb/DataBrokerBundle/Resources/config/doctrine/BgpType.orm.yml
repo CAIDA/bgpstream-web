@@ -32,20 +32,13 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
             fixed: false
             comment: ''
     manyToMany:
-        projects:
-            targetEntity: Project
+        collectors:
+            targetEntity: Collector
             cascade: {  }
             mappedBy: bgpTypes
-            inversedBy: null
-            joinTable: null
-            orderBy: null
     oneToMany:
         data:
             targetEntity: BgpData
-            cascade: {  }
-            mappedBy: bgpType
-        onWebFrequencies:
-            targetEntity: OnWebFrequency
             cascade: {  }
             mappedBy: bgpType
     lifecycleCallbacks: {  }

@@ -35,14 +35,19 @@ class Collector
     private $data;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $bgpTypes;
+
+    /**
      * Constructor
      */
     public
     function __construct()
     {
         $this->data = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bgpTypes = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -92,5 +97,16 @@ class Collector
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Get bgpTypes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public
+    function getBgpTypes()
+    {
+        return $this->bgpTypes;
     }
 }

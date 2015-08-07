@@ -39,30 +39,9 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
             fixed: false
             comment: ''
             column: file_ext
-    manyToMany:
-        bgpTypes:
-            targetEntity: BgpType
-            cascade: {  }
-            mappedBy: null
-            inversedBy: projects
-            joinTable:
-                name: on_web_frequency
-                joinColumns:
-                    -
-                        name: project_id
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    -
-                        name: bgp_type_id
-                        referencedColumnName: id
-            orderBy: null
     oneToMany:
         collectors:
             targetEntity: Collector
-            cascade: {  }
-            mappedBy: project
-        onWebFrequencies:
-            targetEntity: OnWebFrequency
             cascade: {  }
             mappedBy: project
     lifecycleCallbacks: {  }
