@@ -35,7 +35,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
         projects:
             targetEntity: Project
             cascade: {  }
-            mappedBy: bgpType
+            mappedBy: bgpTypes
             inversedBy: null
             joinTable: null
             orderBy: null

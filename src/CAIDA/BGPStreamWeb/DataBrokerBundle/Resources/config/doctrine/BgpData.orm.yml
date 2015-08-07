@@ -2,6 +2,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
     type: entity
     table: bgp_data
     readOnly: true
+    repositoryClass: CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository
     indexes:
         bgp_data_ibfk_2:
             columns:
@@ -23,6 +24,10 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             columns:
                 - collector_id
     id:
+        collector:
+            associationKey: true
+        bgpType:
+            associationKey: true
         fileTime:
             type: integer
             nullable: false

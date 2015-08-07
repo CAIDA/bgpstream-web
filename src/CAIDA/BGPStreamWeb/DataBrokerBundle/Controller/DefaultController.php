@@ -2,6 +2,8 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
@@ -12,6 +14,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
+    // max window of time to ask from the DB
+    const QUERY_WINDOW = 7200;
+
     private $cacheParams;
 
     public function serializeProjects($projects)
@@ -35,8 +40,8 @@ class DefaultController extends Controller
 
             $data[] = [
                 'name'    => $project->getName(),
-                //'path'    => $project->getPath(),
-                //'fileExt' => $project->getFileExt(),
+                'path'    => $project->getPath(),
+                'fileExt' => $project->getFileExt(),
                 'dataTypes'   => $types,
                 'collectors' => $collectors,
             ];
@@ -55,7 +60,7 @@ class DefaultController extends Controller
 
             $data[] = [
                 'name'       => $collector->getName(),
-                //'path'    => $project->getPath(),
+                'path'    => $collector->getPath(),
                 'project'  => $collector->getProject()->getName(),
             ];
         }
@@ -110,9 +115,26 @@ class DefaultController extends Controller
         return $response;
     }
 
+    private function getLocalParam($request, $response, $param, $default, $type='string')
+    {
+        $val            = $request->get($param, $default);
+
+        if ($type == 'array' && !is_array($val)) {
+            $val = [$val];
+        }
+
+        $this->cacheParams[] = $val;
+        $response->addOption($param, $val);
+
+        return $val;
+    }
+
     public function metaProjectsAction($project, Request $request)
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_META);
+        if($response->isError()) {
+            return $response;
+        }
 
         // handle wildcards
         $project = ($project == '*' || $project == 'all') ? null : $project;
@@ -132,6 +154,9 @@ class DefaultController extends Controller
     function metaCollectorsAction($collector, Request $request)
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_META);
+        if($response->isError()) {
+            return $response;
+        }
 
         // handle wildcards
         $collector = ($collector == '*' || $collector == 'all') ? null : $collector;
@@ -151,7 +176,57 @@ class DefaultController extends Controller
     function dataAction(Request $request)
     {
         $response = $this->setupResponse($request, DataResponse::TYPE_DATA);
-        $response->setData(['data' => true]);
+        if($response->isError()) {
+            return $response;
+        }
+
+        /* LOCAL PARAMS */
+        $projects = $this->getLocalParam($request, $response, 'projects', []);
+        $collectors = $this->getLocalParam($request, $response, 'collectors', []);
+        $intervals = $this->getLocalParam($request, $response, 'intervals', [], 'array');
+        $types = $this->getLocalParam($request, $response, 'types', []);
+
+        // TODO: param last processing bgp time
+        // TODO: param last response time
+        // TODO: send this response time
+
+        // some sanity checking on the parameters
+        if (count($intervals) == 0) {
+            return $response->setError("At least one interval must be set");
+        }
+
+        // parse the intervals and find the first interval that we should deal with
+        // TODO: convert this to an Interval class
+        $intervalArr = [];
+        $firstInterval = null;
+        foreach ($intervals as $interval) {
+            $arr = explode(',', $interval);
+            if (count($arr) != 2 || !is_numeric($arr[0]) || !is_numeric($arr[1])) {
+                return $response->setError('Invalid interval: ' . $interval);
+            }
+            $arr[0] = (int)$arr[0];
+            $arr[1] = (int)$arr[1];
+            if (!$firstInterval || $arr[0] < $firstInterval[0]) {
+                $firstInterval = $arr;
+            }
+            $intervalArr[] = $arr;
+        }
+        // truncate the interval to our max window len
+        $firstInterval[1] = min($firstInterval[1],
+                                $firstInterval[0] + static::QUERY_WINDOW);
+
+        $bgpdata =
+            $this->getDoctrine()
+                 ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
+                 ->findByIntervalProjectsCollectorsTypes($firstInterval[0],
+                                                         $firstInterval[1],
+                                                         $projects,
+                                                         $collectors,
+                                                         $types);
+
+        $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
+
+        $response->setData(['dumpFiles' => $dumpfiles]);
         return $response;
     }
 }

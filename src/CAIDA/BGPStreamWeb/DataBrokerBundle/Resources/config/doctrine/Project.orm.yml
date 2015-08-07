@@ -44,7 +44,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
             targetEntity: BgpType
             cascade: {  }
             mappedBy: null
-            inversedBy: project
+            inversedBy: projects
             joinTable:
                 name: on_web_frequency
                 joinColumns:
