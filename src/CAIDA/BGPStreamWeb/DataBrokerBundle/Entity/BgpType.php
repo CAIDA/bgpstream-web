@@ -35,6 +35,11 @@ class BgpType
     private $data;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $onWebFrequencies;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -90,5 +95,15 @@ class BgpType
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Get onWebFrequencies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOnWebFrequencies()
+    {
+        return $this->onWebFrequencies;
     }
 }

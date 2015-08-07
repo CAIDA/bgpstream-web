@@ -42,6 +42,11 @@ class Project
     private $collectors;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $onWebFrequencies;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -126,5 +131,15 @@ class Project
         } else {
             return $this->getCollectors();
         }
+    }
+
+    /**
+     * Get onWebFrequencies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOnWebFrequencies()
+    {
+        return $this->onWebFrequencies;
     }
 }

@@ -61,4 +61,8 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project:
             targetEntity: Collector
             cascade: {  }
             mappedBy: project
+        onWebFrequencies:
+            targetEntity: OnWebFrequency
+            cascade: {  }
+            mappedBy: project
     lifecycleCallbacks: {  }

@@ -44,4 +44,8 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
             targetEntity: BgpData
             cascade: {  }
             mappedBy: bgpType
+        onWebFrequencies:
+            targetEntity: OnWebFrequency
+            cascade: {  }
+            mappedBy: bgpType
     lifecycleCallbacks: {  }

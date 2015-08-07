@@ -1,0 +1,36 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\OnWebFrequency:
+    type: entity
+    table: on_web_frequency
+    readOnly: true
+    id:
+        project:
+            associationKey: true
+        bgpType:
+            associationKey: true
+    fields:
+        onWebFreq:
+            type: integer
+            column: on_web_freq
+        offset:
+            type: integer
+            column: offset
+    manyToOne:
+        project:
+            targetEntity: Project
+            cascade: {  }
+            mappedBy: null
+            inversedBy: onWebFrequencies
+            joinColumns:
+                project_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        bgpType:
+            targetEntity: BgpType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: onWebFrequencies
+            joinColumns:
+                bgp_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

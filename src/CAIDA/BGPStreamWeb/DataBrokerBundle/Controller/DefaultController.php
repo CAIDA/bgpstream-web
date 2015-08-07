@@ -4,6 +4,7 @@ namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\OnWebFrequency;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
@@ -19,18 +20,25 @@ class DefaultController extends Controller
 
     private $cacheParams;
 
-    public function serializeProjects($projects)
+    private function serializeBgpTypes($onWebFreqs)
+    {
+        $types = [];
+        foreach($onWebFreqs as $freq) {
+            /* @var OnWebFrequency $freq */
+            $types[$freq->getBgpType()->getName()] = [
+                'dumpFrequency' => $freq->getOnWebFreq(),
+                'dumpDuration'  => $freq->getOffset(),
+            ];
+        }
+        return $types;
+    }
+
+    private function serializeProjects($projects)
     {
         $data = [];
 
         foreach ($projects as $project) {
             /* @var Project $project */
-
-            $types = [];
-            foreach($project->getBgpTypes() as $type) {
-                /* @var BgpType $type */
-                $types[] = $type->getName();
-            }
 
             $collectors = [];
             foreach($project->getCollectors() as $collector) {
@@ -38,11 +46,11 @@ class DefaultController extends Controller
                 $collectors[] = $collector->getName();
             }
 
-            $data[] = [
-                'name'    => $project->getName(),
-                'path'    => $project->getPath(),
-                'fileExt' => $project->getFileExt(),
-                'dataTypes'   => $types,
+            $data[$project->getName()] = [
+                //'name'    => $project->getName(),
+                //'path'    => $project->getPath(),
+                //'fileExt' => $project->getFileExt(),
+                'dataTypes' => $this->serializeBgpTypes($project->getOnWebFrequencies()),
                 'collectors' => $collectors,
             ];
         }
@@ -50,7 +58,7 @@ class DefaultController extends Controller
         return ['projects' => $data];
     }
 
-    public
+    private
     function serializeCollectors($collectors)
     {
         $data = [];
@@ -58,10 +66,13 @@ class DefaultController extends Controller
         foreach($collectors as $collector) {
             /* @var Collector $collector */
 
-            $data[] = [
-                'name'       => $collector->getName(),
-                'path'    => $collector->getPath(),
+            $data[$collector->getName()] = [
+                //'name'       => $collector->getName(),
+                //'path'    => $collector->getPath(),
                 'project'  => $collector->getProject()->getName(),
+                'dataTypes' =>
+                    $this->serializeBgpTypes($collector->getProject()
+                                                 ->getOnWebFrequencies()),
             ];
         }
 
