@@ -40,6 +40,11 @@ class Collector
     private $bgpTypes;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dumpInfos;
+
+    /**
      * Constructor
      */
     public
@@ -47,6 +52,7 @@ class Collector
     {
         $this->data = new \Doctrine\Common\Collections\ArrayCollection();
         $this->bgpTypes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dumpInfos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -108,5 +114,15 @@ class Collector
     function getBgpTypes()
     {
         return $this->bgpTypes;
+    }
+
+    /**
+     * Get dumpInfos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDumpInfos()
+    {
+        return $this->dumpInfos;
     }
 }

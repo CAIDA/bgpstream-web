@@ -1,0 +1,35 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo:
+    type: entity
+    table: dump_info
+    id:
+        collectorTypeId:
+            type: integer
+            nullable: false
+            id: true
+    fields:
+        period:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        duration:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    oneToOne:
+        collectorType:
+            targetEntity: CollectorType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                collector_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    oneToMany:
+        data:
+            targetEntity: BgpData
+            cascade: {  }
+            mappedBy: dumpInfo
+    lifecycleCallbacks: {  }

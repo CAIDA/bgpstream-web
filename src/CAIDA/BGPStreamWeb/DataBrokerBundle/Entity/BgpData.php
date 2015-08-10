@@ -35,6 +35,11 @@ class BgpData
     private $bgpType;
 
     /**
+     * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo
+     */
+    private $dumpInfo;
+
+    /**
      * Get fileTime
      *
      * @return integer
@@ -82,5 +87,15 @@ class BgpData
     public function getBgpType()
     {
         return $this->bgpType;
+    }
+
+    /**
+     * Get dumpInfo
+     *
+     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo
+     */
+    public function getDumpInfo()
+    {
+        return $this->dumpInfo;
     }
 }

@@ -67,4 +67,10 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
                 bgp_type_id:
                     referencedColumnName: id
             orphanRemoval: false
+        dumpInfo:
+            targetEntity: DumpInfo
+            inversedBy: data
+            joinColumns:
+                collector_type_id:
+                    referencedColumnName: collector_type_id
     lifecycleCallbacks: {  }

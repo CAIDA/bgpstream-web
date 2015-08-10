@@ -31,8 +31,7 @@ class CaidaBgpArchive implements BgpArchiveInterface {
                 $row->getCollector()->getName(),
                 $row->getBgpType()->getName(),
                 $row->getFileTime(),
-                0
-                //$row->getOnWebFrequency()->getOffset()
+                $row->getDumpInfo()->getDuration()
                 );
         }
 

@@ -36,6 +36,17 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType:
             targetEntity: Collector
             cascade: {  }
             mappedBy: bgpTypes
+        dumpInfos:
+            targetEntity: DumpInfo
+            inversedBy: null
+            joinTable:
+                name: collector_type
+                joinColumns:
+                    bgp_type_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    id:
+                        referencedColumnName: collector_type_id
     oneToMany:
         data:
             targetEntity: BgpData

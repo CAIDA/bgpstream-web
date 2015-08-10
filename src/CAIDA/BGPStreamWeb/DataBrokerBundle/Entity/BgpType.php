@@ -35,11 +35,17 @@ class BgpType
     private $data;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $dumpInfos;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->collectors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dumpInfos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -90,5 +96,15 @@ class BgpType
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Get dumpInfos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDumpInfos()
+    {
+        return $this->dumpInfos;
     }
 }

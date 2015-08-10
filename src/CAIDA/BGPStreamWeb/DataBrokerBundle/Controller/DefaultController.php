@@ -4,6 +4,8 @@ namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
@@ -18,14 +20,16 @@ class DefaultController extends Controller
 
     private $cacheParams;
 
-    private function serializeBgpTypes($onWebFreqs)
+    private function serializeDumpInfos($dumpInfos)
     {
         $types = [];
-        foreach($onWebFreqs as $freq) {
-            /* @var OnWebFrequency $freq */
-            $types[$freq->getBgpType()->getName()] = [
-                'dumpFrequency' => $freq->getOnWebFreq(),
-                'dumpDuration'  => $freq->getOffset(),
+        foreach($dumpInfos as $dumpInfo) {
+            /* @var DumpInfo $dumpInfo */
+            /* @var CollectorType $ct */
+            $ct = $dumpInfo->getCollectorType();
+            $types[$ct->getBgpType()->getName()] = [
+                'dumpPeriod' => $dumpInfo->getPeriod(),
+                'dumpDuration'  => $dumpInfo->getDuration(),
             ];
         }
         return $types;
@@ -48,7 +52,6 @@ class DefaultController extends Controller
                 //'name'    => $project->getName(),
                 //'path'    => $project->getPath(),
                 //'fileExt' => $project->getFileExt(),
-                //'dataTypes' => $this->serializeBgpTypes($project->getOnWebFrequencies()),
                 'collectors' => $collectors,
             ];
         }
@@ -68,9 +71,8 @@ class DefaultController extends Controller
                 //'name'       => $collector->getName(),
                 //'path'    => $collector->getPath(),
                 'project'  => $collector->getProject()->getName(),
-                //'dataTypes' =>
-                //    $this->serializeBgpTypes($collector->getProject()
-                //                                 ->getOnWebFrequencies()),
+                'dataTypes' =>
+                    $this->serializeDumpInfos($collector->getDumpInfos()),
             ];
         }
 

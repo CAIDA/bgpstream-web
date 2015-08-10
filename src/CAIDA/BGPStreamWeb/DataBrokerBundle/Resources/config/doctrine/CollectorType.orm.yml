@@ -1,0 +1,44 @@
+CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType:
+    type: entity
+    table: collector_type
+    indexes:
+        collector_type_ibfk_2:
+            columns:
+                - bgp_type_id
+        IDX_29E554FE670BAFFE:
+            columns:
+                - collector_id
+    uniqueConstraints:
+        collector_id:
+            columns:
+                - collector_id
+                - bgp_type_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        collector:
+            targetEntity: Collector
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                collector_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        bgpType:
+            targetEntity: BgpType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                bgp_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
