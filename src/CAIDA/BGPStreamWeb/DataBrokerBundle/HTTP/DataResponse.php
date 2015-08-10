@@ -15,6 +15,7 @@ class DataResponse extends JsonResponse
     protected $encodingOptions;
 
     protected $type;
+    protected $id;
     protected $error = null;
     protected $data;
     protected $options;
@@ -44,6 +45,8 @@ class DataResponse extends JsonResponse
             JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
         $this->setType($type);
+
+        $this->id = time();
     }
 
     /**
@@ -188,6 +191,8 @@ class DataResponse extends JsonResponse
     function toArray()
     {
         $arr = array();
+
+        $arr['id'] = $this->id;
 
         if($this->type || $this->showEmpty) {
             $arr['type'] = $this->type;

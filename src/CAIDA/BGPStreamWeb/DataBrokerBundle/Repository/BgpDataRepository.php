@@ -8,17 +8,24 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Repository;
 
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
 use Doctrine\ORM\EntityRepository;
 
 class BgpDataRepository extends EntityRepository {
 
-    public function findByIntervalProjectsCollectorsTypes($startTime,
-                                                          $endTime,
+    /**
+     * @param Interval $interval
+     * @param null $projects
+     * @param null $collectors
+     * @param null $types
+     * @return array
+     */
+    public function findByIntervalProjectsCollectorsTypes($interval,
                                                           $projects=null,
                                                           $collectors=null,
                                                           $types=null)
     {
-        if (!$startTime || !$endTime) {
+        if (!$interval) {
             throw new \InvalidArgumentException('Missing start or end time');
         }
         $queryStr =
@@ -32,8 +39,8 @@ class BgpDataRepository extends EntityRepository {
         $query = $this->getEntityManager()
                       ->createQuery($queryStr);
 
-        $query->setParameter('starttime', $startTime);
-        $query->setParameter('endtime', $endTime);
+        $query->setParameter('starttime', $interval->getStart());
+        $query->setParameter('endtime', $interval->getEnd());
 
         return $query->getResult();
     }

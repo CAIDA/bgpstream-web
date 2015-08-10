@@ -3,6 +3,8 @@
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo;
@@ -192,45 +194,51 @@ class DefaultController extends Controller
         }
 
         /* LOCAL PARAMS */
+
+        // projects to retrieve data for
         $projects = $this->getLocalParam($request, $response, 'projects', []);
+
+        // collectors to retrieve data for
         $collectors = $this->getLocalParam($request, $response, 'collectors', []);
-        $intervals = $this->getLocalParam($request, $response, 'intervals', [], 'array');
+
+        // time intervals to retrieve data for
+        $intervalsParam = $this->getLocalParam($request, $response, 'intervals', [], 'array');
+
+        // types to retrieve data for
         $types = $this->getLocalParam($request, $response, 'types', []);
 
-        // TODO: param last processing bgp time
-        // TODO: param last response time
-        // TODO: send this response time
+        // TODO: use this fields
+        $lastProcessedTime = $this->getLocalParam($request, $response, 'lastProcessedTime', null);
+        $lastResponseId = $this->getLocalParam($request, $response, 'lastResponseId', null);
 
         // some sanity checking on the parameters
-        if (count($intervals) == 0) {
+        if (count($intervalsParam) == 0) {
             return $response->setError("At least one interval must be set");
         }
 
         // parse the intervals and find the first interval that we should deal with
-        // TODO: convert this to an Interval class
-        $intervalArr = [];
-        $firstInterval = null;
-        foreach ($intervals as $interval) {
-            $arr = explode(',', $interval);
-            if (count($arr) != 2 || !is_numeric($arr[0]) || !is_numeric($arr[1])) {
-                return $response->setError('Invalid interval: ' . $interval);
+        // TODO: use the last processed, and last query
+
+        $intervals = new IntervalSet();
+        foreach ($intervalsParam as $intStr) {
+            try {
+                $interval = new Interval($intStr);
+            } catch (\InvalidArgumentException $ex) {
+                return $response->setError($ex->getMessage());
             }
-            $arr[0] = (int)$arr[0];
-            $arr[1] = (int)$arr[1];
-            if (!$firstInterval || $arr[0] < $firstInterval[0]) {
-                $firstInterval = $arr;
-            }
-            $intervalArr[] = $arr;
+            $intervals->addInterval($interval);
         }
         // truncate the interval to our max window len
-        $firstInterval[1] = min($firstInterval[1],
-                                $firstInterval[0] + static::QUERY_WINDOW);
+        $firstInterval = $intervals->getFirstInterval();
+        $firstInterval->setEnd(
+            min($firstInterval->getEnd(),
+                $firstInterval->getStart() + static::QUERY_WINDOW)
+        );
 
         $bgpdata =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                 ->findByIntervalProjectsCollectorsTypes($firstInterval[0],
-                                                         $firstInterval[1],
+                 ->findByIntervalProjectsCollectorsTypes($firstInterval,
                                                          $projects,
                                                          $collectors,
                                                          $types);

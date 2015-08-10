@@ -9,7 +9,7 @@ interface BgpArchiveInterface {
     /**
      * @param BgpData[] $bgpData
      *
-     * @return DumpFile[]
+     * @return DumpFileSet
      */
     public static function generateDumpFiles($bgpData);
 

@@ -9,7 +9,7 @@ class CaidaBgpArchive implements BgpArchiveInterface {
 
     public static function generateDumpFiles($bgpdata)
     {
-        $files = [];
+        $dfs = new DumpFileSet();
         foreach ($bgpdata as $row) {
 
             $url =
@@ -24,18 +24,20 @@ class CaidaBgpArchive implements BgpArchiveInterface {
                 $row->getFileTime() . '.' .
                 $row->getCollector()->getProject()->getFileExt();
 
-            $files[] = new DumpFile(
-                DumpFile::DUMP_TYPE_SIMPLE,
-                $url,
-                $row->getCollector()->getProject()->getName(),
-                $row->getCollector()->getName(),
-                $row->getBgpType()->getName(),
-                $row->getFileTime(),
-                $row->getDumpInfo()->getDuration()
-                );
+            $dfs->addDumpFile(
+                new DumpFile(
+                    DumpFile::DUMP_TYPE_SIMPLE,
+                    $url,
+                    $row->getCollector()->getProject()->getName(),
+                    $row->getCollector()->getName(),
+                    $row->getBgpType()->getName(),
+                    $row->getFileTime(),
+                    $row->getDumpInfo()->getDuration()
+                )
+            );
         }
 
-        return $files;
+        return $dfs;
     }
 
 }
