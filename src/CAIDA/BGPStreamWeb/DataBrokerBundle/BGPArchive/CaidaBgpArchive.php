@@ -10,7 +10,23 @@ class CaidaBgpArchive implements BgpArchiveInterface {
     public static function generateDumpFiles($bgpdata)
     {
         $dfs = new DumpFileSet();
+
+        /* @var Interval $interval */
+        $interval = null;
         foreach ($bgpdata as $row) {
+
+            // does this file overlap with our interval?
+            $ti = new Interval(
+                $row->getFileTime(),
+                $row->getFileTime() +
+                $row->getDumpInfo()->getDuration()
+            );
+            if (!$interval) {
+                $interval = $ti;
+            } else if (!$interval->extendOverlapping($ti)) {
+                // skip this file
+                continue;
+            }
 
             $url =
                 static::ARCHIVE_PATH . '/' .

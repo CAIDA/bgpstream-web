@@ -65,4 +65,20 @@ class Interval {
         $this->end = $end;
     }
 
+    /**
+     * @param Interval $interval
+     * @return boolean
+     */
+    public function extendOverlapping($interval) {
+        if ($interval->getStart() >= $this->getEnd()) {
+            return false;
+        }
+
+        if ($interval->getEnd() > $this->getEnd()) {
+            $this->setEnd($interval->getEnd());
+        }
+
+        return true;
+    }
+
 }

@@ -228,22 +228,28 @@ class DefaultController extends Controller
             }
             $intervals->addInterval($interval);
         }
-        // truncate the interval to our max window len
+
+
         $firstInterval = $intervals->getFirstInterval();
-        $firstInterval->setEnd(
+
+        $queryInterval = new Interval(
+            $firstInterval->getStart(),
             min($firstInterval->getEnd(),
                 $firstInterval->getStart() + static::QUERY_WINDOW)
         );
 
+        /* guaranteed to be sorted by start time */
         $bgpdata =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                 ->findByIntervalProjectsCollectorsTypes($firstInterval,
+                 ->findByIntervalProjectsCollectorsTypes($queryInterval,
                                                          $projects,
                                                          $collectors,
                                                          $types);
 
         $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
+
+        $response->addOption('debug', ['numFiles' => count($dumpfiles->getDumpFiles())]);
 
         $response->setData(['dumpFiles' => $dumpfiles]);
         return $response;
