@@ -2,8 +2,9 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive;
 
+use JsonSerializable;
 
-class Interval {
+class Interval implements JsonSerializable {
 
     private $start;
     private $end;
@@ -24,6 +25,10 @@ class Interval {
         }
 
         if (!is_numeric($start) || !is_numeric($end)) {
+            throw new \InvalidArgumentException('Invalid Interval: ' . $start . ',' . $end);
+        }
+
+        if ($start > $end) {
             throw new \InvalidArgumentException('Invalid Interval: ' . $start . ',' . $end);
         }
 
@@ -70,6 +75,11 @@ class Interval {
      * @return boolean
      */
     public function extendOverlapping($interval) {
+        if ($interval->getStart() == $this->getStart() &&
+            $interval->getEnd() == $this->getEnd()) {
+            // they are identical
+            return true;
+        }
         if ($interval->getStart() >= $this->getEnd()) {
             return false;
         }
@@ -79,6 +89,16 @@ class Interval {
         }
 
         return true;
+    }
+
+    public function __toString()
+    {
+        return $this->getStart() . ',' . $this->getEnd();
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->__toString();
     }
 
 }

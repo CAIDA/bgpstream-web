@@ -9,40 +9,55 @@
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Repository;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet;
 use Doctrine\ORM\EntityRepository;
 
 class BgpDataRepository extends EntityRepository {
 
     /**
-     * @param Interval $interval
+     * @param IntervalSet $intervals
+     * @param Interval $constraintInterval
      * @param null $projects
      * @param null $collectors
      * @param null $types
      * @return array
      */
-    public function findByIntervalProjectsCollectorsTypes($interval,
+    public function findByIntervalProjectsCollectorsTypes($intervals,
+                                                          $constraintInterval,
                                                           $projects=null,
                                                           $collectors=null,
                                                           $types=null)
     {
-        if (!$interval) {
-            throw new \InvalidArgumentException('Missing start or end time');
+        if (!$intervals || !count($intervals) || !$constraintInterval) {
+            throw new \InvalidArgumentException('Missing intervals');
         }
-        $queryStr =
-            'SELECT d FROM CAIDABGPStreamWebDataBrokerBundle:BgpData d ';
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d')
+            ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
+            ->orderBy('d.fileTime', 'ASC');
 
         // TODO: add the duration of the file to detect the end
-        $queryStr .=
-            'WHERE d.fileTime >= :starttime AND d.fileTime <= :endtime ';
-        $queryStr .= 'ORDER BY d.fileTime ASC';
+        $parameters = [];
+        $cnt = 0;
+        $where = '';
+        foreach ($intervals->getIntervals() as $interval) {
+            if ($cnt > 0) {
+                $where .= ' OR ';
+            }
+            $where .= '(d.fileTime >= ?'.$cnt++ .' AND d.fileTime <= ?'.$cnt++.')';
+            $parameters[] = $interval->getStart();
+            $parameters[] = $interval->getEnd();
+        }
+        $qb->andWhere($where);
 
-        $query = $this->getEntityManager()
-                      ->createQuery($queryStr);
+        $qb->andWhere('d.fileTime >= ?'.$cnt++.' AND d.fileTime <= ?'.$cnt);
+        $parameters[] = $constraintInterval->getStart();
+        $parameters[] = $constraintInterval->getEnd();
 
-        $query->setParameter('starttime', $interval->getStart());
-        $query->setParameter('endtime', $interval->getEnd());
+        $qb->setParameters($parameters);
 
-        return $query->getResult();
+        return $qb->getQuery()->getResult();
     }
 
 }

@@ -216,10 +216,8 @@ class DefaultController extends Controller
             return $response->setError("At least one interval must be set");
         }
 
-        // parse the intervals and find the first interval that we should deal with
-        // TODO: use the last processed, and last query
-
-        $intervals = new IntervalSet();
+        // parse the intervals, compressing overlaps
+        $intervals = new IntervalSet(true);
         foreach ($intervalsParam as $intStr) {
             try {
                 $interval = new Interval($intStr);
@@ -230,26 +228,31 @@ class DefaultController extends Controller
         }
 
 
+        // TODO: use the last processed, and last query to set start of constraint
         $firstInterval = $intervals->getFirstInterval();
 
-        $queryInterval = new Interval(
+        $constraintInterval = new Interval(
             $firstInterval->getStart(),
-            min($firstInterval->getEnd(),
-                $firstInterval->getStart() + static::QUERY_WINDOW)
+            $firstInterval->getStart() + static::QUERY_WINDOW
         );
 
         /* guaranteed to be sorted by start time */
         $bgpdata =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                 ->findByIntervalProjectsCollectorsTypes($queryInterval,
+                 ->findByIntervalProjectsCollectorsTypes($intervals,
+                                                         $constraintInterval,
                                                          $projects,
                                                          $collectors,
                                                          $types);
 
         $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
 
-        $response->addOption('debug', ['numFiles' => count($dumpfiles->getDumpFiles())]);
+        $response->addOption('debug', [
+                                        'numFiles' => count($dumpfiles->getDumpFiles()),
+                                        'intervals' => $intervals,
+                                    ]
+        );
 
         $response->setData(['dumpFiles' => $dumpfiles]);
         return $response;
