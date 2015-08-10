@@ -24,9 +24,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             columns:
                 - collector_id
     id:
-        collector:
-            associationKey: true
-        bgpType:
+        collectorType:
             associationKey: true
         fileTime:
             type: integer
@@ -49,23 +47,32 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             comment: ''
             default: CURRENT_TIMESTAMP
     manyToOne:
+        collectorType:
+            targetEntity: CollectorType
+            inversedBy: null
         collector:
             targetEntity: Collector
-            cascade: {  }
-            mappedBy: null
             inversedBy: data
-            joinColumns:
-                collector_id:
-                    referencedColumnName: id
+            joinTable:
+                name: collector_type
+                joinColumns:
+                    collector_type_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    collector_id:
+                        referencedColumnName: id
             orphanRemoval: false
         bgpType:
             targetEntity: BgpType
-            cascade: {  }
-            mappedBy: null
             inversedBy: data
-            joinColumns:
-                bgp_type_id:
-                    referencedColumnName: id
+            joinTable:
+                name: collector_type
+                joinColumns:
+                    collector_type_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    bgp_type_id:
+                        referencedColumnName: id
             orphanRemoval: false
         dumpInfo:
             targetEntity: DumpInfo

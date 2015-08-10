@@ -25,6 +25,11 @@ class BgpData
     private $ts;
 
     /**
+     * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType
+     */
+    private $collectorType;
+
+    /**
      * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector
      */
     private $collector;
@@ -67,6 +72,16 @@ class BgpData
     public function getTs()
     {
         return $this->ts;
+    }
+
+    /**
+     * Get collectorType
+     *
+     * @return \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType
+     */
+    public function getCollectorType()
+    {
+        return $this->collectorType;
     }
 
     /**
