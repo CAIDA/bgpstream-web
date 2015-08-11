@@ -12,6 +12,7 @@ use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -221,7 +222,7 @@ class DefaultController extends Controller
         }
 
         // TODO: use this fields
-        $lastProcessedTime = $this->getLocalParam($request, $response, 'lastProcessedTime', null);
+        $minInitialTime = $this->getLocalParam($request, $response, 'minInitialTime', null);
         $lastResponseId = $this->getLocalParam($request, $response, 'lastResponseId', null);
 
         // some sanity checking on the parameters
@@ -240,13 +241,15 @@ class DefaultController extends Controller
             $intervals->addInterval($interval);
         }
 
-
-        // TODO: use the last processed, and last query to set start of constraint
-        $firstInterval = $intervals->getFirstInterval();
+        // if this is the first query, set the min initial time to the...
+        // min initial time of the intervals
+        if (!$minInitialTime) {
+            $minInitialTime = $intervals->getFirstInterval()->getStart() - BgpDataRepository::START_OFFSET;
+        }
 
         $constraintInterval = new Interval(
-            $firstInterval->getStart(),
-            $firstInterval->getStart() + static::QUERY_WINDOW
+            $minInitialTime,
+            $minInitialTime + static::QUERY_WINDOW
         );
 
         /* guaranteed to be sorted by start time */

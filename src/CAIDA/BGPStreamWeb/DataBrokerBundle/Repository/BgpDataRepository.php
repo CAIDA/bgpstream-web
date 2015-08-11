@@ -22,9 +22,11 @@ class BgpDataRepository extends EntityRepository {
     // stored in files outside the interval
     const START_OFFSET = 1020; // 900 + 120
 
-    private function buildIntervalWhere($interval, &$parameters, &$cnt)
+    private function buildIntervalWhere($interval, &$parameters, &$cnt, $applyOffset=true)
     {
-        $parameters[] = $interval->getStart() - static::START_OFFSET;
+        $parameters[] =
+            $applyOffset ? $interval->getStart() - static::START_OFFSET :
+                $interval->getStart();
         $parameters[] = $interval->getEnd();
 
         return '(d.fileTime >= ?' . $cnt++ . ' AND d.fileTime <= ?' . $cnt++ . ')';
@@ -69,7 +71,9 @@ class BgpDataRepository extends EntityRepository {
 
         // add our constraint interval
         $qb->andWhere(
-            $this->buildIntervalWhere($constraintInterval, $parameters, $cnt)
+        // set applyOffset to false because the constraint interval has the
+        // offset applied (if needed) already
+            $this->buildIntervalWhere($constraintInterval, $parameters, $cnt, false)
         );
 
         // needed by both project and collector.
