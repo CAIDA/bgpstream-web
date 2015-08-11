@@ -10,9 +10,25 @@ namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Repository;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use Doctrine\ORM\EntityRepository;
 
 class BgpDataRepository extends EntityRepository {
+
+    // fudge time to allow for file times that are slightly wrong
+    const FILE_TIME_OFFSET = 120;
+
+    // fudge time in case some of the records for the interval(s) we want are
+    // stored in files outside the interval
+    const START_OFFSET = 1020; // 900 + 120
+
+    private function buildIntervalWhere($interval, &$parameters, &$cnt)
+    {
+        $parameters[] = $interval->getStart() - static::START_OFFSET;
+        $parameters[] = $interval->getEnd();
+
+        return '(d.fileTime >= ?' . $cnt++ . ' AND d.fileTime <= ?' . $cnt++ . ')';
+    }
 
     /**
      * @param IntervalSet $intervals
@@ -37,7 +53,6 @@ class BgpDataRepository extends EntityRepository {
             ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
             ->orderBy('d.fileTime', 'ASC');
 
-        // TODO: add the duration of the file to detect the end
         $parameters = [];
         $cnt = 0;
         $where = '';
@@ -45,19 +60,34 @@ class BgpDataRepository extends EntityRepository {
             if ($cnt > 0) {
                 $where .= ' OR ';
             }
-            $where .= '(d.fileTime >= ?'.$cnt++ .' AND d.fileTime <= ?'.$cnt++.')';
-            $parameters[] = $interval->getStart();
-            $parameters[] = $interval->getEnd();
+            $where .= $this->buildIntervalWhere($interval, $parameters, $cnt);
         }
+
+        // all the intervals the user is interested in
         $qb->andWhere($where);
 
-        $qb->andWhere('d.fileTime >= ?'.$cnt++.' AND d.fileTime <= ?'.$cnt);
-        $parameters[] = $constraintInterval->getStart();
-        $parameters[] = $constraintInterval->getEnd();
+        // the constraint interval
+        $qb->andWhere(
+            $this->buildIntervalWhere($constraintInterval, $parameters, $cnt)
+        );
 
         $qb->setParameters($parameters);
 
-        return $qb->getQuery()->getResult();
+        $files = $qb->getQuery()->getResult();
+
+        // filter the results to remove files that we accidentally got due to
+        // our overzealous (but fast!) START_OFFSET
+        $filtered = [];
+        foreach ($files as $file) {
+            /* @var BgpData $file */
+            if(($file->getFileTime() + $file->getDumpInfo()->getDuration() +
+                static::FILE_TIME_OFFSET) >= $constraintInterval->getStart()
+            ) {
+                $filtered[] = $file;
+            }
+        }
+
+        return $filtered;
     }
 
 }

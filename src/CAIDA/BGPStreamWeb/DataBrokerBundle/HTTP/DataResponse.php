@@ -11,7 +11,7 @@ class DataResponse extends JsonResponse
     const TYPE_META = 'meta';
     const TYPE_DATA = 'data';
 
-    protected $show_empty;
+    protected $showEmpty;
     protected $encodingOptions;
 
     protected $type;

@@ -240,11 +240,11 @@ class DefaultController extends Controller
         $bgpdata =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                 ->findByIntervalProjectsCollectorsTypes($intervals,
-                                                         $constraintInterval,
-                                                         $projects,
-                                                         $collectors,
-                                                         $types);
+                ->findByIntervalProjectsCollectorsTypes($intervals,
+                    $constraintInterval,
+                    $projects,
+                    $collectors,
+                    $types);
 
         $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
 

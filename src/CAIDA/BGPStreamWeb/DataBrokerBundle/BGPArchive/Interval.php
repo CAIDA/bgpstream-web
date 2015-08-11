@@ -21,7 +21,7 @@ class Interval implements JsonSerializable {
             if (count($arr) != 2) {
                 throw new \InvalidArgumentException('Invalid Interval String: ' . $start);
             }
-            return $this->__construct($arr[0], $arr[1]);
+            return $this->__construct((int)$arr[0], (int)$arr[1]);
         }
 
         if (!is_numeric($start) || !is_numeric($end)) {
