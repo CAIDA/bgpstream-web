@@ -197,15 +197,28 @@ class DefaultController extends Controller
 
         // projects to retrieve data for
         $projects = $this->getLocalParam($request, $response, 'projects', []);
+        $project = $this->getLocalParam($request, $response, 'project', null);
+        if ($project) {
+            $projects[] = $project;
+        }
 
         // collectors to retrieve data for
         $collectors = $this->getLocalParam($request, $response, 'collectors', []);
+        $collector = $this->getLocalParam($request, $response, 'collector', null);
+        if($collector) {
+            $collectors[] = $collector;
+        }
 
         // time intervals to retrieve data for
         $intervalsParam = $this->getLocalParam($request, $response, 'intervals', [], 'array');
 
         // types to retrieve data for
         $types = $this->getLocalParam($request, $response, 'types', []);
+        $type =
+            $this->getLocalParam($request, $response, 'type', null);
+        if($type) {
+            $types[] = $type;
+        }
 
         // TODO: use this fields
         $lastProcessedTime = $this->getLocalParam($request, $response, 'lastProcessedTime', null);

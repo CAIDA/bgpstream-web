@@ -55,6 +55,8 @@ class BgpDataRepository extends EntityRepository {
 
         $parameters = [];
         $cnt = 0;
+
+        // build the where query for the user's intervals
         $where = '';
         foreach ($intervals->getIntervals() as $interval) {
             if ($cnt > 0) {
@@ -62,14 +64,37 @@ class BgpDataRepository extends EntityRepository {
             }
             $where .= $this->buildIntervalWhere($interval, $parameters, $cnt);
         }
-
         // all the intervals the user is interested in
         $qb->andWhere($where);
 
-        // the constraint interval
+        // add our constraint interval
         $qb->andWhere(
             $this->buildIntervalWhere($constraintInterval, $parameters, $cnt)
         );
+
+        // needed by both project and collector.
+        // i'm pretty sure there is no cost if it is not used
+        $qb->join('d.collector', 'coll');
+
+        // filter by project
+        if ($projects && count($projects)) {
+            $qb->join('coll.project', 'proj');
+            $qb->andWhere('proj.name IN (?'.$cnt++.')');
+            $parameters[] = $projects;
+        }
+
+        // filter by collector
+        if ($collectors && count($collectors)) {
+            $qb->andWhere('coll.name IN (?'.$cnt++.')');
+            $parameters[] = $collectors;
+        }
+
+        // filter by type
+        if ($types && count($types)) {
+            $qb->join('d.bgpType', 'type');
+            $qb->andWhere('type.name IN (?'.$cnt++.')');
+            $parameters[] = $types;
+        }
 
         $qb->setParameters($parameters);
 
