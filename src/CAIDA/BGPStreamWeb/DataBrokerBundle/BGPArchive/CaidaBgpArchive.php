@@ -17,7 +17,10 @@ class CaidaBgpArchive implements BgpArchiveInterface {
 
             // does this file overlap with our interval?
             $ti = new Interval(
-                $row->getFileTime(),
+                // ribs span [ts-120, ts+120]
+                $row->getBgpType()->getName() == "ribs" ?
+                    $row->getFileTime()-$row->getDumpInfo()->getDuration() :
+                    $row->getFileTime(),
                 $row->getFileTime() +
                 $row->getDumpInfo()->getDuration()
             );
