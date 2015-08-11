@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    const MAX_INTERVALS = 100;
 
     private $cacheParams;
 
@@ -210,6 +211,9 @@ class DefaultController extends Controller
 
         // time intervals to retrieve data for
         $intervalsParam = $this->getLocalParam($request, $response, 'intervals', [], 'array');
+        if (count($intervalsParam) > static::MAX_INTERVALS) {
+            return $response->setError('Max number of intervals ('.static::MAX_INTERVALS.') exceeded');
+        }
 
         // types to retrieve data for
         $types = $this->getLocalParam($request, $response, 'types', []);
@@ -219,9 +223,8 @@ class DefaultController extends Controller
             $types[] = $type;
         }
 
-        // TODO: use this fields
         $minInitialTime = $this->getLocalParam($request, $response, 'minInitialTime', null);
-        $lastResponseId = $this->getLocalParam($request, $response, 'lastResponseId', null);
+        $dataAddedSince = $this->getLocalParam($request, $response, 'dataAddedSince', null);
 
         // some sanity checking on the parameters
         if (count($intervalsParam) == 0) {
@@ -246,7 +249,7 @@ class DefaultController extends Controller
                  ->findByIntervalProjectsCollectorsTypes(
                      $intervals,
                      $minInitialTime,
-                     $lastResponseId,
+                     $dataAddedSince,
                      $projects,
                      $collectors,
                      $types

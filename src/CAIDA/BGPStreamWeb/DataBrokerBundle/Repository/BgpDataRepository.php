@@ -25,6 +25,8 @@ class BgpDataRepository extends EntityRepository {
     // stored in files outside the interval
     const START_OFFSET = 1020; // 900 + 120
 
+    const OUT_OF_ORDER_WINDOW = 86400;// 24 * 3600
+
     private function buildIntervalWhere($interval, &$parameters, &$cnt, $applyOffset=true)
     {
         $parameters[] =
@@ -75,10 +77,22 @@ class BgpDataRepository extends EntityRepository {
         return $where;
     }
 
+    private function buildTsWhere($dataAddedSince, $minInitialTime, &$parameters, &$cnt)
+    {
+        $parameters[] = $minInitialTime;
+        $parameters[] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
+        $parameters[] = $dataAddedSince;
+
+        // look into the already-processed data for files that have been added
+        // since we last looked
+        return 'd.fileTime < ?' . $cnt++ . ' AND d.fileTime > ?' . $cnt++ .
+               ' AND d.ts > ?' . $cnt++ . ' AND d.ts < CURRENT_TIMESTAMP()-1';
+    }
+
     /**
      * @param IntervalSet $intervals
      * @param integer $minInitialTime
-     * @param integer $lastResponseTime
+     * @param integer $lastResponseId
      * @param null $projects
      * @param null $collectors
      * @param null $types
@@ -86,7 +100,7 @@ class BgpDataRepository extends EntityRepository {
      */
     public function findByIntervalProjectsCollectorsTypes($intervals,
                                                           $minInitialTime=null,
-                                                          $lastResponseId=null,
+                                                          $dataAddedSince=null,
                                                           $projects=null,
                                                           $collectors=null,
                                                           $types=null)
@@ -128,6 +142,17 @@ class BgpDataRepository extends EntityRepository {
             return [];
         }
         $qb->andWhere($fileTimeWhere);
+
+        // build the ts where clause
+        if ($dataAddedSince) {
+            $tsWhere =
+                $this->buildTsWhere($dataAddedSince, $minInitialQueryTime,
+                                    $parameters, $cnt);
+            if(!$tsWhere) {
+                return [];
+            }
+            $qb->andWhere($tsWhere);
+        }
 
         // needed by both project and collector.
         // i'm pretty sure there is no cost if it is not used
