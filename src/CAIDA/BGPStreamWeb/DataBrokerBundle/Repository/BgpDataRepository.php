@@ -51,7 +51,7 @@ class BgpDataRepository extends EntityRepository {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('d')
             ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
-            ->orderBy('d.fileTime', 'ASC');
+            ->orderBy('d.fileTime, d.bgpType', 'ASC');
 
         $parameters = [];
         $cnt = 0;
