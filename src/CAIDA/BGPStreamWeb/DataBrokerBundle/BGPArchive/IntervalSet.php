@@ -70,6 +70,36 @@ class IntervalSet implements JsonSerializable {
         return $this->firstInterval;
     }
 
+    /**
+     * @param integer $time
+     *
+     * @return Interval|null
+     */
+    public function getIntervalOverlapping($time)
+    {
+        foreach ($this->getIntervals() as $interval) {
+            if ($interval->getStart() <= $time && $interval->getEnd() >= $time) {
+                return $interval;
+            }
+        }
+        return null;
+    }
+
+
+    public function getNextInterval($time)
+    {
+        /* @var Interval $bestInterval */
+        $bestInterval = null;
+        foreach ($this->getIntervals() as $interval) {
+            if ($interval->getStart() > $time) {
+                $bestInterval = $interval;
+            } else {
+                break;
+            }
+        }
+        return $bestInterval;
+    }
+
     public function jsonSerialize()
     {
         return $this->getIntervals();

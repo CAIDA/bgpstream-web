@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    // max window of time to ask from the DB
-    const QUERY_WINDOW = 7200;
 
     private $cacheParams;
 
@@ -241,26 +239,18 @@ class DefaultController extends Controller
             $intervals->addInterval($interval);
         }
 
-        // if this is the first query, set the min initial time to the...
-        // min initial time of the intervals
-        if (!$minInitialTime) {
-            $minInitialTime = $intervals->getFirstInterval()->getStart() - BgpDataRepository::START_OFFSET;
-        }
-
-        $constraintInterval = new Interval(
-            $minInitialTime,
-            $minInitialTime + static::QUERY_WINDOW
-        );
-
         /* guaranteed to be sorted by start time */
         $bgpdata =
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                ->findByIntervalProjectsCollectorsTypes($intervals,
-                    $constraintInterval,
-                    $projects,
-                    $collectors,
-                    $types);
+                 ->findByIntervalProjectsCollectorsTypes(
+                     $intervals,
+                     $minInitialTime,
+                     $lastResponseId,
+                     $projects,
+                     $collectors,
+                     $types
+                 );
 
         $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
 

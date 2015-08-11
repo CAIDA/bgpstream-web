@@ -15,6 +15,9 @@ use Doctrine\ORM\EntityRepository;
 
 class BgpDataRepository extends EntityRepository {
 
+    // max window of time to ask from the DB
+    const QUERY_WINDOW = 7200;
+
     // fudge time to allow for file times that are slightly wrong
     const FILE_TIME_OFFSET = 120;
 
@@ -34,47 +37,97 @@ class BgpDataRepository extends EntityRepository {
 
     /**
      * @param IntervalSet $intervals
-     * @param Interval $constraintInterval
+     * @param $minInitialTime
+     * @param $parameters
+     * @param $cnt
+     *
+     * @return string
+     */
+    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, &$cnt)
+    {
+        $where = '';
+
+        // compute our constraint interval
+        $constraintInterval = new Interval(
+            $minInitialTime,
+            $minInitialTime + static::QUERY_WINDOW
+        );
+
+        // build the where query for the user's intervals
+        $userWhere = '';
+        foreach($intervals->getIntervals() as $interval) {
+            if($cnt > 0) {
+                $userWhere .= ' OR ';
+            }
+            $userWhere .= $this->buildIntervalWhere($interval, $parameters, $cnt);
+        }
+        // all the intervals the user is interested in
+        $where .= '('.$userWhere.')';
+
+        // add our constraint interval
+        $where .= ' AND ';
+        // set applyOffset to false because the constraint interval has the
+        // offset applied (if needed) already
+        $where .= $this->buildIntervalWhere($constraintInterval, $parameters,
+                                            $cnt,
+                                            false);
+
+        return $where;
+    }
+
+    /**
+     * @param IntervalSet $intervals
+     * @param integer $minInitialTime
+     * @param integer $lastResponseTime
      * @param null $projects
      * @param null $collectors
      * @param null $types
      * @return array
      */
     public function findByIntervalProjectsCollectorsTypes($intervals,
-                                                          $constraintInterval,
+                                                          $minInitialTime=null,
+                                                          $lastResponseId=null,
                                                           $projects=null,
                                                           $collectors=null,
                                                           $types=null)
     {
-        if (!$intervals || !count($intervals) || !$constraintInterval) {
+        if (!$intervals || !count($intervals)) {
             throw new \InvalidArgumentException('Missing intervals');
         }
 
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('d')
-            ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
-            ->orderBy('d.fileTime, d.bgpType', 'ASC');
+        // set the correct minInitialTime and minInitialQueryTime
+        $minInitialQueryTime = $minInitialTime;
+        if(!$minInitialTime) {
+            // set to the first interval
+            $minInitialTime = $intervals->getFirstInterval()->getStart();
+            $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
+        } elseif(!$intervals->getIntervalOVerlapping($minInitialTime)) {
+            // the time they asked for is not in an interval, bump to the next
+            //interval start
+            $nextInterval = $intervals->getNextInterval($minInitialTime);
+            if(!$nextInterval) {
+                // there is no more data...
+                return [];
+            }
+            $minInitialTime = $nextInterval->getStart();
+            $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
+        }
 
         $parameters = [];
-        $cnt = 0;
+        $cnt        = 0;
+        $qb         = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d')
+           ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
+           ->orderBy('d.fileTime, d.bgpType', 'ASC');
 
-        // build the where query for the user's intervals
-        $where = '';
-        foreach ($intervals->getIntervals() as $interval) {
-            if ($cnt > 0) {
-                $where .= ' OR ';
-            }
-            $where .= $this->buildIntervalWhere($interval, $parameters, $cnt);
+        // build the fileTime where clause
+        $fileTimeWhere =
+            $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
+                                      $parameters, $cnt);
+        if (!$fileTimeWhere) {
+            return [];
         }
-        // all the intervals the user is interested in
-        $qb->andWhere($where);
-
-        // add our constraint interval
-        $qb->andWhere(
-        // set applyOffset to false because the constraint interval has the
-        // offset applied (if needed) already
-            $this->buildIntervalWhere($constraintInterval, $parameters, $cnt, false)
-        );
+        $qb->andWhere($fileTimeWhere);
 
         // needed by both project and collector.
         // i'm pretty sure there is no cost if it is not used
@@ -110,7 +163,7 @@ class BgpDataRepository extends EntityRepository {
         foreach ($files as $file) {
             /* @var BgpData $file */
             if(($file->getFileTime() + $file->getDumpInfo()->getDuration() +
-                static::FILE_TIME_OFFSET) >= $constraintInterval->getStart()
+                static::FILE_TIME_OFFSET) >= $minInitialTime
             ) {
                 $filtered[] = $file;
             }
