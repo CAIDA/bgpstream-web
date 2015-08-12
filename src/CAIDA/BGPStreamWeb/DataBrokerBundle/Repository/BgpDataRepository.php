@@ -220,11 +220,30 @@ class BgpDataRepository extends EntityRepository {
         // filter the results to remove files that we accidentally got due to
         // our overzealous (but fast!) START_OFFSET
         $filtered = [];
+        /* @var Interval $overlapInterval */
+        $overlapInterval = null;
         foreach ($files as $file) {
             /* @var BgpData $file */
             if(($file->getFileTime() + $file->getDumpInfo()->getDuration() +
                 static::FILE_TIME_OFFSET) >= $minInitialTime
             ) {
+                // does this file overlap with our interval?
+                $ti = new Interval(
+                    // ribs span [ts-120, ts+120]
+                    $file->getBgpType()->getName() == "ribs" ?
+                        $file->getFileTime() -
+                        $file->getDumpInfo()->getDuration() :
+                        $file->getFileTime(),
+                    $file->getFileTime() +
+                    $file->getDumpInfo()->getDuration()
+                );
+                if(!$overlapInterval) {
+                    $overlapInterval = $ti;
+                } else if(!$overlapInterval->extendOverlapping($ti)) {
+                    // skip this file
+                    continue;
+                }
+                // keep this file
                 $filtered[] = $file;
             }
         }
