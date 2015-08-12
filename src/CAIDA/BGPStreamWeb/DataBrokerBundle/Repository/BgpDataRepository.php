@@ -29,12 +29,14 @@ class BgpDataRepository extends EntityRepository {
 
     private function buildIntervalWhere($interval, &$parameters, &$cnt, $applyOffset=true)
     {
-        $parameters[] =
+        $p1 = $cnt++;
+        $p2 = $cnt++;
+        $parameters['w'.$p1] =
             $applyOffset ? $interval->getStart() - static::START_OFFSET :
                 $interval->getStart();
-        $parameters[] = $interval->getEnd();
+        $parameters['w'.$p2] = $interval->getEnd();
 
-        return '(d.fileTime >= ?' . $cnt++ . ' AND d.fileTime <= ?' . $cnt++ . ')';
+        return '(d.fileTime >= :w' . $p1 . ' AND d.fileTime <= :w' . $p2 . ')';
     }
 
     /**
@@ -45,7 +47,7 @@ class BgpDataRepository extends EntityRepository {
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, &$cnt)
+    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters)
     {
         $where = '';
 
@@ -57,11 +59,13 @@ class BgpDataRepository extends EntityRepository {
 
         // build the where query for the user's intervals
         $userWhere = '';
+        $cnt = 0;
         foreach($intervals->getIntervals() as $interval) {
             if($cnt > 0) {
                 $userWhere .= ' OR ';
             }
             $userWhere .= $this->buildIntervalWhere($interval, $parameters, $cnt);
+            $cnt++;
         }
         // all the intervals the user is interested in
         $where .= '('.$userWhere.')';
@@ -77,22 +81,74 @@ class BgpDataRepository extends EntityRepository {
         return $where;
     }
 
-    private function buildTsWhere($dataAddedSince, $minInitialTime, &$parameters, &$cnt)
+    private function buildTsWhere($dataAddedSince, $minInitialTime, &$parameters)
     {
-        $parameters[] = $minInitialTime;
-        $parameters[] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
-        $parameters[] = $dataAddedSince;
+        $parameters['w1'] = $minInitialTime;
+        $parameters['w2'] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
+        $parameters['w3'] = $dataAddedSince;
 
         // look into the already-processed data for files that have been added
         // since we last looked
-        return 'd.fileTime < ?' . $cnt++ . ' AND d.fileTime > ?' . $cnt++ .
-               ' AND d.ts > ?' . $cnt++ . ' AND d.ts < CURRENT_TIMESTAMP()-1';
+        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts > :w3 AND d.ts < CURRENT_TIMESTAMP()-1';
+    }
+
+    private function findDataByWhere($projects, $collectors, $types, $whereStr, $whereParams)
+    {
+        $parameters = [];
+        $qb         = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('d')
+           ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd');
+        //->orderBy('d.fileTime, d.bgpType', 'ASC'); // we sort ourselves
+
+        // needed by both project and collector.
+        // i'm pretty sure there is no cost if it is not used
+        $qb->join('d.collector', 'coll');
+
+        // filter by project
+        if($projects && count($projects)) {
+            $qb->join('coll.project', 'proj');
+            $qb->andWhere('proj.name IN (:projs)');
+            $parameters['projs'] = $projects;
+        }
+
+        // filter by collector
+        if($collectors && count($collectors)) {
+            $qb->andWhere('coll.name IN (:colls)');
+            $parameters['colls'] = $collectors;
+        }
+
+        // filter by type
+        if($types && count($types)) {
+            $qb->join('d.bgpType', 'type');
+            $qb->andWhere('type.name IN (:types)');
+            $parameters['types'] = $types;
+        }
+
+        $qb->andWhere($whereStr);
+        $parameters = array_merge($parameters, $whereParams);
+
+        $qb->setParameters($parameters);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param BgpData $a
+     * @param BgpData $b
+     * @return boolean
+     */
+    private function cmpBgpData($a, $b)
+    {
+        if ($a->getFileTime() == $b->getFileTime()) {
+            return $a->getBgpType()->getId() - $b->getBgpType()->getId();
+        }
+        return $a->getFileTime() - $b->getFileTime();
     }
 
     /**
      * @param IntervalSet $intervals
      * @param integer $minInitialTime
-     * @param integer $lastResponseId
+     * @param integer $dataAddedSince
      * @param null $projects
      * @param null $collectors
      * @param null $types
@@ -127,60 +183,31 @@ class BgpDataRepository extends EntityRepository {
             $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
         }
 
-        $parameters = [];
-        $cnt        = 0;
-        $qb         = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('d')
-           ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd')
-           ->orderBy('d.fileTime, d.bgpType', 'ASC');
-
         // build the fileTime where clause
-        $fileTimeWhere =
+        $timeParams = [];
+        $timeWhere =
             $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
-                                      $parameters, $cnt);
-        if (!$fileTimeWhere) {
+                                      $timeParams);
+        if (!$timeWhere) {
             return [];
         }
-        $qb->andWhere($fileTimeWhere);
+        $newFiles = $this->findDataByWhere($projects, $collectors, $types, $timeWhere, $timeParams);
 
         // build the ts where clause
+        $oooFiles = [];
         if ($dataAddedSince) {
+            $tsParams = [];
             $tsWhere =
                 $this->buildTsWhere($dataAddedSince, $minInitialQueryTime,
-                                    $parameters, $cnt);
+                                    $tsParams);
             if(!$tsWhere) {
                 return [];
             }
-            $qb->andWhere($tsWhere);
+            $oooFiles = $this->findDataByWhere($projects, $collectors, $types, $tsWhere, $tsParams);
         }
 
-        // needed by both project and collector.
-        // i'm pretty sure there is no cost if it is not used
-        $qb->join('d.collector', 'coll');
-
-        // filter by project
-        if ($projects && count($projects)) {
-            $qb->join('coll.project', 'proj');
-            $qb->andWhere('proj.name IN (?'.$cnt++.')');
-            $parameters[] = $projects;
-        }
-
-        // filter by collector
-        if ($collectors && count($collectors)) {
-            $qb->andWhere('coll.name IN (?'.$cnt++.')');
-            $parameters[] = $collectors;
-        }
-
-        // filter by type
-        if ($types && count($types)) {
-            $qb->join('d.bgpType', 'type');
-            $qb->andWhere('type.name IN (?'.$cnt++.')');
-            $parameters[] = $types;
-        }
-
-        $qb->setParameters($parameters);
-
-        $files = $qb->getQuery()->getResult();
+        $files = array_merge($newFiles, $oooFiles);
+        usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
 
         // filter the results to remove files that we accidentally got due to
         // our overzealous (but fast!) START_OFFSET
