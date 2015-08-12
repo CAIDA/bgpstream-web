@@ -247,6 +247,7 @@ class DefaultController extends Controller
             $this->getDoctrine()
                  ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
                  ->findByIntervalProjectsCollectorsTypes(
+                     $response->getTime(),
                      $intervals,
                      $minInitialTime,
                      $dataAddedSince,

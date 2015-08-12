@@ -15,7 +15,7 @@ class DataResponse extends JsonResponse
     protected $encodingOptions;
 
     protected $type;
-    protected $id;
+    protected $time;
     protected $error = null;
     protected $data;
     protected $options;
@@ -46,7 +46,17 @@ class DataResponse extends JsonResponse
 
         $this->setType($type);
 
-        $this->id = time();
+        $this->time = time();
+    }
+
+    /** Gets the time that the response was created
+     *
+     * @return int
+     */
+    public
+    function getTime()
+    {
+        return $this->time;
     }
 
     /**
@@ -192,7 +202,7 @@ class DataResponse extends JsonResponse
     {
         $arr = array();
 
-        $arr['id'] = $this->id;
+        $arr['time'] = $this->time;
 
         if($this->type || $this->showEmpty) {
             $arr['type'] = $this->type;

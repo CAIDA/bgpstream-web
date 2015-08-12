@@ -43,7 +43,6 @@ class BgpDataRepository extends EntityRepository {
      * @param IntervalSet $intervals
      * @param $minInitialTime
      * @param $parameters
-     * @param $cnt
      *
      * @return string
      */
@@ -81,15 +80,16 @@ class BgpDataRepository extends EntityRepository {
         return $where;
     }
 
-    private function buildTsWhere($dataAddedSince, $minInitialTime, &$parameters)
+    private function buildTsWhere($responseTime, $dataAddedSince, $minInitialTime, &$parameters)
     {
         $parameters['w1'] = $minInitialTime;
         $parameters['w2'] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
         $parameters['w3'] = $dataAddedSince;
+        $parameters['w4'] = $responseTime;
 
         // look into the already-processed data for files that have been added
         // since we last looked
-        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts > :w3 AND d.ts < CURRENT_TIMESTAMP()-1';
+        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts > :w3 AND d.ts < :w4';
     }
 
     private function findDataByWhere($projects, $collectors, $types, $whereStr, $whereParams)
@@ -146,6 +146,7 @@ class BgpDataRepository extends EntityRepository {
     }
 
     /**
+     * @param integer $responseTime
      * @param IntervalSet $intervals
      * @param integer $minInitialTime
      * @param integer $dataAddedSince
@@ -154,12 +155,15 @@ class BgpDataRepository extends EntityRepository {
      * @param null $types
      * @return array
      */
-    public function findByIntervalProjectsCollectorsTypes($intervals,
-                                                          $minInitialTime=null,
-                                                          $dataAddedSince=null,
-                                                          $projects=null,
-                                                          $collectors=null,
-                                                          $types=null)
+    public function findByIntervalProjectsCollectorsTypes(
+        $responseTime,
+        $intervals,
+        $minInitialTime=null,
+        $dataAddedSince=null,
+        $projects=null,
+        $collectors=null,
+        $types=null
+    )
     {
         if (!$intervals || !count($intervals)) {
             throw new \InvalidArgumentException('Missing intervals');
@@ -198,8 +202,12 @@ class BgpDataRepository extends EntityRepository {
         if ($dataAddedSince) {
             $tsParams = [];
             $tsWhere =
-                $this->buildTsWhere($dataAddedSince, $minInitialQueryTime,
-                                    $tsParams);
+                $this->buildTsWhere(
+                    $responseTime,
+                    $dataAddedSince,
+                    $minInitialQueryTime,
+                    $tsParams
+                );
             if(!$tsWhere) {
                 return [];
             }
