@@ -175,7 +175,7 @@ class BgpDataRepository extends EntityRepository {
             // set to the first interval
             $minInitialTime = $intervals->getFirstInterval()->getStart();
             $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
-        } elseif(!$intervals->getIntervalOVerlapping($minInitialTime)) {
+        } elseif(!$intervals->getIntervalOverlapping($minInitialTime)) {
             // the time they asked for is not in an interval, bump to the next
             //interval start
             $nextInterval = $intervals->getNextInterval($minInitialTime);
