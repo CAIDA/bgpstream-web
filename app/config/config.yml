@@ -78,3 +78,31 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_http_cache:
+    cache_control:
+        defaults:
+            overwrite: false
+        rules:
+            -
+                match:
+                    path: ^/broker/meta
+                headers:
+                    overwrite: true
+                    cache_control:
+                        public: true
+                        max_age: 600
+                        s_maxage: 600
+                    last_modified: "-1 hour"
+                    vary: [Accept-Encoding]
+            -
+                match:
+                    path: ^/broker/data
+                headers:
+                    overwrite: true
+                    cache_control:
+                        public: true
+                        max_age: 60
+                        s_maxage: 60
+                    last_modified: "-1 hour"
+                    vary: [Accept-Encoding]
