@@ -16,7 +16,10 @@ use Doctrine\ORM\EntityRepository;
 class BgpDataRepository extends EntityRepository {
 
     // max window of time to ask from the DB
-    const QUERY_WINDOW = 7200;
+    const QUERY_WINDOW = 7200; // 2 hours
+
+    // max query window length when doing exponential expansion
+    const QUERY_WINDOW_MAX = 2419200; // 28 days
 
     // fudge time to allow for file times that are slightly wrong
     const FILE_TIME_OFFSET = 120;
@@ -27,6 +30,14 @@ class BgpDataRepository extends EntityRepository {
 
     const OUT_OF_ORDER_WINDOW = 86400;// 24 * 3600
 
+    /**
+     * @param Interval $interval
+     * @param      $parameters
+     * @param      $cnt
+     * @param bool $applyOffset
+     *
+     * @return string
+     */
     private function buildIntervalWhere($interval, &$parameters, &$cnt, $applyOffset=true)
     {
         $p1 = $cnt++;
@@ -43,17 +54,32 @@ class BgpDataRepository extends EntityRepository {
      * @param IntervalSet $intervals
      * @param $minInitialTime
      * @param $parameters
+     * @param $retryCnt
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters)
+    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt)
     {
         $where = '';
+
+        // compute constraint interval length based on number of retries
+        $constraintLength = $retryCnt *
+                            min(static::QUERY_WINDOW_MAX,
+                                static::QUERY_WINDOW * pow(2, $retryCnt));
+
+        // if we've already tried to get data and the end of the constraint
+        // interval is after the end of the last interval in the set, return null
+        if($retryCnt > 0 &&
+           $minInitialTime + $constraintLength >
+           $intervals->getLastInterval()->getEnd()
+        ) {
+            return null;
+        }
 
         // compute our constraint interval
         $constraintInterval = new Interval(
             $minInitialTime,
-            $minInitialTime + static::QUERY_WINDOW
+            $minInitialTime + $constraintLength
         );
 
         // build the where query for the user's intervals
@@ -169,52 +195,65 @@ class BgpDataRepository extends EntityRepository {
             throw new \InvalidArgumentException('Missing intervals');
         }
 
-        // set the correct minInitialTime and minInitialQueryTime
-        $minInitialQueryTime = $minInitialTime;
-        if(!$minInitialTime) {
-            // set to the first interval
-            $minInitialTime = $intervals->getFirstInterval()->getStart();
-            $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
-        } elseif(!$intervals->getIntervalOverlapping($minInitialTime)) {
-            // the time they asked for is not in an interval, bump to the next
-            //interval start
-            $nextInterval = $intervals->getNextInterval($minInitialTime);
-            if(!$nextInterval) {
-                // there is no more data...
+        // if there is no data, retry, expanding our constraint window until
+        // either we find data, or the constraint window extends past the end
+        // of the last interval
+        $files = [];
+        $retries = 0;
+        while(!count($files)) {
+
+            // set the correct minInitialTime and minInitialQueryTime
+            $minInitialQueryTime = $minInitialTime;
+            if(!$minInitialTime) {
+                // set to the first interval
+                $minInitialTime      =
+                    $intervals->getFirstInterval()->getStart();
+                $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
+            } elseif(!$intervals->getIntervalOverlapping($minInitialTime)) {
+                // the time they asked for is not in an interval, bump to the next
+                //interval start
+                $nextInterval = $intervals->getNextInterval($minInitialTime);
+                if(!$nextInterval) {
+                    // there is no more data...
+                    return [];
+                }
+                $minInitialTime      = $nextInterval->getStart();
+                $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
+            }
+
+            // build the fileTime where clause
+            $timeParams = [];
+            $timeWhere  =
+                $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
+                                          $timeParams, $retries++);
+            if(!$timeWhere) { // there's no data!
                 return [];
             }
-            $minInitialTime = $nextInterval->getStart();
-            $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
-        }
+            $newFiles = $this->findDataByWhere($projects, $collectors, $types,
+                                               $timeWhere, $timeParams);
 
-        // build the fileTime where clause
-        $timeParams = [];
-        $timeWhere =
-            $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
-                                      $timeParams);
-        if (!$timeWhere) {
-            return [];
-        }
-        $newFiles = $this->findDataByWhere($projects, $collectors, $types, $timeWhere, $timeParams);
-
-        // build the ts where clause
-        $oooFiles = [];
-        if ($dataAddedSince) {
-            $tsParams = [];
-            $tsWhere =
-                $this->buildTsWhere(
-                    $responseTime,
-                    $dataAddedSince,
-                    $minInitialQueryTime,
-                    $tsParams
-                );
-            if(!$tsWhere) {
-                return [];
+            // build the ts where clause
+            $oooFiles = [];
+            if($dataAddedSince) {
+                $tsParams = [];
+                $tsWhere  =
+                    $this->buildTsWhere(
+                        $responseTime,
+                        $dataAddedSince,
+                        $minInitialQueryTime,
+                        $tsParams
+                    );
+                if(!$tsWhere) {
+                    return [];
+                }
+                $oooFiles =
+                    $this->findDataByWhere($projects, $collectors, $types,
+                                           $tsWhere, $tsParams);
             }
-            $oooFiles = $this->findDataByWhere($projects, $collectors, $types, $tsWhere, $tsParams);
+
+            $files = array_merge($newFiles, $oooFiles);
         }
 
-        $files = array_merge($newFiles, $oooFiles);
         usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
 
         // filter the results to remove files that we accidentally got due to

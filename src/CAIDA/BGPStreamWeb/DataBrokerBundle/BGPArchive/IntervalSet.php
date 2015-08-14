@@ -15,10 +15,14 @@ class IntervalSet implements JsonSerializable {
     /** @var Interval */
     private $firstInterval;
 
+    /** @var Interval */
+    private $lastInterval;
+
     public function __construct($combineOverlapping=false)
     {
         $this->intervals = [];
         $this->firstInterval = null;
+        $this->lastInterval = null;
         $this->combineOverlapping = $combineOverlapping;
     }
 
@@ -65,9 +69,21 @@ class IntervalSet implements JsonSerializable {
         $this->update();
     }
 
+    /**
+     * @return Interval|null
+     */
     public function getFirstInterval()
     {
         return $this->firstInterval;
+    }
+
+    /**
+     * @return Interval|null
+     */
+    public
+    function getLastInterval()
+    {
+        return $this->lastInterval;
     }
 
     /**
@@ -122,11 +138,17 @@ class IntervalSet implements JsonSerializable {
         usort($this->intervals, ['CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet', 'cmpInterval']);
 
         $this->firstInterval = null;
+        $this->lastInterval = null;
         foreach ($this->intervals as $interval) {
             if(!$this->firstInterval ||
                $interval->getStart() < $this->firstInterval->getStart()
             ) {
                 $this->firstInterval = $interval;
+            }
+
+            if(!$this->lastInterval ||
+               $interval->getEnd() >= $this->lastInterval->getEnd()) {
+                $this->lastInterval = $interval;
             }
         }
     }
