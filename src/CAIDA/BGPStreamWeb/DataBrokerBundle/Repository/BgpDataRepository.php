@@ -63,7 +63,7 @@ class BgpDataRepository extends EntityRepository {
         $where = '';
 
         // compute constraint interval length based on number of retries
-        $constraintLength = $retryCnt *
+        $constraintLength = ($retryCnt+1) *
                             min(static::QUERY_WINDOW_MAX,
                                 static::QUERY_WINDOW * pow(2, $retryCnt));
 
