@@ -8,7 +8,7 @@ set :deploy_to,   "/db/bgp/#{application}"
 set :app_path,    "app"
 set :web_path,    "web"
 
-set :repository,  "charthouse-github:CAIDA/bgpstream-web.git"
+set :repository,  "bgpstream-web-github:CAIDA/bgpstream-web.git"
 set :scm,         :git
 set :deploy_via,  :rsync_with_remote_cache
 
