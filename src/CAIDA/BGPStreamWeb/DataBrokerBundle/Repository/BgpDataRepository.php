@@ -232,6 +232,22 @@ class BgpDataRepository extends EntityRepository {
             $newFiles = $this->findDataByWhere($projects, $collectors, $types,
                                                $timeWhere, $timeParams);
 
+
+            // filter the results to remove files that we accidentally got due to
+            // our overzealous (but fast!) START_OFFSET
+            // also filter any files added in the current second to avoid a race condition
+            $filteredNewFiles = [];
+            foreach($files as $file) {
+                /* @var BgpData $file */
+                if($file->getTs() < $responseTime &&
+                   ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
+                    static::FILE_TIME_OFFSET) >= $minInitialTime
+                ) {
+                    $filteredNewFiles[] = $file;
+                }
+            }
+            $newFiles = $filteredNewFiles;
+
             // build the ts where clause
             $oooFiles = [];
             if($dataAddedSince) {
@@ -256,39 +272,30 @@ class BgpDataRepository extends EntityRepository {
 
         usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
 
-        // filter the results to remove files that we accidentally got due to
-        // our overzealous (but fast!) START_OFFSET
-        // also filter any files added in the current second to avoid a race condition
         $filtered = [];
         /* @var Interval $overlapInterval */
         $overlapInterval = null;
         foreach ($files as $file) {
             /* @var BgpData $file */
-            if($file->getTs() < $responseTime &&
-               ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
-                static::FILE_TIME_OFFSET) >= $minInitialTime
-            ) {
-                // does this file overlap with our interval?
-                $ti = new Interval(
-                    // ribs span [ts-120, ts+120]
-                    $file->getBgpType()->getName() == "ribs" ?
-                        $file->getFileTime() -
-                        $file->getDumpInfo()->getDuration() :
-                        $file->getFileTime(),
-                    $file->getFileTime() +
-                    $file->getDumpInfo()->getDuration()
-                );
-                if(!$overlapInterval) {
-                    $overlapInterval = $ti;
-                } else if(!$overlapInterval->extendOverlapping($ti)) {
-                    // skip this file
-                    continue;
-                }
-                // keep this file
-                $filtered[] = $file;
+            // does this file overlap with our interval?
+            $ti = new Interval(
+            // ribs span [ts-120, ts+120]
+                $file->getBgpType()->getName() == "ribs" ?
+                    $file->getFileTime() -
+                    $file->getDumpInfo()->getDuration() :
+                    $file->getFileTime(),
+                $file->getFileTime() +
+                $file->getDumpInfo()->getDuration()
+            );
+            if(!$overlapInterval) {
+                $overlapInterval = $ti;
+            } else if(!$overlapInterval->extendOverlapping($ti)) {
+                // skip this file
+                continue;
             }
+            // keep this file
+            $filtered[] = $file;
         }
-
         return $filtered;
     }
 
