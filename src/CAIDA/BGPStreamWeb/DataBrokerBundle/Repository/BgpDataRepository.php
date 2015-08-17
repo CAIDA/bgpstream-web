@@ -110,8 +110,12 @@ class BgpDataRepository extends EntityRepository {
     {
         $parameters['w1'] = $minInitialTime;
         $parameters['w2'] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
-        $parameters['w3'] = $dataAddedSince;
-        $parameters['w4'] = $responseTime;
+        $dAS =  new \DateTime();
+        $dAS->setTimestamp($dataAddedSince);
+        $parameters['w3'] = $dAS;
+        $rt = new \DateTime();
+        $rt->setTimestamp($responseTime);
+        $parameters['w4'] = $rt;
 
         // look into the already-processed data for files that have been added
         // since we last looked
@@ -195,6 +199,10 @@ class BgpDataRepository extends EntityRepository {
             throw new \InvalidArgumentException('Missing intervals');
         }
 
+        // set mysql to UTC
+        $this->getEntityManager()->getConnection()
+             ->prepare("SET time_zone='+0:0'")->execute();
+
         // if there is no data, retry, expanding our constraint window until
         // either we find data, or the constraint window extends past the end
         // of the last interval
@@ -237,9 +245,9 @@ class BgpDataRepository extends EntityRepository {
             // our overzealous (but fast!) START_OFFSET
             // also filter any files added in the current second to avoid a race condition
             $filteredNewFiles = [];
-            foreach($files as $file) {
+            foreach($newFiles as $file) {
                 /* @var BgpData $file */
-                if($file->getTs() < $responseTime &&
+                if($file->getTs()->getTimestamp() < $responseTime &&
                    ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
                     static::FILE_TIME_OFFSET) >= $minInitialTime
                 ) {
