@@ -115,7 +115,7 @@ class BgpDataRepository extends EntityRepository {
 
         // look into the already-processed data for files that have been added
         // since we last looked
-        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts > :w3 AND d.ts < :w4';
+        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts >= :w3 AND d.ts < :w4';
     }
 
     private function findDataByWhere($projects, $collectors, $types, $whereStr, $whereParams)
@@ -258,12 +258,14 @@ class BgpDataRepository extends EntityRepository {
 
         // filter the results to remove files that we accidentally got due to
         // our overzealous (but fast!) START_OFFSET
+        // also filter any files added in the current second to avoid a race condition
         $filtered = [];
         /* @var Interval $overlapInterval */
         $overlapInterval = null;
         foreach ($files as $file) {
             /* @var BgpData $file */
-            if(($file->getFileTime() + $file->getDumpInfo()->getDuration() +
+            if($file->getTs() < $responseTime &&
+               ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
                 static::FILE_TIME_OFFSET) >= $minInitialTime
             ) {
                 // does this file overlap with our interval?
