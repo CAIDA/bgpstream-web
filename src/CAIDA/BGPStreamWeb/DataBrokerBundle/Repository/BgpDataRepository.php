@@ -110,12 +110,16 @@ class BgpDataRepository extends EntityRepository {
     {
         $parameters['w1'] = $minInitialTime;
         $parameters['w2'] = $minInitialTime-static::OUT_OF_ORDER_WINDOW;
-        $parameters['w3'] = $dataAddedSince;
-        $parameters['w4'] = $responseTime;
+        $dAS =  new \DateTime();
+        $dAS->setTimestamp($dataAddedSince);
+        $parameters['w3'] = $dAS;
+        $rt = new \DateTime();
+        $rt->setTimestamp($responseTime);
+        $parameters['w4'] = $rt;
 
         // look into the already-processed data for files that have been added
         // since we last looked
-        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts > :w3 AND d.ts < :w4';
+        return 'd.fileTime < :w1 AND d.fileTime > :w2 AND d.ts >= :w3 AND d.ts < :w4';
     }
 
     private function findDataByWhere($projects, $collectors, $types, $whereStr, $whereParams)
@@ -195,6 +199,10 @@ class BgpDataRepository extends EntityRepository {
             throw new \InvalidArgumentException('Missing intervals');
         }
 
+        // set mysql to UTC
+        $this->getEntityManager()->getConnection()
+             ->prepare("SET time_zone='+0:0'")->execute();
+
         // if there is no data, retry, expanding our constraint window until
         // either we find data, or the constraint window extends past the end
         // of the last interval
@@ -232,6 +240,22 @@ class BgpDataRepository extends EntityRepository {
             $newFiles = $this->findDataByWhere($projects, $collectors, $types,
                                                $timeWhere, $timeParams);
 
+
+            // filter the results to remove files that we accidentally got due to
+            // our overzealous (but fast!) START_OFFSET
+            // also filter any files added in the current second to avoid a race condition
+            $filteredNewFiles = [];
+            foreach($newFiles as $file) {
+                /* @var BgpData $file */
+                if($file->getTs()->getTimestamp() < $responseTime &&
+                   ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
+                    static::FILE_TIME_OFFSET) >= $minInitialTime
+                ) {
+                    $filteredNewFiles[] = $file;
+                }
+            }
+            $newFiles = $filteredNewFiles;
+
             // build the ts where clause
             $oooFiles = [];
             if($dataAddedSince) {
@@ -256,37 +280,30 @@ class BgpDataRepository extends EntityRepository {
 
         usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
 
-        // filter the results to remove files that we accidentally got due to
-        // our overzealous (but fast!) START_OFFSET
         $filtered = [];
         /* @var Interval $overlapInterval */
         $overlapInterval = null;
         foreach ($files as $file) {
             /* @var BgpData $file */
-            if(($file->getFileTime() + $file->getDumpInfo()->getDuration() +
-                static::FILE_TIME_OFFSET) >= $minInitialTime
-            ) {
-                // does this file overlap with our interval?
-                $ti = new Interval(
-                    // ribs span [ts-120, ts+120]
-                    $file->getBgpType()->getName() == "ribs" ?
-                        $file->getFileTime() -
-                        $file->getDumpInfo()->getDuration() :
-                        $file->getFileTime(),
-                    $file->getFileTime() +
-                    $file->getDumpInfo()->getDuration()
-                );
-                if(!$overlapInterval) {
-                    $overlapInterval = $ti;
-                } else if(!$overlapInterval->extendOverlapping($ti)) {
-                    // skip this file
-                    continue;
-                }
-                // keep this file
-                $filtered[] = $file;
+            // does this file overlap with our interval?
+            $ti = new Interval(
+            // ribs span [ts-120, ts+120]
+                $file->getBgpType()->getName() == "ribs" ?
+                    $file->getFileTime() -
+                    $file->getDumpInfo()->getDuration() :
+                    $file->getFileTime(),
+                $file->getFileTime() +
+                $file->getDumpInfo()->getDuration()
+            );
+            if(!$overlapInterval) {
+                $overlapInterval = $ti;
+            } else if(!$overlapInterval->extendOverlapping($ti)) {
+                // skip this file
+                continue;
             }
+            // keep this file
+            $filtered[] = $file;
         }
-
         return $filtered;
     }
 
