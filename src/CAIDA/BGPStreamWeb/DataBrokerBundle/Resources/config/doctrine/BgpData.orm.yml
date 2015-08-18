@@ -41,30 +41,6 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
         collectorType:
             targetEntity: CollectorType
             inversedBy: null
-        collector:
-            targetEntity: Collector
-            inversedBy: data
-            joinTable:
-                name: collector_type
-                joinColumns:
-                    collector_type_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    collector_id:
-                        referencedColumnName: id
-            orphanRemoval: false
-        bgpType:
-            targetEntity: BgpType
-            inversedBy: data
-            joinTable:
-                name: collector_type
-                joinColumns:
-                    collector_type_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    bgp_type_id:
-                        referencedColumnName: id
-            orphanRemoval: false
         dumpInfo:
             targetEntity: DumpInfo
             inversedBy: data
