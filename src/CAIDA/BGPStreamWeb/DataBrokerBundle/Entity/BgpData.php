@@ -29,15 +29,6 @@ class BgpData
      */
     private $collectorType;
 
-    /**
-     * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector
-     */
-    private $collector;
-
-    /**
-     * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType
-     */
-    private $bgpType;
 
     /**
      * @var \CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo
@@ -91,7 +82,7 @@ class BgpData
      */
     public function getCollector()
     {
-        return $this->collector;
+        return $this->getCollectorType()->getCollector();
     }
 
     /**
@@ -101,7 +92,7 @@ class BgpData
      */
     public function getBgpType()
     {
-        return $this->bgpType;
+        return $this->getCollectorType()->getBgpType();
     }
 
     /**

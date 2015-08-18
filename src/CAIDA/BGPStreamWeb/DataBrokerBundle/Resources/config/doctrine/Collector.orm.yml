@@ -46,11 +46,6 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
                 project_id:
                     referencedColumnName: id
             orphanRemoval: false
-    oneToMany:
-        data:
-            targetEntity: BgpData
-            cascade: {  }
-            mappedBy: collector
     manyToMany:
         dumpInfos:
             targetEntity: DumpInfo

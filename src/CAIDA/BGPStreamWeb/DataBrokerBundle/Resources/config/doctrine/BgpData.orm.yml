@@ -4,25 +4,16 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
     readOnly: true
     repositoryClass: CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository
     indexes:
-        bgp_data_ibfk_2:
-            columns:
-                - bgp_type_id
         file_time_idx:
             columns:
                 - file_time
-        ts_collector_type_filetime_idx:
+        collector_type_filetime_idx:
             columns:
-                - ts
+                - collector_type_id
                 - file_time
-                - bgp_type_id
-                - collector_id
-        type_filetime_idx:
+        collector_type_id_idx:
             columns:
-                - file_time
-                - bgp_type_id
-        IDX_842B7360670BAFFE:
-            columns:
-                - collector_id
+                - collector_type_id
     id:
         collectorType:
             associationKey: true
@@ -50,30 +41,6 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
         collectorType:
             targetEntity: CollectorType
             inversedBy: null
-        collector:
-            targetEntity: Collector
-            inversedBy: data
-            joinTable:
-                name: collector_type
-                joinColumns:
-                    collector_type_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    collector_id:
-                        referencedColumnName: id
-            orphanRemoval: false
-        bgpType:
-            targetEntity: BgpType
-            inversedBy: data
-            joinTable:
-                name: collector_type
-                joinColumns:
-                    collector_type_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    bgp_type_id:
-                        referencedColumnName: id
-            orphanRemoval: false
         dumpInfo:
             targetEntity: DumpInfo
             inversedBy: data
