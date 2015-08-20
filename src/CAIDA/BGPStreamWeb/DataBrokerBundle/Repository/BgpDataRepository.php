@@ -284,6 +284,7 @@ class BgpDataRepository extends EntityRepository {
         $filtered = [];
         /* @var Interval $overlapInterval */
         $overlapInterval = null;
+        $overlapSet = [];
         foreach ($files as $file) {
             /* @var BgpData $file */
             // does this file overlap with our interval?
@@ -299,13 +300,25 @@ class BgpDataRepository extends EntityRepository {
             if(!$overlapInterval) {
                 $overlapInterval = $ti;
             } else if(!$overlapInterval->extendOverlapping($ti)) {
-                // skip this file
-                continue;
+                // new set
+
+                // first, add the previous overlap set (ensures we only return complete sets)
+                if(count($overlapSet)) {
+                    $filtered = array_merge($filtered, $overlapSet);
+                    $overlapSet = [];
+                }
+
+                $overlapInterval = $ti;
             }
-            // keep this file
-            $filtered[] = $file;
+            // add this file to the set
+            $overlapSet[] = $file;
         }
-        return $filtered;
+        // if all our files form one set, then return that
+        if (!count($filtered)) {
+            return $overlapSet;
+        } else {
+            return $filtered;
+        }
     }
 
 }
