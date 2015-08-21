@@ -227,6 +227,7 @@ class DefaultController extends Controller
         }
 
         $minInitialTime = $this->getLocalParam($request, $response, 'minInitialTime', null);
+        $minInitialTime = (int) $minInitialTime;
         $dataAddedSince = $this->getLocalParam($request, $response, 'dataAddedSince', null);
 
         // some sanity checking on the parameters
