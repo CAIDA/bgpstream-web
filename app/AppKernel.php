@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
+            new Lsw\MemcacheBundle\LswMemcacheBundle(),
             new CAIDA\BGPStreamWeb\DataBrokerBundle\CAIDABGPStreamWebDataBrokerBundle(),
         );
 
