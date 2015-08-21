@@ -26,6 +26,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType:
         collector:
             targetEntity: Collector
             cascade: {  }
+            fetch: EAGER
             mappedBy: null
             inversedBy: null
             joinColumns:
@@ -35,6 +36,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType:
         bgpType:
             targetEntity: BgpType
             cascade: {  }
+            fetch: EAGER
             mappedBy: null
             inversedBy: null
             joinColumns:
