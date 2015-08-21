@@ -35,6 +35,8 @@ class DataResponse extends JsonResponse
         // our parent tries to set this for us
         $this->data = null;
 
+        $this->time = time();
+
         // init the options object
         $this->options = array();
 
@@ -45,8 +47,16 @@ class DataResponse extends JsonResponse
             JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 
         $this->setType($type);
+    }
 
-        $this->time = time();
+    /** Sets the time that the response was created
+     *
+     * @param integer $time
+     */
+    public
+    function setTime($time)
+    {
+        $this->time = $time;
     }
 
     /** Gets the time that the response was created
