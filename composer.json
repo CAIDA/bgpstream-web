@@ -20,7 +20,8 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "friendsofsymfony/http-cache-bundle": "~1.2"
+        "friendsofsymfony/http-cache-bundle": "~1.2",
+        "leaseweb/memcache-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
