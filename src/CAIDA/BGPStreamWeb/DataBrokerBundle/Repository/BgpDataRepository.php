@@ -130,14 +130,14 @@ class BgpDataRepository extends EntityRepository {
            ->from('CAIDABGPStreamWebDataBrokerBundle:BgpData', 'd');
         //->orderBy('d.fileTime, d.bgpType', 'ASC'); // we sort ourselves
 
-        // needed by both collector and type
-        // i'm pretty sure there is no cost if it is not used
-        $qb->join('d.collectorType', 'collType');
-        $qb->join('collType.collector', 'coll');
+        $qb->leftJoin('d.collectorType', 'collType');
+        $qb->leftJoin('d.dumpInfo', 'dumpInfo');
+        $qb->leftJoin('collType.collector', 'coll');
+        $qb->leftJoin('coll.project', 'proj');
+        $qb->leftJoin('collType.bgpType', 'type');
 
         // filter by project
         if($projects && count($projects)) {
-            $qb->join('coll.project', 'proj');
             $qb->andWhere('proj.name IN (:projs)');
             $parameters['projs'] = $projects;
         }
@@ -150,7 +150,6 @@ class BgpDataRepository extends EntityRepository {
 
         // filter by type
         if($types && count($types)) {
-            $qb->join('collType.bgpType', 'type');
             $qb->andWhere('type.name IN (:types)');
             $parameters['types'] = $types;
         }

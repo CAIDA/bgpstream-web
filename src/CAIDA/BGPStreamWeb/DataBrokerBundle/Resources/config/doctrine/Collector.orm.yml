@@ -40,6 +40,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
         project:
             targetEntity: Project
             cascade: {  }
+            fetch: EAGER
             mappedBy: null
             inversedBy: collectors
             joinColumns:

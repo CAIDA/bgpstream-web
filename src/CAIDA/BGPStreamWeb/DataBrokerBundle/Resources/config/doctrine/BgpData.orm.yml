@@ -41,9 +41,11 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
         collectorType:
             targetEntity: CollectorType
             inversedBy: null
+            fetch: EAGER
         dumpInfo:
             targetEntity: DumpInfo
-            inversedBy: data
+            inversedBy: null
+            fetch: EAGER
             joinColumns:
                 collector_type_id:
                     referencedColumnName: collector_type_id
