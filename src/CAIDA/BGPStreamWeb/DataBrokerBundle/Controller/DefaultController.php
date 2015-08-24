@@ -2,9 +2,9 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 
-use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\CaidaBgpArchive;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\BgpArchiveManager;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\Interval;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\IntervalSet;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo;
@@ -12,7 +12,6 @@ use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -227,8 +226,13 @@ class DefaultController extends Controller
         }
 
         $minInitialTime = $this->getLocalParam($request, $response, 'minInitialTime', null);
-        $minInitialTime = (int) $minInitialTime;
+        if ($minInitialTime && !is_numeric($minInitialTime)) {
+            return $response->setError('minInitialTime parameter must be in unix epoch format');
+        }
         $dataAddedSince = $this->getLocalParam($request, $response, 'dataAddedSince', null);
+        if($dataAddedSince && !is_numeric($dataAddedSince)) {
+            return $response->setError('dataAddedSince parameter must be in unix epoch format');
+        }
 
         // some sanity checking on the parameters
         if (count($intervalsParam) == 0) {
@@ -259,14 +263,16 @@ class DefaultController extends Controller
                  ->findByIntervalProjectsCollectorsTypes(
                      $response->getTime(),
                      $intervals,
-                     $minInitialTime,
-                     $dataAddedSince,
+                     (int)$minInitialTime,
+                     (int)$dataAddedSince,
                      $projects,
                      $collectors,
                      $types
                  );
 
-        $dumpfiles = CaidaBgpArchive::generateDumpFiles($bgpdata);
+        $bam = new BgpArchiveManager();
+
+        $dumpfiles = $bam->generateDumpFiles($request, $bgpdata);
 
         $response->addOption('debug', [
                                         'numFiles' => count($dumpfiles->getDumpFiles()),

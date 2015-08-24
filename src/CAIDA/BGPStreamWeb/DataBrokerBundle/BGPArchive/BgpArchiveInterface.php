@@ -3,14 +3,23 @@
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive;
 
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
+use Symfony\Component\HttpFoundation\Request;
 
 interface BgpArchiveInterface {
 
     /**
-     * @param BgpData[] $bgpData
+     * @param Request $request
+     * @param BgpData $bgpdata
      *
-     * @return DumpFileSet
+     * @return boolean
      */
-    public static function generateDumpFiles($bgpData);
+    public function acceptBgpData($request, $bgpdata);
+
+    /**
+     * @param BgpData $bgpData
+     *
+     * @return DumpFile
+     */
+    public function generateDumpFile($bgpData);
 
 }

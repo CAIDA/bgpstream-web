@@ -94,21 +94,9 @@ class Project
         return $this->collectors;
     }
 
-    /**
-     * Get collectors by name
-     *
-     * @param string $name
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCollectorsByName($name)
+    public
+    function __toString()
     {
-        if ($name) {
-            $criteria = Criteria::create();
-            $criteria->where(Criteria::expr()->eq('name', $name));
-
-            return $this->collectors->matching($criteria);
-        } else {
-            return $this->getCollectors();
-        }
+        return $this->getName();
     }
 }

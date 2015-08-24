@@ -1,6 +1,6 @@
 <?php
 
-namespace CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive;
+namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Interval;
 
 use JsonSerializable;
 
@@ -135,7 +135,7 @@ class IntervalSet implements JsonSerializable {
     private function update()
     {
         // re-sort the array, and look for the first interval
-        usort($this->intervals, ['CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet', 'cmpInterval']);
+        usort($this->intervals, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\IntervalSet', 'cmpInterval']);
 
         $this->firstInterval = null;
         $this->lastInterval = null;
