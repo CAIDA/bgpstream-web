@@ -125,4 +125,9 @@ class Collector
     {
         return $this->dumpInfos;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

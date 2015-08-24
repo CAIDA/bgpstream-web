@@ -1,6 +1,6 @@
 <?php
 
-namespace CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive;
+namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Interval;
 
 use JsonSerializable;
 

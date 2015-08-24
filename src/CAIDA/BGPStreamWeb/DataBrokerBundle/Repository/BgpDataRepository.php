@@ -8,8 +8,8 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Repository;
 
-use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\Interval;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\IntervalSet;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\Interval;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\IntervalSet;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use Doctrine\ORM\EntityRepository;
 
