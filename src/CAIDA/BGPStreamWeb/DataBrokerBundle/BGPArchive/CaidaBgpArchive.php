@@ -40,6 +40,12 @@ class CaidaBgpArchive implements BgpArchiveInterface {
 
     public function acceptBgpData($request, $row)
     {
+        // allow caida users to pull data directly from RV/RIS
+        $preferCaida = $request->get('preferCaida', 'true');
+        $preferCaida = $preferCaida == 'true' ? true : false;
+        if(!$preferCaida) {
+            return false;
+        }
         foreach ($this->allowedRanges as $pfx) {
             if($this->ip_in_range($request->getClientIp(), $pfx)) {
                 return true;
