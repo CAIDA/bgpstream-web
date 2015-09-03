@@ -1,0 +1,6 @@
+caida_bgpstream_web_homepage:
+  path:  /{page}/{subpage}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:index
+    page: home
+    subpage:

@@ -1,0 +1,39 @@
+html, body {
+    height: 100%;
+}
+
+#content-push {
+    height: 70px;
+}
+
+#content-push-full {
+    height: 50px;
+}
+
+#footer-push {
+    height: 40px;
+}
+
+.footer-bar {
+    min-height: 40px !important;
+    height: 40px !important;
+}
+
+.footer-bar p {
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.logo {
+    /*padding-right: 4px;*/
+    height: 30px;
+}
+
+.navbar-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    margin-top: -3px;
+}
