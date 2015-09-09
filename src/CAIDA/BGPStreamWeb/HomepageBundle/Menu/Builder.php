@@ -46,13 +46,13 @@ class Builder
         );
 
         $menu->addChild('docs');
-        $menu['docs']->addChild('manual',
+        $menu['docs']->addChild('overview',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage',
                             'routeParameters' =>
                                 array(
                                     'page' => 'docs',
-                                    'subpage' => 'manual'
+                                    'subpage' => 'overview'
                                 )
                         )
         );

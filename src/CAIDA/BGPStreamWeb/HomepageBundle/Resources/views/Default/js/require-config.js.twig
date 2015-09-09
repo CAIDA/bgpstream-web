@@ -16,6 +16,11 @@ require.config({
         jstree: '//cdnjs.cloudflare.com/ajax/libs/jstree/3.0.9/jstree.min',
         yaml: '//cdnjs.cloudflare.com/ajax/libs/js-yaml/3.0.2/js-yaml.min',
 
+        {% javascripts
+        '@CAIDABGPStreamWebHomepageBundle/Resources/public/libs/prismjs/js/prism.js' %}
+        'prism': '{{ asset_url[:-3] }}',
+        {% endjavascripts %}
+
         d3: '//cdnjs.cloudflare.com/ajax/libs/d3/3.4.12/d3.min',
     },
     shim: {
@@ -24,7 +29,10 @@ require.config({
         'jquery-browser-plugin': ['jquery'],
         'bbq': ['jquery-browser-plugin'],
         'highcharts-export': ['highstock'],
-        'highstock-scalable-yaxis': ['highstock']
+        'highstock-scalable-yaxis': ['highstock'],
+        'prism': {
+            'exports': 'Prism'
+        }
     }
 });
 
