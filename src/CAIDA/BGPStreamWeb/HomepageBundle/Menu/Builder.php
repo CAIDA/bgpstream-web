@@ -76,7 +76,7 @@ class Builder
                                         )
                                 )
         );
-        $menu['docs']->addChild('API',
+        $menu['docs']->addChild('{API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                     'routeParameters' =>
