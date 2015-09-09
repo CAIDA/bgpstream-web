@@ -35,6 +35,67 @@ class Builder
                         )
         );
 
+        $menu->addChild('download',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'download'
+                                )
+                        )
+        );
+
+        $menu->addChild('docs');
+        $menu['docs']->addChild('manual',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'docs',
+                                    'subpage' => 'manual'
+                                )
+                        )
+        );
+        $menu['docs']->addChild('installing',
+                                array(
+                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'routeParameters' =>
+                                        array(
+                                            'page'    => 'docs',
+                                            'subpage' => 'installing'
+                                        )
+                                )
+        );
+        $menu['docs']->addChild('tutorials',
+                                array(
+                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'routeParameters' =>
+                                        array(
+                                            'page'    => 'docs',
+                                            'subpage' => 'tutorials'
+                                        )
+                                )
+        );
+        $menu['docs']->addChild('API',
+                                array(
+                                    'route'           => 'caida_bgpstream_web_homepage_docs_api',
+                                    'routeParameters' =>
+                                        array(
+                                            'doxypage'    => 'bgpstream_8h.html',
+                                        )
+                                )
+        );
+
+        $menu->addChild('projects',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'projects'
+                                )
+                        )
+        );
+
         // short circuit here if not logged in at all.
         // anything below here WILL NOT be visible to anon visitors
         /*

@@ -1,0 +1,34 @@
+<map id="struct_bgpstream_t" name="struct_bgpstream_t">
+<area shape="rect" id="node2" href="$structstruct__bgpstream__reader__mgr__t.html" title="struct_bgpstream_reader\l_mgr_t" alt="" coords="3305,145,3466,186"/>
+<area shape="rect" id="node4" href="$structstruct__BGPDUMP__ENTRY.html" title="struct_BGPDUMP_ENTRY" alt="" coords="2677,101,2855,128"/>
+<area shape="rect" id="node5" href="$structattr.html" title="attr" alt="" coords="1423,260,1462,287"/>
+<area shape="rect" id="node22" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__ROUTE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_ROUTE_ENTRY" alt="" coords="1732,411,1927,453"/>
+<area shape="rect" id="node6" href="$structcluster__list.html" title="cluster_list" alt="" coords="1053,120,1131,147"/>
+<area shape="rect" id="node7" href="$structunknown__attr.html" title="unknown_attr" alt="" coords="1043,171,1141,197"/>
+<area shape="rect" id="node8" href="$structaspath.html" title="aspath" alt="" coords="1061,224,1123,251"/>
+<area shape="rect" id="node9" href="$structmp__info.html" title="mp_info" alt="" coords="1059,275,1125,301"/>
+<area shape="rect" id="node10" href="$structmp__nlri.html" title="mp_nlri" alt="" coords="693,275,754,301"/>
+<area shape="rect" id="node11" href="$structprefix.html" title="prefix" alt="" coords="369,224,421,251"/>
+<area shape="rect" id="node19" href="$structstruct__BGPDUMP__ZEBRA__MESSAGE.html" title="struct_BGPDUMP_ZEBRA\l_MESSAGE" alt="" coords="1003,54,1181,95"/>
+<area shape="rect" id="node20" href="$structzebra__incomplete.html" title="zebra_incomplete" alt="" coords="663,121,784,148"/>
+<area shape="rect" id="node12" href="$unionunion__BGPDUMP__IP__ADDRESS.html" title="union_BGPDUMP_IP_ADDRESS" alt="" coords="5,427,224,453"/>
+<area shape="rect" id="node18" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE_ENTRY" alt="" coords="1303,411,1583,453"/>
+<area shape="rect" id="node21" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PREFIX.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PREFIX" alt="" coords="2043,483,2218,525"/>
+<area shape="rect" id="node24" href="$structstruct__BGPDUMP__ZEBRA__STATE__CHANGE.html" title="struct_BGPDUMP_ZEBRA\l_STATE_CHANGE" alt="" coords="460,537,639,578"/>
+<area shape="rect" id="node25" href="$structstruct__BGPDUMP__MRTD__TABLE__DUMP.html" title="struct_BGPDUMP_MRTD\l_TABLE_DUMP" alt="" coords="808,602,979,643"/>
+<area shape="rect" id="node13" href="$structtransit.html" title="transit" alt="" coords="1065,325,1119,352"/>
+<area shape="rect" id="node14" href="$structcommunity.html" title="community" alt="" coords="1051,376,1133,403"/>
+<area shape="rect" id="node15" href="$unionunion__BGPDUMP__BODY.html" title="union_BGPDUMP_BODY" alt="" coords="2419,360,2592,387"/>
+<area shape="rect" id="node16" href="$structstruct__BGPDUMP__ZEBRA__SNAPSHOT.html" title="struct_BGPDUMP_ZEBRA\l_SNAPSHOT" alt="" coords="2041,287,2220,329"/>
+<area shape="rect" id="node17" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE" alt="" coords="2016,222,2245,263"/>
+<area shape="rect" id="node27" href="$structstruct__BGPDUMP.html" title="struct_BGPDUMP" alt="" coords="2442,45,2569,72"/>
+<area shape="rect" id="node23" href="$structstruct__BGPDUMP__ZEBRA__ENTRY.html" title="struct_BGPDUMP_ZEBRA\l_ENTRY" alt="" coords="2041,418,2220,459"/>
+<area shape="rect" id="node26" href="$structstruct__BGPDUMP__MRTD__MESSAGE.html" title="struct_BGPDUMP_MRTD\l_MESSAGE" alt="" coords="2045,353,2216,394"/>
+<area shape="rect" id="node28" href="$struct__CFRFILE.html" title="cfile_tools.h A small library containing tools for dealing with files that are compressed with differ..." alt="" coords="2089,5,2172,32"/>
+<area shape="rect" id="node29" href="$structstruct__bgpstream__filter__mgr__t.html" title="struct_bgpstream_filter\l_mgr_t" alt="" coords="2995,191,3141,233"/>
+<area shape="rect" id="node30" href="$structstruct__bgpstream__string__filter__t.html" title="struct_bgpstream_string\l_filter_t" alt="" coords="2689,191,2843,233"/>
+<area shape="rect" id="node31" href="$structstruct__bgpstream__interval__filter__t.html" title="struct_bgpstream_interval\l_filter_t" alt="" coords="2683,295,2849,337"/>
+<area shape="rect" id="node32" href="$structstruct__bgpstream__input__mgr__t.html" title="struct_bgpstream_input\l_mgr_t" alt="" coords="3309,274,3462,315"/>
+<area shape="rect" id="node33" href="$structstruct__bgpstream__input__t.html" title="struct_bgpstream_input_t" alt="" coords="2987,296,3149,323"/>
+<area shape="rect" id="node34" href="$structstruct__bgpstream__datasource__mgr__t.html" title="struct_bgpstream_datasource\l_mgr_t" alt="" coords="3291,339,3480,381"/>
+</map>
