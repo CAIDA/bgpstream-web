@@ -3,6 +3,12 @@ caida_bgpstream_web_homepage_docs_api:
   defaults:
     _controller: CAIDABGPStreamWebHomepageBundle:Default:api
 
+caida_bgpstream_web_homepage_docs:
+  path: /docs/{page}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:docs
+    page: overview
+
 caida_bgpstream_web_homepage:
   path:  /{page}/{subpage}
   defaults:
