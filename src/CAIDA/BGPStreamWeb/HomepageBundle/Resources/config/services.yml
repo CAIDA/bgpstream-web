@@ -5,7 +5,7 @@ services:
 
   caida_charthouse.menu.topNav:
     class: Knp\Menu\MenuItem
-    factory_service: caida_charthouse_frontend.menu_builder
+    factory_service: caida_bgpstreamweb_homepage.menu_builder
     factory_method: topNavMenu
     tags:
       - { name: knp_menu.menu, alias: topNav }

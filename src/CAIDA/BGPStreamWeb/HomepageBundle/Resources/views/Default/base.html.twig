@@ -22,22 +22,22 @@
         {% endstylesheets %}
     {% endblock %}
 
+    {% block head_js_block %}
     <script type="text/javascript">
         {% block head_js %}{% endblock %}
     </script>
+    {% endblock %}
 </head>
 
 <body>
 
-{#
 {% spaceless %}
     {{ knp_menu_render(
     'topNav',
-    {'template': 'CAIDACharthouseFrontendBundle:Menu:topnav.html.twig',
+    {'template': 'CAIDABGPStreamWebHomepageBundle:Menu:topnav.html.twig',
         'app': app}
     ) }}
 {% endspaceless %}
-#}
 
 {# NOTE: If you want to do something special with the content and override
     outer_body, then you should take note of the content-push and
@@ -48,6 +48,15 @@
         {% block body %}{% endblock %}
     </div>
     {#<div id="footer-push"></div>#}
+{% endblock %}
+
+{% block jsblock %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
+    <script>
+        {% include 'CAIDABGPStreamWebHomepageBundle:Default:js/require-config.js.twig' %}
+        require(['bootstrap'], function () {
+        });
+    </script>
 {% endblock %}
 </body>
 </html>

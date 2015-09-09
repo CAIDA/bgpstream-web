@@ -1,0 +1,23 @@
+<map id="union_BGPDUMP_BODY" name="union_BGPDUMP_BODY">
+<area shape="rect" id="node2" href="$structstruct__BGPDUMP__ZEBRA__SNAPSHOT.html" title="struct_BGPDUMP_ZEBRA\l_SNAPSHOT" alt="" coords="2204,5,2383,47"/>
+<area shape="rect" id="node3" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE" alt="" coords="1951,319,2180,360"/>
+<area shape="rect" id="node4" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE_ENTRY" alt="" coords="1303,384,1583,425"/>
+<area shape="rect" id="node10" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__ROUTE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_ROUTE_ENTRY" alt="" coords="1732,384,1927,425"/>
+<area shape="rect" id="node5" href="$unionunion__BGPDUMP__IP__ADDRESS.html" title="union_BGPDUMP_IP_ADDRESS" alt="" coords="5,397,224,423"/>
+<area shape="rect" id="node6" href="$structstruct__BGPDUMP__ZEBRA__MESSAGE.html" title="struct_BGPDUMP_ZEBRA\l_MESSAGE" alt="" coords="1003,35,1181,76"/>
+<area shape="rect" id="node7" href="$structprefix.html" title="prefix" alt="" coords="369,126,421,153"/>
+<area shape="rect" id="node9" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PREFIX.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PREFIX" alt="" coords="2206,388,2381,429"/>
+<area shape="rect" id="node16" href="$structmp__nlri.html" title="mp_nlri" alt="" coords="693,254,754,281"/>
+<area shape="rect" id="node20" href="$structstruct__BGPDUMP__ZEBRA__STATE__CHANGE.html" title="struct_BGPDUMP_ZEBRA\l_STATE_CHANGE" alt="" coords="460,507,639,548"/>
+<area shape="rect" id="node21" href="$structstruct__BGPDUMP__MRTD__TABLE__DUMP.html" title="struct_BGPDUMP_MRTD\l_TABLE_DUMP" alt="" coords="808,572,979,613"/>
+<area shape="rect" id="node8" href="$structzebra__incomplete.html" title="zebra_incomplete" alt="" coords="663,42,784,69"/>
+<area shape="rect" id="node11" href="$structattr.html" title="attr" alt="" coords="1423,242,1462,269"/>
+<area shape="rect" id="node12" href="$structcluster__list.html" title="cluster_list" alt="" coords="1053,253,1131,279"/>
+<area shape="rect" id="node13" href="$structunknown__attr.html" title="unknown_attr" alt="" coords="1043,303,1141,330"/>
+<area shape="rect" id="node14" href="$structaspath.html" title="aspath" alt="" coords="1061,355,1123,382"/>
+<area shape="rect" id="node15" href="$structmp__info.html" title="mp_info" alt="" coords="1059,101,1125,127"/>
+<area shape="rect" id="node17" href="$structtransit.html" title="transit" alt="" coords="1065,151,1119,178"/>
+<area shape="rect" id="node18" href="$structcommunity.html" title="community" alt="" coords="1051,202,1133,229"/>
+<area shape="rect" id="node19" href="$structstruct__BGPDUMP__ZEBRA__ENTRY.html" title="struct_BGPDUMP_ZEBRA\l_ENTRY" alt="" coords="2204,453,2383,495"/>
+<area shape="rect" id="node22" href="$structstruct__BGPDUMP__MRTD__MESSAGE.html" title="struct_BGPDUMP_MRTD\l_MESSAGE" alt="" coords="2208,632,2379,673"/>
+</map>

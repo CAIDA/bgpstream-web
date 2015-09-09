@@ -1,0 +1,13 @@
+<map id="struct_BGPDUMP_TABLE_DUMP_V2_ROUTE_ENTRY" name="struct_BGPDUMP_TABLE_DUMP_V2_ROUTE_ENTRY">
+<area shape="rect" id="node2" href="$structattr.html" title="attr" alt="" coords="327,436,366,463"/>
+<area shape="rect" id="node3" href="$structcluster__list.html" title="cluster_list" alt="" coords="307,317,386,344"/>
+<area shape="rect" id="node4" href="$structunknown__attr.html" title="unknown_attr" alt="" coords="5,317,104,344"/>
+<area shape="rect" id="node5" href="$structaspath.html" title="aspath" alt="" coords="129,317,191,344"/>
+<area shape="rect" id="node6" href="$structmp__info.html" title="mp_info" alt="" coords="216,317,283,344"/>
+<area shape="rect" id="node7" href="$structmp__nlri.html" title="mp_nlri" alt="" coords="303,213,364,240"/>
+<area shape="rect" id="node8" href="$structprefix.html" title="prefix" alt="" coords="307,96,359,123"/>
+<area shape="rect" id="node9" href="$unionunion__BGPDUMP__IP__ADDRESS.html" title="union_BGPDUMP_IP_ADDRESS" alt="" coords="299,5,517,32"/>
+<area shape="rect" id="node12" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE_ENTRY" alt="" coords="445,148,725,189"/>
+<area shape="rect" id="node10" href="$structtransit.html" title="transit" alt="" coords="410,317,465,344"/>
+<area shape="rect" id="node11" href="$structcommunity.html" title="community" alt="" coords="489,317,570,344"/>
+</map>

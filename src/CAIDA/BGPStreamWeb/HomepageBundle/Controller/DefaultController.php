@@ -31,4 +31,21 @@ class DefaultController extends Controller
                                                  '\' does not exist');
         }
     }
+
+    public function apiAction($_route, $doxypage)
+    {
+        $twig =
+                "CAIDABGPStreamWebHomepageBundle:Default:docs.api.html.twig";
+
+        try {
+            return $this->render($twig,
+                                 [
+                                     'route' => $_route,
+                                     'doxypage' => $doxypage,
+                                 ]
+            );
+        } catch(\InvalidArgumentException $ex) {
+            throw $this->createNotFoundException('Requested page does not exist');
+        }
+    }
 }
