@@ -46,8 +46,11 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         if(!$preferCaida) {
             return false;
         }
+        $client_ip =
+            isset($_SERVER['HTTP_X_REAL_IP']) ? $_SERVER['HTTP_X_REAL_IP'] :
+                @$_SERVER['REMOTE_ADDR'];
         foreach ($this->allowedRanges as $pfx) {
-            if($this->ip_in_range($request->getClientIp(), $pfx)) {
+            if($this->ip_in_range($client_ip, $pfx)) {
                 return true;
             }
         }
