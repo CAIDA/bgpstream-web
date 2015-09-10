@@ -1,9 +1,8 @@
-caida_bgpstream_web_homepage:
-    resource: "@CAIDABGPStreamWebHomepageBundle/Resources/config/routing.yml"
-    prefix:   /
-
 caida_bgpstream_web_data_broker:
     resource: "@CAIDABGPStreamWebDataBrokerBundle/Resources/config/routing.yml"
     prefix:   /broker
 
+caida_bgpstream_web_homepage:
+    resource: "@CAIDABGPStreamWebHomepageBundle/Resources/config/routing.yml"
+    prefix:   /
 
