@@ -1,0 +1,3 @@
+pre {
+    visibility: hidden; /* to allow prism to work without flickering */
+}

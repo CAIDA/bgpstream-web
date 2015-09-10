@@ -3,6 +3,7 @@
 {% block styleblock %}
     {{ parent() }}
     {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/docs.css'
     'bundles/caidabgpstreamwebhomepage/libs/prismjs/css/prism.css'
     filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -17,6 +18,7 @@
                 //if ($('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code').length) {
                 require(['prism'], function (prism) {
                     prism.highlightAll();
+                    $('pre').css({'opacity': 0, 'visibility': 'visible'}).animate({opacity: 1.0}, 150);
                 });
                 //}
             });
