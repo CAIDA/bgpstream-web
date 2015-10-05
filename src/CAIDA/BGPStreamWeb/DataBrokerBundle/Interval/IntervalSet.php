@@ -48,7 +48,8 @@ class IntervalSet implements JsonSerializable {
     public function addInterval($interval)
     {
         $toAdd = true;
-        if ($this->combineOverlapping) {
+        if ($this->combineOverlapping &&
+            $interval->getEnd() != Interval::FOREVER) {
             // check if any of the existing intervals overlap
             foreach ($this->getIntervals() as $exInt) {
                 if ($exInt->getStart() > $interval->getEnd()) {
@@ -94,7 +95,9 @@ class IntervalSet implements JsonSerializable {
     public function getIntervalOverlapping($time)
     {
         foreach ($this->getIntervals() as $interval) {
-            if ($interval->getStart() <= $time && $interval->getEnd() >= $time) {
+            if ($interval->getStart() <= $time &&
+                ($interval->getEnd() == Interval::FOREVER ||
+                 $interval->getEnd() >= $time)) {
                 return $interval;
             }
         }
@@ -147,7 +150,8 @@ class IntervalSet implements JsonSerializable {
             }
 
             if(!$this->lastInterval ||
-               $interval->getEnd() >= $this->lastInterval->getEnd()) {
+               ($interval->getEnd() == Interval::FOREVER ||
+                $interval->getEnd() >= $this->lastInterval->getEnd())) {
                 $this->lastInterval = $interval;
             }
         }

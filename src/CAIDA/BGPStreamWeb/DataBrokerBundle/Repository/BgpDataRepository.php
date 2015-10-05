@@ -45,9 +45,13 @@ class BgpDataRepository extends EntityRepository {
         $parameters['w'.$p1] =
             $applyOffset ? $interval->getStart() - static::START_OFFSET :
                 $interval->getStart();
-        $parameters['w'.$p2] = $interval->getEnd();
+        if ($interval->getEnd() != Interval::FOREVER) {
+            $parameters['w' . $p2] = $interval->getEnd();
 
-        return '(d.fileTime >= :w' . $p1 . ' AND d.fileTime <= :w' . $p2 . ')';
+            return '(d.fileTime >= :w' . $p1 . ' AND d.fileTime <= :w' . $p2 . ')';
+        } else {
+            return '(d.fileTime >= :w' . $p1 . ')';
+        }
     }
 
     /**
@@ -70,6 +74,7 @@ class BgpDataRepository extends EntityRepository {
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
         if($retryCnt > 0 &&
+           $intervals->getLastInterval()->getEnd() != Interval::FOREVER &&
            $minInitialTime + $constraintLength >
            $intervals->getLastInterval()->getEnd()
         ) {
