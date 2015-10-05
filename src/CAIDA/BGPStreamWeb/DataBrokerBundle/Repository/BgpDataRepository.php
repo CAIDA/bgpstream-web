@@ -59,10 +59,11 @@ class BgpDataRepository extends EntityRepository {
      * @param $minInitialTime
      * @param $parameters
      * @param $retryCnt
+     * @param $responseTime
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt)
+    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt, $responseTime)
     {
         $where = '';
 
@@ -74,9 +75,12 @@ class BgpDataRepository extends EntityRepository {
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
         if($retryCnt > 0 &&
-           $intervals->getLastInterval()->getEnd() != Interval::FOREVER &&
-           $minInitialTime + $constraintLength >
-           $intervals->getLastInterval()->getEnd()
+           // end of constraint window is in the "future"
+           (($minInitialTime + $constraintLength) > $responseTime ||
+            // or the end of the constraint window is after the end of the overall interval
+            ($intervals->getLastInterval()->getEnd() != Interval::FOREVER &&
+             ($minInitialTime + $constraintLength) >
+             $intervals->getLastInterval()->getEnd()))
         ) {
             return null;
         }
@@ -238,7 +242,7 @@ class BgpDataRepository extends EntityRepository {
             $timeParams = [];
             $timeWhere  =
                 $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
-                                          $timeParams, $retries++);
+                                          $timeParams, $retries++, $responseTime);
             if(!$timeWhere) { // there's no data!
                 return [];
             }
