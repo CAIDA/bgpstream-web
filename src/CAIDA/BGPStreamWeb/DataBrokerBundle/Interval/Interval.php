@@ -6,6 +6,8 @@ use JsonSerializable;
 
 class Interval implements JsonSerializable {
 
+    const FOREVER = 0;
+
     private $start;
     private $end;
 
@@ -28,7 +30,7 @@ class Interval implements JsonSerializable {
             throw new \InvalidArgumentException('Invalid Interval: ' . $start . ',' . $end);
         }
 
-        if ($start > $end) {
+        if ($end != Interval::FOREVER && $start > $end) {
             throw new \InvalidArgumentException('Invalid Interval: ' . $start . ',' . $end);
         }
 
@@ -80,11 +82,13 @@ class Interval implements JsonSerializable {
             // they are identical
             return true;
         }
-        if ($interval->getStart() >= $this->getEnd()) {
+        if ($this->getEnd() != Interval::FOREVER &&
+            $interval->getStart() >= $this->getEnd()) {
             return false;
         }
 
-        if ($interval->getEnd() > $this->getEnd()) {
+        if ($this->getEnd() != Interval::FOREVER &&
+            $interval->getEnd() > $this->getEnd()) {
             $this->setEnd($interval->getEnd());
         }
 

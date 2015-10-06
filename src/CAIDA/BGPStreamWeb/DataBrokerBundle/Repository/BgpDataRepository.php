@@ -45,9 +45,13 @@ class BgpDataRepository extends EntityRepository {
         $parameters['w'.$p1] =
             $applyOffset ? $interval->getStart() - static::START_OFFSET :
                 $interval->getStart();
-        $parameters['w'.$p2] = $interval->getEnd();
+        if ($interval->getEnd() != Interval::FOREVER) {
+            $parameters['w' . $p2] = $interval->getEnd();
 
-        return '(d.fileTime >= :w' . $p1 . ' AND d.fileTime <= :w' . $p2 . ')';
+            return '(d.fileTime >= :w' . $p1 . ' AND d.fileTime <= :w' . $p2 . ')';
+        } else {
+            return '(d.fileTime >= :w' . $p1 . ')';
+        }
     }
 
     /**
@@ -55,10 +59,11 @@ class BgpDataRepository extends EntityRepository {
      * @param $minInitialTime
      * @param $parameters
      * @param $retryCnt
+     * @param $responseTime
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt)
+    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt, $responseTime)
     {
         $where = '';
 
@@ -70,8 +75,12 @@ class BgpDataRepository extends EntityRepository {
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
         if($retryCnt > 0 &&
-           $minInitialTime + $constraintLength >
-           $intervals->getLastInterval()->getEnd()
+           // end of constraint window is in the "future"
+           (($minInitialTime + $constraintLength) > $responseTime ||
+            // or the end of the constraint window is after the end of the overall interval
+            ($intervals->getLastInterval()->getEnd() != Interval::FOREVER &&
+             ($minInitialTime + $constraintLength) >
+             $intervals->getLastInterval()->getEnd()))
         ) {
             return null;
         }
@@ -233,7 +242,7 @@ class BgpDataRepository extends EntityRepository {
             $timeParams = [];
             $timeWhere  =
                 $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
-                                          $timeParams, $retries++);
+                                          $timeParams, $retries++, $responseTime);
             if(!$timeWhere) { // there's no data!
                 return [];
             }
