@@ -76,7 +76,7 @@ class Builder
                                         )
                                 )
         );
-        $menu['docs']->addChild('{API}',
+        $menu['docs']->addChild('{C API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                     'routeParameters' =>
@@ -85,7 +85,28 @@ class Builder
                                         )
                                 )
         );
+        $menu['docs']->addChild('{Python API}',
+                                array(
+                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'routeParameters' =>
+                                        array(
+                                            'page'    => 'docs',
+                                            'subpage' => 'pybgpstream-api'
+                                        )
+                                )
+        );
 
+        $menu->addChild('data',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'data'
+                                )
+                        )
+        );
+
+        /*
         $menu->addChild('projects',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage',
@@ -95,6 +116,7 @@ class Builder
                                 )
                         )
         );
+        */
 
         // short circuit here if not logged in at all.
         // anything below here WILL NOT be visible to anon visitors
