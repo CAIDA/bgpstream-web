@@ -25,6 +25,16 @@ class DefaultController extends Controller
 
     private function serializeDumpInfos($dumpInfos)
     {
+        $timeRanges = $this->getDoctrine()
+                           ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
+                           ->findTimeRanges();
+
+        /* build a map so we can quickly look up time range for a collector */
+        $collectorTimeRanges = [];
+        foreach($timeRanges as $timeRange) {
+            $collectorTimeRanges[$timeRange['collectorTypeId']] = $timeRange;
+        }
+
         $types = [];
         foreach($dumpInfos as $dumpInfo) {
             /* @var DumpInfo $dumpInfo */
@@ -34,6 +44,8 @@ class DefaultController extends Controller
             $types[$ct->getBgpType()->getName()] = [
                 'dumpPeriod' => $dumpInfo->getPeriod(),
                 'dumpDuration'  => $dumpInfo->getDuration(),
+                'oldestDumpTime' => $collectorTimeRanges[$ct->getId()]['oldestDumpTime'],
+                'latestDumpTime' => $collectorTimeRanges[$ct->getId()]['latestDumpTime'],
             ];
         }
         return $types;
@@ -56,16 +68,6 @@ class DefaultController extends Controller
     {
         $data = [];
 
-        $timeRanges = $this->getDoctrine()
-                     ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
-                     ->findTimeRanges();
-
-        /* build a map so we can quickly look up time range for a collector */
-        $collectorTimeRanges = [];
-        foreach ($timeRanges as $timeRange) {
-            $collectorTimeRanges[$timeRange['collectorTypeId']] = $timeRange;
-        }
-
         foreach($collectors as $collector) {
             /* @var Collector $collector */
 
@@ -78,10 +80,6 @@ class DefaultController extends Controller
                 'project'  => $collector->getProject()->getName(),
                 'dataTypes' =>
                     $this->serializeDumpInfos($collector->getDumpInfos()),
-                'dataTimeRange' => [
-                    $collectorTimeRanges[$collector->getId()]['oldestDumpTime'],
-                    $collectorTimeRanges[$collector->getId()]['latestDumpTime'],
-                ]
             ];
 
 
