@@ -36,6 +36,7 @@ set :branch, ENV['branch'] || (instance.to_s == "prod" ? "production" : "master"
 set :instance_files,    [
                          "web/.htaccess",          # for app_dev.php in test
 #                         "web/app_dev.php",        # for no-ip auth on test
+                         "app/config/parameters.yml.dist",
                          ]
 
 # ssh settings
