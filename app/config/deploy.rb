@@ -46,6 +46,9 @@ ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
 # Run migrations before warming the cache
 #before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_metadata"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_query"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_result"
 
 # Custom(ised) tasks
 namespace :deploy do
