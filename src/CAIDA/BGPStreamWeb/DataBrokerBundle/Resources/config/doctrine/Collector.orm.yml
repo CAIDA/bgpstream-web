@@ -50,6 +50,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
     manyToMany:
         dumpInfos:
             targetEntity: DumpInfo
+            fetch: EAGER
             inversedBy: null
             joinTable:
                 name: collector_type
@@ -62,6 +63,7 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector:
         bgpTypes:
             targetEntity: BgpType
             inversedBy: collectors
+            fetch: EAGER
             joinTable:
                 name: collector_type
                 joinColumns:

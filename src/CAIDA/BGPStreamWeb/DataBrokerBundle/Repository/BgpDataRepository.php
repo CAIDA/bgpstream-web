@@ -329,4 +329,21 @@ class BgpDataRepository extends EntityRepository {
         }
     }
 
+    /**
+     * @return array
+     */
+    public
+    function findTimeRanges()
+    {
+        $queryStr =
+            'SELECT d.collectorTypeId, MIN(d.fileTime) as oldestDumpTime, MAX(d.fileTime) as latestDumpTime ' .
+            'FROM CAIDABGPStreamWebDataBrokerBundle:BgpData d ' .
+            'GROUP BY d.collectorTypeId';
+
+        $query = $this->getEntityManager()
+                      ->createQuery($queryStr);
+
+        return $query->getResult();
+    }
+
 }

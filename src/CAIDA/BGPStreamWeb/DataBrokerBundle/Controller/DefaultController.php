@@ -5,12 +5,11 @@ namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Controller;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\BGPArchive\BgpArchiveManager;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\Interval;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Interval\IntervalSet;
+use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\DumpInfo;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\HTTP\DataResponse;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
-use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpType;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +30,7 @@ class DefaultController extends Controller
             /* @var DumpInfo $dumpInfo */
             /* @var CollectorType $ct */
             $ct = $dumpInfo->getCollectorType();
+
             $types[$ct->getBgpType()->getName()] = [
                 'dumpPeriod' => $dumpInfo->getPeriod(),
                 'dumpDuration'  => $dumpInfo->getDuration(),
@@ -45,19 +45,7 @@ class DefaultController extends Controller
 
         foreach ($projects as $project) {
             /* @var Project $project */
-
-            $collectors = [];
-            foreach($project->getCollectors() as $collector) {
-                /* @var BgpType $type */
-                $collectors[] = $collector->getName();
-            }
-
-            $data[$project->getName()] = [
-                //'name'    => $project->getName(),
-                //'path'    => $project->getPath(),
-                //'fileExt' => $project->getFileExt(),
-                'collectors' => $collectors,
-            ];
+            $data[$project->getName()] = $this->serializeCollectors($project->getCollectors());
         }
 
         return ['projects' => $data];
@@ -68,8 +56,21 @@ class DefaultController extends Controller
     {
         $data = [];
 
+        $timeRanges = $this->getDoctrine()
+                     ->getRepository('CAIDABGPStreamWebDataBrokerBundle:BgpData')
+                     ->findTimeRanges();
+
+        /* build a map so we can quickly look up time range for a collector */
+        $collectorTimeRanges = [];
+        foreach ($timeRanges as $timeRange) {
+            $collectorTimeRanges[$timeRange['collectorTypeId']] = $timeRange;
+        }
+
         foreach($collectors as $collector) {
             /* @var Collector $collector */
+
+            // get min and max time for this collectorType
+
 
             $data[$collector->getName()] = [
                 //'name'       => $collector->getName(),
@@ -77,7 +78,13 @@ class DefaultController extends Controller
                 'project'  => $collector->getProject()->getName(),
                 'dataTypes' =>
                     $this->serializeDumpInfos($collector->getDumpInfos()),
+                'dataTimeRange' => [
+                    $collectorTimeRanges[$collector->getId()]['oldestDumpTime'],
+                    $collectorTimeRanges[$collector->getId()]['latestDumpTime'],
+                ]
             ];
+
+
         }
 
         return ['collectors' => $data];

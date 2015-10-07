@@ -1,6 +1,7 @@
 CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\CollectorType:
     type: entity
     table: collector_type
+    repositoryClass: CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\CollectorTypeRepository
     indexes:
         collector_type_ibfk_2:
             columns:

@@ -8,6 +8,7 @@
 
 namespace CAIDA\BGPStreamWeb\DataBrokerBundle\Repository;
 
+use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
 use Doctrine\ORM\EntityRepository;
 
 class CollectorRepository extends EntityRepository
