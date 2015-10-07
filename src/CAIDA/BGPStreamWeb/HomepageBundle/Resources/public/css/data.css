@@ -1,0 +1,18 @@
+h2 > a,
+h2 > a:hover,
+h2 > a:active,
+h2 > a:visited {
+    color: #2c3e50;
+}
+
+.dp-logo {
+    height: 60px;
+}
+
+.vertical-center {
+    vertical-align: middle !important;
+}
+
+table {
+    display: none;
+}
