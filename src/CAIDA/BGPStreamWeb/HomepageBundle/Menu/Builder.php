@@ -66,16 +66,6 @@ class Builder
                                         )
                                 )
         );
-        $menu['docs']->addChild('tutorials',
-                                array(
-                                    'route'           => 'caida_bgpstream_web_homepage',
-                                    'routeParameters' =>
-                                        array(
-                                            'page'    => 'docs',
-                                            'subpage' => 'tutorials'
-                                        )
-                                )
-        );
         $menu['docs']->addChild('{C API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
@@ -96,7 +86,59 @@ class Builder
                                 )
         );
 
-        $menu->addChild('data',
+        $menu->addChild('tutorials');
+        $menu['tutorials']->addChild('{libBGPStream}',
+                                array(
+                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'routeParameters' =>
+                                        array(
+                                            'page'    => 'tutorials',
+                                            'subpage' => 'libbgpstream'
+                                        )
+                                )
+        );
+        $menu['tutorials']->addChild('{BGPReader}',
+                                     array(
+                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'routeParameters' =>
+                                             array(
+                                                 'page'    => 'tutorials',
+                                                 'subpage' => 'bgpreader'
+                                             )
+                                     )
+        );
+        $menu['tutorials']->addChild('{BGPCorsaro}',
+                                     array(
+                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'routeParameters' =>
+                                             array(
+                                                 'page'    => 'tutorials',
+                                                 'subpage' => 'bgpcorsaro'
+                                             )
+                                     )
+        );
+        $menu['tutorials']->addChild('{PyBGPStream}',
+                                     array(
+                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'routeParameters' =>
+                                             array(
+                                                 'page'    => 'tutorials',
+                                                 'subpage' => 'pybgpstream'
+                                             )
+                                     )
+        );
+
+        $menu->addChild('publications',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'pubs'
+                                )
+                        )
+        );
+
+        $menu->addChild('data providers',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage',
                             'routeParameters' =>

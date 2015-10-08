@@ -47,3 +47,21 @@ html, body {
     padding: 14px 24px;
     font-size: 21px;
 }
+
+.footer-bar .wrapper {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.footer-bar img {
+    margin-top: -7px;
+    margin-right: 6px;
+    height: 60px;
+}
+
+.footer-bar a,
+.footer-bar a:hover,
+.footer-bar a:active,
+.footer-bar a:visited {
+    color: #b4bcc2;
+}

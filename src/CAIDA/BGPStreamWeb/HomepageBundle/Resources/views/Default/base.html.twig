@@ -50,6 +50,31 @@
     {#<div id="footer-push"></div>#}
 {% endblock %}
 
+<div class="navbar navbar-default navbar-fixed-bottom footer-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <p class="text-muted">
+                        <a href="http://www.caida.org/" target="_blank">
+                            <div class="wrapper">
+                                <img class="caida-footer-logo"
+                                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/caida.png') }}">BGPStream is a CAIDA project
+                            </div>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-muted pull-right">
+                        &copy; The Regents of the University of California.
+                        All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% block jsblock %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
     <script>

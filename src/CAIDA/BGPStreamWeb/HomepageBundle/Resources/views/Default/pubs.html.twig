@@ -1,0 +1,70 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/pubs.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Publications</h1>
+    </div>
+    <hr>
+    <div class="row pub">
+        <div class="col-md-12">
+            <h3>BGPStream: a framework for live and historical BGP data analysis
+                <br>
+                <small>Under submission to NSDI 2016</small>
+            </h3>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.pdf') }}"
+               target="_blank">
+                <img class="img-thumbnail"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.png') }}">
+            </a>
+        </div>
+        <div class="col-md-9">
+            <p class="abstract">
+                We present the design and implementation of BGPStream, an
+                open-source software
+                framework for the analysis of both historical and real-time
+                Border Gateway
+                Protocol (BGP) measurement data. Although BGP is a crucial
+                operational
+                component of the Internet infrastructure, and is the subject of
+                research in the
+                areas of Internet performance, security, topology, protocols,
+                economics, etc.,
+                there is no standard and efficient way of processing large
+                amounts of
+                distributed and/or live BGP measurement data. BGPStream fills
+                this gap,
+                enabling efficient investigation of events, rapid prototyping,
+                and building
+                complex tools and efficient large-scale monitoring applications
+                (e.g., detection
+                of connectivity disruptions or BGP hijacking attacks). We
+                discuss the design
+                choices and challenges in the development of BGPStream. We
+                present how the
+                components of the framework can be used in different applicative
+                scenarios, and
+                we describe the development and deployment of complex services
+                for global
+                Internet monitoring that we built on top of it.
+            </p>
+            <div class="pull-right">
+                <a target="_blank"
+                   href="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.pdf') }}"
+                   class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> PDF
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
