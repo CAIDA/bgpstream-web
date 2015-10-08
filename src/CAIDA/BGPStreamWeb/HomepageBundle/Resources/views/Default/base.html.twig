@@ -47,7 +47,7 @@
     <div class="container-main container">
         {% block body %}{% endblock %}
     </div>
-    {#<div id="footer-push"></div>#}
+    <div id="footer-push"></div>
 {% endblock %}
 
 <div class="navbar navbar-default navbar-fixed-bottom footer-bar">
@@ -79,7 +79,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
     <script>
         {% include 'CAIDABGPStreamWebHomepageBundle:Default:js/require-config.js.twig' %}
-        require(['bootstrap'], function () {
+        require(['jquery', 'bootstrap'], function ($) {
+            $()
+            {
+                var shiftWindow = function () {
+                    scrollBy(0, -70)
+                };
+                if (location.hash) shiftWindow();
+                window.addEventListener("hashchange", shiftWindow);
+            };
         });
     </script>
 {% endblock %}

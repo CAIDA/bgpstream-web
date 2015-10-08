@@ -1,13 +1,26 @@
 caida_bgpstream_web_homepage_docs_api:
-  path: /docs/api/{doxypage}
+  path: /docs/c-api/{doxypage}
   defaults:
     _controller: CAIDABGPStreamWebHomepageBundle:Default:api
+
+caida_bgpstream_web_pybgpstream_api:
+  path:  /docs/pybgpstream-api
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:index
+    page: docs
+    subpage: pybgpstream-api
 
 caida_bgpstream_web_homepage_docs:
   path: /docs/{page}
   defaults:
     _controller: CAIDABGPStreamWebHomepageBundle:Default:docs
     page: overview
+
+caida_bgpstream_web_homepage_tutorials:
+  path: /tutorials/{page}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:tutorials
+    page: libbgpstream
 
 caida_bgpstream_web_homepage:
   path:  /{page}/{subpage}

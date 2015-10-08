@@ -57,7 +57,7 @@ class DefaultController extends Controller
             $page = 'overview';
         }
 
-        $twig = "CAIDABGPStreamWebHomepageBundle:Default:docs.html.twig";
+        $twig = "CAIDABGPStreamWebHomepageBundle:Default:markdown-content.html.twig";
 
         $mdFile = "@CAIDABGPStreamWebHomepageBundle/Resources/content/docs/$page.md";
 
@@ -65,6 +65,33 @@ class DefaultController extends Controller
             return $this->render($twig,
                                  array(
                                      'route' => $_route,
+                                     'md_content_file' => $mdFile,
+                                 )
+            );
+        } catch(\InvalidArgumentException $ex) {
+            throw $this->createNotFoundException('Page \'' . $page .
+                                                 '\' does not exist');
+        }
+    }
+
+    public
+    function tutorialsAction($_route, $page)
+    {
+        /* if they have asked for 'home' or 'index', send them to 'libbgpstream' */
+        if($page == 'home' || $page == 'index') {
+            $page = 'libbgpstream';
+        }
+
+        $twig =
+            "CAIDABGPStreamWebHomepageBundle:Default:markdown-content.html.twig";
+
+        $mdFile =
+            "@CAIDABGPStreamWebHomepageBundle/Resources/content/tutorials/$page.md";
+
+        try {
+            return $this->render($twig,
+                                 array(
+                                     'route'           => $_route,
                                      'md_content_file' => $mdFile,
                                  )
             );
