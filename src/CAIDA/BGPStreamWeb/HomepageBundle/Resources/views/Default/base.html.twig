@@ -80,14 +80,13 @@
     <script>
         {% include 'CAIDABGPStreamWebHomepageBundle:Default:js/require-config.js.twig' %}
         require(['jquery', 'bootstrap'], function ($) {
-            $()
-            {
+            $(function () {
                 var shiftWindow = function () {
                     scrollBy(0, -70)
                 };
-                if (location.hash) shiftWindow();
-                window.addEventListener("hashchange", shiftWindow);
-            };
+                //if (location.hash) shiftWindow();
+                window.onhashchange=shiftWindow;
+            });
         });
     </script>
 {% endblock %}
