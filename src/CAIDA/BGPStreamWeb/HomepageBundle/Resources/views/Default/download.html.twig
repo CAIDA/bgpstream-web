@@ -10,9 +10,23 @@
             <div id="libbgpstream">
                 <h2>C Library</h2>
 
-                <p>@@Description of the C Library goes here. ...libBGPStream is
-                    the core of the BGPStream framework... PyBGPStream depends
-                    on it... Link to the tutorial and C API Documentation.</p>
+                <p>The BGPStream C library <i>(libBGPStream)</i> is
+                    the core of the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs') }}">
+                        BGPStream framework
+                    </a>, providing an API to
+                    configure and consumer a stream of BGP measurement data.
+                    Even if you plan to use the Python bindings <i>(PyBGPStream)</i>,
+                    you will first need to install the libBGPStream library.
+                    See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs_api') }}">
+                        API documentation
+                    </a>
+                    and
+                    <a href="{{ path('caida_bgpstream_web_homepage_tutorials', {'page': 'libbgpstream'}) }}">
+                       tutorials
+                    </a>
+                    for more information on using libBGPStream.</p>
 
                 <h3>Build From Source</h3>
                 <p>Building BGPStream from source is easy. See the
@@ -25,7 +39,9 @@
                     <tbody>
                     <tr>
                         <td>Source Tarball</td>
-                        <td><a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz') }}">bgpstream-1.0.0.tar.gz</a></td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz') }}">bgpstream-1.0.0.tar.gz</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Clone on GitHub</td>
@@ -36,42 +52,73 @@
                 </table>
 
                 <h3>Platform-specific Distributions</h3>
-                <p>Coming soon...</p>
-                {#
                 <p>We maintain distributions of BGPStream for some popular platforms.</p>
                 <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
                     <tbody>
                     <tr>
                         <td>FreeBSD</td>
-                        <td>Available in FreeBSD ports as <code>XXX/bgpstream</code></td>
+                        <td><i>Under submission</i> to FreeBSD ports as <code>net/bgpstream</code></td>
                     </tr>
                     <tr>
                         <td>Mac OSX</td>
+                        <td><i>Coming soon...</i></td>
+                        {#
                         <td>Available through MacPorts: <code>port install bgpstream</code></td>
-                        </td>
+                        #}
                     </tr>
                     <tr>
                         <td>Debian/Ubuntu</td>
+                        {#
                         <td>Available through official repositories as <code>bgpstream</code>
                             and <code>bgpstream-dev</code> (development headers)
                         </td>
-                        </td>
+                        #}
+                        <td><i>Coming soon...</i></td>
                     </tr>
                     </tbody>
                 </table>
-                #}
                 <hr>
             </div>
             <div id="pybgpstream">
                 <h2>Python Bindings</h2>
-                <p>@@Description of the Python bindings goes here</p>
+                <p>PyBGPStream is our Python bindings to the low-level C
+                    libBGPStream API. Ensure <a href="#libbgpstream">libBGPStream</a>
+                    is installed prior to installing PyBGPStream. See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs_pybgpstream_api') }}">
+                        API documentation
+                    </a>
+                    and
+                    <a href="{{ path('caida_bgpstream_web_homepage_tutorials', {'page': 'pybgpstream'}) }}">
+                        tutorials
+                    </a> for more information about using PyBGPStream.</p>
+                <p>
+                    See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'installing'}) }}">
+                        Install Guide
+                    </a>
+                    for more information about how to install PyBGPStream.
+                </p>
 
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>From PyPI <i>(preferred)</i></td>
+                        <td><code>pip install pybgpstream</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Source Tarball</td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-1.0.0.tar.gz') }}">pybgpstream-1.0.0.tar.gz</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clone on GitHub</td>
+                        <td><a href="http://github.com/caida/bgpstream">BGPStream</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
                 <hr>
             </div>
             <div id="broker">
