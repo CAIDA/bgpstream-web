@@ -11,6 +11,7 @@ if(!in_array($client_ip, array(
     '192.172.226.97',  // gibi
     '192.172.226.172',  // chiara-mbp
     '132.249.100.142', // ama desktop
+    '192.172.226.169', // alberto-mbp
     '127.0.0.1',
     'fe80::1',
     '::1'
