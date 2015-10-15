@@ -35,6 +35,17 @@ class Builder
                         )
         );
 
+        $menu->addChild('overview',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page'    => 'docs',
+                                    'subpage' => 'overview'
+                                )
+                        )
+        );
+
         $menu->addChild('download',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage',
@@ -46,16 +57,6 @@ class Builder
         );
 
         $menu->addChild('docs');
-        $menu['docs']->addChild('overview',
-                        array(
-                            'route'           => 'caida_bgpstream_web_homepage',
-                            'routeParameters' =>
-                                array(
-                                    'page' => 'docs',
-                                    'subpage' => 'overview'
-                                )
-                        )
-        );
         $menu['docs']->addChild('installing',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage',
