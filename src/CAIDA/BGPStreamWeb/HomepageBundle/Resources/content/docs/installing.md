@@ -1,10 +1,8 @@
 Installing BGPStream
 ====================
 
-<h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
-
 BGPStream C Library and BGPCorsaro
--------------------
+----------------------------------
 
 Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
 Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
@@ -12,28 +10,77 @@ Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 
 ### Dependencies
 
+#### Required Libraries
+
+BGPStream requires the [wandio](http://research.wand.net.nz/software/libwandio.php) library, which itself depends on several libraries:
+
+   - bzip2 (libbz2)
+   - gzip (zlib)
+   - HTTP (libcurl &gt; 7.18.0)
+   
+On FreeBSD, the only library not installed as part of the base OS is _libcurl_ which can be found in ports at `ftp/curl`.
+
+On Ubuntu/Debian, these libraries can be installed by running:
+~~~
+# apt-get install zlib1g-dev libbz2-dev libcurl4-openssl-dev
+~~~
+
+Once these dependencies are met, wandio can be installed as follows:
+~~~
+$ tar zxf wandio-X.X.X.tar.gz
+$ cd wandio-X.X.X/
+$ ./configure
+$ make
+# make install
+~~~
+__Note:__ Ensure that the last lines from `configure` show a _Yes_ result for at least zlib, bz2, and libcurl like the following:
+~~~
+configure: WANDIO version 1.0.3
+configure: Compiled with compressed file (zlib) support: Yes
+configure: Compiled with compressed file (bz2) support: Yes
+configure: Compiled with compressed file (lzo write only) support: No
+configure: Compiled with compressed file (lzma) support: No
+configure: Compiled with http read (libcurl) support: Yes
+~~~
+
+Alternatively, FreeBSD users can install wandio from ports (`devel/wandio`). Distributions for other operating systems will be released shortly.
+
+
+#### Optional Libraries
+
+Optional dependencies are:
+
+- [sqlite3](https://www.sqlite.org/) C library (required for the SQLite data interface plugin)
+  - available in FreeBSD Ports as `databases/sqlite3`, and in Ubuntu/Debian apt repositories as `libsqlite3-dev`
+
+### Building from source
+
 BGP Stream is written in C and should compile with any ANSI compliant C Compiler
-which supports the C99 standard. Please email bgpstream-info@caida.org with any
-issues.
+which supports the C99 standard. We have tested BGPStream on FreeBSD, Linux and
+Mac OSX using a variety of common compiler versions. Please open an issue on our
+[GitHub page](https://github.com/caida/bgpstream/issues) with any problems you encounter.
 
-Building BGP Stream requires:
-- [libtrace](http://research.wand.net.nz/software/libtrace.php)
-version 3.0.14 or higher
-    - a working version of libtrace is available at http://research.wand.net.nz/software/libtrace/libtrace-3.0.22.tar.bz2 
+First, obtain a copy of BGPStream from the
+[download page]({{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}).
 
-- [sqlite3](https://www.sqlite.org/) c library
-     - a working version of sqlite3 is available at https://www.sqlite.org/2015/sqlite-autoconf-3081002.tar.gz
-
-- [mysql](https://www.mysql.com/) c library, version 5.5  or higher
-  - a working version of mysql is available at http://downloads.mysql.com/archives/get/file/mysql-connector-c-6.1.5-src.tar.gz
-
-If the above libraries are not in the system library paths, then you
-can specify their paths at configuration time:
-
+Then, once the dependencies described above have been satisfied, BGPStream can
+be built by running:
 ~~~
-$ ./configure CPPFLAGS='-I/path_to_libs/include' LDFLAGS='-L/path_to_libs/lib'
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0
+$ ./configure
+$ make
+# make install
 ~~~
 
+If required libraries are not in the system library paths, specify their paths when running `configure` as follows:
+~~~
+$ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'
+~~~
+
+### Installing from Platform-specific package
+
+xxx
 
 PyBGPStream
 ------------
