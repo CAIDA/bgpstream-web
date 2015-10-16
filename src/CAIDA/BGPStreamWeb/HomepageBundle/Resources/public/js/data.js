@@ -1,6 +1,6 @@
 require(['jquery', 'moment'], function ($, moment) {
 
-    var MOMENT_DATE_FORMAT = 'YYYY/MM/DD HH:MM'
+    var MOMENT_DATE_FORMAT = 'YYYY/MM/DD HH:mm';
 
     function buildTable(tbodyId, data) {
         var tbody = $('#' + tbodyId);
