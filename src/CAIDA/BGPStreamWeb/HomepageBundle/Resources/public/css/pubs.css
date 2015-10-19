@@ -3,9 +3,10 @@
 }
 
 .row.pub img {
-    height: 300px;
+    max-height: 300px;
 }
 
 .row .abstract {
-    min-height: 250px;
+    padding-bottom: 50px;
+    /*min-height: 250px;*/
 }
