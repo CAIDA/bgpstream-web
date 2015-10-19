@@ -1,24 +1,50 @@
 Installing BGPStream
 ====================
 
-BGPStream C Library and BGPCorsaro
-----------------------------------
+BGPStream
+---------
 
-Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
-Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
-Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
+The BGPStream C library (_libBGPStream_) is the core of the BGPStream framework.
+It is used by [PyBGPStream](@@maybe-overview) (see install instructions below), as well as the
+[BGPReader](@@maybe-overview) and [BGPCorsaro](@@maybe-overview) tools (installed with the library).
 
-### Dependencies
+### Installing from Platform-specific package
 
-#### Required Libraries
+BGPStream can be installed using platform-specific packages. See the
+[download page]({{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }})
+for a list of operating systems currently supported (this is a work-in-progress).
 
-BGPStream requires the [wandio](http://research.wand.net.nz/software/libwandio.php) library, which itself depends on several libraries:
+#### FreeBSD <small>Coming Soon...</small>
+
+BGPStream is available from FreeBSD ports at `net/bgpstream`.
+
+The port will install all required dependencies (usually just _libcurl_ and _libwandio_).
+
+#### Ubuntu/Debian <small>Coming Soon...</small>
+
+Install BGPStream by running:
+~~~
+# apt-get install bgpstream-dev bgpstream-tools
+~~~
+
+If you are planning to only use the PyBGPStream Python bindings, then you need
+not install the `bgpstream-tools` package.
+
+### Installing from source
+
+#### Dependencies
+
+##### Required Libraries
+
+ - [wandio](http://research.wand.net.nz/software/libwandio.php)
+ 
+However, several libraries are required before installing wandio:
 
    - bzip2 (libbz2)
    - gzip (zlib)
    - HTTP (libcurl &gt; 7.18.0)
    
-On FreeBSD, the only library not installed as part of the base OS is _libcurl_ which can be found in ports at `ftp/curl`.
+On FreeBSD, the only wandio dependency not installed as part of the base OS is _libcurl_ which can be found in ports at `ftp/curl`.
 
 On Ubuntu/Debian, these libraries can be installed by running:
 ~~~
@@ -43,17 +69,15 @@ configure: Compiled with compressed file (lzma) support: No
 configure: Compiled with http read (libcurl) support: Yes
 ~~~
 
+On Ubuntu/Debian you will need to run `ldconfig` after the `make install` step.
+
 Alternatively, FreeBSD users can install wandio from ports (`devel/wandio`). Distributions for other operating systems will be released shortly.
 
 
-#### Optional Libraries
+##### Optional Libraries
 
-Optional dependencies are:
-
-- [sqlite3](https://www.sqlite.org/) C library (required for the SQLite data interface plugin)
-  - available in FreeBSD Ports as `databases/sqlite3`, and in Ubuntu/Debian apt repositories as `libsqlite3-dev`
-
-### Building from source
+ - [sqlite3](https://www.sqlite.org/), required for the SQLite data interface<br>
+Available in FreeBSD Ports as `databases/sqlite3`, and in Ubuntu/Debian apt repositories as `libsqlite3-dev`
 
 BGP Stream is written in C and should compile with any ANSI compliant C Compiler
 which supports the C99 standard. We have tested BGPStream on FreeBSD, Linux and
@@ -78,56 +102,81 @@ If required libraries are not in the system library paths, specify their paths w
 $ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'
 ~~~
 
-### Installing from Platform-specific package
-
-xxx
+On Ubuntu/Debian you will need to run `ldconfig` after the `make install` step.
 
 PyBGPStream
 ------------
 
-pybgpstream is still in active development so is not available in PyPI, pip,
-etc.
+### Installing from PyPI
 
-It can be downloaded `here 
-<http://www.caida.org/~chiara/bgpstream-doc/_pybgpstream-1.0.tar.gz>`_.
+The simplest and recommended way to install PyBGPStream is from PyPI using `pip`:
+~~~
+$ pip install pybgpstream
+~~~
 
-To install, you will first need to have built and installed
-bgpstream. Then, you will need to unzip the pybgpstream distribution and do
-something like this:
+__Note:__ The BGPStream C library _must_ be installed prior to installing pybgpstream.
+If you see an error like the following during installation, then you may not
+have libBGPStream installed (see above for instructions).
+~~~
+In file included from src/_pybgpstream_module.c:27:
+src/_pybgpstream_bgprecord.h:29:10: fatal error: 'bgpstream.h' file not found
+~~~
 
-    python setup.py build
-    python setup.py install
+If you have installed libBGPStream to a non-standard location
+(e.g., `/path/to/libbgpstream`), then you will need to provide more information to
+pip as follows:
+~~~
+pip install \
+    --global-option build_ext \
+    --global-option '--include-dir /path/to/libbgpstream/include' \
+    --global-option '--library-dir /path/to/libbgpstream/lib' \
+    bgpstream
+~~~
+In this case you may also have to tell Python where to find libBGPStream at run time like so:
+~~~
+LD_LIBRARY_PATH=/path/to/libbgpstream/lib python my_bgpstream_app.py
+~~~
+
+### Installing from source
+
+If you prefer to install PyBGPStream from source, then first obtain a copy of
+the tarball from the
+[download page](({{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }})).
+
+Then, run the following commands:
+~~~
+$ tar zxf pybgpstream-1.0.0.tar.gz
+$ cd pybgpstream-1.0.0
+$ python setup.py build_ext
+# python setup.py install
+~~~
 
 Use `python setup.py install --user` to install the library in your home directory.
 
-To check if pybgpstream is installed correctly run the tutorial print script:
+If libBGPStream has been installed in a non-standard location, then the
+`build_ext` step will fail with an error similar to:
+~~~
+error goes here
+~~~
+In this case, provide the path to the library as follows:
+~~~
+$ python setup.py build_ext --include-dirs=/path/to/libbgpstream/include \
+                            --library-dirs=/path/to/libbgpstream/lib
+~~~
+In this case you may also have to tell Python where to find libBGPStream at run time like so:
+~~~
+LD_LIBRARY_PATH=/path/to/libbgpstream/lib python my_bgpstream_app.py
+~~~
 
+### Testing the installation
+
+To check if pybgpstream is installed correctly run the tutorial print script:
 ~~~
 $ cd examples
-$ python tutorial_print.py
-valid singlefile_ds.singlefile_ds 1427846570
-W 202.249.2.185 25152 W {'prefix': '144.104.37.0/24'}
-valid singlefile_ds.singlefile_ds 1427846573
-A 2001:200:0:fe00::6249:0 25152 A {'next-hop': '2001:200:0:fe00::9c1:0', 'prefix': '2a00:bdc0:e004::/48', 'as-path': '25152 2497 6939 47541 28709'}
-  ...
+$ ./tutorial_print.py
+valid ris.rrc06 1427846570
+	W 202.249.2.185 25152 W {'prefix': '144.104.37.0/24'}
+valid ris.rrc06 1427846573
+	A 2001:200:0:fe00::6249:0 25152 A {'next-hop': '2001:200:0:fe00::9c1:0', 'prefix': '2a00:bdc0:e004::/48', 'as-path': '25152 2497 6939 47541 28709'}
+...
 ~~~
-
-The tutorial print script reads the MRT updates file
-provided with the distribution ris.rrc06.updates.1427846400.gz and
-outputs part of the file based on filters.
-
-### Tips
-If  libbgpstream is not installed into a directory where Python can
-find it, you can do something like:
-
-    python setup.py build_ext --include-dirs=$HOME/testing/bgpstream/include --library-dirs=$HOME/testing/bgpstream/lib
-    python setup.py install [--user]
-
-If you receive this error when running a script:
-
-    ImportError: libbgpstream.so.1: cannot open shared object file: No such file or directory
-
-then add bgpstream library path to the LD_LIBRARY PATH:
-
-    $ export LD_LIBRARY_PATH=$HOME/testing/bgpstream/lib:$LD_LIBRARY_PATH
-    $python a_bgpstream_script.py
