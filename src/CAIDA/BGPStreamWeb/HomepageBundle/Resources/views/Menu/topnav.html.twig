@@ -162,6 +162,10 @@
 
 {% block dropdownLinkElement %}
 {% import _self as knp_menu %}
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{
-      block('label')|title }} <b class="caret"></b></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        {% if block('label') starts with '{' and block('label') ends with '}' %}
+            {{ block('label')|replace({'{':'', '}':''}) }}
+        {% else %}
+            {{ block('label')|title }}
+        {% endif %}<b class="caret"></b></a>
 {% endblock %}

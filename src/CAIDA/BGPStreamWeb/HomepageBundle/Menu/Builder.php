@@ -56,18 +56,31 @@ class Builder
                         )
         );
 
-        $menu->addChild('docs');
-        $menu['docs']->addChild('installing',
+        $menu->addChild('install');
+        $menu['install']->addChild('{BGPStream}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage',
                                     'routeParameters' =>
                                         array(
-                                            'page'    => 'docs',
-                                            'subpage' => 'installing'
+                                            'page'    => 'install',
+                                            'subpage' => 'bgpstream'
                                         )
                                 )
         );
-        $menu['docs']->addChild('{C API}',
+        $menu['install']->addChild('{PyBGPStream}',
+                                   array(
+                                       'route'           => 'caida_bgpstream_web_homepage',
+                                       'routeParameters' =>
+                                           array(
+                                               'page'    => 'install',
+                                               'subpage' => 'pybgpstream'
+                                           )
+                                   )
+        );
+
+        $menu->addChild('{API}');
+
+        $menu['{API}']->addChild('{C API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                     'routeParameters' =>
@@ -76,7 +89,7 @@ class Builder
                                         )
                                 )
         );
-        $menu['docs']->addChild('{Python API}',
+        $menu['{API}']->addChild('{Python API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage',
                                     'routeParameters' =>
@@ -86,7 +99,7 @@ class Builder
                                         )
                                 )
         );
-        $menu['docs']->addChild('{Broker API}',
+        $menu['{API}']->addChild('{Broker API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage',
                                     'routeParameters' =>
