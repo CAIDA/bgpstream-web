@@ -17,6 +17,7 @@
         {% stylesheets
         'bundles/caidabgpstreamwebhomepage/libs/bootstrap/css/bootstrap-flatly.css'
         '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/base.css'
+        'bundles/caidabgpstreamwebhomepage/libs/prismjs/css/prism.css'
         filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -44,7 +45,7 @@
     container-main styles. #}
 {% block outer_body %}
     <div id="content-push" class="hidden-xs"></div>
-    <div class="container-main container">
+    <div class="container-main container language-none">
         {% block body %}{% endblock %}
     </div>
     <div id="footer-push"></div>
@@ -86,6 +87,16 @@
                 };
                 //if (location.hash) shiftWindow();
                 window.onhashchange=shiftWindow;
+
+                //if ($('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code').length) {
+                require(['prism'], function (prism) {
+                    prism.highlightAll();
+                    $('pre').css({
+                        'opacity': 0,
+                        'visibility': 'visible'
+                    }).animate({opacity: 1.0}, 150);
+                });
+                //}
             });
         });
     </script>

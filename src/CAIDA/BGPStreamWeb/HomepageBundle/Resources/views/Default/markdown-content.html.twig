@@ -4,32 +4,13 @@
     {{ parent() }}
     {% stylesheets
     '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/docs.css'
-    'bundles/caidabgpstreamwebhomepage/libs/prismjs/css/prism.css'
     filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}
 
-{% block jsblock %}
-    {{ parent() }}
-    <script type="text/javascript">
-        require(['jquery'], function ($) {
-            $(function () {
-                //if ($('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code').length) {
-                require(['prism'], function (prism) {
-                    prism.highlightAll();
-                    $('pre').css({'opacity': 0, 'visibility': 'visible'}).animate({opacity: 1.0}, 150);
-                });
-                //}
-            });
-        });
-    </script>
-{% endblock %}
-
 {% block body %}
-    <div class="language-none"> {# force prism to run on all code blocks #}
-        {% filter markdown %}
-        {% include md_content_file %}
-        {% endfilter %}
-    </div>
+    {% filter markdown %}
+    {% include md_content_file %}
+    {% endfilter %}
 {% endblock %}
