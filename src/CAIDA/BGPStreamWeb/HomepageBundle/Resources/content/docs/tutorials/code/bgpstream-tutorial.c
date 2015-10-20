@@ -1,14 +1,4 @@
 #include <stdio.h>
-#include <time.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <stdbool.h>
-#include <string.h>
-
 #include "bgpstream.h"
 
 int
