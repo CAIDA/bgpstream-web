@@ -37,11 +37,10 @@ class Builder
 
         $menu->addChild('overview',
                         array(
-                            'route'           => 'caida_bgpstream_web_homepage',
+                            'route'           => 'caida_bgpstream_web_homepage_docs',
                             'routeParameters' =>
                                 array(
-                                    'page'    => 'docs',
-                                    'subpage' => 'overview'
+                                    'page' => 'overview'
                                 )
                         )
         );
@@ -59,7 +58,7 @@ class Builder
         $menu->addChild('install');
         $menu['install']->addChild('{BGPStream}',
                                 array(
-                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'route'           => 'caida_bgpstream_web_homepage_docs',
                                     'routeParameters' =>
                                         array(
                                             'page'    => 'install',
@@ -69,7 +68,7 @@ class Builder
         );
         $menu['install']->addChild('{PyBGPStream}',
                                    array(
-                                       'route'           => 'caida_bgpstream_web_homepage',
+                                       'route'           => 'caida_bgpstream_web_homepage_docs',
                                        'routeParameters' =>
                                            array(
                                                'page'    => 'install',
@@ -78,8 +77,29 @@ class Builder
                                    )
         );
 
-        $menu->addChild('{API}');
+        $menu->addChild('tools');
+        $menu['tools']->addChild('{BGPReader}',
+                                 array(
+                                     'route'           => 'caida_bgpstream_web_homepage_docs',
+                                     'routeParameters' =>
+                                         array(
+                                             'page' => 'tools',
+                                             'subpage' => 'bgpreader',
+                                         )
+                                 )
+        );
+        $menu['tools']->addChild('{BGPCorsaro}',
+                                 array(
+                                     'route'           => 'caida_bgpstream_web_homepage_docs',
+                                     'routeParameters' =>
+                                         array(
+                                             'page'       => 'tools',
+                                             'subpage'    => 'bgpcorsaro',
+                                         )
+                                 )
+        );
 
+        $menu->addChild('{API}');
         $menu['{API}']->addChild('{C API}',
                                 array(
                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
@@ -91,7 +111,7 @@ class Builder
         );
         $menu['{API}']->addChild('{Python API}',
                                 array(
-                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'route'           => 'caida_bgpstream_web_homepage_docs',
                                     'routeParameters' =>
                                         array(
                                             'page'    => 'api',
@@ -101,7 +121,7 @@ class Builder
         );
         $menu['{API}']->addChild('{Broker API}',
                                 array(
-                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'route'           => 'caida_bgpstream_web_homepage_docs',
                                     'routeParameters' =>
                                         array(
                                             'page'    => 'api',
@@ -113,7 +133,7 @@ class Builder
         $menu->addChild('tutorials');
         $menu['tutorials']->addChild('{libBGPStream}',
                                 array(
-                                    'route'           => 'caida_bgpstream_web_homepage',
+                                    'route'           => 'caida_bgpstream_web_homepage_docs',
                                     'routeParameters' =>
                                         array(
                                             'page'    => 'tutorials',
@@ -123,7 +143,7 @@ class Builder
         );
         $menu['tutorials']->addChild('{BGPReader}',
                                      array(
-                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'route'           => 'caida_bgpstream_web_homepage_docs',
                                          'routeParameters' =>
                                              array(
                                                  'page'    => 'tutorials',
@@ -133,7 +153,7 @@ class Builder
         );
         $menu['tutorials']->addChild('{BGPCorsaro}',
                                      array(
-                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'route'           => 'caida_bgpstream_web_homepage_docs',
                                          'routeParameters' =>
                                              array(
                                                  'page'    => 'tutorials',
@@ -143,7 +163,7 @@ class Builder
         );
         $menu['tutorials']->addChild('{PyBGPStream}',
                                      array(
-                                         'route'           => 'caida_bgpstream_web_homepage',
+                                         'route'           => 'caida_bgpstream_web_homepage_docs',
                                          'routeParameters' =>
                                              array(
                                                  'page'    => 'tutorials',

@@ -18,5 +18,5 @@ database provided with the distribution and it counts the elems that match
 the filters (collectors, record type, and time).
 
 ~~~ .language-c
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/content/tutorials/code/bgpstream-tutorial.c' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/content/docs/tutorials/code/bgpstream-tutorial.c' %}
 ~~~

@@ -1,20 +1,17 @@
 caida_bgpstream_web_homepage_docs_api:
-  path: /api/libbgpstream/{doxypage}
+  path: /docs/api/libbgpstream/{doxypage}
   defaults:
     _controller: CAIDABGPStreamWebHomepageBundle:Default:api
 
+# markdown or twig
 caida_bgpstream_web_homepage_docs:
-  path: /docs/{page}
+  path: /docs/{page}/{subpage}
   defaults:
     _controller: CAIDABGPStreamWebHomepageBundle:Default:docs
     page: overview
+    subpage:
 
-caida_bgpstream_web_homepage_tutorials:
-  path: /tutorials/{page}
-  defaults:
-    _controller: CAIDABGPStreamWebHomepageBundle:Default:tutorials
-    page: libbgpstream
-
+# twig-only
 caida_bgpstream_web_homepage:
   path:  /{page}/{subpage}
   defaults:
