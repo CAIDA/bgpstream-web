@@ -112,7 +112,7 @@ bgpstream_destroy(bs);
 #### Complete Example
 
 ~~~ .language-c
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/content/docs/tutorials/code/bgpstream-tutorial.c' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/bgpstream-tutorial.c' %}
 ~~~
 
 <br>
@@ -194,7 +194,7 @@ if (( elem->type == BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT ||
 #### Complete Example
 
 ~~~ .language-c
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/content/tutorials/code/pfx-monitoring.c' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pfx-monitoring.c' %}
 ~~~
 
 
