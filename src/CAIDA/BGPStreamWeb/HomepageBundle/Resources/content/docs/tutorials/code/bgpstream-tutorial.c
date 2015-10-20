@@ -29,16 +29,7 @@ main()
       return -1;
     }
 
-
-  /* Configure the sqlite interface */
-  bgpstream_data_interface_id_t datasource_id = bgpstream_get_data_interface_id_by_name(bs, "sqlite");
-  bgpstream_set_data_interface(bs, datasource_id);
-
-  /* Configure the sqlite interface options */
-  bgpstream_data_interface_option_t *option =
-    bgpstream_get_data_interface_option_by_name(bs, datasource_id,
-                                                "db-file");
-  bgpstream_set_data_interface_option(bs, option, "./sqlite_test.db");
+  /* The broker interface is set by default */
 
   /* Select bgp data from RRC06 and route-views.jinx collectors only */
   bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_COLLECTOR, "rrc06");
@@ -48,8 +39,8 @@ main()
   bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_RECORD_TYPE, "updates");
 
   /* Select a time interval to process:
-   * Wed, 01 Apr 2015 00:02:30 GMT -> Wed, 01 Apr 2015 00:05:00 UTC */
-  bgpstream_add_interval_filter(bs,1427846550,1427846700);
+   * Sun, 10 Oct 2010 10:10:10 GMT -  Sun, 10 Oct 2010 11:11:11 GMT */
+  bgpstream_add_interval_filter(bs,1286705410,1286709071);
 
   /* Start bgpstream */
   if(bgpstream_start(bs) < 0) {
@@ -60,17 +51,19 @@ main()
   int get_next_ret = 0;
   int elem_counter = 0;
 
-  /* pointer to a bgpstream elem, memory is borrowed from bgpstream,
+  /* Pointer to a bgpstream elem, memory is borrowed from bgpstream,
    * use the elem_copy function to own the memory */
   bgpstream_elem_t *bs_elem = NULL;
 
   /* Read the stream of records */
   do
     {
-      /* get next record */
+      /* Get next record */
       get_next_ret = bgpstream_get_next_record(bs, bs_record);
+      /* Check if there are new records and if they are valid records */
       if(get_next_ret && bs_record->status == BGPSTREAM_RECORD_STATUS_VALID_RECORD)
         {
+          /* Get next elem in the record */
           while((bs_elem = bgpstream_record_get_next_elem (bs_record)) != NULL)
             {
               elem_counter++;
@@ -79,14 +72,14 @@ main()
     }
   while(get_next_ret > 0);
 
+  /* Print the number of elems */
   printf("\tRead %d elems\n", elem_counter);
 
-  /* de-allocate memory for the bgpstream */
-  bgpstream_destroy(bs);
-
-  /* de-allocate memory for the bgpstream record */
+  /* De-allocate memory for the bgpstream record */
   bgpstream_record_destroy(bs_record);
 
+  /* De-allocate memory for the bgpstream */
+  bgpstream_destroy(bs);
 
   return 0;
 }
