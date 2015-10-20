@@ -3,9 +3,16 @@ services:
     class: CAIDA\BGPStreamWeb\HomepageBundle\Menu\Builder
     arguments: ["@knp_menu.factory", '@security.authorization_checker']
 
-  caida_charthouse.menu.topNav:
+  caida_bgpstreamweb_homepage.menu.topNav:
     class: Knp\Menu\MenuItem
     factory_service: caida_bgpstreamweb_homepage.menu_builder
     factory_method: topNavMenu
     tags:
       - { name: knp_menu.menu, alias: topNav }
+
+  caida_bgpstreamweb_homepage.menu.docsNav:
+    class: Knp\Menu\MenuItem
+    factory_service: caida_bgpstreamweb_homepage.menu_builder
+    factory_method: docsNavMenu
+    tags:
+      - { name: knp_menu.menu, alias: docsNav }

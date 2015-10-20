@@ -67,7 +67,7 @@ class DefaultController extends Controller
         }
         if ($this->get('templating')->exists($mdFile)) {
             $mdTwig =
-                "CAIDABGPStreamWebHomepageBundle:Default:markdown-content.html.twig";
+                "CAIDABGPStreamWebHomepageBundle:Default:docs/markdown-content.html.twig";
             try {
                 return $this->render($mdTwig,
                                      array(
