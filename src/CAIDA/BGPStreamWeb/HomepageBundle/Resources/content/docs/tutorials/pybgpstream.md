@@ -3,6 +3,70 @@ PyBGPStream Tutorial
 
 <h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
 
+pyBGPStream provides a Python interface to the libBGPStream C library.
+More details are available at @@link to pybgpstream overview, whereas
+the complete documentation is available at @@link to pybgpstream docs.
+
+Below we provide the following tutorials:
+
+* [Get familiar with the API: print the MOAS prefixes](#api1)
+* [Prefix monitoring](#api2)
+
+
+### Get familiar with the API: print the MOAS prefixes ##   {% verbatim %}{#api1}{% endverbatim %}
+
+Below is a simple example that shows how to use pybgpstream to output
+the MOAS prefixes and their origin ASes. The example is fully
+functioning and it can be  run using the following command:
+
+~~~
+$ python moas.py
+   194.68.55.0/24 43893,30893
+   199.45.53.0/24 701,65403
+   207.188.170.0/24 13332,26640
+   ...
+   193.232.141.0/24 42385,31649
+   84.16.224.0/19 28753,16265
+   125.208.1.0/24 4808,4847
+~~~
+
+
+The program instantiate an instance of BGPStream that uses the CAIDA
+broker as data interface, it parses the BGP elems extracted from the
+BGP records that match the filters (collectors, record type, and
+time), and saves in a hash map the list of unique origin ASns for each
+prefix. 
+
+
+<br>
+
+#### Step by step description
+
+The first step in each program is to import the Python modules and
+create a new BGPStream instance as well as a re-usable BGP record
+instance.
+
+<br>
+
+~~~ .language-python
+from _pybgpstream import BGPStream, BGPRecord, BGPElem
+
+stream = BGPStream()
+rec = BGPRecord()
+~~~
+
+<br>
+
+
+The second step consists in customiziing
+
+is a re-usable memory allocation that is going to contain the most
+recent record read. 
+
+
+
+<!--
+
 Below are some examples that show how to get started with the
 bgpstream python bindings.
 
@@ -232,3 +296,5 @@ $ python topology.py
 Processed  558680  rib entries
 Found  72031  AS adjacencies
 ~~~
+
+-->
