@@ -9,17 +9,19 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block body %}
+{% block slimbody %}
     <div class="page-header">
         <h1>PyBGPStream API</h1>
     </div>
-    <div class="pull-right">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="#bgpstream">BGPStream</a></li>
-            <li role="presentation"><a href="#bgprecord">BGPRecord</a></li>
-            <li role="presentation"><a href="#bgpelem">BGPElem</a></li>
-        </ul>
-    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-push-10">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="#bgpstream">BGPStream</a></li>
+                <li role="presentation"><a href="#bgprecord">BGPRecord</a></li>
+                <li role="presentation"><a href="#bgpelem">BGPElem</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10 col-md-pull-2">
 {# paste output from sphinx below here (grab the div with id "pybgpstream") #}
     <div class="section" id="pybgpstream">
         <h1>_pybgpstream<a class="headerlink" href="#pybgpstream"
@@ -881,5 +883,6 @@
 
         </div>
     </div>
-
+        </div>
+    </div>
 {% endblock %}

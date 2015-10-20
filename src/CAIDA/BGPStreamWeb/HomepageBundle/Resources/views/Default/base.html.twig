@@ -46,7 +46,13 @@
 {% block outer_body %}
     <div id="content-push" class="hidden-xs"></div>
     <div class="container-main container language-none">
-        {% block body %}{% endblock %}
+        {% block body %}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {% block slimbody %}{% endblock %}
+            </div>
+        </div>
+        {% endblock %}
     </div>
     <div id="footer-push"></div>
 {% endblock %}

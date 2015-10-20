@@ -94,8 +94,8 @@ class Builder
                                     'route'           => 'caida_bgpstream_web_homepage',
                                     'routeParameters' =>
                                         array(
-                                            'page'    => 'docs',
-                                            'subpage' => 'pybgpstream-api'
+                                            'page'    => 'api',
+                                            'subpage' => 'pybgpstream'
                                         )
                                 )
         );
@@ -104,8 +104,8 @@ class Builder
                                     'route'           => 'caida_bgpstream_web_homepage',
                                     'routeParameters' =>
                                         array(
-                                            'page'    => 'docs',
-                                            'subpage' => 'broker-api'
+                                            'page'    => 'api',
+                                            'subpage' => 'broker'
                                         )
                                 )
         );

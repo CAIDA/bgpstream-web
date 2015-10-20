@@ -1,4 +1,5 @@
-@import url("//fonts.googleapis.com/css?family=Lato:400,700,400italic");
+/*@import url("//fonts.googleapis.com/css?family=Lato:300,300italic");*/
+@import url("//fonts.googleapis.com/css?family=Roboto:300,700,300italic");
 /*!
  * Bootswatch v3.2.0
  * Homepage: http://bootswatch.com
@@ -889,9 +890,9 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
-  line-height: 1.42857143;
+  line-height: 1.65;/*1.42857143;*/
   color: #2c3e50;
   background-color: #ffffff;
 }
@@ -938,7 +939,7 @@ img {
 }
 .img-thumbnail {
   padding: 4px;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   background-color: #ffffff;
   border: 1px solid #ecf0f1;
   border-radius: 4px;
@@ -990,7 +991,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.1;
   color: inherit;
@@ -1243,7 +1244,7 @@ dl {
 }
 dt,
 dd {
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
 }
 dt {
   font-weight: bold;
@@ -1290,7 +1291,7 @@ blockquote small,
 blockquote .small {
   display: block;
   font-size: 80%;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   color: #b4bcc2;
 }
 blockquote footer:before,
@@ -1329,7 +1330,7 @@ blockquote:after {
 address {
   margin-bottom: 21px;
   font-style: normal;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
 }
 code,
 kbd,
@@ -1362,7 +1363,7 @@ pre {
   padding: 10px;
   margin: 0 0 10.5px;
   font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   word-break: break-all;
   word-wrap: break-word;
   color: #7b8a8b;
@@ -2067,7 +2068,7 @@ th {
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   padding: 8px;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   vertical-align: top;
   border-top: 1px solid #ecf0f1;
 }
@@ -2339,7 +2340,7 @@ output {
   display: block;
   padding-top: 11px;
   font-size: 15px;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   color: #2c3e50;
 }
 .form-control {
@@ -2348,7 +2349,7 @@ output {
   height: 43px;
   padding: 10px 15px;
   font-size: 15px;
-  line-height: 1.42857143;
+  line-height: 1.65; /*1.42857143;*/
   color: #2c3e50;
   background-color: #ffffff;
   background-image: none;
@@ -2394,7 +2395,7 @@ input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
   line-height: 43px;
-  line-height: 1.42857143 \0;
+  line-height: 1.65 \0;
 }
 input[type="date"].input-sm,
 input[type="time"].input-sm,
@@ -2724,7 +2725,7 @@ select[multiple].input-lg {
   white-space: nowrap;
   padding: 10px 15px;
   font-size: 15px;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3153,7 +3154,7 @@ tbody.collapse.in {
   padding: 3px 20px;
   clear: both;
   font-weight: normal;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   color: #7b8a8b;
   white-space: nowrap;
 }
@@ -3202,7 +3203,7 @@ tbody.collapse.in {
   display: block;
   padding: 3px 20px;
   font-size: 13px;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   color: #b4bcc2;
   white-space: nowrap;
 }
@@ -3618,7 +3619,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav-tabs > li > a {
   margin-right: 2px;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
 }
@@ -4312,7 +4313,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   position: relative;
   float: left;
   padding: 10px 15px;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   text-decoration: none;
   color: #ffffff;
   background-color: #18bc9c;
@@ -4577,7 +4578,7 @@ a.list-group-item.active > .badge,
   display: block;
   padding: 4px;
   margin-bottom: 21px;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
   background-color: #ffffff;
   border: 1px solid #ecf0f1;
   border-radius: 4px;
@@ -5427,7 +5428,7 @@ button.close {
 }
 .modal-title {
   margin: 0;
-  line-height: 1.42857143;
+line-height: 1.65; /* 1.42857143; */
 }
 .modal-body {
   position: relative;

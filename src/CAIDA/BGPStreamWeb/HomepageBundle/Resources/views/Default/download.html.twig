@@ -1,6 +1,6 @@
 {% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
 
-{% block body %}
+{% block slimbody %}
     <div class="page-header">
         <h1>Get BGPStream</h1>
     </div>
@@ -19,7 +19,7 @@
                     Even if you plan to use the Python bindings <i>(PyBGPStream)</i>,
                     you will first need to install the libBGPStream library.
                     See the
-                    <a href="{{ path('caida_bgpstream_web_homepage_docs_api') }}">
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs_api', {'doxypage': 'bgpstream_8h.html'}) }}">
                         API documentation
                     </a>
                     and
@@ -84,7 +84,7 @@
                 <p>PyBGPStream is our Python bindings to the low-level C
                     libBGPStream API. Ensure <a href="#libbgpstream">libBGPStream</a>
                     is installed prior to installing PyBGPStream. See the
-                    <a href="{{ path('caida_bgpstream_web_homepage_docs_pybgpstream_api') }}">
+                    <a href="{{ path('caida_bgpstream_web_homepage', {'page': 'api', 'subpage': 'pybgpstream'}) }}">
                         API documentation
                     </a>
                     and

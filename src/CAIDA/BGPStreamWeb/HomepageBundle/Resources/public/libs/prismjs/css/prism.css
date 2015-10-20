@@ -4,11 +4,12 @@
  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
  * @author Tim  Shedor
  */
+@import url("//fonts.googleapis.com/css?family=Roboto+Mono:300,700,300italic");
 
 code[class*="language-"],
 pre[class*="language-"] {
 	color: black;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-family: 'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;
@@ -30,13 +31,13 @@ pre[class*="language-"] {
 /* Code blocks */
 pre[class*="language-"] {
 	position: relative;
-	margin: .5em 0;
+	margin: 0.5em 0; /* 1.65em 0;*/
     /*
 	-webkit-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
 	-moz-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
 	box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
 	*/
-	border-left: 10px solid #146A93;
+	/*border-left: 10px solid #146A93;*/
 	background-color: #fdfdfd;
 	background-image: -webkit-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
 	background-image: -moz-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
