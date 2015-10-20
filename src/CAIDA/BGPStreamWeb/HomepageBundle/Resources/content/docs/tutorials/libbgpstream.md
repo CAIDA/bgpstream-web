@@ -3,6 +3,19 @@ libBGPStream Tutorial
 
 <h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
 
+libBGPStream is a C library that facilitate the creation of a sorted
+stream of BGP records. More details are available at @@link to libbgpstream overview, whereas
+the complete documentation is available at @@link to libbgpstream docs.
+
+Below we provide the following tutorials:
+
+* [Get familiar with the API: count the BGP elems](#api1)
+* [Prefix monitoring](#api2)
+
+
+
+### Get familiar with the API: count the BGP elems ##   {% verbatim %}{#api1}{% endverbatim %}
+
 Below is a simple example that shows how to use most of the C library
 API functions. The example is fully functioning and it can be compiled
 and run using the following commands:
@@ -88,6 +101,78 @@ The complete working example is available below.
 ~~~
 
 
+### Prefix monitoring ###  {% verbatim %}{#api2}{% endverbatim %}
+
+Below is a more complex example that shows how to implement a program that
+outputs all the announcements and withdrawal messages for a specific
+prefix, ___2403:f600::/32___,  observed by Route Views 2 and RRC00 
+during the time interval ___01:20:10 - 06:32:15 on Tue, 12 Aug 2014 UTC___.
+
+The example is fully functioning and it can be compiled
+and run using the following commands:
+
+    $ gcc ./pfx-monitoring.c  -lbgpstream -o ./pfx-monitoring
+    $ ./pfx-monitoring
+     1407813784|2a02:38::2|6881|A|2403:f600::/32|2a02:38::2|6881 6939 4826 38456 55722|55722||
+     1407813784|2a00:1c10:10::8|50300|W|2403:f600::/32|||||
+     1407813786|2001:67c:24e4:1::1|57381|A|2403:f600::/32|2001:67c:24e4:1::1|57381 50304 10026 38456 55722|55722||
+     1407813787|2001:df0:2e8:1000::1|45896|W|2403:f600::/32|||||
+     ...
+     1407814218|2a01:678::2|29608|A|2403:f600::/32|2a01:678::2|29608 6939 4826 38456 55722|55722||
+     1407814228|2001:df0:2e8:1000::1|45896|A|2403:f600::/32|2001:df0:2e8:1000::1|45896 4826 38456 55722|55722||
+
+
+#### Step by step description
+
+
+The program stores in a ___pfx_storage___ structure the prefix to
+monitor. The user can provide the prefix as a string and then convert
+it into a bgpstream data structure using the bgpstream utils @@link to overview.
+
+~~~ .language-c
+  bgpstream_pfx_storage_t my_pfx;
+  bgpstream_str2pfx( "2403:f600::/32", &my_pfx);
+~~~
+
+The configuration of the stream through a set of filters is similar to
+the previous [example](#api1).
+
+~~~ .language-c
+  bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_COLLECTOR, "rrc00");
+  bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_COLLECTOR,
+  "route-views2");
+  
+  bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_RECORD_TYPE, "updates");
+
+  bgpstream_add_interval_filter(bs, 1407806410, 1407825135);
+~~~
+
+Finally, for each elem, the program prints out only the information
+associated with announcements and withdrawals related to the selected
+prefix. 
+
+~~~ .language-c
+    if (( elem->type == BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT ||
+          elem->type == BGPSTREAM_ELEM_TYPE_WITHDRAWAL) &&
+          bgpstream_pfx_storage_equal(&my_pfx, &elem->prefix))
+          { 
+            bgpstream_elem_snprintf(buffer, 1024, elem);
+            fprintf(stdout, "%s\n", buffer);
+         }
+~~~
+
+#### Complete Example
+
+The complete working example is available below.
+
+~~~ .language-c
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/content/tutorials/code/pfx-monitoring.c' %}
+~~~
+
+
+
+
+<!---
 Example 1: prefix logging
 -------------------------------
 
@@ -168,3 +253,4 @@ in order to characterized the AS PATHs between each monitor and a prefix
      1442275206|2001:8e0:0:ffff::9|8758|R|2001:48d0::/35|2001:8e0:0:ffff::9|8758 8758 6939 2152 2153 195 195|195||
      
 The output shows the reachability of 2001:48d0::/35. 
+-->
