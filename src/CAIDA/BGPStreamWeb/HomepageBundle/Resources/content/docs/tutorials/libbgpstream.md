@@ -1,7 +1,7 @@
 libBGPStream Tutorial
 =====================
 
-<h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
+<h1 class="text-danger">TODO: REVIEW THIS DOCUMENT</h1>
 
 libBGPStream is a C library that facilitate the creation of a sorted
 stream of BGP records. More details are available at @@link to libbgpstream overview, whereas
