@@ -60,14 +60,9 @@ class BgpDataRepository extends EntityRepository {
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt, $responseTime)
+    private function buildFileTimeWhere($intervals, $minInitialTime, $constraintLength, &$parameters, $retryCnt, $responseTime)
     {
         $where = '';
-
-        // compute constraint interval length based on number of retries
-        $constraintLength = ($retryCnt+1) *
-                            min(static::QUERY_WINDOW_MAX,
-                                static::QUERY_WINDOW * pow(2, $retryCnt));
 
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
@@ -214,6 +209,8 @@ class BgpDataRepository extends EntityRepository {
         // of the last interval
         $files = [];
         $retries = 0;
+        $minInitialQueryTime = $minInitialTime;
+        $constraintLength = static::QUERY_WINDOW;
         while(!count($files)) {
 
             // set the correct minInitialTime and minInitialQueryTime
@@ -235,10 +232,15 @@ class BgpDataRepository extends EntityRepository {
                 $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
             }
 
+            // compute constraint interval length based on number of retries
+            $constraintLength = $retries+1 *
+                                min(static::QUERY_WINDOW_MAX,
+                                    static::QUERY_WINDOW * pow(2, $retries));
+
             // build the fileTime where clause
             $timeParams = [];
             $timeWhere  =
-                $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
+                $this->buildFileTimeWhere($intervals, $minInitialQueryTime, $constraintLength,
                                           $timeParams, $retries++, $responseTime);
             if(!$timeWhere) { // there's no data!
                 return [];
@@ -284,6 +286,12 @@ class BgpDataRepository extends EntityRepository {
         }
 
         usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
+
+        // if the requested interval is less than our 2hr constraint window,
+        // then dont bother filtering at all
+        if (!$intervals->getIntervalOverlapping($minInitialQueryTime + $constraintLength)) {
+            return $files;
+        }
 
         $filtered = [];
         /* @var Interval $overlapInterval */
