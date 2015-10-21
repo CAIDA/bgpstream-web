@@ -11,14 +11,29 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-3">
-            {% spaceless %}
-                {{ knp_menu_render(
-                'docsNav',
-                {'template': 'CAIDABGPStreamWebHomepageBundle:Menu:docsnav.html.twig',
-                    'app': app}
-                ) }}
-            {% endspaceless %}
+        <div class="col-md-3 docs-nav">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="hidden-sm hidden-xs">
+                        {% spaceless %}
+                            {{ knp_menu_render(
+                            'docsNav',
+                            {'template': 'CAIDABGPStreamWebHomepageBundle:Menu:docsnav.html.twig',
+                                'app': app, 'orientation': 'vertical'}
+                            ) }}
+                        {% endspaceless %}
+                    </div>
+                    <div class="visible-sm visible-xs">
+                        {% spaceless %}
+                            {{ knp_menu_render(
+                            'docsNav',
+                            {'template': 'CAIDABGPStreamWebHomepageBundle:Menu:docsnav.html.twig',
+                                'app': app, 'orientation': 'horizontal'}
+                            ) }}
+                        {% endspaceless %}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-9">
             {% block slimbody %}{% endblock %}
