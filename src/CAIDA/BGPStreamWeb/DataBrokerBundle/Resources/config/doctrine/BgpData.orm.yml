@@ -25,6 +25,12 @@ CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\BgpData:
             id: true
             column: file_time
     fields:
+        collectorTypeId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: collector_type_id
         webSize:
             type: string
             nullable: false

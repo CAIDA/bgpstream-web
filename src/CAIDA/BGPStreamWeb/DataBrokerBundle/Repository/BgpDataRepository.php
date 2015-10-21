@@ -21,12 +21,9 @@ class BgpDataRepository extends EntityRepository {
     // max query window length when doing exponential expansion
     const QUERY_WINDOW_MAX = 2419200; // 28 days
 
-    // fudge time to allow for file times that are slightly wrong
-    const FILE_TIME_OFFSET = 120;
-
     // fudge time in case some of the records for the interval(s) we want are
     // stored in files outside the interval
-    const START_OFFSET = 1020; // 900 + 120
+    const START_OFFSET = 900;
 
     const OUT_OF_ORDER_WINDOW = 86400;// 24 * 3600
 
@@ -63,14 +60,9 @@ class BgpDataRepository extends EntityRepository {
      *
      * @return string
      */
-    private function buildFileTimeWhere($intervals, $minInitialTime, &$parameters, $retryCnt, $responseTime)
+    private function buildFileTimeWhere($intervals, $minInitialTime, $constraintLength, &$parameters, $retryCnt, $responseTime)
     {
         $where = '';
-
-        // compute constraint interval length based on number of retries
-        $constraintLength = ($retryCnt+1) *
-                            min(static::QUERY_WINDOW_MAX,
-                                static::QUERY_WINDOW * pow(2, $retryCnt));
 
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
@@ -217,6 +209,8 @@ class BgpDataRepository extends EntityRepository {
         // of the last interval
         $files = [];
         $retries = 0;
+        $minInitialQueryTime = $minInitialTime;
+        $constraintLength = static::QUERY_WINDOW;
         while(!count($files)) {
 
             // set the correct minInitialTime and minInitialQueryTime
@@ -238,10 +232,15 @@ class BgpDataRepository extends EntityRepository {
                 $minInitialQueryTime = $minInitialTime - static::START_OFFSET;
             }
 
+            // compute constraint interval length based on number of retries
+            $constraintLength = $retries+1 *
+                                min(static::QUERY_WINDOW_MAX,
+                                    static::QUERY_WINDOW * pow(2, $retries));
+
             // build the fileTime where clause
             $timeParams = [];
             $timeWhere  =
-                $this->buildFileTimeWhere($intervals, $minInitialQueryTime,
+                $this->buildFileTimeWhere($intervals, $minInitialQueryTime, $constraintLength,
                                           $timeParams, $retries++, $responseTime);
             if(!$timeWhere) { // there's no data!
                 return [];
@@ -257,8 +256,7 @@ class BgpDataRepository extends EntityRepository {
             foreach($newFiles as $file) {
                 /* @var BgpData $file */
                 if($file->getTs()->getTimestamp() < $responseTime &&
-                   ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
-                    static::FILE_TIME_OFFSET) >= $minInitialTime
+                   ($file->getFileTime() + $file->getDumpInfo()->getDuration()) >= $minInitialTime
                 ) {
                     $filteredNewFiles[] = $file;
                 }
@@ -288,6 +286,12 @@ class BgpDataRepository extends EntityRepository {
         }
 
         usort($files, ['CAIDA\BGPStreamWeb\DataBrokerBundle\Repository\BgpDataRepository', 'cmpBgpData']);
+
+        // if the requested interval is less than our 2hr constraint window,
+        // then dont bother filtering at all
+        if (!$intervals->getIntervalOverlapping($minInitialQueryTime + $constraintLength)) {
+            return $files;
+        }
 
         $filtered = [];
         /* @var Interval $overlapInterval */
@@ -327,6 +331,23 @@ class BgpDataRepository extends EntityRepository {
         } else {
             return $filtered;
         }
+    }
+
+    /**
+     * @return array
+     */
+    public
+    function findTimeRanges()
+    {
+        $queryStr =
+            'SELECT d.collectorTypeId, MIN(d.fileTime) as oldestDumpTime, MAX(d.fileTime) as latestDumpTime ' .
+            'FROM CAIDABGPStreamWebDataBrokerBundle:BgpData d ' .
+            'GROUP BY d.collectorTypeId';
+
+        $query = $this->getEntityManager()
+                      ->createQuery($queryStr);
+
+        return $query->getResult();
     }
 
 }

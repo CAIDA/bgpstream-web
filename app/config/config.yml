@@ -122,5 +122,5 @@ lsw_memcache:
             entity_manager: default
     pools:
         default:
-            servers:
-              - { host: 127.0.0.208, tcp_port: 11211 }
+            servers: %memcache_servers%
+

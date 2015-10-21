@@ -36,6 +36,7 @@ set :branch, ENV['branch'] || (instance.to_s == "prod" ? "production" : "master"
 set :instance_files,    [
                          "web/.htaccess",          # for app_dev.php in test
 #                         "web/app_dev.php",        # for no-ip auth on test
+                         "app/config/parameters.yml.dist",
                          ]
 
 # ssh settings
@@ -45,6 +46,9 @@ ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
 # Run migrations before warming the cache
 #before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_metadata"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_query"
+before "symfony:cache:warmup", "symfony:doctrine:cache:clear_result"
 
 # Custom(ised) tasks
 namespace :deploy do
