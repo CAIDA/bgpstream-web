@@ -21,12 +21,9 @@ class BgpDataRepository extends EntityRepository {
     // max query window length when doing exponential expansion
     const QUERY_WINDOW_MAX = 2419200; // 28 days
 
-    // fudge time to allow for file times that are slightly wrong
-    const FILE_TIME_OFFSET = 120;
-
     // fudge time in case some of the records for the interval(s) we want are
     // stored in files outside the interval
-    const START_OFFSET = 1020; // 900 + 120
+    const START_OFFSET = 900;
 
     const OUT_OF_ORDER_WINDOW = 86400;// 24 * 3600
 
@@ -257,8 +254,7 @@ class BgpDataRepository extends EntityRepository {
             foreach($newFiles as $file) {
                 /* @var BgpData $file */
                 if($file->getTs()->getTimestamp() < $responseTime &&
-                   ($file->getFileTime() + $file->getDumpInfo()->getDuration() +
-                    static::FILE_TIME_OFFSET) >= $minInitialTime
+                   ($file->getFileTime() + $file->getDumpInfo()->getDuration()) >= $minInitialTime
                 ) {
                     $filteredNewFiles[] = $file;
                 }
