@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {%- if title is defined -%}
+            {%- for element in title -%}
+                {{ element|title }} &middot;
+            {% endfor -%}
+        {%- endif -%}
+        BGPStream</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Alistair King">
+
+    {% block styleblock %}
+        {% stylesheets
+        'bundles/caidabgpstreamwebhomepage/libs/bootstrap/css/bootstrap-flatly.css'
+        '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/base.css'
+        'bundles/caidabgpstreamwebhomepage/libs/prismjs/css/prism.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    {% block head_js_block %}
+    <script type="text/javascript">
+        {% block head_js %}{% endblock %}
+    </script>
+    {% endblock %}
+</head>
+
+<body>
+
+{% spaceless %}
+    {{ knp_menu_render(
+    'topNav',
+    {'template': 'CAIDABGPStreamWebHomepageBundle:Menu:topnav.html.twig',
+        'app': app}
+    ) }}
+{% endspaceless %}
+
+{# NOTE: If you want to do something special with the content and override
+    outer_body, then you should take note of the content-push and
+    container-main styles. #}
+{% block outer_body %}
+    <div id="content-push" class="hidden-xs"></div>
+    <div class="container-main container language-none">
+        {% block body %}
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {% block slimbody %}{% endblock %}
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    <div id="footer-push"></div>
+{% endblock %}
+
+<div class="navbar navbar-default navbar-fixed-bottom footer-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <p class="text-muted">
+                        <a href="http://www.caida.org/" target="_blank">
+                            <div class="wrapper">
+                                <img class="caida-footer-logo"
+                                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/caida.png') }}">BGPStream is a CAIDA project
+                            </div>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-muted pull-right">
+                        &copy; The Regents of the University of California.
+                        All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block jsblock %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.11/require.min.js"></script>
+    <script>
+        {% include 'CAIDABGPStreamWebHomepageBundle:Default:js/require-config.js.twig' %}
+        require(['jquery', 'bootstrap'], function ($) {
+            $(function () {
+                var shiftWindow = function () {
+                    scrollBy(0, -70)
+                };
+                //if (location.hash) shiftWindow();
+                window.onhashchange=shiftWindow;
+
+                //if ($('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code').length) {
+                require(['prism'], function (prism) {
+                    prism.highlightAll();
+                    $('pre').css({
+                        'opacity': 0,
+                        'visibility': 'visible'
+                    }).animate({opacity: 1.0}, 150);
+                });
+                //}
+            });
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,273 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:docs/base.html.twig' %}
+
+{% block slimbody %}
+<div class="page-header">
+    <h1>Installing BGPStream</h1>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#generic"
+                                              aria-controls="generic"
+                                              role="tab" data-toggle="tab">Generic
+            Unix</a></li>
+    <li role="presentation"><a href="#freebsd" aria-controls="freebsd"
+                               role="tab" data-toggle="tab">FreeBSD</a></li>
+    <li role="presentation"><a href="#ubuntu" aria-controls="ubuntu"
+                               role="tab"
+                               data-toggle="tab">Ubuntu/Debian</a></li>
+    <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
+                               data-toggle="tab">Mac OSX</a></li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="generic">
+        <h2>1. Install Dependencies</h2>
+        <h3>Required Libraries</h3>
+
+        <p>First, install the following dependencies of <a
+                    href="http://research.wand.net.nz/software/libwandio.php">wandio</a> using your favorite package manager (see the OS-specific instructions for more details):</p>
+
+        <ul>
+            <li><a href="http://www.bzip.org/">libbz2</a></li>
+            <li><a href="http://www.zlib.net/">zlib</a></li>
+            <li><a href="http://curl.haxx.se/libcurl/">libcurl</a> (&gt; 7.18.0)</li>
+        </ul>
+
+        <p>Then, install wandio as follows:</p>
+
+        <pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure
+$ make
+$ sudo make install</code></pre>
+
+        <p><strong>Note:</strong> Ensure that the last lines from <code>configure</code>
+            show a <em>Yes</em> result for at least <i>zlib</i>, <i>bz2</i>, and <i>libcurl</i>
+            like the following:</p>
+
+<pre><code>configure: WANDIO version 1.0.3
+configure: Compiled with compressed file (zlib) support: Yes
+configure: Compiled with compressed file (bz2) support: Yes
+configure: Compiled with compressed file (lzo write only) support: No
+configure: Compiled with compressed file (lzma) support: No
+configure: Compiled with http read (libcurl) support: Yes</code></pre>
+
+        <h3>Optional Libraries</h3>
+
+        <ul>
+            <li><a href="https://www.sqlite.org/">sqlite3</a>, required for
+                the SQLite data interface
+            </li>
+        </ul>
+
+        <h2>2. Download and install BGPStream</h2>
+
+<pre><code>$ cd ~/src/
+$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0
+$ ./configure
+$ make
+# make install
+</code></pre>
+
+        <p>If required libraries are not in the system library paths,
+            specify their paths when running <code>configure</code> as
+            follows:</p>
+
+<pre><code>$ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'</code></pre>
+
+        <h2>Troubleshooting</h2>
+        <p>BGPStream is written in C and should compile with any ANSI
+            compliant C Compiler
+            which supports the C99 standard. We have tested BGPStream on
+            FreeBSD, Linux and
+            Mac OSX using a variety of common compiler versions. Please open
+            an issue on our
+            <a href="https://github.com/caida/bgpstream/issues">GitHub
+                page</a> with any problems you encounter.</p>
+    </div>
+
+    {# ---------- FREEBSD ---------- #}
+    <div role="tabpanel" class="tab-pane" id="freebsd">
+        <div style="opacity: 0.5">
+        <h2>Installing from Ports
+            <small>Coming Soon...</small>
+        </h2>
+
+        <p>BGPStream is available from FreeBSD ports at
+            <code>net/bgpstream</code>:</p>
+
+<pre><code>cd /usr/ports/net/bgpstream
+sudo make install clean</code></pre>
+
+        <p>(BGPStream is a fairly new port, you may need to run
+            <code>portsnap fetch update</code> first.)</p>
+
+        <p>Alternatively, if you are using the next-generation package
+            manager (<code>pkg</code>), you can install BGPStream by
+            running:</p>
+
+        <pre><code>sudo pkg install bgpstream</code></pre>
+
+        <p>The port will install all required dependencies (usually just
+            <em>libcurl</em> and <em>libwandio</em>).</p>
+        </div>
+
+        <h2>Installing from source</h2>
+
+        <h3>1. Install <em>libcurl</em>:</h3>
+
+        <pre><code>$ cd /usr/ports/ftp/curl
+$ sudo make install clean</code></pre>
+
+        <p><em>or</em></p>
+
+        <pre><code>sudo pkg install curl</code></pre>
+
+        <h3>2. Download and install
+            <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
+        </h3>
+
+        <p>Please open an issue on our
+        <a href="https://github.com/caida/bgpstream/issues">GitHub
+            page</a> with any problems you encounter.</p>
+
+<pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure
+$ make
+$ sudo make install</code></pre>
+
+        <h3>3. Download and install BGPStream:</h3>
+
+<pre><code>$ cd ~/src/
+$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0/
+$ ./configure
+$ make
+$ make check
+$ sudo make install</code></pre>
+
+    </div>
+
+    {# ---------- UBUNTU ---------- #}
+    <div role="tabpanel" class="tab-pane" id="ubuntu">
+
+        <div style="opacity: 0.5">
+        <h2>Installing from packages
+            <small>Coming Soon...</small>
+        </h2>
+
+        <p>Install BGPStream by running:</p>
+
+        <pre><code>$ sudo apt-get install bgpstream-dev bgpstream-tools</code></pre>
+
+        <p>If you are planning to only use the PyBGPStream Python bindings,
+            then you need
+            not install the <code>bgpstream-tools</code> package.</p>
+        </div>
+
+        <h2>Installing from source</h2>
+
+        <h3>1. Install dependencies:</h3>
+
+        <pre><code>sudo apt-get install zlib1g-dev libbz2-dev libcurl4-openssl-dev</code></pre>
+
+        <h3>2. Download and install <a
+                    href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
+        </h3>
+
+        <p><strong>Note:</strong> DO NOT install the <code>libwandio1</code>
+            package. It is
+            currently an out-of-date version of wandio.</p>
+
+        <pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure
+$ make
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <h3>3. Download and install BGPStream:</h3>
+
+        <pre><code>$ cd ~/src/
+$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0/
+$ ./configure
+$ make
+$ make check
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>Please open an issue on our
+            <a href="https://github.com/caida/bgpstream/issues">GitHub
+                page</a> with any problems you encounter.</p>
+
+    </div>
+
+    {# ---------- OSX ---------- #}
+    <div role="tabpanel" class="tab-pane" id="osx">
+
+        <div style="opacity: 0.5;">
+        <h2>Installing from MacPorts
+            <small>Coming Soon...</small>
+        </h2>
+
+        <p>Install BGPStream by running:</p>
+
+        <pre><code>$ sudo port install bgpstream</code></pre>
+        </div>
+
+        <h2>Installing from source</h2>
+
+        <h3>1. Install <em>libcurl</em>:</h3>
+
+        <p>Using MacPorts:</p>
+        <pre><code>sudo port install curl</code></pre>
+
+        <p>or, using Homebrew:</p>
+        <pre><code>brew install curl</code></pre>
+
+        <h3>2. Download and install
+            <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
+        </h3>
+
+<pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure
+$ make
+$ sudo make install</code></pre>
+
+        <h3>3. Download and install BGPStream:</h3>
+
+<pre><code>$ cd ~/src/
+$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0/
+$ ./configure
+$ make
+$ make check
+$ sudo make install</code></pre>
+
+        <p>Please open an issue on our
+            <a href="https://github.com/caida/bgpstream/issues">GitHub
+                page</a> with any problems you encounter.</p>
+
+    </div>
+</div>
+{% endblock %}

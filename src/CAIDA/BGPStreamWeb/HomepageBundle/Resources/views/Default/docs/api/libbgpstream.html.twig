@@ -1,0 +1,30 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:docs/base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    'bundles/caidabgpstreamwebhomepage/css/api.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block head_js %}
+
+{% endblock %}
+
+{% block jsblock %}
+    {{ parent() }}
+    {% javascripts
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/js/doxy-boot.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>BGPStream C API Documentation</h1>
+    </div>
+    {% include "@CAIDABGPStreamWebHomepageBundle/Resources/public/doxygen/#{doxypage}" %}
+{% endblock %}

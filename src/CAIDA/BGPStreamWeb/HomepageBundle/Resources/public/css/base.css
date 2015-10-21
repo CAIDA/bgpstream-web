@@ -1,0 +1,71 @@
+html, body {
+    height: 100%;
+}
+
+#content-push {
+    height: 70px;
+}
+
+#content-push-full {
+    height: 50px;
+}
+
+#footer-push {
+    height: 60px;
+}
+
+.footer-bar {
+    min-height: 40px !important;
+    height: 40px !important;
+}
+
+.footer-bar p {
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.logo {
+    /*padding-right: 4px;*/
+    height: 30px;
+}
+
+.navbar-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    margin-top: -3px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    padding: 14px 24px;
+    font-size: 21px;
+}
+
+.footer-bar .wrapper {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.footer-bar img {
+    margin-top: -7px;
+    margin-right: 6px;
+    height: 60px;
+}
+
+.footer-bar a,
+.footer-bar a:hover,
+.footer-bar a:active,
+.footer-bar a:visited {
+    color: #b4bcc2;
+}
+
+pre {
+    visibility: hidden; /* to allow prism to work without flickering */
+}

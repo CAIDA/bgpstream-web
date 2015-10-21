@@ -1,0 +1,20 @@
+caida_bgpstream_web_homepage_docs_api:
+  path: /docs/api/libbgpstream/{doxypage}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:api
+
+# markdown or twig
+caida_bgpstream_web_homepage_docs:
+  path: /docs/{page}/{subpage}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:docs
+    page: overview
+    subpage:
+
+# twig-only
+caida_bgpstream_web_homepage:
+  path:  /{page}/{subpage}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:index
+    page: home
+    subpage:

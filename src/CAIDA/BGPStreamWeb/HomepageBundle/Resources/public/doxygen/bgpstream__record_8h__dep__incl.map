@@ -1,0 +1,16 @@
+<map id="bgpstream_record.h" name="bgpstream_record.h">
+<area shape="rect" id="node2" href="$bgpstream_8h.html" title="Header file that exposes the public interface of bgpstream. " alt="" coords="393,80,487,107"/>
+<area shape="rect" id="node8" href="$bgpstream__reader_8h_source.html" title="bgpstream_reader.h" alt="" coords="438,229,573,256"/>
+<area shape="rect" id="node12" href="$bgpstream__elem_8c_source.html" title="bgpstream_elem.c" alt="" coords="603,80,728,107"/>
+<area shape="rect" id="node13" href="$bgpstream__elem__generator_8h.html" title="Header file that exposes the protected interface of the bgpstream elem generator. ..." alt="" coords="753,80,938,107"/>
+<area shape="rect" id="node15" href="$bgpstream__record_8c_source.html" title="bgpstream_record.c" alt="" coords="910,155,1042,181"/>
+<area shape="rect" id="node3" href="$bgpstream__int_8h_source.html" title="bgpstream_int.h" alt="" coords="297,304,409,331"/>
+<area shape="rect" id="node5" href="$bgpstream__filter_8h_source.html" title="bgpstream_filter.h" alt="" coords="243,155,363,181"/>
+<area shape="rect" id="node11" href="$bgpreader_8c_source.html" title="bgpreader.c" alt="" coords="438,155,527,181"/>
+<area shape="rect" id="node4" href="$bgpstream_8c_source.html" title="bgpstream.c" alt="" coords="307,379,399,405"/>
+<area shape="rect" id="node6" href="$bgpstream__datasource_8h_source.html" title="bgpstream_datasource.h" alt="" coords="5,229,168,256"/>
+<area shape="rect" id="node10" href="$bgpstream__filter_8c_source.html" title="bgpstream_filter.c" alt="" coords="193,229,311,256"/>
+<area shape="rect" id="node7" href="$bgpstream__datasource_8c_source.html" title="bgpstream_datasource.c" alt="" coords="5,304,168,331"/>
+<area shape="rect" id="node9" href="$bgpstream__reader_8c_source.html" title="bgpstream_reader.c" alt="" coords="438,304,573,331"/>
+<area shape="rect" id="node14" href="$bgpstream__elem__generator_8c_source.html" title="bgpstream_elem_generator.c" alt="" coords="701,155,885,181"/>
+</map>

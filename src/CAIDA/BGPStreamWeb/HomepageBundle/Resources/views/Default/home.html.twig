@@ -1,0 +1,49 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>
+            <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/bgpstream-logo-black-blue.png') }}">
+        </h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+            condimentum nibh, ut fermentum massa justo sit amet.</p>
+
+        <p><a class="btn btn-lg btn-success" href="/download" role="button">Get BGPStream</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Scientific Research</h2>
+
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
+                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
+                fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                magna mollis euismod. Donec sed odio dui. </p>
+
+            <p><a class="btn btn-primary" href="#" role="button">View
+                    details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Operational Monitoring</h2>
+
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
+                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
+                fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                magna mollis euismod. Donec sed odio dui. </p>
+
+            <p><a class="btn btn-primary" href="#" role="button">View
+                    details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Data Sources</h2>
+
+            <p>BGPStream provides near-realtime access to publicly available
+                BGP measurement data from more than 30 collectors operated by
+                the Route Views and RIPE RIS projects. @@ more more more</p>
+
+            <p><a class="btn btn-primary" href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'}) }}" role="button">See available data &raquo;</a></p>
+        </div>
+    </div>
+
+{% endblock %}

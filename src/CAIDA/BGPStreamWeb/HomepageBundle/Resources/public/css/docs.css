@@ -1,0 +1,32 @@
+.docs-nav {
+    padding-top: 20px;
+}
+
+.docs-nav .nav-pills > li.active > a,
+.docs-nav .nav-pills > li.active > a:hover,
+.docs-nav .nav-pills > li.active > a:focus {
+    color: #18bc9c;
+    background-color: transparent;
+    border-left: 2px solid #18bc9c;
+    border-radius: 0;
+}
+
+.docs-nav .nav-pills .nav-pills {
+    padding-left: 10px;
+    font-size: 12px;
+    display: none;
+}
+
+.docs-nav .nav-pills > li.active .nav-pills {
+    display: block !important;
+}
+
+.docs-nav .nav-pills .nav-pills > li.active > a,
+.docs-nav .nav-pills .nav-pills > li.active > a:hover,
+.docs-nav .nav-pills .nav-pills > li.active > a:focus {
+    border-left: 1px solid #18bc9c;
+}
+
+/*body {
+    background-image: linear-gradient(to right, #F7F7F7, #F7F7F7 32.5%, white 32.5%);
+}*/

@@ -1,0 +1,136 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/pubs.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>Publications and Presentations</h1>
+    </div>
+    <div class="row pub">
+        <div class="col-md-12">
+            <h3>BGPStream: a framework for BGP data analysis
+                <br>
+                <small>
+                    Presentation at
+                    <a href="http://www.caida.org/workshops/aims/1503/">
+                        AIMS 2015</a>, April 1 2015
+                </small>
+            </h3>
+        </div>
+        <div class="col-md-3">
+            <a href="https://www.caida.org/publications/presentations/2015/bgpstream_aims/"
+               target="_blank">
+                <img class="img-thumbnail"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/AIMS-2015.bgpstream.presentation.png') }}">
+            </a>
+        </div>
+        <div class="col-md-9">
+            <p class="abstract">
+                @@Presented by Alistair King at CAIDA's Workshop on Active Internet Measurements (AIMS), April 1 2015.
+            </p>
+
+            <div class="pull-right">
+                <a target="_blank"
+                   href="https://www.caida.org/publications/presentations/2015/bgpstream_aims/bgpstream_aims.pdf"
+                   class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> PDF
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row pub">
+        <div class="col-md-12">
+            <h3>"BGPStream" (An Open Source Framework for Live/Historical BGP Data Analysis)
+                <br>
+                <small>Presentation at
+                    <a href="https://ripe70.ripe.net">
+                        RIPE 70</a>, May 13 2015
+                </small>
+            </h3>
+        </div>
+        <div class="col-md-3">
+            <a href="https://ripe70.ripe.net/presentations/55-bgpstream.pdf"
+               target="_blank">
+                <img class="img-thumbnail"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/RIPE70-2015.bgpstream.presentation.png') }}">
+            </a>
+        </div>
+        <div class="col-md-9">
+            <p class="abstract">
+                @@Presented by Chiara Orsini to the <a href="https://ripe70.ripe.net/programme/meeting-plan/mat-wg/">Measurement, Analysis and Tools Working Group (MAT-WG)</a> at RIPE 70, May 13 2015.
+            </p>
+
+            <div class="pull-right">
+                <a target="_blank"
+                   href="https://ripe70.ripe.net/presentations/55-bgpstream.pdf"
+                   class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> PDF
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="bgpstream-tech-rep" class="row pub">
+        <div class="col-md-12">
+            <h3>BGPStream: a framework for live and historical BGP data analysis
+                <br>
+                <small>Under submission to NSDI 2016</small>
+            </h3>
+        </div>
+        <div class="col-md-3">
+            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.pdf') }}"
+               target="_blank">
+                <img class="img-thumbnail"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.png') }}">
+            </a>
+        </div>
+        <div class="col-md-9">
+            <p class="abstract">
+                We present the design and implementation of BGPStream, an
+                open-source software
+                framework for the analysis of both historical and real-time
+                Border Gateway
+                Protocol (BGP) measurement data. Although BGP is a crucial
+                operational
+                component of the Internet infrastructure, and is the subject of
+                research in the
+                areas of Internet performance, security, topology, protocols,
+                economics, etc.,
+                there is no standard and efficient way of processing large
+                amounts of
+                distributed and/or live BGP measurement data. BGPStream fills
+                this gap,
+                enabling efficient investigation of events, rapid prototyping,
+                and building
+                complex tools and efficient large-scale monitoring applications
+                (e.g., detection
+                of connectivity disruptions or BGP hijacking attacks). We
+                discuss the design
+                choices and challenges in the development of BGPStream. We
+                present how the
+                components of the framework can be used in different applicative
+                scenarios, and
+                we describe the development and deployment of complex services
+                for global
+                Internet monitoring that we built on top of it.
+            </p>
+
+            <div class="pull-right">
+                <a target="_blank"
+                   href="{{ asset('bundles/caidabgpstreamwebhomepage/pubs/2015-10-07.bgpstream.pdf') }}"
+                   class="btn btn-sm btn-primary">
+                    <span class="glyphicon glyphicon-save"></span> PDF
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock %}
