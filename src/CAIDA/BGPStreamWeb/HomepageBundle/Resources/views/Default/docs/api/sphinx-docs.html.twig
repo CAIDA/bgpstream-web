@@ -16,21 +16,16 @@
 {% endblock %}
 
 {% block slimbody %}
-    <div class="page-header">
-        <h1>{{ filename }}</h1>
-    </div>
     {% include file_path %}
 {% endblock %}
 
-{#
 {% block jsblock %}
     {{ parent() }}
     <script>
         require(['jquery'], function ($) {
             $(function () {
-
+                //$(".container-main .container").removeClass("container");
             });
         });
     </script>
 {% endblock %}
-#}

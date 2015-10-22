@@ -1,5 +1,11 @@
 /* override things here */
 
+.container-main .container {
+    padding: 0;
+    width: unset;
+    min-width: unset;
+}
+
 .type,
 .function {
     padding-bottom: 15px;
