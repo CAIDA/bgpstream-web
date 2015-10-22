@@ -9,11 +9,11 @@ the complete documentation is available at @@link to pybgpstream docs.
 
 Below we provide the following tutorials:
 
-* [Get familiar with the API](#print) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-moas.py') }}))
+* [Get familiar with the API](#print) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
 
-* [Print the MOAS prefixes](#moas) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-moas.py') }}))
+* [Print the MOAS prefixes](#moas) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
 
-* [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-aspath.py') }}))
+* [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py') }}))
 
 
 
@@ -24,7 +24,7 @@ the information extracted from BGP records and BGP elems. The example is fully
 functioning and it can be  run using the following command:
 
 ~~~
-$ python tutorial-print.py
+$ python pybgpstream-print.py
  ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 21219 50581 49588'}
  ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '91.214.14.0/24', 'as-path': '9002 6663 39668 65535 49256'}
  ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 49588'}
@@ -98,11 +98,11 @@ while(stream.get_next_record(rec)):
 ### Complete Example
 
 Get the [code]({{
-asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-print.py')
+asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-print.py')
 }}).
 
 ~~~ .language-python
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/tutorial-print.py' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-print.py' %}
 ~~~
 
 
@@ -114,7 +114,7 @@ the MOAS prefixes and their origin ASes. The example is fully
 functioning and it can be  run using the following command:
 
 ~~~
-$ python moas.py
+$ python pybgpstream-moas.py
    194.68.55.0/24 43893,30893
    199.45.53.0/24 701,65403
    207.188.170.0/24 13332,26640
@@ -183,11 +183,11 @@ if len(ases) > 0:
 ### Complete Example
 
 Get the [code]({{
-asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-moas.py')
+asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py')
 }}).
 
 ~~~ .language-python
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/tutorial-moas.py' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-moas.py' %}
 ~~~
 
 ## Measuring the extent of AS path inflation ##   {% verbatim %}{#aspath}{% endverbatim %}
@@ -199,7 +199,7 @@ adoption of routing policies. The example is fully functioning and it
 can be  run using the following command: 
 
 ~~~
-$ python moas.py
+$ python pybgpstream-moas.py
    ...
    3549 27316 6 5
    3549 27314 3 3
@@ -296,11 +296,11 @@ for peer in bgp_lens:
 ### Complete Example
 
 Get the [code]({{
-asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/tutorial-aspath.py')
+asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py')
 }}).
 
 ~~~ .language-python
-{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/tutorial-aspath.py' %}
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-aspath.py' %}
 ~~~
 
 
