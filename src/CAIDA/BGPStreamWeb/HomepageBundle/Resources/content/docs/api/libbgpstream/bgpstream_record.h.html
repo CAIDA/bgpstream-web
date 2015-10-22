@@ -1,0 +1,672 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+
+            <p>Header file that exposes the public interface of a bgpstream
+                record. </p>
+
+            <p>
+            <dl class="docutils">
+                <dt><strong>Author</strong></dt>
+                <dd>Chiara Orsini</dd>
+            </dl>
+            </p>
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public Opaque Data
+                    Structures</p>
+                <dl class="type">
+                    <dt id="_CPPv227bgpstream_record_mrt_data_t">
+                        <span id="bgpstream_record_mrt_data_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a50711fc7e6f52f1a2f8680a0ea2a2b66"></span><em
+                            class="property">typedef </em><em class="property">struct</em>
+                        struct_BGPDUMP_ENTRY <code class="descname">bgpstream_record_mrt_data_t</code><a
+                            class="headerlink"
+                            href="#_CPPv227bgpstream_record_mrt_data_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>An opaque pointer to a BGPDUMP_ENTRY field. </p>
+
+                        <p>
+                        <dl class="docutils">
+                            <dt><strong>Note</strong></dt>
+                            <dd>this is an <em>internal</em> data structure, it
+                                is <em>not</em> guaranteed that it will continue
+                                to conform to the public BGPDUMP_ENTRY
+                                structure. This is NOT for use in user code
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+            </div>
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public Enums</p>
+                <dl class="type">
+                    <dt id="_CPPv228bgpstream_record_dump_type_t">
+                        <span id="bgpstream_record_dump_type_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1aee79f7a559e865c7ea167f4711ac0b71"></span><em
+                            class="property">enum </em><code class="descname">bgpstream_record_dump_type_t</code><a
+                            class="headerlink"
+                            href="#_CPPv228bgpstream_record_dump_type_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The type of the record. </p>
+
+                        <p><em>Values:</em></p>
+                        <dl class="member">
+                            <dt id="_CPPv216BGPSTREAM_UPDATE">
+                                <span id="BGPSTREAM_UPDATE"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1aee79f7a559e865c7ea167f4711ac0b71ae7ef5435593612d153ff720ce1a41a36"></span><code
+                                    class="descname">BGPSTREAM_UPDATE</code> = 0<a
+                                    class="headerlink"
+                                    href="#_CPPv216BGPSTREAM_UPDATE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>The record contains data for a BGP Update
+                                message. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv213BGPSTREAM_RIB">
+                                <span id="BGPSTREAM_RIB"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1aee79f7a559e865c7ea167f4711ac0b71a797690bc20ee9562ce6d11bef08772d5"></span><code
+                                    class="descname">BGPSTREAM_RIB</code> = 1<a
+                                    class="headerlink"
+                                    href="#_CPPv213BGPSTREAM_RIB"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>The record contains data for a BGP RIB
+                                message. </p>
+                            </dd>
+                        </dl>
+
+                    </dd>
+                </dl>
+
+                <dl class="type">
+                    <dt id="_CPPv225bgpstream_dump_position_t">
+                        <span id="bgpstream_dump_position_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a0f8afac89035446b4b1839c075e06a25"></span><em
+                            class="property">enum </em><code class="descname">bgpstream_dump_position_t</code><a
+                            class="headerlink"
+                            href="#_CPPv225bgpstream_dump_position_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The position of this record in the dump. </p>
+
+                        <p><em>Values:</em></p>
+                        <dl class="member">
+                            <dt id="_CPPv220BGPSTREAM_DUMP_START">
+                                <span id="BGPSTREAM_DUMP_START"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a0f8afac89035446b4b1839c075e06a25a1cdae6f555d54a628366324d6e6d03b8"></span><code
+                                    class="descname">BGPSTREAM_DUMP_START</code>
+                                = 0<a class="headerlink"
+                                      href="#_CPPv220BGPSTREAM_DUMP_START"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>This is the first record of the dump. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv221BGPSTREAM_DUMP_MIDDLE">
+                                <span id="BGPSTREAM_DUMP_MIDDLE"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a0f8afac89035446b4b1839c075e06a25a2ec837a706f8ca53ea4ea6cd03d54c75"></span><code
+                                    class="descname">BGPSTREAM_DUMP_MIDDLE</code>
+                                = 1<a class="headerlink"
+                                      href="#_CPPv221BGPSTREAM_DUMP_MIDDLE"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>This is a record in the middle of the
+                                dump. </p>
+
+                                <p>i.e. not the first or the last record of the
+                                    dump </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv218BGPSTREAM_DUMP_END">
+                                <span id="BGPSTREAM_DUMP_END"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a0f8afac89035446b4b1839c075e06a25a1c0afb91045f45f2a5931fa9ac44cbf0"></span><code
+                                    class="descname">BGPSTREAM_DUMP_END</code> =
+                                2<a class="headerlink"
+                                    href="#_CPPv218BGPSTREAM_DUMP_END"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>This is the last record of the dump. </p>
+                            </dd>
+                        </dl>
+
+                    </dd>
+                </dl>
+
+                <dl class="type">
+                    <dt id="_CPPv225bgpstream_record_status_t">
+                        <span id="bgpstream_record_status_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49"></span><em
+                            class="property">enum </em><code class="descname">bgpstream_record_status_t</code><a
+                            class="headerlink"
+                            href="#_CPPv225bgpstream_record_status_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Status of the record. </p>
+
+                        <p><em>Values:</em></p>
+                        <dl class="member">
+                            <dt id="_CPPv236BGPSTREAM_RECORD_STATUS_VALID_RECORD">
+                                <span id="BGPSTREAM_RECORD_STATUS_VALID_RECORD"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49af207da7c507d0d458dfdb20b0ea7a282"></span><code
+                                    class="descname">BGPSTREAM_RECORD_STATUS_VALID_RECORD</code>
+                                = 0<a class="headerlink"
+                                      href="#_CPPv236BGPSTREAM_RECORD_STATUS_VALID_RECORD"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>The record is valid and may be used. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv239BGPSTREAM_RECORD_STATUS_FILTERED_SOURCE">
+                                <span id="BGPSTREAM_RECORD_STATUS_FILTERED_SOURCE"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49a90f5f8a746b6b44c2d7c8fbd3efa1589"></span><code
+                                    class="descname">BGPSTREAM_RECORD_STATUS_FILTERED_SOURCE</code>
+                                = 1<a class="headerlink"
+                                      href="#_CPPv239BGPSTREAM_RECORD_STATUS_FILTERED_SOURCE"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Source is not empty, but no valid record was
+                                found. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv236BGPSTREAM_RECORD_STATUS_EMPTY_SOURCE">
+                                <span id="BGPSTREAM_RECORD_STATUS_EMPTY_SOURCE"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49a186d4a93ffc6711a751e403a64ed3c42"></span><code
+                                    class="descname">BGPSTREAM_RECORD_STATUS_EMPTY_SOURCE</code>
+                                = 2<a class="headerlink"
+                                      href="#_CPPv236BGPSTREAM_RECORD_STATUS_EMPTY_SOURCE"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Source has no entries. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv240BGPSTREAM_RECORD_STATUS_CORRUPTED_SOURCE">
+                                <span id="BGPSTREAM_RECORD_STATUS_CORRUPTED_SOURCE"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49a017b3a8976232f2ee3f2bb25f0dfd333"></span><code
+                                    class="descname">BGPSTREAM_RECORD_STATUS_CORRUPTED_SOURCE</code>
+                                = 3<a class="headerlink"
+                                      href="#_CPPv240BGPSTREAM_RECORD_STATUS_CORRUPTED_SOURCE"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd></dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv240BGPSTREAM_RECORD_STATUS_CORRUPTED_RECORD">
+                                <span id="BGPSTREAM_RECORD_STATUS_CORRUPTED_RECORD"></span><span
+                                    class="target"
+                                    id="bgpstreambgpstream__record_8h_1a6a1a5710308783dc7338ec7e66d0af49a73ec0b61828c898a9d131eb34529dd56"></span><code
+                                    class="descname">BGPSTREAM_RECORD_STATUS_CORRUPTED_RECORD</code>
+                                = 4<a class="headerlink"
+                                      href="#_CPPv240BGPSTREAM_RECORD_STATUS_CORRUPTED_RECORD"
+                                      title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd></dd>
+                        </dl>
+
+                    </dd>
+                </dl>
+
+            </div>
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public Data
+                    Structures</p>
+                <dl class="type">
+                    <dt id="_CPPv229bgpstream_record_attributes_t">
+                        <span id="bgpstream_record_attributes_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a7d9d32bbe7bc91d37ae170404cac30d5"></span><em
+                            class="property">typedef </em><em class="property">struct</em>
+                        <a class="reference internal"
+                           href="#_CPPv236struct_bgpstream_record_attributes_t"
+                           title="struct_bgpstream_record_attributes_t">struct_bgpstream_record_attributes_t</a>
+                        <code class="descname">bgpstream_record_attributes_t</code><a
+                            class="headerlink"
+                            href="#_CPPv229bgpstream_record_attributes_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Record attributes. </p>
+                    </dd>
+                </dl>
+
+                <dl class="type">
+                    <dt id="_CPPv218bgpstream_record_t">
+                        <span id="bgpstream_record_t"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1af9267ae8b8b398073499fa7efa63140f"></span><em
+                            class="property">typedef </em><em class="property">struct</em>
+                        <a class="reference internal"
+                           href="#_CPPv225struct_bgpstream_record_t"
+                           title="struct_bgpstream_record_t">struct_bgpstream_record_t</a>
+                        <code class="descname">bgpstream_record_t</code><a
+                            class="headerlink"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Record structure. </p>
+                    </dd>
+                </dl>
+
+            </div>
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public API
+                    Functions</p>
+                <dl class="function">
+                    <dt id="_CPPv223bgpstream_record_createv">
+                        <span id="bgpstream_record_create"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a346ab423e33c75c8fd739094caa75a3b"></span><a
+                            class="reference internal"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="bgpstream_record_t">bgpstream_record_t</a>
+                        *<code
+                            class="descname">bgpstream_record_create</code><span
+                            class="sig-paren">(</span><span
+                            class="sig-paren">)</span><a class="headerlink"
+                                                         href="#_CPPv223bgpstream_record_createv"
+                                                         title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Create a new BGP Stream Record instance for passing
+                        to bgpstream_get_next_record. </p>
+
+                        <p>
+                            A Record may be reused for successive calls to
+                            bgpstream_get_next_record if records are processed
+                            independently of each other
+                        <dl class="docutils">
+                            <dt><strong>Return</strong></dt>
+                            <dd>a pointer to a Record instance if successful,
+                                NULL otherwise
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+                <dl class="function">
+                    <dt id="_CPPv224bgpstream_record_destroyP18bgpstream_record_t">
+                        <span id="bgpstream_record_destroy__bgpstream_record_tP"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a3474d7cb61571d2a36153fc07693df1b"></span>void
+                        <code class="descname">bgpstream_record_destroy</code><span
+                            class="sig-paren">(</span><a
+                            class="reference internal"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="bgpstream_record_t">bgpstream_record_t</a>
+                        *<em>record</em><span class="sig-paren">)</span><a
+                            class="headerlink"
+                            href="#_CPPv224bgpstream_record_destroyP18bgpstream_record_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Destroy the given BGP Stream Record instance. </p>
+
+                        <p>
+                        <dl class="docutils">
+                            <dt><strong>Parameters</strong></dt>
+                            <dd>
+                                <ul class="breatheparameterlist first last">
+                                    <li><code
+                                            class="first docutils literal"><span
+                                            class="pre">record</span></code> -
+                                        <p>pointer to a BGP Stream Record
+                                            instance to destroy </p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+                <dl class="function">
+                    <dt id="_CPPv222bgpstream_record_clearP18bgpstream_record_t">
+                        <span id="bgpstream_record_clear__bgpstream_record_tP"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a111583f0aa858299eb577b32a3172bf1"></span>void
+                        <code class="descname">bgpstream_record_clear</code><span
+                            class="sig-paren">(</span><a
+                            class="reference internal"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="bgpstream_record_t">bgpstream_record_t</a>
+                        *<em>record</em><span class="sig-paren">)</span><a
+                            class="headerlink"
+                            href="#_CPPv222bgpstream_record_clearP18bgpstream_record_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Clear the given BGP Stream Record instance. </p>
+
+                        <p>
+                        <dl class="docutils">
+                            <dt><strong>Note</strong></dt>
+                            <dd>the record passed to bgpstream_get_next_record
+                                is automatically cleaned.
+                            </dd>
+                            <dt><strong>Parameters</strong></dt>
+                            <dd>
+                                <ul class="breatheparameterlist first last">
+                                    <li><code
+                                            class="first docutils literal"><span
+                                            class="pre">record</span></code> -
+                                        <p>pointer to a BGP Stream Record
+                                            instance to clear</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+                <dl class="function">
+                    <dt id="_CPPv230bgpstream_record_get_next_elemP18bgpstream_record_t">
+                        <span id="bgpstream_record_get_next_elem__bgpstream_record_tP"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1acd808836aac15d87e53f67567d4b2284"></span>bgpstream_elem_t
+                        *<code
+                            class="descname">bgpstream_record_get_next_elem</code><span
+                            class="sig-paren">(</span><a
+                            class="reference internal"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="bgpstream_record_t">bgpstream_record_t</a>
+                        *<em>record</em><span class="sig-paren">)</span><a
+                            class="headerlink"
+                            href="#_CPPv230bgpstream_record_get_next_elemP18bgpstream_record_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Retrieve the next elem from the record. </p>
+
+                        <p>
+                            The returned pointer is guaranteed to be valid until
+                            the record is re-used in a subsequent call to
+                            bgpstream_get_next_record, or is destroyed with
+                            bgpstream_record_destroy
+                        <dl class="docutils">
+                            <dt><strong>Return</strong></dt>
+                            <dd>borrowed pointer to the next Elem in the record,
+                                NULL if there are no more Elems
+                            </dd>
+                            <dt><strong>Parameters</strong></dt>
+                            <dd>
+                                <ul class="breatheparameterlist first last">
+                                    <li><code
+                                            class="first docutils literal"><span
+                                            class="pre">record</span></code> -
+                                        <p>pointer to the BGP Stream Record to
+                                            retrieve the elem from </p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+                <dl class="function">
+                    <dt id="_CPPv231bgpstream_record_print_mrt_dataPC18bgpstream_record_t">
+                        <span id="bgpstream_record_print_mrt_data__bgpstream_record_tPC"></span><span
+                            class="target"
+                            id="bgpstreambgpstream__record_8h_1a8d0a37c143942ae79f1661721896c985"></span>void
+                        <code class="descname">bgpstream_record_print_mrt_data</code><span
+                            class="sig-paren">(</span><a
+                            class="reference internal"
+                            href="#_CPPv218bgpstream_record_t"
+                            title="bgpstream_record_t">bgpstream_record_t</a>
+                        *<em>bs_record</em><span class="sig-paren">)</span><a
+                            class="headerlink"
+                            href="#_CPPv231bgpstream_record_print_mrt_dataPC18bgpstream_record_t"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Dump the given record to stdout in bgpdump
+                        format. </p>
+
+                        <p>
+                            See <a class="reference external"
+                                   href="https://bitbucket.org/ripencc/bgpdump">https://bitbucket.org/ripencc/bgpdump</a>
+                            for more information about bgpdump
+                        <dl class="docutils">
+                            <dt><strong>Parameters</strong></dt>
+                            <dd>
+                                <ul class="breatheparameterlist first last">
+                                    <li><code
+                                            class="first docutils literal"><span
+                                            class="pre">record</span></code> -
+                                        <p>pointer to a BGP Stream Record
+                                            instance to dump</p>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                        </p>
+                    </dd>
+                </dl>
+
+            </div>
+            <dl class="class">
+                <dt id="_CPPv236struct_bgpstream_record_attributes_t">
+                    <span id="struct_bgpstream_record_attributes_t"></span><span
+                        class="target"
+                        id="bgpstreamstructstruct__bgpstream__record__attributes__t"></span><em
+                        class="property">struct </em><code class="descname">struct_bgpstream_record_attributes_t</code><a
+                        class="headerlink"
+                        href="#_CPPv236struct_bgpstream_record_attributes_t"
+                        title="Permalink to this definition">¶</a></dt>
+                <dd><em>#include &lt;bgpstream_record.h&gt;</em>
+
+                    <p>Record attributes. </p>
+
+                    <div class="breathe-sectiondef container">
+                        <p class="breathe-sectiondef-title rubric">Public
+                            Members</p>
+                        <dl class="member">
+                            <dt id="_CPPv2N36struct_bgpstream_record_attributes_t12dump_projectE">
+                                <span id="struct_bgpstream_record_attributes_t::dump_project__cA"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__attributes__t_1a3a0c89b986117f1ff3dbf1fe2df8a995"></span>char
+                                <code class="descname">dump_project</code>[BGPSTREAM_UTILS_STR_NAME_LEN]<a
+                                    class="headerlink"
+                                    href="#_CPPv2N36struct_bgpstream_record_attributes_t12dump_projectE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Project name. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N36struct_bgpstream_record_attributes_t14dump_collectorE">
+                                <span id="struct_bgpstream_record_attributes_t::dump_collector__cA"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__attributes__t_1a2605f3bfb79280247d8624608a9368a0"></span>char
+                                <code class="descname">dump_collector</code>[BGPSTREAM_UTILS_STR_NAME_LEN]<a
+                                    class="headerlink"
+                                    href="#_CPPv2N36struct_bgpstream_record_attributes_t14dump_collectorE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Collector name. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N36struct_bgpstream_record_attributes_t9dump_typeE">
+                                <span id="struct_bgpstream_record_attributes_t::dump_type__bgpstream_record_dump_type_t"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__attributes__t_1ad9b55353ca663fe13a2b0da68d55a663"></span><a
+                                    class="reference internal"
+                                    href="#_CPPv228bgpstream_record_dump_type_t"
+                                    title="bgpstream_record_dump_type_t">bgpstream_record_dump_type_t</a>
+                                <code class="descname">dump_type</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N36struct_bgpstream_record_attributes_t9dump_typeE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Dump type. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N36struct_bgpstream_record_attributes_t9dump_timeE">
+                                <span id="struct_bgpstream_record_attributes_t::dump_time__l"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__attributes__t_1a59cf9912b728f8356362f20d11b6c175"></span>long
+                                <code class="descname">dump_time</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N36struct_bgpstream_record_attributes_t9dump_timeE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Time that the BGP data was &#8220;aggregated&#8221;. </p>
+
+                                <p>E.g. the start time of an MRT dump file </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N36struct_bgpstream_record_attributes_t11record_timeE">
+                                <span id="struct_bgpstream_record_attributes_t::record_time__l"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__attributes__t_1a3f391e3e6dd5dc0a6c7c80d3c69b5afb"></span>long
+                                <code class="descname">record_time</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N36struct_bgpstream_record_attributes_t11record_timeE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Time from the MRT record. </p>
+
+                                <p>I.e. the time <em>this</em> record was dumped
+                                </p>
+                            </dd>
+                        </dl>
+
+                    </div>
+                </dd>
+            </dl>
+
+            <dl class="class">
+                <dt id="_CPPv225struct_bgpstream_record_t">
+                    <span id="struct_bgpstream_record_t"></span><span
+                        class="target"
+                        id="bgpstreamstructstruct__bgpstream__record__t"></span><em
+                        class="property">struct </em><code class="descname">struct_bgpstream_record_t</code><a
+                        class="headerlink"
+                        href="#_CPPv225struct_bgpstream_record_t"
+                        title="Permalink to this definition">¶</a></dt>
+                <dd><em>#include &lt;bgpstream_record.h&gt;</em>
+
+                    <p>Record structure. </p>
+
+                    <div class="breathe-sectiondef container">
+                        <p class="breathe-sectiondef-title rubric">Public
+                            Members</p>
+                        <dl class="member">
+                            <dt id="_CPPv2N25struct_bgpstream_record_t8bd_entryE">
+                                <span id="struct_bgpstream_record_t::bd_entry__bgpstream_record_mrt_data_tP"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__t_1a6e45c729bb8818fe4e8447b2ffe1f3bd"></span><a
+                                    class="reference internal"
+                                    href="#_CPPv227bgpstream_record_mrt_data_t"
+                                    title="bgpstream_record_mrt_data_t">bgpstream_record_mrt_data_t</a>
+                                *<code class="descname">bd_entry</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N25struct_bgpstream_record_t8bd_entryE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>INTERNAL: buffer containing the underlying
+                                MRT data for the record. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N25struct_bgpstream_record_t14elem_generatorE">
+                                <span id="struct_bgpstream_record_t::elem_generator__bgpstream_elem_generatorP"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__t_1a12988f49e747c7c5e774893a303278fc"></span><em
+                                    class="property">struct</em>
+                                bgpstream_elem_generator *<code
+                                    class="descname">elem_generator</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N25struct_bgpstream_record_t14elem_generatorE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>INTERNAL: state used to generate elems for
+                                get_next_elem. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N25struct_bgpstream_record_t10attributesE">
+                                <span id="struct_bgpstream_record_t::attributes__bgpstream_record_attributes_t"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__t_1a73574913268a59b8517fcfae050f1709"></span><a
+                                    class="reference internal"
+                                    href="#_CPPv229bgpstream_record_attributes_t"
+                                    title="bgpstream_record_attributes_t">bgpstream_record_attributes_t</a>
+                                <code class="descname">attributes</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N25struct_bgpstream_record_t10attributesE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Collection of attributes pertaining to this
+                                record. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N25struct_bgpstream_record_t6statusE">
+                                <span id="struct_bgpstream_record_t::status__bgpstream_record_status_t"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__t_1ad5c462369ff98d609e3a45ac3dfecf2f"></span><a
+                                    class="reference internal"
+                                    href="#_CPPv225bgpstream_record_status_t"
+                                    title="bgpstream_record_status_t">bgpstream_record_status_t</a>
+                                <code class="descname">status</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N25struct_bgpstream_record_t6statusE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Status of this record. </p>
+                            </dd>
+                        </dl>
+
+                        <dl class="member">
+                            <dt id="_CPPv2N25struct_bgpstream_record_t8dump_posE">
+                                <span id="struct_bgpstream_record_t::dump_pos__bgpstream_dump_position_t"></span><span
+                                    class="target"
+                                    id="bgpstreamstructstruct__bgpstream__record__t_1adc127afbff0ef31942217f115fbb3a80"></span><a
+                                    class="reference internal"
+                                    href="#_CPPv225bgpstream_dump_position_t"
+                                    title="bgpstream_dump_position_t">bgpstream_dump_position_t</a>
+                                <code class="descname">dump_pos</code><a
+                                    class="headerlink"
+                                    href="#_CPPv2N25struct_bgpstream_record_t8dump_posE"
+                                    title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Position of this record in the dump. </p>
+                            </dd>
+                        </dl>
+
+                    </div>
+                </dd>
+            </dl>
+
+
+        </div>
+
+    </div>
+</div>

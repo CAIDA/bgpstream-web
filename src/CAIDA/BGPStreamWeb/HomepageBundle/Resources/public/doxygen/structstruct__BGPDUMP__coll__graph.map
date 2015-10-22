@@ -1,6 +1,0 @@
-<map id="struct_BGPDUMP" name="struct_BGPDUMP">
-<area shape="rect" id="node2" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE" alt="" coords="31,199,260,240"/>
-<area shape="rect" id="node3" href="$structstruct__BGPDUMP__TABLE__DUMP__V2__PEER__INDEX__TABLE__ENTRY.html" title="struct_BGPDUMP_TABLE\l_DUMP_V2_PEER_INDEX_TABLE_ENTRY" alt="" coords="5,95,285,136"/>
-<area shape="rect" id="node4" href="$unionunion__BGPDUMP__IP__ADDRESS.html" title="union_BGPDUMP_IP_ADDRESS" alt="" coords="36,5,255,32"/>
-<area shape="rect" id="node5" href="$struct__CFRFILE.html" title="cfile_tools.h A small library containing tools for dealing with files that are compressed with differ..." alt="" coords="284,206,367,233"/>
-</map>

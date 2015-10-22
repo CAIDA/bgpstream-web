@@ -1,0 +1,24 @@
+/* override things here */
+
+.type,
+.function {
+    padding-bottom: 15px;
+}
+
+.rubric {
+    font-size: 26px;
+    font-weight: 300 !important;
+    margin-top: 0 !important;
+}
+
+.descname {
+    font-size: 1em !important;
+}
+
+.member .descname {
+    font-size: 0.8em !important;
+}
+
+.class .rubric {
+    display: none;
+}

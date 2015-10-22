@@ -32,20 +32,29 @@ class DefaultController extends Controller
         }
     }
 
-    public function apiAction($_route, $doxypage)
+    public
+    function sphinxAction($_route, $project, $file)
     {
         $twig =
-                "CAIDABGPStreamWebHomepageBundle:Default:docs/api/libbgpstream.html.twig";
+            "CAIDABGPStreamWebHomepageBundle:Default:docs/api/sphinx-docs.html.twig";
+
+        if(substr_compare($file, '.html', -5) == 0) {
+            $file = substr($file, 0, -5);
+        }
+
+        $sphinxFile =
+            "@CAIDABGPStreamWebHomepageBundle/Resources/content/docs/api/$project/$file.html";
 
         try {
             return $this->render($twig,
-                                 [
-                                     'route' => $_route,
-                                     'doxypage' => $doxypage,
-                                 ]
+                                 array(
+                                     'route'           => $_route,
+                                     'file_path' => $sphinxFile,
+                                     'filename' => $file,
+                                 )
             );
         } catch(\InvalidArgumentException $ex) {
-            throw $this->createNotFoundException('Requested page does not exist');
+            throw $this->createNotFoundException('Page does not exist');
         }
     }
 

@@ -142,7 +142,7 @@ class Builder
                                 )
                         )
         );
-        $menu['install']->addChild('{BGPStream}',
+        $menu['install']->addChild('{BGPStream Core}',
                                    array(
                                        'route'           => 'caida_bgpstream_web_homepage_docs',
                                        'routeParameters' =>
@@ -193,6 +193,8 @@ class Builder
                                  )
         );
 
+
+        /* API */
         $menu->addChild('{APIs}',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage_docs',
@@ -202,16 +204,51 @@ class Builder
                                 )
                         )
         );
-        $menu['{APIs}']->addChild('{C API}',
+
+        /* C API */
+        $menu['{APIs}']->addChild('c',
                                  array(
-                                     'route'           => 'caida_bgpstream_web_homepage_docs_api',
+                                     'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>
                                          array(
-                                             'doxypage' => 'bgpstream_8h.html',
+                                             'page' => 'api',
+                                             'subpage' => 'libbgpstream'
                                          )
                                  )
         );
-        $menu['{APIs}']->addChild('{Python API}',
+        $menu['{APIs}']['c']->addChild('{bgpstream.h}',
+                                  array(
+                                      'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                      'routeParameters' =>
+                                          array(
+                                              'project' => 'libbgpstream',
+                                              'file' => 'bgpstream.h.html'
+                                          )
+                                  )
+        );
+        $menu['{APIs}']['c']->addChild('{bgpstream_record.h}',
+                                       array(
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'routeParameters' =>
+                                               array(
+                                                   'project' => 'libbgpstream',
+                                                   'file'    => 'bgpstream_record.h.html'
+                                               )
+                                       )
+        );
+        $menu['{APIs}']['c']->addChild('{bgpstream_elem.h}',
+                                       array(
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'routeParameters' =>
+                                               array(
+                                                   'project' => 'libbgpstream',
+                                                   'file'    => 'bgpstream_elem.h.html'
+                                               )
+                                       )
+        );
+
+        /* Python API */
+        $menu['{APIs}']->addChild('python',
                                  array(
                                      'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>
@@ -221,7 +258,19 @@ class Builder
                                          )
                                  )
         );
-        $menu['{APIs}']->addChild('{Broker API}',
+        $menu['{APIs}']['python']->addChild('{_pybgpstream}',
+                                       array(
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'routeParameters' =>
+                                               array(
+                                                   'project' => 'pybgpstream',
+                                                   'file'    => '_pybgpstream.html'
+                                               )
+                                       )
+        );
+
+
+        $menu['{APIs}']->addChild('{Metadata Broker}',
                                  array(
                                      'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>

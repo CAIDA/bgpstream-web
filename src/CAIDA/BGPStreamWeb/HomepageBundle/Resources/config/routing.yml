@@ -1,3 +1,8 @@
+caida_bgpstream_web_homepage_docs_api_sphinx:
+  path: /docs/api/{project}/{file}
+  defaults:
+    _controller: CAIDABGPStreamWebHomepageBundle:Default:sphinx
+
 caida_bgpstream_web_homepage_docs_api:
   path: /docs/api/libbgpstream/{doxypage}
   defaults:
