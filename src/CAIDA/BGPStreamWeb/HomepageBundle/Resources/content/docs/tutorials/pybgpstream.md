@@ -149,7 +149,7 @@ stream.add_interval_filter(1438415400,1438416600)
 
 <br>
 
-We  use a dictionary to associate a list of origin ASns to each
+We  use a dictionary to associate a list of origin ASns with each
 prefix observed in the RIB dump.
 
 <br>
