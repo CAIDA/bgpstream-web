@@ -1,19 +1,19 @@
 {% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
 
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/acks.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     <div class="page-header">
         <h1>Acknowledgements</h1>
     </div>
-
-    <table class="table">
-        <tbody>
-        <tr>
-            <td>NSF</td>
-            <td><a href="@@">asdghsadf</a></td>
-        </tr>
-        </tbody>
-    </table>
-
+{#
     NSF
      - IODA
      - Hijacks
@@ -21,9 +21,72 @@
     - SISTER
     SDSC
     UCSD
+    #}
+
+    <div class="row row-thumbs">
+        <a href="http://www.nsf.gov" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/nsf.svg') }}">
+
+                    <div class="caption text-center">
+                        <p><a href="https://www.caida.org/funding/ioda/">NSF
+                                CNS-1228994</a></p>
+
+                        <p><a href="https://www.caida.org/funding/hijacks/">NSF
+                                CNS-1423659</a></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="http://www.dhs.gov" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/dhs.svg') }}">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="row row-thumbs">
+        <a href="http://www.sdsc.edu" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/sdsc.svg') }}">
+                </div>
+            </div>
+        </a>
+        <a href="http://www.ucsd.edu" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ucsd.svg') }}">
+                </div>
+            </div>
+        </a>
+    </div>
 
     <h2>Collaborators</h2>
-    Collaborations
-     - RIPE NCC
-     - BGPmon
+    <div class="row row-thumbs">
+        <a href="http://www.routeviews.org" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}">
+                </div>
+            </div>
+        </a>
+        <a href="http://www.ripe.net" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripencc-white.svg') }}">
+                </div>
+            </div>
+        </a>
+        <a href="http://www.bgpmon.io" target="_blank">
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/bgpmon-dark.svg') }}">
+                </div>
+            </div>
+        </a>
+    </div>
 {% endblock %}
