@@ -15,6 +15,9 @@
     <li role="presentation"><a href="#ubuntu" aria-controls="ubuntu"
                                role="tab"
                                data-toggle="tab">Ubuntu/Debian</a></li>
+    <li role="presentation"><a href="#centos" aria-controls="centos"
+                               role="tab"
+                               data-toggle="tab">CentOS</a></li>
     <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
                                data-toggle="tab">Mac OSX</a></li>
 </ul>
@@ -55,6 +58,27 @@ configure: Compiled with compressed file (lzo write only) support: No
 configure: Compiled with compressed file (lzma) support: No
 configure: Compiled with http read (libcurl) support: Yes</code></pre>
 
+        <p>
+            Note: If you do not want to install system-wide, then you can
+            specify an installation directory (<code>/INSTALL/PATH</code>) as follows:
+        </p>
+        <pre><code>$ ./configure --prefix=/INSTALL/PATH</code></pre>
+        <p>
+            Then, depending on your OS, you may need to set <code>LD_LIBRRAY_PATH</code> as follows:
+        </p>
+        <pre><code>$ export LD_LIBRARY_PATH="/INSTALL/PATH/lib:$LD_LIBRARY_PATH"</code></pre>
+
+        <p>If required libraries are not in the system library paths,
+            specify their paths when running <code>configure</code> as
+            follows:</p>
+
+        <pre><code>$ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'</code></pre>
+
+        <p>
+            You may test that wandio works by running
+            <code>$ wandiocat http://google.com</code>
+        </p>
+
         <h3>Optional Libraries</h3>
 
         <ul>
@@ -74,11 +98,7 @@ $ make
 # make install
 </code></pre>
 
-        <p>If required libraries are not in the system library paths,
-            specify their paths when running <code>configure</code> as
-            follows:</p>
-
-<pre><code>$ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'</code></pre>
+        <p>See wandio instructions above for how to install BGPStream to a non-default location.</p>
 
         <h2>Troubleshooting</h2>
         <p>BGPStream is written in C and should compile with any ANSI
@@ -145,6 +165,14 @@ $ ./configure
 $ make
 $ sudo make install</code></pre>
 
+        <p>
+            You may test that wandio works by running
+            <code>$ wandiocat http://google.com</code>
+        </p>
+
+        <p>See the generic install instructions for details on how to install
+            into a non-default location.</p>
+
         <h3>3. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
@@ -155,6 +183,10 @@ $ ./configure
 $ make
 $ make check
 $ sudo make install</code></pre>
+
+        <p>Please open an issue on our
+            <a href="https://github.com/caida/bgpstream/issues">GitHub
+                page</a> with any problems you encounter.</p>
 
     </div>
 
@@ -198,6 +230,81 @@ $ ./configure
 $ make
 $ sudo make install
 $ sudo ldconfig</code></pre>
+
+        <p>See the generic install instructions for details on how to install
+            into a non-default location.</p>
+
+        <h3>3. Download and install BGPStream:</h3>
+
+        <pre><code>$ cd ~/src/
+$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.0.0.tar.gz
+$ cd bgpstream-1.0.0/
+$ ./configure
+$ make
+$ make check
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>Please open an issue on our
+            <a href="https://github.com/caida/bgpstream/issues">GitHub
+                page</a> with any problems you encounter.</p>
+
+    </div>
+
+    {# ---------- CENTOS ---------- #}
+    <div role="tabpanel" class="tab-pane" id="centos">
+
+        <div style="opacity: 0.5">
+            <h2>Installing from RPM
+                <small>Coming Soon...</small>
+            </h2>
+
+            <p>Install BGPStream by running:</p>
+
+            <pre><code>$ sudo yum install bgpstream-devel bgpstream</code></pre>
+
+            <p>If you are planning to only use the PyBGPStream Python bindings,
+                then you need
+                not install the <code>bgpstream</code> package.</p>
+        </div>
+
+        <h2>Installing from source</h2>
+
+        <h3>1. Install dependencies:</h3>
+
+        <pre><code>sudo yum install zlib-devel bzip2-devel libcurl-devel</code></pre>
+
+        <h3>2. Download and install <a
+                    href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
+        </h3>
+
+        <pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure
+$ make
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>
+            You may test that wandio works by running
+            <code>$ wandiocat http://google.com</code>
+        </p>
+        <p>If you get an error like:</p>
+        <pre><code>wandiocat: error while loading shared libraries: libwandio.so.1: cannot open shared object file: No such file or directory</code></pre>
+        <p>
+            Then you may need to run
+        </p>
+        <pre><code>$ sudo echo /usr/local/etc > /etc/ld.so.conf.d/usrlocal.conf</code></pre>
+        <p>
+            and then re-run <code>sudo ldconfig</code>.
+        </p>
+
+        <p>See the generic install instructions for details on how to install
+            into a non-default location.</p>
 
         <h3>3. Download and install BGPStream:</h3>
 
@@ -252,6 +359,9 @@ $ cd wandio-1.0.3/
 $ ./configure
 $ make
 $ sudo make install</code></pre>
+
+        <p>See the generic install instructions for details on how to install
+            into a non-default location.</p>
 
         <h3>3. Download and install BGPStream:</h3>
 
