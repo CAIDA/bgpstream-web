@@ -9,6 +9,10 @@ h2 > a:visited {
     height: 60px;
 }
 
+.dp-tab-logo {
+    height: 30px;
+}
+
 .vertical-center {
     vertical-align: middle !important;
 }

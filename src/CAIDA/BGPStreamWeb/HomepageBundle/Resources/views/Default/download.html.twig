@@ -8,16 +8,11 @@
     <div class="row">
         <div class="col-md-8">
             <div id="libbgpstream">
-                <h2>C Library</h2>
+                <h2>BGPStream Core</h2>
 
-                <p>The BGPStream C library <i>(libBGPStream)</i> is
-                    the core of the
-                    <a href="{{ path('caida_bgpstream_web_homepage_docs') }}">
-                        BGPStream framework
-                    </a>, providing an API to
-                    configure and consumer a stream of BGP measurement data.
+                <p>The BGPStream Core package provides the @@BGPReader and @@BGPCorsaro tools as well as the @@libBGPStream API.
                     Even if you plan to use the Python bindings <i>(PyBGPStream)</i>,
-                    you will first need to install the libBGPStream library.
+                    you will first need to install BGPStream Core.
                     See the
                     <a href="{{ path('caida_bgpstream_web_homepage_docs_api', {'doxypage': 'bgpstream_8h.html'}) }}">
                         API documentation
@@ -26,7 +21,7 @@
                     <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'}) }}">
                        tutorials
                     </a>
-                    for more information on using libBGPStream.</p>
+                    for more information on using BGPStream.</p>
 
                 <h3>Build From Source</h3>
                 <p>Building BGPStream from source is easy. See the
@@ -136,7 +131,7 @@
         </div>
         <div class="col-md-4">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="#libbgpstream">C Library</a></li>
+                <li role="presentation"><a href="#libbgpstream">BGPStream Core</a></li>
                 <li role="presentation"><a href="#pybgpstream">Python Bindings</a></li>
                 <li role="presentation"><a href="#broker">Broker Web-App</a></li>
             </ul>

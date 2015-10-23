@@ -5,44 +5,32 @@
         <h1>
             <img src="{{ asset('bundles/caidabgpstreamwebhomepage/images/bgpstream-logo-black-blue.png') }}">
         </h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet.</p>
+        <p class="lead">A software framework for live and historical BGP data analysis, supporting <br class="hidden-xs hidden-sm"> <i>scientific research</i>, <i>operational monitoring</i>, and <i>post-event analysis</i>.</p>
 
-        <p><a class="btn btn-lg btn-success" href="/download" role="button">Get BGPStream</a></p>
+        <p><a class="btn btn-lg btn-success" href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}" role="button">Get BGPStream</a></p>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Scientific Research</h2>
-
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                magna mollis euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-primary" href="#" role="button">View
-                    details &raquo;</a></p>
+            <h2>Powerful Tools &amp; APIs</h2>
+            <p>
+                Quickly inspect raw BGP data from the command-line, develop Python apps, or build complex systems using a C/C++ API, etc.
+                Designed to run anywhere, from laptops to clusters.</p>
+            <p><a class="btn btn-primary" href="{{ path('caida_bgpstream_web_homepage', {'page': 'components'}) }}" role="button">Learn about the components &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Operational Monitoring</h2>
+            <h2>Seamless &amp; Live Data Access</h2>
 
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                magna mollis euismod. Donec sed odio dui. </p>
+            <p>Give BGPStream a time range and it will automatically acquire and stream the right data to you.</p>
 
-            <p><a class="btn btn-primary" href="#" role="button">View
-                    details &raquo;</a></p>
+            <p><a class="btn btn-primary" href="#" role="button">See data providers &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Data Sources</h2>
+            <h2>Tutorials &amp; Docs</h2>
 
-            <p>BGPStream provides near-realtime access to publicly available
-                BGP measurement data from more than 30 collectors operated by
-                the Route Views and RIPE RIS projects. @@ more more more</p>
+            <p>Documentation includes software and API reference manuals as well as tutorials with fully-running code samples.</p>
 
-            <p><a class="btn btn-primary" href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'}) }}" role="button">See available data &raquo;</a></p>
+            <p><a class="btn btn-primary" href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'}) }}" role="button">Get started &raquo;</a></p>
         </div>
     </div>
 

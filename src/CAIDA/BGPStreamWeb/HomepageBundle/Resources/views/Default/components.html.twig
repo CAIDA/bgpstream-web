@@ -1,35 +1,52 @@
-{% extends 'CAIDABGPStreamWebHomepageBundle:Default:docs/base.html.twig' %}
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/components.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
 
 {% block slimbody %}
-    <h1>Tools</h1>
+    <div class="page-header">
+        <h1>BGPStream Components
+        </h1>
+    </div>
+
+    <h2><span class="glyphicon glyphicon-wrench"
+              aria-hidden="true"></span> Tools</h2>
 
     <div class="row">
         <div class="col-md-6">
-            <h2>BGPReader<br><small>Generate ASCII output</small></h2>
+            <h3>BGPReader<br>
+                <small>Generate ASCII output</small>
+            </h3>
 
             <div class="label-group">
                 {#
                 <div class="label-row">
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> ASCII output</span>
                 </div>
                 #}
                 <div class="label-row">
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
-                                aria-hidden="true"></span> Eye-ball raw data</span>
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Eyeball raw data</span>
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
-                                aria-hidden="true"></span> One-liners</span>
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Shell one-liners</span>
                 </div>
                 {#
                 <div class="label-row">
                     <span class="label label-8"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> BGPdump support</span>
                     <span class="label label-3"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Ad-hoc analysis</span>
                 </div>
                 #}
@@ -49,25 +66,27 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h2>BGPCorsaro<br><small>Continuous monitoring with extensible plugins</small></h2>
+            <h3>BGPCorsaro<br>
+                <small>Continuous monitoring with extensible plugins</small>
+            </h3>
 
             <div class="label-group">
                 {#
                 <div class="label-row">
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Continuous monitoring</span>
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Extensible plugins</span>
                 </div>
                 #}
                 <div class="label-row">
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Extract time series</span>
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Operational monitoring</span>
                 </div>
             </div>
@@ -88,26 +107,29 @@
 
     <br>
     <hr>
-    <h1>APIs</h1>
+    <h2><span class="glyphicon glyphicon-cog"
+              aria-hidden="true"></span> APIs</h2>
 
     <div class="row">
         <div class="col-md-6">
-            <h2>libBGPStream<br><small>Develop C/C++ code</small></h2>
+            <h3>libBGPStream<br>
+                <small>Develop C/C++ code</small>
+            </h3>
 
             <div class="label-group">
                 {#
                 <div class="label-row">
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Develop C/C++ code</span>
                 </div>
                 #}
                 <div class="label-row">
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Build complex infrastructure</span>
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Build efficient tools</span>
                 </div>
             </div>
@@ -128,20 +150,24 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h2>PyBGPStream</h2>
+            <h3>PyBGPStream<br>
+                <small>Develop Python code</small>
+            </h3>
 
             <div class="label-group">
+                {#
                 <div class="label-row">
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Develop Python code</span>
                 </div>
+                #}
                 <div class="label-row">
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Rapid prototyping</span>
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Ad-hoc analysis</span>
                 </div>
             </div>
@@ -162,20 +188,24 @@
     <br>
     <div class="row">
         <div class="col-md-6">
-            <h2>Metadata Broker Service</h2>
+            <h3>Metadata Broker Service<br>
+                <small>Access data-provider metadata</small>
+            </h3>
 
             <div class="label-group">
+                {#
                 <div class="label-row">
                     <span class="label label-2"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Access data-provider metadata</span>
                 </div>
+                #}
                 <div class="label-row">
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Track available data</span>
                     <span class="label label-4"><span
-                                class="glyphicon glyphicon-tags"
+                                class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Add support for new data sources</span>
                 </div>
             </div>

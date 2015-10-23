@@ -28,3 +28,7 @@
 .class .rubric {
     display: none;
 }
+
+body {
+    padding-top: 0 !important;
+}
