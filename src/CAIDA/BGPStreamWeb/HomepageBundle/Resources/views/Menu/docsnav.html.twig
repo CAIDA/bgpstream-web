@@ -107,7 +107,7 @@
     {% import _self as knp_menu %}
     <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>
         {% if block('label') starts with '{' and block('label') ends with '}' %}
-        {{ block('label')|replace({'{':'', '}':''}) }}
+        {{ block('label')|replace({'{':'', '}':''})|raw }}
         {% else %}
         {{ block('label')|title }}
         {% endif %}
@@ -122,7 +122,7 @@
 {% import _self as knp_menu %}
     <a href="{%- if item.uri is not empty %}{{ item.uri }}{%- else %}#{%- endif %}" class="nav-pills-toggle">
         {% if block('label') starts with '{' and block('label') ends with '}' %}
-            {{ block('label')|replace({'{':'', '}':''}) }}
+            {{ block('label')|replace({'{':'', '}':''})|raw }}
         {% else %}
             {{ block('label')|title }}
         {% endif %}</a>

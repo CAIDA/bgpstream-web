@@ -1,0 +1,197 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:docs/base.html.twig' %}
+
+{% block slimbody %}
+    <h1>Tools</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>BGPReader<br><small>Generate ASCII output</small></h2>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> ASCII output</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Eye-ball raw data</span>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> One-liners</span>
+                </div>
+                {#
+                <div class="label-row">
+                    <span class="label label-8"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> BGPdump support</span>
+                    <span class="label label-3"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Ad-hoc analysis</span>
+                </div>
+                #}
+            </div>
+            <p>
+                BGPReader is the simplest interface to BGPStream: a command-line
+                tool for
+                extracting BGP measurement data in ASCII format. It can also be
+                used as a drop-in
+                replacement for the legacy [bgpdump](@@) tool.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    BGPReader &raquo;</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>BGPCorsaro<br><small>Continuous monitoring with extensible plugins</small></h2>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Continuous monitoring</span>
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Extensible plugins</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Extract time series</span>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Operational monitoring</span>
+                </div>
+            </div>
+            <p>
+                BGPCorsaro is a powerful tool to continuously extract derived
+                data from a BGP stream in regular time bins. Its extensible
+                architecture is based on a pipeline of plugins, which
+                continuously process BGPStream records.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    BGPCorsaro &raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <h1>APIs</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>libBGPStream<br><small>Develop C/C++ code</small></h2>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Develop C/C++ code</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Build complex infrastructure</span>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Build efficient tools</span>
+                </div>
+            </div>
+            <p>
+                libBGPStream is the central library of the BGPStream framework.
+                It is written
+                in C and presents a simple API for configuring and reading a
+                stream of BGP
+                measurement data. All BGPStream tools as well as the PyBGPStream
+                API make use
+                of libBGPStream.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    libBGPStream &raquo;</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>PyBGPStream</h2>
+
+            <div class="label-group">
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Develop Python code</span>
+                </div>
+                <div class="label-row">
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Rapid prototyping</span>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Ad-hoc analysis</span>
+                </div>
+            </div>
+            <div>
+                <p>
+                    PyBGPStream is Python package that provides bindings to the
+                    libBGPStream
+                    library, allowing Python scripts to configure and read a
+                    stream of BGP
+                    measurement data.
+                </p>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    PyBGPStream &raquo;</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Metadata Broker Service</h2>
+
+            <div class="label-group">
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Access data-provider metadata</span>
+                </div>
+                <div class="label-row">
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Track available data</span>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-tags"
+                                aria-hidden="true"></span> Add support for new data sources</span>
+                </div>
+            </div>
+            <div>
+                <p>
+                    The BGPStream Broker is a web application that provides a
+                    unified HTTP query
+                    interface to retrieve metadata about data available from
+                    different data
+                    providers.
+                </p>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }}"
+                   class="btn btn-primary btn-sm">Learn about the Broker HTTP
+                    API &raquo;</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

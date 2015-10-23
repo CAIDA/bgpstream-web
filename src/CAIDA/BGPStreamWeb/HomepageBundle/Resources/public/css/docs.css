@@ -46,6 +46,10 @@
     padding-bottom: 15px;
 }
 
+.label-row {
+    padding-bottom: 5px;
+}
+
 .label {
     font-weight: 300;
     padding: .5em .6em .4em
