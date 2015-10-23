@@ -33,12 +33,12 @@
                 </div>
                 #}
                 <div class="label-row">
-                    <span class="label label-4"><span
-                                class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Eyeball raw data</span>
-                    <span class="label label-4"><span
-                                class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Shell one-liners</span>
+                    <a class="label label-4" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}"><span
+                                    class="glyphicon glyphicon-ok"
+                                    aria-hidden="true"></span> Eyeball raw data</a>
+                    <a class="label label-4" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'}) }}"><span
+                                    class="glyphicon glyphicon-ok"
+                                    aria-hidden="true"></span> Shell one-liners</a>
                 </div>
                 {#
                 <div class="label-row">
@@ -65,6 +65,7 @@
                     BGPReader &raquo;</a>
             </div>
         </div>
+        <br class="visible-xs visible-sm">
         <div class="col-md-6">
             <h3>BGPCorsaro<br>
                 <small>Continuous monitoring with extensible plugins</small>
@@ -82,12 +83,14 @@
                 </div>
                 #}
                 <div class="label-row">
-                    <span class="label label-4"><span
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Extract time series</span>
-                    <span class="label label-4"><span
+                                aria-hidden="true"></span> Extract time series</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Operational monitoring</span>
+                                aria-hidden="true"></span> Operational monitoring</a>
                 </div>
             </div>
             <p>
@@ -125,12 +128,14 @@
                 </div>
                 #}
                 <div class="label-row">
-                    <span class="label label-4"><span
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Build complex infrastructure</span>
-                    <span class="label label-4"><span
+                                aria-hidden="true"></span> Build complex infrastructure</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Build efficient tools</span>
+                                aria-hidden="true"></span> Build efficient tools</a>
                 </div>
             </div>
             <p>
@@ -149,6 +154,7 @@
                     libBGPStream &raquo;</a>
             </div>
         </div>
+        <br class="visible-xs visible-sm">
         <div class="col-md-6">
             <h3>PyBGPStream<br>
                 <small>Develop Python code</small>
@@ -163,12 +169,14 @@
                 </div>
                 #}
                 <div class="label-row">
-                    <span class="label label-4"><span
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Rapid prototyping</span>
-                    <span class="label label-4"><span
+                                aria-hidden="true"></span> Rapid prototyping</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Ad-hoc analysis</span>
+                                aria-hidden="true"></span> Ad-hoc analysis</a>
                 </div>
             </div>
             <div>
@@ -201,9 +209,10 @@
                 </div>
                 #}
                 <div class="label-row">
-                    <span class="label label-4"><span
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'}) }}"><span
                                 class="glyphicon glyphicon-ok"
-                                aria-hidden="true"></span> Track available data</span>
+                                aria-hidden="true"></span> Track available data</a>
                     <span class="label label-4"><span
                                 class="glyphicon glyphicon-ok"
                                 aria-hidden="true"></span> Add support for new data sources</span>
@@ -217,7 +226,7 @@
                     different data
                     providers.
                 </p>
-                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }}"
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'broker'}) }}"
                    class="btn btn-primary btn-sm">Learn about the Broker HTTP
                     API &raquo;</a>
             </div>
