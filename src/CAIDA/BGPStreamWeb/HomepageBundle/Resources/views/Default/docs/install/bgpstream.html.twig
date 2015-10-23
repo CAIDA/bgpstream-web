@@ -45,7 +45,7 @@ $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
 $ make
-$ sudo make install</code></pre>
+# make install</code></pre>
 
         <p><strong>Note:</strong> Ensure that the last lines from <code>configure</code>
             show a <em>Yes</em> result for at least <i>zlib</i>, <i>bz2</i>, and <i>libcurl</i>
@@ -121,8 +121,8 @@ $ make
         <p>BGPStream is available from FreeBSD ports at
             <code>net/bgpstream</code>:</p>
 
-<pre><code>cd /usr/ports/net/bgpstream
-sudo make install clean</code></pre>
+<pre><code>$ cd /usr/ports/net/bgpstream
+$ sudo make install clean</code></pre>
 
         <p>(BGPStream is a fairly new port, you may need to run
             <code>portsnap fetch update</code> first.)</p>
@@ -131,7 +131,7 @@ sudo make install clean</code></pre>
             manager (<code>pkg</code>), you can install BGPStream by
             running:</p>
 
-        <pre><code>sudo pkg install bgpstream</code></pre>
+        <pre><code>$ sudo pkg install bgpstream</code></pre>
 
         <p>The port will install all required dependencies (usually just
             <em>libcurl</em> and <em>libwandio</em>).</p>
@@ -146,7 +146,7 @@ $ sudo make install clean</code></pre>
 
         <p><em>or</em></p>
 
-        <pre><code>sudo pkg install curl</code></pre>
+        <pre><code>$ sudo pkg install curl</code></pre>
 
         <h3>2. Download and install
             <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
@@ -211,7 +211,7 @@ $ sudo make install</code></pre>
 
         <h3>1. Install dependencies:</h3>
 
-        <pre><code>sudo apt-get install zlib1g-dev libbz2-dev libcurl4-openssl-dev</code></pre>
+        <pre><code>$ sudo apt-get install zlib1g-dev libbz2-dev libcurl4-openssl-dev</code></pre>
 
         <h3>2. Download and install <a
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
@@ -273,7 +273,7 @@ $ sudo ldconfig</code></pre>
 
         <h3>1. Install dependencies:</h3>
 
-        <pre><code>sudo yum install zlib-devel bzip2-devel libcurl-devel</code></pre>
+        <pre><code>$ sudo yum install zlib-devel bzip2-devel libcurl-devel</code></pre>
 
         <h3>2. Download and install <a
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
@@ -289,20 +289,6 @@ $ make
 $ sudo make install
 $ sudo ldconfig</code></pre>
 
-        <p>
-            You may test that wandio works by running
-            <code>$ wandiocat http://google.com</code>
-        </p>
-        <p>If you get an error like:</p>
-        <pre><code>wandiocat: error while loading shared libraries: libwandio.so.1: cannot open shared object file: No such file or directory</code></pre>
-        <p>
-            Then you may need to run
-        </p>
-        <pre><code>$ sudo echo /usr/local/etc > /etc/ld.so.conf.d/usrlocal.conf</code></pre>
-        <p>
-            and then re-run <code>sudo ldconfig</code>.
-        </p>
-
         <p>See the generic install instructions for details on how to install
             into a non-default location.</p>
 
@@ -316,6 +302,14 @@ $ ./configure
 $ make
 $ make check
 $ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>If you get the following error:</p>
+        <pre><code>checking for wandio HTTP support... configure: error: wandio HTTP support required (install libcurl before building wandio)</code></pre>
+        <p>and <code>config.log</code> contains an error like:</p>
+        <pre><code>wandiocat: error while loading shared libraries: libwandio.so.1: cannot open shared object file: No such directory</code></pre>
+        <p>Then you may need to run</p>
+        <pre><code>$ sudo sh -c 'echo /usr/local/lib > /etc/ld.so.conf.d/usrlocal.conf'
 $ sudo ldconfig</code></pre>
 
         <p>Please open an issue on our
@@ -342,10 +336,10 @@ $ sudo ldconfig</code></pre>
         <h3>1. Install <em>libcurl</em>:</h3>
 
         <p>Using MacPorts:</p>
-        <pre><code>sudo port install curl</code></pre>
+        <pre><code>$ sudo port install curl</code></pre>
 
         <p>or, using Homebrew:</p>
-        <pre><code>brew install curl</code></pre>
+        <pre><code>$ brew install curl</code></pre>
 
         <h3>2. Download and install
             <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
