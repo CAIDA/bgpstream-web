@@ -15,38 +15,41 @@ Below we provide the following tutorials:
 
 * [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py') }}))
 
-
+<br>
 
 ## Get familiar with the API ##   {% verbatim %}{#print}{% endverbatim %}
 
-Below is a simple example that shows how to use pybgpstream to output
-the information extracted from BGP records and BGP elems. The example is fully
-functioning and it can be  run using the following command:
+As a first example, we use pybgpstream to output the information extracted
+from BGP records and BGP elems. We provide a step by step description
+and the link to download the script at the end of the section.
+The example is fully functioning and it can be  run using the following command:
 
 ~~~
 $ python pybgpstream-print.py
- ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 21219 50581 49588'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '91.214.14.0/24', 'as-path': '9002 6663 39668 65535 49256'}
- ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 49588'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 2914 3356 4651 131090 131090 131090'}
- ris rrc11 update 1438417216 valid A 198.32.160.103 13030 {'next-hop': '198.32.160.103', 'prefix': '41.221.20.0/24', 'as-path': '13030 30781 57023 57023 57023 57023 36947'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '41.221.20.0/24', 'as-path': '9002 3356 12956 36947'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 3356 4651 131090 131090 131090'}
- ris rrc11 update 1438417216 valid W 198.32.160.42 2497 {'prefix': '103.224.214.0/24'}
- ris rrc11 update 1438417216 valid W 198.32.160.42 2497 {'prefix': '103.224.215.0/24'}
- ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 50581 49588'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 6453 4651 131090 131090 131090'}
- ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 49588'}
- ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 3356 4651 131090 131090 131090'}
+ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 21219 50581 49588'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '91.214.14.0/24', 'as-path': '9002 6663 39668 65535 49256'}
+ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 49588'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 2914 3356 4651 131090 131090 131090'}
+ris rrc11 update 1438417216 valid A 198.32.160.103 13030 {'next-hop': '198.32.160.103', 'prefix': '41.221.20.0/24', 'as-path': '13030 30781 57023 57023 57023 57023 36947'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '41.221.20.0/24', 'as-path': '9002 3356 12956 36947'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 3356 4651 131090 131090 131090'}
+ris rrc11 update 1438417216 valid W 198.32.160.42 2497 {'prefix': '103.224.214.0/24'}
+ris rrc11 update 1438417216 valid W 198.32.160.42 2497 {'prefix': '103.224.215.0/24'}
+ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 50581 49588'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop': '198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 6453 4651 131090 131090 131090'}
+ris rrc11 update 1438417216 valid A 2001:504:1::a500:9002:1 9002 {'next-hop': '2001:504:1::a500:9002:1', 'prefix': '2001:67c:2c44::/48', 'as-path': '9002 13249 49588'}
+ris rrc11 update 1438417216 valid A 198.32.160.182 9002 {'next-hop':
+'198.32.160.182', 'prefix': '61.7.155.0/24', 'as-path': '9002 3356 4651 131090 131090 131090'}
 ~~~
+
+<br>
 
 ### Step by step description
 
-The first step in each program is to import the Python modules and
+The first step in each pybgpstream script is to import the Python modules and
 create a new BGPStream instance as well as a re-usable BGP record
 instance.
 
-<br>
 
 ~~~ .language-python
 from _pybgpstream import BGPStream, BGPRecord, BGPElem
@@ -61,10 +64,8 @@ The second step consists in customizing the stream using the project,
 collector, type, and time interval filters. The time interval filter
 is mandatory, whereas the others are optional. In this specific case,
 we are configuring the stream to return the BGP records read from
-a RIBs dump generated by RIS RRC 10 collector,
+an Updates dump generated by RIS RRC 11 collector,
 having a timestamp equal to Sat, 01 Aug 2015 08:20:16 GMT.
-
-<br>
 
 ~~~ .language-python
 stream.add_filter('collector','rrc11')
@@ -79,9 +80,6 @@ extract from it the elems that it contains and print the record and
 elem fields. If a non-valid record is found, we do not attempt to
 extract elems. 
 
-<br>
-
-
 ~~~ .language-python
 while(stream.get_next_record(rec)):
     if rec.status != "valid":
@@ -94,6 +92,7 @@ while(stream.get_next_record(rec)):
             elem = rec.get_next_elem()
 ~~~
 
+<br>
 
 ### Complete Example
 
@@ -105,11 +104,11 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-print.p
 {% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-print.py' %}
 ~~~
 
-
+<br>
 
 ## Print the MOAS prefixes ##   {% verbatim %}{#moas}{% endverbatim %}
 
-Below is a simple example that shows how to use pybgpstream to output
+In this second tutorial we show  how to use pybgpstream to output
 the MOAS prefixes and their origin ASes. The example is fully
 functioning and it can be  run using the following command:
 
@@ -124,22 +123,22 @@ $ python pybgpstream-moas.py
    125.208.1.0/24 4808,4847
 ~~~
 
+<br>
 
-The program instantiate an instance of BGPStream that uses the CAIDA
-broker as data interface, it parses the BGP elems extracted from the
+The program parses the BGP elems extracted from the
 BGP records that match the filters (collectors, record type, and
-time), and saves in a hash map the list of unique origin ASns for each
-prefix. 
+time), saves in a hash map the list of unique origin ASns for each
+prefix, and outputs those that have multiple origin ASns. 
 
+<br>
 
 
 ### Step by step description
 
 In this case the stream is configured to return the BGP records read from
-a RIBs dump generated by  Route View Singapore collector,
+a RIBs dump generated by the Route View Singapore collector,
 having a timestamp in the interval 7:50:00 - 08:10:00 Sat, 01 Aug
 2015 GMT.
-<br>
 
 ~~~ .language-python
 stream.add_filter('collector','route-views.sg')
@@ -152,8 +151,6 @@ stream.add_interval_filter(1438415400,1438416600)
 We  use a dictionary to associate a list of origin ASns with each
 prefix observed in the RIB dump.
 
-<br>
-
 ~~~ .language-python
 from collections import defaultdict
 
@@ -164,12 +161,10 @@ prefix_origin = defaultdict(set)
 
 Each time a new BGP elem is extracted, the program extracts the prefix
 and the origin ASn and updates the *prefix_origin* dictionary.
-Prefix and as-path fields are string fields that are present in any
+Prefix and AS-path  are string fields that are present in any
 BGP elem of type RIB. The split function converts the AS path string
 into an array of strings, each one representing an AS hop, the last
 hop is the origin AS.
-
-<br>
 
 ~~~ .language-python
 pfx = elem.fields['prefix']
@@ -179,6 +174,7 @@ if len(ases) > 0:
  prefix_origin[pfx].add(origin)
 ~~~
 
+<br>
 
 ### Complete Example
 
@@ -190,9 +186,11 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py
 {% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-moas.py' %}
 ~~~
 
+<br>
+
 ## Measuring the extent of AS path inflation ##   {% verbatim %}{#aspath}{% endverbatim %}
 
-Below is a compact example that shows how to use pybgpstream to
+In this example, we show how to use pybgpstream to
 measure the extent of AS path inflation, i.e. measure how many AS
 paths are longer than the shortest path between two ASes due to the
 adoption of routing policies. The example is fully functioning and it
@@ -213,8 +211,9 @@ $ python pybgpstream-moas.py
 ...
 ~~~
 
+<br>
 
-The program instantiate reads a RIB dump as originated by the RIS
+The program  reads a RIB dump as originated by the RIS
 RRC00 collector, it computes the number of AS hops between the
 peer ASn and the origin AS, and it compares it to the shortest path
 between the same AS pairs in an simple undirected graph built using
@@ -230,11 +229,8 @@ format:
 ### Step by step description
 
 In this case the stream is configured to return the BGP records read from
-a RIBs dump generated by RIS RRC00 collector,
-having a timestamp in the interval 7:50:00 - 08:10:00 Sat, 01 Aug
-2015 GMT.
-
-<br>
+a RIBs dump generated by RIS RRC00 collector, having a timestamp in
+the interval 7:50:00 - 08:10:00 Sat, 01 Aug 2015 GMT.
 
 ~~~ .language-python
 stream.add_filter('collector','rrc00')
@@ -250,8 +246,6 @@ does not have loops or self-edges).  A dictionary of dictionaries is
 used to maintain the shortest path between the peer ASn and the origin ASn
 as observed in BGP.
 
-<br>
-
 ~~~ .language-python
 import networkx as nx
 from collections import defaultdict
@@ -263,13 +257,13 @@ bgp_lens = defaultdict(lambda: defaultdict(lambda: None))
 
 <br>
 
-Each time a new BGP elem is extracted, the program computes the ordered list of
-ASns in the AS path, and removes possible repeatedly prepended ASns (using the
-groupby function). Each adjacency in the AS path is used to add a new
-link to the NetworkX graph, meanwhile the AS path length updates the
-*bgp_lens*  dictionary.
+Each time a new BGP elem is extracted, the program removes the ASns
+that are repeatedly prepended in the AS path (using the groupby
+function),  counts the number of AS hops between the peer and the
+destination AS (i.e. the origin AS), and saves this information in the
+*bgp_lens*  dictionary. Each adjacency in the reduced AS path is used
+to add a new link to the NetworkX graph. 
 
-<br>
 
 ~~~ .language-python
 hops = [k for k, g in groupby(elem.fields['as-path'].split(" "))]
@@ -280,11 +274,13 @@ if len(hops) > 1 and hops[0] == peer:
             bgp_lens[peer][origin] = min(filter(bool,[bgp_lens[peer][origin],len(hops)]))
 ~~~
 
-Finally, for each peer and origin pair, the script uses NetworkX
+<br>
+
+Finally, for each peer and origin pair, the script uses the NetworkX
 utility functionst to compute the length of the shortest path between
-the two nodes in the undirected graph. The output juxtaposes the
+the two nodes in the simple undirected graph. The output juxtaposes the
 minimum lenght observed in BGP and the shortest path computed in the
-undirected graph.
+simple undirected graph.
 
 ~~~ .language-python
 for peer in bgp_lens:
@@ -292,6 +288,8 @@ for peer in bgp_lens:
        nxlen = len(nx.shortest_path(as_graph, peer, origin))
         print peer, origin, bgp_lens[peer][origin], nxlen
 ~~~
+
+<br>
 
 ### Complete Example
 
