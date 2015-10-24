@@ -18,11 +18,14 @@ $ bgpcorsaro -w <start>[,<end>] -x "plugin-name [<plugin-options>]" -O outfile-t
 
 ~~~
 
+<br>
 
 Below we provide the following tutorials:
 
 * [Using the pfxmonitor plugin](#pfxmonitor)
 * [Creating a new plugin](#newplugin)
+
+<br>
 
 
 ## Using the pfxmonitor plugin ##   {% verbatim %}{#pfxmonitor}{%endverbatim %}
@@ -44,7 +47,7 @@ prefixes that are usually originated by AS137 (GARR, the Italian
 Academic and Research Network) over a period of one month.
 
 
-### Step 1: collecting the list of prefixes to monitor
+### Step 1: collecting the list of prefixes to monitor (GET OUTPUT FROM THOR)
 
 We can generate the list of prefixes announced by AS 137 by
 redirecting the output of bgpreader to a file. We can focus on the

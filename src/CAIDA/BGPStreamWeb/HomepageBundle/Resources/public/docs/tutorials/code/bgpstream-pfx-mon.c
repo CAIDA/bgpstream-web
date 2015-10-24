@@ -40,7 +40,7 @@ int main(int argc, const char **argv)
            elem->type == BGPSTREAM_ELEM_TYPE_WITHDRAWAL) &&
           bgpstream_pfx_storage_equal(&my_pfx, &elem->prefix)) {
         /* Print the BGP information */
-        bgpstream_elem_snprintf(buffer, 1024, elem);
+        bgpstream_record_elem_snprintf(buffer, 1024, record, elem);
         fprintf(stdout, "%s\n", buffer);
       }
     }
