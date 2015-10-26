@@ -10,9 +10,7 @@ the complete documentation is available at @@link to pybgpstream docs.
 Below we provide the following tutorials:
 
 * [Get familiar with the API](#print) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
-
 * [Print the MOAS prefixes](#moas) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
-
 * [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py') }}))
 
 <br>

@@ -20,7 +20,8 @@ BGPReader
 <div class="col-md-6" markdown="1">
 BGPCorsaro
 ----------
- - TODO
+ - [Using the pfxmonitor plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#pfxmonitor)
+ - [Creating a new plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#newplugin)
 
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}"
     class="btn btn-primary btn-md">
@@ -33,7 +34,8 @@ BGPCorsaro
 <div class="col-md-6" markdown="1">
 libBGPStream
 ------------
- - TODO
+ - [Get familiar with the API: count the BGP elems]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'})}}#api1)
+ - [Prefix monitoring]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'})}}#api2)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'})}}"
      class="btn btn-primary btn-md">
@@ -43,7 +45,9 @@ libBGPStream
 <div class="col-md-6" markdown="1">
 PyBGPStream
 -----------
- - TODO
+ - [Get familiar with the API]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#print)
+ - [Print the MOAS prefixes]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#moas)
+ - [Measuring the extent of AS path inflation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#aspath)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}"
       class="btn btn-primary btn-md">
