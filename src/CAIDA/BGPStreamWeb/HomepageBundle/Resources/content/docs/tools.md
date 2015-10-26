@@ -2,10 +2,10 @@ Tools
 =====
 
 The BGPStream framework includes two tools for processing BGP data:
-[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools,
+[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
 'subpage': 'bgpreader'})}})
 and
-[BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools,
+[BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
 'subpage': 'bgpcorsaro})}}).
 These tools are both built using the
 [libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api'})}}) API.
@@ -24,7 +24,7 @@ seamless out-of-the-box access to both the Route Views and RIS data archives,
 users no longer need to manually acquire data, simply provide a time interval to
 BGPReader and BGPStream will do the rest.
 
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools,
+<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
 'subpage': 'bgpreader'})}}"
     class="btn btn-primary btn-md">
     Get started with BGPReader &raquo;
