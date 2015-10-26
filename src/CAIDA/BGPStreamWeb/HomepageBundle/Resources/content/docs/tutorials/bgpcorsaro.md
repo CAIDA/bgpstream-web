@@ -47,7 +47,7 @@ prefixes that are usually originated by AS137 (GARR, the Italian
 Academic and Research Network) over a period of one month.
 
 
-### Step 1: collecting the list of prefixes to monitor (GET OUTPUT FROM THOR)
+### Step 1: collecting the list of prefixes to monitor
 
 We can generate the list of prefixes announced by AS 137 by
 redirecting the output of bgpreader to a file. We can focus on the
@@ -75,6 +75,8 @@ $ bgpreader -w1420070400,1420156799  | awk -F"|" '(($2=="R" || $2=="A") && $11==
 ~~~
 
 Let's save the list of prefixes in a file *garr_pfxs_20150101.txt*.
+
+<br>
 
 ### Step 2: running bgpcorsaro
 
@@ -116,11 +118,35 @@ output file to be *pfxmonitor.txt*
 -i 300 -O ./%X.txt
 ~~~
 
-
+<br>
 
 ### Step 3: taking a look at the results
 
-TODO: run 
+*garr_pfxs_20150101.txt* contains 80 unique prefixes (78 IPv4
+prefixes, 2 IPv6 prefixes).  When running the bgpcorsaro plugin, the
+output metrics (number of prefixes, and number of announcing ASns) are
+mostly stable. Numbers change when:
+
+ * some prefixes stop to be announced,
+ * new more specific prefixes are announced,
+ * other AS announce such space.
+
+~~~
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420070400
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420070400
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420070700
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420070700
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420071000
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420071000
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420071300
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420071300
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420071600
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420071600
+bgp.pfxmonitor.ip-space.prefixes_cnt 80 1420071900
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1420071900
+...
+~~~
+
 
 <br>
 
