@@ -39,7 +39,7 @@ regular time bins. Plugins are easily extensible, so users with a specific
 monitoring requirement can create a plugin tailored for their needs, simplifying
 the task of creating production-quality realtime monitoring applications.
 
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools,
+<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
 'subpage': 'bgpcorsaro'})}}"
     class="btn btn-primary btn-md">
     Get started with BGPCorsaro &raquo;
