@@ -56,16 +56,22 @@ prefixes announced by AS137 on  Jan, 1 2015.
 ~~~
 
 $ bgpreader -w1420070400,1420156799  | awk -F"|" '(($2=="R" || $2=="A") && $11=="137"){print $8}' |  sort -u
-  130.136.0.0/16
-  130.186.0.0/19
-  130.192.0.0/16
+ 30.136.0.0/16
+ 130.186.0.0/19
+ 130.192.0.0/16
+ 130.251.0.0/16
+ 131.114.0.0/16
+ 131.154.0.0/16
+ 131.175.0.0/16
+ 137.204.0.0/16
+ 138.41.0.0/16
   ...
-  193.43.18.0/23
   193.43.97.0/24
-  194.119.192.0/19
-  212.189.128.0/17
-  90.147.0.0/16
-  TODO!
+ 194.119.192.0/19
+ 2001:760::/32
+ 212.189.128.0/17
+ 2a00:1620::/32
+ 90.147.0.0/16
 ~~~
 
 Let's save the list of prefixes in a file *garr_pfxs_20150101.txt*.
@@ -76,7 +82,7 @@ Now that we have a list of prefixes to monitor we can run bgpcorsaro
 using the following command:
 
 ~~~
-$ bgpcorsaro -w1420070400,1422748800  -x"pfxmonitor -L ./garr_pfxs_20150101.txt -n 5 -M" -i 300 -O ./%X.txt
+$ bgpcorsaro -w1420070400,1420077600  -x"pfxmonitor -L ./garr_pfxs_20150101.txt -n 5 -M" -i 300 -O ./%X.txt
 ~~~
 
 <br>
