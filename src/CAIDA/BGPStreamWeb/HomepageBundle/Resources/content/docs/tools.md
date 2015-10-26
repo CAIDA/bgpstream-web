@@ -6,10 +6,11 @@ The BGPStream framework includes two tools for processing BGP data:
 'subpage': 'bgpreader'})}})
 and
 [BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
-'subpage': 'bgpcorsaro})}}).
+'subpage': 'bgpcorsaro'})}}).
 These tools are both built using the
 [libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api'})}}) API.
 
+<br>
 BGPReader
 ---------
 
@@ -30,6 +31,7 @@ BGPReader and BGPStream will do the rest.
     Get started with BGPReader &raquo;
 </a>
 
+<br>
 BGPCorsaro
 ----------
 
@@ -39,8 +41,7 @@ regular time bins. Plugins are easily extensible, so users with a specific
 monitoring requirement can create a plugin tailored for their needs, simplifying
 the task of creating production-quality realtime monitoring applications.
 
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools',
-'subpage': 'bgpcorsaro'})}}"
+<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'})}}"
     class="btn btn-primary btn-md">
     Get started with BGPCorsaro &raquo;
 </a>

@@ -249,7 +249,7 @@ class Builder
         $ac = $a['{libBGPStream}'];
         $ac->addChild('{bgpstream.h}',
                                   array(
-                                      'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                      'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                       'routeParameters' =>
                                           array(
                                               'project' => 'libbgpstream',
@@ -259,7 +259,7 @@ class Builder
         );
         $ac->addChild('{bgpstream_record.h}',
                                        array(
-                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                            'routeParameters' =>
                                                array(
                                                    'project' => 'libbgpstream',
@@ -269,7 +269,7 @@ class Builder
         );
         $ac->addChild('{bgpstream_elem.h}',
                                        array(
-                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                            'routeParameters' =>
                                                array(
                                                    'project' => 'libbgpstream',
@@ -292,7 +292,7 @@ class Builder
         $ap = $a['{PyBGPStream}'];
         $ap->addChild('{_pybgpstream}',
                                        array(
-                                           'route'           => 'caida_bgpstream_web_homepage_docs_api_sphinx',
+                                           'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                            'routeParameters' =>
                                                array(
                                                    'project' => 'pybgpstream',
@@ -322,16 +322,6 @@ class Builder
                                 )
                         )
         );
-        $menu['tutorials']->addChild('{libBGPStream}',
-                                     array(
-                                         'route'           => 'caida_bgpstream_web_homepage_docs',
-                                         'routeParameters' =>
-                                             array(
-                                                 'page'    => 'tutorials',
-                                                 'subpage' => 'libbgpstream'
-                                             )
-                                     )
-        );
         $menu['tutorials']->addChild('{BGPReader}',
                                      array(
                                          'route'           => 'caida_bgpstream_web_homepage_docs',
@@ -351,6 +341,16 @@ class Builder
                                                  'subpage' => 'bgpcorsaro'
                                              )
                                      )
+        );
+        $menu['tutorials']->addChild('{libBGPStream}',
+            array(
+                'route' => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page' => 'tutorials',
+                        'subpage' => 'libbgpstream'
+                    )
+            )
         );
         $menu['tutorials']->addChild('{PyBGPStream}',
                                      array(

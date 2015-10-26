@@ -139,6 +139,18 @@ $ sudo make install clean</code></pre>
 
         <h2>Installing from source</h2>
 
+        <h3>1. Install <em>wandio</em>:</h3>
+
+        <pre><code>$ cd /usr/ports/devel/wandio
+$ sudo make install clean</code></pre>
+
+        {#
+        <p><em>or</em></p>
+
+        <pre><code>$ sudo pkg install wandio</code></pre>
+        #}
+
+        {#
         <h3>1. Install <em>libcurl</em>:</h3>
 
         <pre><code>$ cd /usr/ports/ftp/curl
@@ -172,8 +184,9 @@ $ sudo make install</code></pre>
 
         <p>See the generic install instructions for details on how to install
             into a non-default location.</p>
+            #}
 
-        <h3>3. Download and install BGPStream:</h3>
+        <h3>2. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
 $ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz', absolute=true) }}
