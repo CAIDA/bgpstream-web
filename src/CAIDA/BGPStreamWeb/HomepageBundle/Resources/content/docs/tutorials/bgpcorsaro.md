@@ -30,18 +30,6 @@ Below we provide the following tutorials:
 
 ## Using the pfxmonitor plugin ##   {% verbatim %}{#pfxmonitor}{%endverbatim %}
 
-pfxmonitor is a stateful plugin that monitors prefixes overlapping with a given set of IP address
-ranges. For each BGPStream record, the plugin:
-
- 1. selects only the RIB and Updates dump records related to prefixes
-     that overlap with the given IP address ranges.
- 2. tracks, for each <prefix, VP> pair, the ASN that originated the
-     route to the prefix. At the end of each time bin, the plugin outputs
-     the timestamp of the current bin, the number of unique prefixes
-     identified and, the number of unique origin ASNs observed by all the VPs.
-
-@@move the above to documentation?!
-
 Below we describe how to use the pfxmonitor plugin to monitor the
 prefixes that are usually originated by AS137 (GARR, the Italian
 Academic and Research Network) over a period of one month.

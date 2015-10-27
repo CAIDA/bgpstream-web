@@ -6,14 +6,15 @@ information about the BGP records and the BGP elems that are part of a
 BGP stream. 
 
 
-
 BGPReader requires the user to specify the stream time interval, and
 it accepts the following command line options. 
 
 ~~~
 usage: bgpreader -w <start>[,<end>] [<options>]
+~~~
 
-Available options are:
+*data interface options*
+~~~
    -d <interface> use the given data interface to find available data
                   available data interfaces are:
        broker         Retrieve metadata information from the BGPStream Broker service (default)
@@ -24,7 +25,10 @@ Available options are:
                   set an option for the current data interface.
                   use '-o ?' to get a list of available options for the current
                   data interface. (data interface can be selected using -d)
+~~~
 
+*stream filters options*
+~~~
    -p <project>   process records from only the given project (routeviews, ris)*
    -c <collector> process records from only the given collector*
    -t <type>      process records with only the given type (ribs, updates)*
@@ -32,17 +36,21 @@ Available options are:
                   process records within the given time window
                     (omitting the end parameter enables live mode)*
    -P <period>    process a rib files every <period> seconds (bgp time)
-   -l             enable live mode (make blocking requests for BGP records)
-                  allows bgpstream to be used to process data in real-time
+   -l            enable live mode (make blocking requests for BGP records)
+                  allows bgpstream to be used to process data in
+                  real-time
+~~~
 
+*output format  options* 
+~~~
    -e             print info for each element of a valid BGP record (default)
    -m             print info for each BGP valid record in bgpdump -m format
    -r             print info for each BGP record (used mostly for debugging BGPStream)
    -i             print format information before output
-
-   -h             print this help menu
-   * denotes an option that can be given multiple times
 ~~~
+
+
+The * denotes an option that can be given multiple times.
 
 
 <br>

@@ -1,23 +1,28 @@
 BGPCorsaro
 ==========
 
-@@ things things things things things
+BGPReader is a command line tool that @TODO
 
-Usage
------
+BGPCorsaro requires the user to specify the stream time interval and
+a template to generate output files.
 
 ~~~
-usage: bgpcorsaro -w <start>[,<end>] -O outfile -B back-end [<options>]
-Available options are:
+usage: bgpcorsaro -w <start>[,<end>] -O outfile [<options>]
+~~~
+
+*data interface and stream filters options*
+~~~
    -d <interface> use the given bgpstream data interface to find available data
                    available data interfaces are:
        broker       Retrieve metadata information from the BGPStream Broker service (default)
        singlefile   Read a single mrt data file (a RIB and/or an update)
        csvfile      Retrieve metadata information from a csv file
+       sqlite       Retrieve metadata information from a sqlite database
    -o <option-name,option-value>*
                   set an option for the current data interface.
                   use '-o ?' to get a list of available options for the current
-                  data interface. (data interface can be selected using -d)
+                  data interface. (data interface can be selected
+                  using -d)
    -p <project>   process records from only the given project (routeviews, ris)*
    -c <collector> process records from only the given collector*
    -t <type>      process records with only the given type (ribs, updates)*
@@ -27,35 +32,170 @@ Available options are:
    -P <period>    process a rib files every <period> seconds (bgp time)
    -l             enable live mode (make blocking requests for BGP records)
                   allows bgpcorsaro to be used to process data in real-time
+~~~
 
-   -i <interval>  distribution interval in seconds (default: 0)
+*interval options*
+~~~
+   -i <interval>  distribution interval in seconds (default: 60)
    -a             align the end time of the first interval
-   -g <gap-limit> maximum allowed gap between packets (0 is no limit) (default: 60)
+   -g <gap-limit> maximum allowed gap between packets (0 is no limit) (default: 0)
    -L             disable logging to a file
+~~~
 
-   -x <plugin>    enable the given plugin (default: all)*
+*plugin options*
+~~~
+    -x <plugin>    enable the given plugin (default: all)*
                    available plugins:
                     - pfxmonitor
                     - pacifier
                    use -p "<plugin_name> -?" to see plugin options
-   -n <name>      monitor name (default: gibi.caida.org)
+~~~
+                   
+*logging options*
+~~~
+-n <name>      monitor name (default: localhost)
    -O <outfile>   use <outfile> as a template for file names.
                    - %X => plugin name
                    - %N => monitor name
                    - see man strftime(3) for more options
    -r <intervals> rotate output files after n intervals
    -R <intervals> rotate bgpcorsaro meta files after n intervals
+~~~
+   
+The * denotes an option that can be given multiple times.
 
-   -h             print this help menu
-* denotes an option that can be given multiple times
+<br>
+
+The **default** data interface is the **broker**. The user can modify
+the following data interface parameters (in case she/he is running a
+private instance of the BGP Stream broker) using the **-o** option:
+
+~~~
+Data interface options for 'broker':
+   url               Broker URL (default: "https://bgpstream.caida.org/broker")
+   param          Additional Broker GET parameter*
 ~~~
 
-Plugins
--------
+<br>
 
-more things things things
+The information about the available **collectors** and the associated **time
+intervals** are available at the
+<a href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'})}}">data providers page</a>.
 
-Example
--------
+<br>
 
-even more things things things
+Below we provide more details about:
+
+* [BGPCorsaro output](#output)
+
+* [Available plugins ](#plugins)
+
+<br>
+
+
+## BGPCorsaro output {% verbatim %}{#output}{% endverbatim %}
+
+By default, BGPCorsaro generates two output files:
+
+* log.txt 
+* <outfile-pattern> - logs the BGP start and ending time of each interval.
+
+
+### Example
+
+In this example, BGPCorsaro processes 10 minutes of BGP data observed
+from the Route Views Jinx collector; it bins the time in intervals of 5
+seconds. Each BGP record is processed by the only active plugin, **pfxmonitor**.
+~~~
+$ bgpcorsaro -c route-views.jinx  -w1445306400,1445307000 \
+   -x "pfxmonitor -l 192.0.43.0/24  -n 1" -i 5  -L -O ./%X.txt
+
+[23:15:40:852] bgpcorsaro_set_interval: setting interval length to 5
+[23:15:40:852] bgpcorsaro_plugin_enable_plugin: enabling pfxmonitor
+[23:15:40:853] bgpcorsaro_set_stream: setting stream pointer
+bgp.pfxmonitor.ip-space.prefixes_cnt 1 1445306400
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1445306400
+...
+bgp.pfxmonitor.ip-space.prefixes_cnt 1 1445306985
+bgp.pfxmonitor.ip-space.origin_ASns_cnt 1 1445306985
+~~~
+
+<br>
+
+In this specific case, the outfile name pattern specified is
+<plugin-name>.txt.
+In *pfxmonitor.txt*, we find the list of processed intervals:
+
+~~~
+# BGPCORSARO_INTERVAL_START 0 1445306400
+# BGPCORSARO_INTERVAL_END 0 1445306404
+...
+# BGPCORSARO_INTERVAL_START 116 1445306980
+# BGPCORSARO_INTERVAL_END 116 1445306984
+# BGPCORSARO_INTERVAL_START 117 1445306985
+# BGPCORSARO_INTERVAL_END 117 1445306989
+# BGPCORSARO_INTERVAL_START 118 1445306990
+~~~
+
+
+## Available plugins {% verbatim %}{#plugins}{% endverbatim %}
+
+### pfxmonitor
+
+*pfxmonitor* is a stateful plugin that monitors prefixes overlapping with a given set of IP address
+ranges. For each BGPStream record, the plugin:
+
+ 1. selects only the RIB and Updates dump records related to prefixes
+     that overlap with the given IP address ranges.
+ 2. tracks, for each <prefix, VP> pair, the ASN that originated the
+     route to the prefix. At the end of each time bin, the plugin outputs
+     the timestamp of the current bin, the number of unique prefixes
+     identified and, the number of unique origin ASNs observed by all the VPs.
+
+The pfxmonitor plugin requires the user to specify one or more
+prefixes to monitor. Such prefixes can be provided using the **-l**
+command line option repeatedly, or they can be given in a file using
+**-L** (one prefix per line).
+
+~~~
+plugin usage: pfxmonitor -l <pfx> -L<prefix-file>
+       -l <prefix>        prefix to monitor*
+       -L <prefix-file>   read the prefixes to monitor from file*
+       -M                 consider only more specifics (default: false)
+       -n <peer_cnt>   minimum number of unique peers' ASNs to declare prefix visible (default: 10)
+       -m <prefix>        metric prefix (default: bgp)
+       -i <name>          IP space name (default: ip-space)
+~~~
+
+<br>
+
+By default, pfxmonitor keeps track of all the prefixes that overlap
+with at least one of the prefixes provided in input. If the user is
+interested only in the cases in which the same prefixes are announced
+or more specifics are announced, then she/he should use the **-M**
+option.
+
+
+<br>
+
+The **-n <peer_cnt>** option specifies the minimum number of unique peers' ASNs
+to declare prefix visible. In detail, a pair *<prefix,origin ASn>* is
+taken into account (for the computation of the output metrics) if and
+only if the same pair *<prefix,origin ASn>* is observed by at least
+**<peer_cnt>** unique peer ASns.
+
+<br>
+
+**-m** and  **-i** plugin options modify the metrics generated by the
+plugin, specifically, they change the following fields:
+
+~~
+<metric-prefix>.pfxmonitor.<ip-space-name>.prefixes_cnt 1 1445306400
+<metric-prefix>.pfxmonitor.<ip-space-name>.origin_ASns_cnt 1 1445306400
+~~
+
+### pacifier
+
+Documentation coming soon...
+
+
