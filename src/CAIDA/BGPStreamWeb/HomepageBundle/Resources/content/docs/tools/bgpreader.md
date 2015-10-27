@@ -5,6 +5,7 @@ BGPReader is a command line tool that prints to standard output
 information about the BGP records and the BGP elems that are part of a
 BGP stream. 
 
+<br>
 
 BGPReader requires the user to specify the stream time interval, and
 it accepts the following command line options. 
@@ -12,6 +13,8 @@ it accepts the following command line options.
 ~~~
 usage: bgpreader -w <start>[,<end>] [<options>]
 ~~~
+
+<br>
 
 *data interface options*
 ~~~
@@ -27,6 +30,8 @@ usage: bgpreader -w <start>[,<end>] [<options>]
                   data interface. (data interface can be selected using -d)
 ~~~
 
+<br>
+
 *stream filters options*
 ~~~
    -p <project>   process records from only the given project (routeviews, ris)*
@@ -41,6 +46,8 @@ usage: bgpreader -w <start>[,<end>] [<options>]
                   real-time
 ~~~
 
+<br>
+
 *output format  options* 
 ~~~
    -e             print info for each element of a valid BGP record (default)
@@ -49,6 +56,7 @@ usage: bgpreader -w <start>[,<end>] [<options>]
    -i             print format information before output
 ~~~
 
+<br>
 
 The * denotes an option that can be given multiple times.
 
