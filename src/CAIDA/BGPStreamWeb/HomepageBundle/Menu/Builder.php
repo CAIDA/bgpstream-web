@@ -162,6 +162,37 @@ class Builder
                                 )
                         )
         );
+        $menu['overview']->addChild('data access',
+            array(
+                'route' => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page' => 'overview',
+                        'subpage' => 'data-access'
+                    )
+            )
+        );
+        $menu['overview']->addChild('record extraction',
+            array(
+                'route' => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page' => 'overview',
+                        'subpage' => 'record-extraction'
+                    )
+            )
+        );
+        $menu['overview']->addChild('record processing',
+            array(
+                'route' => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page' => 'overview',
+                        'subpage' => 'record-processing'
+                    )
+            )
+        );
+
 
         $menu->addChild('install',
                         array(
