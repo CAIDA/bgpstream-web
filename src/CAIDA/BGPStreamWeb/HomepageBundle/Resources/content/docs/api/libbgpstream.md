@@ -41,7 +41,7 @@ documenting the public API.
 We also make all the libBGPStream code available on GitHub, and encourage
 community contributions via Pull Requests.
 </p>
-<a href="https://github.com/caida/bgpstream"
+<a href="https://github.com/caida/bgpstream" target="_blank"
     class="btn btn-primary btn-md">
     Browse the GitHub repository &raquo;
 </a>
