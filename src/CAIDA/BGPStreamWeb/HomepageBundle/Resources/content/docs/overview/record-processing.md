@@ -1,19 +1,22 @@
-Record processing  layer
+Record Processing
 =================
 
-The record processing layer consists of all the components that use the 
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage':'libbgpstream'})}}"> libBGPStream’s API</a>.
+The record processing layer consists of all components that use the
+[libBGPStream API]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage':'libbgpstream'})}}).
 
-We distribute BGPStream with the following independent modules:
+We distribute BGPStream with several record processing components.
 
-* [**BGPReader**](#bgpreader), a command-line tool that outputs the requested BGP data
-in ASCII format
+* _BGPReader_, a command-line tool to output BGP data in ASCII format
+* _BGPCorsaro_, a tool that uses a modular plugin architecture to
+extract statistics or aggregate data in regular time bins
+* _PyBGPStream_, Python bindings to the libBGPStream API
 
-* [**pyBGPStream**](#pybgpstream), Python bindings to the libBGPStream API
+<a href="{{ path('caida_bgpstream_web_homepage', {'page': 'components'}) }}"
+    class="btn btn-primary btn-md">
+    Learn more about the record processing components &raquo;
+</a>
 
-* [**BGPCorsaro**](#bgpcorsaro), a tool that uses a modular plugin architecture to
-extract statistics or aggregate data that are output at regular time
-bins
+{# AK REMOVED BELOW AS IT SEEMS BETTER IN THE COMPONENTS PAGE
 
 Below we compare these tools based on their efficiency and ease of use.
 
@@ -85,4 +88,4 @@ streams.
 
 <br>
 
-
+#}

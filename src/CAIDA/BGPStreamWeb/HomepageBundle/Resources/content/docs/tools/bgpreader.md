@@ -5,16 +5,15 @@ BGPReader is a command line tool that prints to standard output
 information about the BGP records and the BGP elems that are part of a
 BGP stream. 
 
-<br>
+Usage
+-----
 
 BGPReader requires the user to specify the stream time interval, and
-it accepts the following command line options. 
+it accepts the following command line options: 
 
 ~~~
 usage: bgpreader -w <start>[,<end>] [<options>]
 ~~~
-
-<br>
 
 *data interface options*
 ~~~
@@ -30,7 +29,17 @@ usage: bgpreader -w <start>[,<end>] [<options>]
                   data interface. (data interface can be selected using -d)
 ~~~
 
-<br>
+The **default** data interface is the **broker** which allows BGPReader to
+provide out-of-the-box access to Route Views and RIPE RIS data.
+Data interface parameters can be set using the `-o` option.
+
+{#
+~~~
+Data interface options for 'broker':
+   url               Broker URL (default: "https://bgpstream.caida.org/broker")
+   param          Additional Broker GET parameter*
+~~~
+#}
 
 *stream filters options*
 ~~~
@@ -46,7 +55,9 @@ usage: bgpreader -w <start>[,<end>] [<options>]
                   real-time
 ~~~
 
-<br>
+Information about available **collectors** and the associated **time
+intervals** are available at the
+[Data Providers]({{ path('caida_bgpstream_web_homepage', {'page': 'data'})}}) page.
 
 *output format  options* 
 ~~~
@@ -56,64 +67,35 @@ usage: bgpreader -w <start>[,<end>] [<options>]
    -i             print format information before output
 ~~~
 
-<br>
-
-The * denotes an option that can be given multiple times.
+(The `*` denotes an option that can be given multiple times.)
 
 
-<br>
+ASCII Output Formats
+--------------------
 
-The **default** data interface is the **broker**. The user can modify
-the following data interface parameters (in case she/he is running a
-private instance of the BGP Stream broker) using the **-o** option:
+Below we provide details about the following formats:
 
-~~~
-Data interface options for 'broker':
-   url               Broker URL (default: "https://bgpstream.caida.org/broker")
-   param          Additional Broker GET parameter*
-~~~
+* [BGP Elem](#elem) `-e` (default format)
+* [BGPdump](#bgpdump) `-m`
+* [BGP Record](#record) `-r`
 
-<br>
-
-The information about the available **collectors** and the associated **time
-intervals** are available at the
-<a href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'})}}">data providers page</a>.
-
-<br>
-
-Below we provide more details about:
-
-* [the BGP elem output format](#elem)
-
-* [the bgpdump output format](#bgpdump)
-
-* [BGP record output format](#record)
-
-* [alternative data interfaces ](#interfaces)
-
-<br>
-
-## BGP elem output format (default) {% verbatim %}{#elem}{% endverbatim %}
-
-The BGP elem output complies with the following format:
+### BGP Elem Format (default) {% verbatim %}{#elem}{% endverbatim %}
 
 ~~~
 <dump-type>|<elem-type>|<record-ts>|<project>|<collector>|<peer-ASn>|<peer-IP>|<prefix>|<next-hop-IP>|<AS-path>|<origin-AS>|<old-state>|<new-state>
 ~~~
 
-The **dump-type** field can take one of these values:
+The **dump-type** field is one of:
 
 * **R** - RIB
 * **U** - Update
 
-The **elem-type** field can take one of these values:
+The **elem-type** field is one of:
 
 * **R** - RIB
 * **A** - announcement
 * **W** - withdrawal
 * **S** - state message
-
-<br>
 
 When the stream contains RIB data, we also provide *RIB control
 messages* to notify the beginning and the end of a RIB. The control
@@ -123,16 +105,16 @@ messages have the following format:
 <dump-type>|<dump-pos>|<record-ts>|<project>|<collector>
 ~~~
 
-Where the **dump-type** field is always set to **B**, and the
+Where the **dump-type** field is always set to **R**, and the
 **dump-pos** is either:
 
 * **B** - begin
 * **E** - end
 
-### Example:
+#### Example:
 
 ~~~
-$ bgpreader -w1445306400,1445306402 -c route-views.sfmix
+$ bgpreader -w 1445306400,1445306402 -c route-views.sfmix
 R|B|1445306400|routeviews|route-views.sfmix
 R|R|1445306400|routeviews|route-views.sfmix|32354|206.197.187.5|1.0.0.0/24|206.197.187.5|32354 15169|15169||
 ...
@@ -146,17 +128,17 @@ U|A|1445306401|routeviews|route-views.sfmix|14061|206.197.187.10|66.19.194.0/24|
 
 <br>
 
-## bgpdump output format (-m option) {% verbatim %}{#bgpdump}{% endverbatim %}
+### BGPdump output format `-m` {% verbatim %}{#bgpdump}{% endverbatim %}
 
-We provide the bgpdump *one-line per entry with unix timestamps*
-output format. Visit <a href="https://bitbucket.org/ripencc/bgpdump/wiki/Home"
-target="_blank">bgpdump</a> for more information. 
+BGPReader supports the bgpdump *one-line per entry with unix timestamps*
+output format. See the
+<a href="https://bitbucket.org/ripencc/bgpdump/wiki/Home" target="_blank">BGPdump website</a>
+for more information.
 
-
-### Example:
+#### Example:
 
 ~~~
-$ bgpreader -w1445306400,1445306402 -p ris -m
+$ bgpreader -w 1445306400,1445306402 -p ris -m
 BGP4MP|1445306400|W|2001:504:1::a502:4482:1|24482|2a03:5080::/32
 BGP4MP|1445306400|A|193.232.245.109|24482|208.74.216.0/21|24482 7029 40377|IGP|193.232.245.109|0|8000|7029:260 7029:1001 7029:1002 24482:2 24482:13020 24482:13021 24482:65302|NAG||
 BGP4MP|1445306400|A|198.32.176.20|6939|212.22.66.0/24|6939 12389 41938 8359 50618 35189 201432|IGP|198.32.176.20|0|0||NAG||
@@ -172,39 +154,38 @@ BGP4MP|1445306402|W|198.32.160.129|251|84.205.67.0/24
 
 <br>
 
-## BGP record output format (-r option) {% verbatim %}{#record}{% endverbatim %}
+### BGP Record output format `-r` {% verbatim %}{#record}{% endverbatim %}
 
-The BGP record output complies with the following format:
+_Note:_ The BGPRecord format is mostly useful for debugging BGPStream since it
+contains low-level information about the validity of records read from dump
+files.
 
 ~~~
 <dump-type>|<dump-pos>|<project>|<collector>|<status>|<dump-time>
 ~~~
 
-The **dump-type** field can take one of these values:
+The **dump-type** field can be:
 
 * **R** - RIB
 * **U** - Update
 
-The **dump-pos** field can take one of these values:
+The **dump-pos** field is one of:
 
 * **B** - begin
-* **M** - begin
+* **M** - middle
 * **E** - end
 
-The **status** field can take one of these values:
+The **status** field is one of:
 
 * **V** - valid record
-* **E** - empty (it signals an empty dump)
+* **E** - empty (it signals an empty dump file)
 * **R** - corrupted record
 * **S** - corrupted source (the entire dump is corrupted)
 
-
-<br>
-
-### Example:
+#### Example:
 
 ~~~
-$ bgpreader -w1445306400,1445306402 -c route-views.sfmix
+$ bgpreader -w 1445306400,1445306402 -c route-views.sfmix
 R|B|1445306400|routeviews|route-views.sg|V|1445306400
 R|M|1445306400|routeviews|route-views.sg|V|1445306400
 R|M|1445306400|routeviews|route-views.sg|V|1445306400
@@ -223,35 +204,29 @@ U|M|1445306402|ris|rrc11|V|1445306400
 
 <br>
 
-## Alternative data interfaces options  {% verbatim %}{#interfaces}{% endverbatim %}
+## Alternative data interfaces  {% verbatim %}{#interfaces}{% endverbatim %}
 
-### singlefile
+### Single-File `-d singlefile`
 
-Documentation coming soon...
-
+Options:
 ~~~
 Data interface options for 'singlefile':
    rib-file       rib mrt file to read (default: "not-set")
    upd-file       updates mrt file to read (default: "not-set")
 ~~~
 
-<br>
 
-### csvfile
-Documentation coming soon...
+### CSV File `-d csvfile`
 
+Options:
 ~~~
 Data interface options for 'csvfile':
    csv-file       csv file listing the mrt data to read  (default: "not-set")
 ~~~
 
-<br>
+### SQLite DB `-d sqlite`
 
-### sqlite
-
-Documentation coming soon...
-
-
+Options:
 ~~~
 Data interface options for 'sqlite':
    db-file        sqlite database (default: "not-set")
