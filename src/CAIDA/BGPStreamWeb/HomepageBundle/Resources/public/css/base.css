@@ -134,6 +134,13 @@ pre {
     width: 80%;
 }
 
+/* fix for jumbotron on small (vertically) screens */
+.jumbotron {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+}
+
 @media (min-width: 768px) {
     .jumbotron > h1 > img {
         max-width: none;
