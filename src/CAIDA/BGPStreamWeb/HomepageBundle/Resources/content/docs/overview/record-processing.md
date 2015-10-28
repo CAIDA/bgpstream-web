@@ -1,4 +1,5 @@
-## Record processing  {% verbatim %}{#layer3}{% endverbatim %}
+Record processing  layer
+=================
 
 The record processing layer consists of all the components that use the 
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage':'libbgpstream'})}}"> libBGPStream’s API</a>.

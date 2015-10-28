@@ -1,22 +1,5 @@
 BGPStream Framework Overview
 ============================
-
-<h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
-
-Both BGP Stream and this documentation are still under active development and
-features will likely change between versions.
-Please contact [bgpstream-info@caida.org](mailto:bgpstream-info@caida.org) with any questions and/or suggestions.
-
-The BGP Stream framework is organized in three layers.
-From bottom up, these are:
-
-* [data and meta-data access](#layer1)
-
-* [records extraction and packaging](#layer2)
-
-* [record processing](#layer3) 
-
-
 <br>
 
 <div class="thumbnail">
@@ -24,6 +7,20 @@ From bottom up, these are:
 </div>
 
 <br>
+
+The BGP Stream framework is organized in three layers.
+From bottom up, these are:
+
+* <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'overview', 'subpage':'data-access'})}}">  data and meta-data access </a>
+
+* <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'overview', 'subpage':'record-extraction'})}}">  records extraction and packaging </a>
+
+* <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'overview', 'subpage':'record-processing'})}}">  record processing </a>
+
+
+<br>
+
+## Additional information
 
 1. All the tools and libraries are available for **download** at
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'download'}) }}">  this page</a>.
@@ -42,3 +39,10 @@ the **tools** usage instructions are described at
 
 
 <br>
+
+## Note
+
+Both BGP Stream and this documentation are still under active development and
+features will likely change between versions.
+
+Please contact [bgpstream-info@caida.org](mailto:bgpstream-info@caida.org) with any questions and/or suggestions.
