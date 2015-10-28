@@ -1,11 +1,8 @@
 PyBGPStream Tutorial
 ====================
 
-<h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
-
-pyBGPStream provides a Python interface to the libBGPStream C library.
-More details are available at @@link to pybgpstream overview, whereas
-the complete documentation is available at @@link to pybgpstream docs.
+[PyBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'}) }})
+provides a Python interface to the libBGPStream C library.
 
 Below we provide the following tutorials:
 

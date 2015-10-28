@@ -1,13 +1,10 @@
 BGPCorsaro Tutorial
 ===================
 
-<h1 class="text-danger">TODO: UPDATE THIS DOCUMENT</h1>
-
-BGPCorsaro is a command-line tool  to continuously extract derived
+[BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }})
+is a command-line tool to continuously extract derived
 data from a BGP stream in regular time bins.Its architecture is based
 on a pipeline of plugins, which continuously process BGPStream records.
-More details are available at @@link to bgpcorsaro overview, whereas
-the complete documentation is available at @@link to bgpcorsaro docs.
 
 
 The most used command-line options are:
@@ -100,7 +97,7 @@ the list or if they are more specific.
 
 <br>
 
-We set the interval @@link to documentation to be *5 minutes*, and the
+We set the interval to be *5 minutes*, and the
 output file to be *pfxmonitor.txt*
 ~~~
 -i 300 -O ./%X.txt

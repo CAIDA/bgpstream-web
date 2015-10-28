@@ -1,11 +1,9 @@
 libBGPStream Tutorial
 =====================
 
-<h1 class="text-danger">TODO: REVIEW THIS DOCUMENT</h1>
-
-libBGPStream is a C library that facilitate the creation of a sorted
-stream of BGP records. More details are available at @@link to libbgpstream overview, whereas
-the complete documentation is available at @@link to libbgpstream docs.
+[libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }})
+is a C library that facilitate the creation of a sorted
+stream of BGP records.
 
 Below we provide the following tutorials:
 
@@ -148,7 +146,7 @@ $ ./pfx-monitoring
 
 The program stores in a ___pfx_storage___ structure the prefix to
 monitor. The user can provide the prefix as a string and then convert
-it into the BGPStream prefix data structure using the BGPStream utils @@link to overview.
+it into the BGPStream prefix data structure using the BGPStream utils.
 
 ~~~ .language-c
 bgpstream_pfx_storage_t my_pfx;
