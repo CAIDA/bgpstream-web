@@ -48,6 +48,8 @@ data access interfaces if you want to use local/private dump files with BGPStrea
 <br>
 
 ## Further Reading
+Learn more about how to use BGPStream by reading the [tutorials]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials'}) }}).
+
 See the
 [BGPStream technical report]({{ path('caida_bgpstream_web_homepage', {'page': 'pubs'}) }}#bgpstream-tech-rep)
 for an in-depth discussion of the architecture of BGPStream.
