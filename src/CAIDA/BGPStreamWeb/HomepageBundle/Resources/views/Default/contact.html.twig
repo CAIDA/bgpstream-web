@@ -1,0 +1,56 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h1>
+                    Contact
+                </h1>
+            </div>
+            <p class="lead">BGPStream is a project of the <a target="_blank"
+                                                             href="https://www.caida.org">CAIDA</a>
+                group at <a target="_blank" href="http://www.ucsd.edu">UC San
+                    Diego</a>.</p>
+
+            <h2>Problems?</h2>
+            <p>Please open an <a
+                        href="https://github.com/caida/bgpstream/issues">issue</a> on our <a
+                        href="https://github.com/caida/bgpstream">GitHub
+                    page</a> with any technical problems you encounter (or
+                better yet, submit a <a
+                        href="https://github.com/caida/bgpstream/pulls">Pull Request</a>).</p>
+
+            <h2>Contribute</h2>
+
+            <p>BGPStream is an open-source framework and we encourage community
+                contributions via <a
+                        href="https://github.com/caida/bgpstream/pulls">Pull
+                    Requests</a> on our
+                <a
+                        href="https://github.com/caida/bgpstream">GitHub
+                    page</a>.</p>
+
+            <h2>Questions/Suggestions</h2>
+
+            <p>If you have any questions or suggestions, please send us an
+                email:
+                <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+            </p>
+        </div>
+        <div class="col-md-4 hidden-sm hidden-xs" style="padding-top: 50px;">
+            <div class="row text-center" style="padding-top: 50px;">
+                <a href="https://www.caida.org" target="_blank">
+                    <img class="text-center" style="width: 120px;"
+                         src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/caida.png') }}">
+                </a>
+            </div>
+            <div class="row text-center" style="padding-top: 15px;">
+                <a href="https://www.ucsd.edu" target="_blank">
+                    <img class="text-center" style="width: 150px;"
+                         src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ucsd.svg') }}">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

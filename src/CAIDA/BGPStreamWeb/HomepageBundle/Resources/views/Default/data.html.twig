@@ -1,0 +1,118 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/data.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block jsblock %}
+    {{ parent() }}
+    {% javascripts
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/js/data.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>Data Providers</h1>
+    </div>
+    <p class="lead">BGPStream provides support for <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'overview', 'subpage': 'data-access'}) }}">local data</a>
+        as well as out-of-the-box <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'overview', 'subpage': 'data-access'}) }}#broker">seamless access</a> to the
+        following data providers.</p>
+    <hr>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#routeviews"
+                                                  aria-controls="routeviews"
+                                                  role="tab" data-toggle="tab"><img
+                        class="dp-tab-logo"
+                        src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}"> Route Views</a></li>
+        <li role="presentation"><a href="#ris" aria-controls="ris"
+                                   role="tab" data-toggle="tab"><img
+                        class="dp-tab-logo"
+                        src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripencc-white.svg') }}"></a></li>
+        <li role="presentation"><a href="#bgpmon" aria-controls="bgpmon"
+                                   role="tab" data-toggle="tab" class="text-muted">
+                <img class="dp-tab-logo"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/bgpmon-dark.svg') }}"></a>
+        </li>
+    </ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="routeviews">
+    <h2>
+        <img class="dp-logo pull-right"
+             src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}">
+        <a target="_blank" href="http://www.routeviews.org/" title="Route Views">Route Views</a> <small><code>routeviews</code></small>
+    </h2>
+    <div class="progress progress-striped active">
+        <div class="progress-bar" style="width: 100%">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="col-md-2">Collector</th>
+            <th class="col-md-2">Dump Type</th>
+            <th class="col-md-2">Dump Frequency</th>
+            <th class="col-md-3">First Dump</th>
+            <th class="col-md-3">Latest Dump</th>
+        </tr>
+        </thead>
+        <tbody id="rv-tbody">
+        </tbody>
+    </table>
+    {#
+        <a target='_blank' class="btn btn-primary btn-xs"
+           href="#"
+           title="Download collector list as JSON">
+            <span class="glyphicon glyphicon-save"/> json
+        </a>
+    #}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="ris">
+    <h2>
+        <img class="dp-logo pull-right"
+             src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripencc-white.svg') }}">
+        <a target="_blank" href="https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris" title="RIPE RIS">RIPE Routing Information Service</a> <small><code>ris</code></small>
+    </h2>
+    <div class="progress progress-striped active">
+        <div class="progress-bar" style="width: 100%">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="col-md-2">Collector</th>
+            <th class="col-md-2">Dump Type</th>
+            <th class="col-md-2">Dump Frequency</th>
+            <th class="col-md-3">First Dump</th>
+            <th class="col-md-3">Latest Dump</th>
+        </tr>
+        </thead>
+        <tbody id="ris-tbody">
+        </tbody>
+    </table>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="bgpmon">
+        <h2>
+            <img class="dp-logo pull-right"
+                 src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/bgpmon-dark.svg') }}">
+            <a target="_blank"
+               href="http://www.bgpmon.io/"
+               title="BGPmon">BGPmon</a>
+            <small>Coming Soon...</small>
+        </h2>
+    </div>
+    </div>
+
+{% endblock %}

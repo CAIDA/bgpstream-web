@@ -1,0 +1,236 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/components.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>BGPStream Components
+        </h1>
+    </div>
+
+    <h2><span class="glyphicon glyphicon-wrench"
+              aria-hidden="true"></span> Tools</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>BGPReader<br>
+                <small>Generate ASCII output</small>
+            </h3>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> ASCII output</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <a class="label label-4" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}"><span
+                                    class="glyphicon glyphicon-ok"
+                                    aria-hidden="true"></span> Eyeball raw data</a>
+                    <a class="label label-4" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'}) }}"><span
+                                    class="glyphicon glyphicon-ok"
+                                    aria-hidden="true"></span> Shell one-liners</a>
+                </div>
+                {#
+                <div class="label-row">
+                    <span class="label label-8"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> BGPdump support</span>
+                    <span class="label label-3"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Ad-hoc analysis</span>
+                </div>
+                #}
+            </div>
+            <p>
+                BGPReader is the simplest interface to BGPStream: a command-line
+                tool for
+                extracting BGP measurement data in ASCII format. It can also be
+                used as a drop-in
+                replacement for the legacy [bgpdump](https://bitbucket.org/ripencc/bgpdump/wiki/Home) tool.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    BGPReader &raquo;</a>
+            </div>
+        </div>
+        <br class="visible-xs visible-sm">
+        <div class="col-md-6">
+            <h3>BGPCorsaro<br>
+                <small>Continuous monitoring with extensible plugins</small>
+            </h3>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Continuous monitoring</span>
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Extensible plugins</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Extract time series</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Operational monitoring</a>
+                </div>
+            </div>
+            <p>
+                BGPCorsaro is a powerful tool to continuously extract derived
+                data from a BGP stream in regular time bins. Its extensible
+                architecture is based on a pipeline of plugins, which
+                continuously process BGPStream records.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    BGPCorsaro &raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <h2><span class="glyphicon glyphicon-cog"
+              aria-hidden="true"></span> APIs</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>libBGPStream<br>
+                <small>Develop C/C++ code</small>
+            </h3>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Develop C/C++ code</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Build efficient tools</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Build complex infrastructure</a>
+                </div>
+            </div>
+            <p>
+                libBGPStream is the central library of the BGPStream framework.
+                It is written
+                in C and presents a simple API for configuring and reading a
+                stream of BGP
+                measurement data. All BGPStream tools as well as the PyBGPStream
+                API make use
+                of libBGPStream.
+            </p>
+
+            <div>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    libBGPStream &raquo;</a>
+            </div>
+        </div>
+        <br class="visible-xs visible-sm">
+        <div class="col-md-6">
+            <h3>PyBGPStream<br>
+                <small>Develop Python code</small>
+            </h3>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Develop Python code</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Rapid prototyping</a>
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Ad-hoc analysis</a>
+                </div>
+            </div>
+            <div>
+                <p>
+                    PyBGPStream is Python package that provides bindings to the
+                    libBGPStream
+                    library, allowing Python scripts to configure and read a
+                    stream of BGP
+                    measurement data.
+                </p>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'}) }}"
+                   class="btn btn-primary btn-sm">Learn about
+                    PyBGPStream &raquo;</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Metadata Broker Service<br>
+                <small>Access data-provider metadata</small>
+            </h3>
+
+            <div class="label-group">
+                {#
+                <div class="label-row">
+                    <span class="label label-2"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Access data-provider metadata</span>
+                </div>
+                #}
+                <div class="label-row">
+                    <a class="label label-4"
+                       href="{{ path('caida_bgpstream_web_homepage', {'page': 'data'}) }}"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Track available data</a>
+                    <span class="label label-4"><span
+                                class="glyphicon glyphicon-ok"
+                                aria-hidden="true"></span> Add support for new data sources</span>
+                </div>
+            </div>
+            <div>
+                <p>
+                    The BGPStream Broker is a web application that provides a
+                    unified HTTP query
+                    interface to retrieve metadata about data available from
+                    different data
+                    providers.
+                </p>
+                <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'broker'}) }}"
+                   class="btn btn-primary btn-sm">Learn about the Broker HTTP
+                    API &raquo;</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

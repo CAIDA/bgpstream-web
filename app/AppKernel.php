@@ -18,7 +18,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
             new Lsw\MemcacheBundle\LswMemcacheBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new CAIDA\BGPStreamWeb\DataBrokerBundle\CAIDABGPStreamWebDataBrokerBundle(),
+            new CAIDA\BGPStreamWeb\HomepageBundle\CAIDABGPStreamWebHomepageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
