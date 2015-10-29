@@ -1,0 +1,143 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>Get BGPStream</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div id="bgpstream">
+                <h2>BGPStream Core</h2>
+
+                <p>The BGPStream Core package provides the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}">BGPReader</a>
+                    and
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }}">BGPCorsaro</a>
+                    tools as well as the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }}">libBGPStream API</a>.
+                    Even if you plan to use the Python bindings
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'}) }}">PyBGPStream</a>,
+                    you will first need to install BGPStream Core.
+                    See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs') }}">
+                        documentation
+                    </a>
+                    for more information on using BGPStream.</p>
+
+                <h3>Build From Source</h3>
+                <p>Building BGPStream from source is easy. See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'}) }}">
+                        Install Guide
+                    </a>
+                    for more information.
+                </p>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Source Tarball</td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.0.0.tar.gz') }}">bgpstream-1.0.0.tar.gz</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clone on GitHub</td>
+                        <td><a href="http://github.com/caida/bgpstream" target="_blank">BGPStream</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div style="opacity: 0.5">
+                <h3>Platform-specific Distributions <small>Coming Soon...</small></h3>
+                <p>We maintain distributions of BGPStream for some popular platforms.</p>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>FreeBSD</td>
+                        <td>FreeBSD ports: <code>net/bgpstream</code></td>
+                    </tr>
+                    <tr>
+                        <td>Mac OSX</td>
+                        <td>MacPorts: <code>sudo port install bgpstream</code></td>
+                    </tr>
+                    <tr>
+                        <td>Ubuntu/Debian</td>
+                        <td><code>sudo apt-get install bgpstream-dev bgpstream-tools</code></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <hr>
+            </div>
+            <div id="pybgpstream">
+                <h2>Python Bindings</h2>
+                <p>PyBGPStream is our Python bindings to the low-level C
+                    libBGPStream API. Ensure <a href="#bgpstream">BGPStream Core</a>
+                    is installed prior to installing PyBGPStream. See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'}) }}">
+                        documentation
+                    </a>
+                    and
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'}) }}">
+                        tutorials
+                    </a> for more information about using PyBGPStream.</p>
+                <p>
+                    See the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'pybgpstream'}) }}">
+                        PyBGPStream install guide
+                    </a>
+                    for more information.
+                </p>
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>From PyPI <i>(preferred)</i></td>
+                        <td><code>pip install pybgpstream</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Source Tarball</td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-1.0.0.tar.gz') }}">pybgpstream-1.0.0.tar.gz</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clone on GitHub</td>
+                        <td><a href="http://github.com/caida/bgpstream" target="_blank">BGPStream</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+            <div id="broker">
+                <h2>Broker Web Application</h2>
+
+                <p>The BGPStream Broker is a web application that provides a
+                    unified query interface to retrieve meta-data about data
+                    available from different data providers. CAIDA operates a
+                    publicly accessible instance of the Broker that libBGPStream
+                    is configured to query by default (see the
+                    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'broker'}) }}">
+                        Broker API
+                    </a>
+                    documentation for more details).</p>
+
+                <p>Advanced users that wish to run a private instance of the
+                    Broker may obtain a copy of the source code by contacting
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.</p>
+                <hr>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
+            <p class="text-muted">On this page:</p>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="#bgpstream">BGPStream Core</a></li>
+                <li role="presentation"><a href="#pybgpstream">Python Bindings</a></li>
+                <li role="presentation"><a href="#broker">Broker Web-App</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

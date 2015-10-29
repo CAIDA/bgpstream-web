@@ -1,0 +1,167 @@
+html, body {
+    height: 100%;
+}
+
+#content-push {
+    height: 70px;
+}
+
+#content-push-full {
+    height: 50px;
+}
+
+#footer-push {
+    height: 60px;
+}
+
+.footer-bar {
+    min-height: 40px !important;
+    height: 40px !important;
+}
+
+.footer-bar p {
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.logo {
+    /*padding-right: 4px;*/
+    height: 30px;
+}
+
+.navbar-container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand {
+    margin-top: -3px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    padding: 14px 24px;
+    font-size: 21px;
+}
+
+.footer-bar .wrapper {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.footer-bar img {
+    margin-top: -7px;
+    margin-right: 6px;
+    height: 60px;
+}
+
+.footer-bar a,
+.footer-bar a:hover,
+.footer-bar a:active,
+.footer-bar a:visited {
+    color: #b4bcc2;
+    text-decoration: none;
+}
+
+pre {
+    visibility: hidden; /* to allow prism to work without flickering */
+}
+
+.label-group {
+    padding-bottom: 15px;
+}
+
+.label-row {
+    padding-bottom: 5px;
+}
+
+.label {
+    font-weight: 300;
+    padding: .5em .6em .4em
+}
+
+.label > .glyphicon {
+    padding-right: 5px;
+}
+
+.label.label-1 {
+    background-color: #cab2d6;
+}
+
+.label.label-2 {
+    background-color: #fdbf6f;
+}
+
+.label.label-3 {
+    background-color: #fb9a99;
+}
+
+.label.label-4 {
+    background-color: #33a02c;
+}
+
+.label.label-5 {
+    background-color: #ff7f00;
+}
+
+.label.label-6 {
+    background-color: #e31a1c;
+}
+
+.label.label-7 {
+    background-color: #b2df8a;
+}
+
+.label.label-8 {
+    background-color: #a6cee3;
+}
+
+.label.label-9 {
+    background-color: #6a3d9a;
+}
+
+.label.label-10 {
+    background-color: #1f78b4;
+}
+
+/* homepage styles */
+.jumbotron > h1 > img {
+    max-width: 500px;
+    width: 80%;
+}
+
+/* fix for jumbotron on small (vertically) screens */
+.jumbotron {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .jumbotron > h1 > img {
+        max-width: none;
+        width: unset;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-collapse.collapse.in {
+        display: block !important;
+    }
+
+    .navbar-header .collapse, .navbar-toggle {
+        display: block !important;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+}

@@ -1,15 +1,15 @@
-caidabgp_stream_web_data_broker_meta_project:
+caida_bgpstream_web_data_broker_meta_project:
     path:     /meta/projects/{project}
     defaults:
         _controller: CAIDABGPStreamWebDataBrokerBundle:Default:metaProjects
         project: all
 
-caidabgp_stream_web_data_broker_meta_collector:
+caida_bgpstream_web_data_broker_meta_collector:
     path:     /meta/collectors/{collector}
     defaults:
         _controller: CAIDABGPStreamWebDataBrokerBundle:Default:metaCollectors
         collector: all
 
-caidabgp_stream_web_data_broker_data:
+caida_bgpstream_web_data_broker_data:
     path:     /data
     defaults: { _controller: CAIDABGPStreamWebDataBrokerBundle:Default:data }
