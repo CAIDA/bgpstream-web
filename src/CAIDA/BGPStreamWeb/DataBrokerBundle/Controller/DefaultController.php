@@ -13,6 +13,7 @@ use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Project;
 use CAIDA\BGPStreamWeb\DataBrokerBundle\Entity\Collector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -287,5 +288,11 @@ class DefaultController extends Controller
 
         $response->setData(['dumpFiles' => $dumpfiles]);
         return $response;
+    }
+
+    public
+    function testAction()
+    {
+        return new Response('success');
     }
 }
