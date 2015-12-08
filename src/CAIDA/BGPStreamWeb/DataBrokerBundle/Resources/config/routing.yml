@@ -13,3 +13,7 @@ caida_bgpstream_web_data_broker_meta_collector:
 caida_bgpstream_web_data_broker_data:
     path:     /data
     defaults: { _controller: CAIDABGPStreamWebDataBrokerBundle:Default:data }
+
+caida_bgpstream_web_data_broker_test:
+    path:     /test
+    defaults: { _controller: CAIDABGPStreamWebDataBrokerBundle:Default:test }
