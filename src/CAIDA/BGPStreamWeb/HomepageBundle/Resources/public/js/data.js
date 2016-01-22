@@ -40,7 +40,6 @@ require(['jquery', 'moment'], function ($, moment) {
                         var diffNow = untilMoment.diff(moment());
                         var diffNowMoment = moment.duration(diffNow);
                         var diffClass = diffNow*-1 < dumpPeriod*1000*2 ? 'text-success' : diffNow*-1 < dumpPeriod*1000*3 ? 'text-warning' : 'text-danger';
-                        console.log('diffNow: ' + diffNow + ' period: ' + dumpPeriod);
 
                         $('<td>' + fromTime + ' <small>(' + fromMoment.fromNow() + '</small>)</td>').appendTo(row);
                         $('<td>' + untilTime + ' <small class="'+diffClass+'">(' + diffNowMoment.humanize() + ' ago)</small></td>').appendTo(row);
