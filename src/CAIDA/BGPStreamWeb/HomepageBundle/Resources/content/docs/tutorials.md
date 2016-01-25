@@ -9,7 +9,7 @@ To help users get started with BGPStream, we provide several tutorials for each
 BGPReader
 ---------
  - [Replace BGPdump with BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#dump2reader)
- - [Isolate data using filters]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#sample1sec)
+ - [Isolate data using filters]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#elemfilters)
  - [Read a local file]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#other)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}"
@@ -48,6 +48,7 @@ PyBGPStream
  - [Get familiar with the API]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#print)
  - [Print the MOAS prefixes]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#moas)
  - [Measuring the extent of AS path inflation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#aspath)
+ - [Studying the communities]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#communities)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}"
       class="btn btn-primary btn-md">
