@@ -1,482 +1,1222 @@
 <div class="section" id="bgpstream-h">
-<h1>bgpstream.h<a class="headerlink" href="#bgpstream-h" title="Permalink to this headline">¶</a></h1>
-<p>Header file that exposes the public interface of bgpstream. </p>
-<p>See bgpstream_record.h and bgpstream_elem.h for the public interfaces of bgpstream_record and bgpstream_elem respectively.</p>
-<p><dl class="docutils">
-<dt><strong>Author</strong></dt>
-<dd>Chiara Orsini </dd>
-</dl>
-</p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Macros</p>
-<dl class="macro">
-<dt id="c.BGPSTREAM_FOREVER">
-<span class="target" id="bgpstreambgpstream_8h_1a0be8ea63a5a9b8fa1eadfda4aa96cd96"></span><code class="descname">BGPSTREAM_FOREVER</code><a class="headerlink" href="#c.BGPSTREAM_FOREVER" title="Permalink to this definition">¶</a></dt>
-<dd><p>Used to specify an interval that never ends (i.e., when processing in live mode). </p>
-</dd></dl>
+    <h1>bgpstream.h<a class="headerlink" href="#bgpstream-h"
+                      title="Permalink to this headline">¶</a></h1>
 
-</div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Opaque Data Structures</p>
-<dl class="type">
-<dt id="_CPPv211bgpstream_t">
-<span id="bgpstream_t"></span><span class="target" id="bgpstreambgpstream_8h_1a424b99385d50cf572ec0f30993194ad7"></span><em class="property">typedef </em><em class="property">struct</em> struct_bgpstream_t <code class="descname">bgpstream_t</code><a class="headerlink" href="#_CPPv211bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opaque handle that represents a BGP Stream instance. </p>
-</dd></dl>
+    <p>Header file that exposes the public interface of
+        bgpstream. </p>
 
-</div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Enums</p>
-<dl class="type">
-<dt id="_CPPv223bgpstream_filter_type_t">
-<span id="bgpstream_filter_type_t"></span><span class="target" id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0e"></span><em class="property">enum </em><code class="descname">bgpstream_filter_type_t</code><a class="headerlink" href="#_CPPv223bgpstream_filter_type_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>The type of the filter to be applied. </p>
-<p><em>Values:</em></p>
-<dl class="member">
-<dt id="_CPPv229BGPSTREAM_FILTER_TYPE_PROJECT">
-<span id="BGPSTREAM_FILTER_TYPE_PROJECT"></span><span class="target" id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0eae7684330f31f3aacf68cb9768a858e06"></span><code class="descname">BGPSTREAM_FILTER_TYPE_PROJECT</code> = 1<a class="headerlink" href="#_CPPv229BGPSTREAM_FILTER_TYPE_PROJECT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filter records based on associated project (e.g. </p>
-<p>&#8216;ris&#8217;) </p>
-</dd></dl>
+    <p>See bgpstream_record.h and bgpstream_elem.h for the public
+        interfaces of bgpstream_record and bgpstream_elem
+        respectively.</p>
 
-<dl class="member">
-<dt id="_CPPv231BGPSTREAM_FILTER_TYPE_COLLECTOR">
-<span id="BGPSTREAM_FILTER_TYPE_COLLECTOR"></span><span class="target" id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea75a407504c7d5ca7a73028592ce440f3"></span><code class="descname">BGPSTREAM_FILTER_TYPE_COLLECTOR</code> = 2<a class="headerlink" href="#_CPPv231BGPSTREAM_FILTER_TYPE_COLLECTOR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filter records based on collector (e.g. </p>
-<p>&#8216;rrc01&#8217;) </p>
-</dd></dl>
+    <p>
+    <dl class="docutils">
+        <dt><strong>Author</strong></dt>
+        <dd>Chiara Orsini</dd>
+    </dl>
+    </p>
+    <div class="breathe-sectiondef container">
+        <p class="breathe-sectiondef-title rubric">Public Macros</p>
+        <dl class="macro">
+            <dt id="c.BGPSTREAM_FOREVER">
+                                <span class="target"
+                                      id="bgpstreambgpstream_8h_1a0be8ea63a5a9b8fa1eadfda4aa96cd96"></span><code
+                    class="descname">BGPSTREAM_FOREVER</code><a
+                    class="headerlink" href="#c.BGPSTREAM_FOREVER"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Used to specify an interval that never ends
+                (i.e., when processing in live mode). </p>
+            </dd>
+        </dl>
 
-<dl class="member">
-<dt id="_CPPv233BGPSTREAM_FILTER_TYPE_RECORD_TYPE">
-<span id="BGPSTREAM_FILTER_TYPE_RECORD_TYPE"></span><span class="target" id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea6c450394edc3bb3cacc126647905b8b2"></span><code class="descname">BGPSTREAM_FILTER_TYPE_RECORD_TYPE</code> = 3<a class="headerlink" href="#_CPPv233BGPSTREAM_FILTER_TYPE_RECORD_TYPE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filter records based on record type (e.g. </p>
-<p>&#8216;updates&#8217;) </p>
-</dd></dl>
+    </div>
+    <div class="breathe-sectiondef container">
+        <p class="breathe-sectiondef-title rubric">Public Opaque
+            Data Structures</p>
+        <dl class="type">
+            <dt id="_CPPv211bgpstream_t">
+                <span id="bgpstream_t"></span><span class="target"
+                                                    id="bgpstreambgpstream_8h_1a424b99385d50cf572ec0f30993194ad7"></span><em
+                    class="property">typedef </em><em
+                    class="property">struct</em> struct_bgpstream_t
+                <code class="descname">bgpstream_t</code><a
+                    class="headerlink" href="#_CPPv211bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Opaque handle that represents a BGP Stream
+                instance. </p>
+            </dd>
+        </dl>
 
-</dd></dl>
+    </div>
+    <div class="breathe-sectiondef container">
+        <p class="breathe-sectiondef-title rubric">Public Enums</p>
+        <dl class="type">
+            <dt id="_CPPv223bgpstream_filter_type_t">
+                <span id="bgpstream_filter_type_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0e"></span><em
+                    class="property">enum </em><code
+                    class="descname">bgpstream_filter_type_t</code><a
+                    class="headerlink"
+                    href="#_CPPv223bgpstream_filter_type_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>The type of the filter to be applied. </p>
 
-<dl class="type">
-<dt id="_CPPv229bgpstream_data_interface_id_t">
-<span id="bgpstream_data_interface_id_t"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9a"></span><em class="property">enum </em><code class="descname">bgpstream_data_interface_id_t</code><a class="headerlink" href="#_CPPv229bgpstream_data_interface_id_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Data Interface IDs. </p>
-<p><em>Values:</em></p>
-<dl class="member">
-<dt id="_CPPv231BGPSTREAM_DATA_INTERFACE_BROKER">
-<span id="BGPSTREAM_DATA_INTERFACE_BROKER"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aac8e514c5deebee712673677a3ccf66fe"></span><code class="descname">BGPSTREAM_DATA_INTERFACE_BROKER</code> = 1<a class="headerlink" href="#_CPPv231BGPSTREAM_DATA_INTERFACE_BROKER" title="Permalink to this definition">¶</a></dt>
-<dd><p>Broker data interface. </p>
-</dd></dl>
+                <p><em>Values:</em></p>
+                <dl class="member">
+                    <dt id="_CPPv229BGPSTREAM_FILTER_TYPE_PROJECT">
+                        <span id="BGPSTREAM_FILTER_TYPE_PROJECT"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0eae7684330f31f3aacf68cb9768a858e06"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_PROJECT</code>
+                        = 1<a class="headerlink"
+                              href="#_CPPv229BGPSTREAM_FILTER_TYPE_PROJECT"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter records based on associated
+                        project (e.g. </p>
 
-<dl class="member">
-<dt id="_CPPv235BGPSTREAM_DATA_INTERFACE_SINGLEFILE">
-<span id="BGPSTREAM_DATA_INTERFACE_SINGLEFILE"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa118449f8db5cf4549f6a38de43ee6038"></span><code class="descname">BGPSTREAM_DATA_INTERFACE_SINGLEFILE</code> = 2<a class="headerlink" href="#_CPPv235BGPSTREAM_DATA_INTERFACE_SINGLEFILE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Customlist interface. </p>
-</dd></dl>
+                        <p>&#8216;ris&#8217;) </p>
+                    </dd>
+                </dl>
 
-<dl class="member">
-<dt id="_CPPv232BGPSTREAM_DATA_INTERFACE_CSVFILE">
-<span id="BGPSTREAM_DATA_INTERFACE_CSVFILE"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa3568bfff45b6a6eab2a3285be6911a35"></span><code class="descname">BGPSTREAM_DATA_INTERFACE_CSVFILE</code> = 3<a class="headerlink" href="#_CPPv232BGPSTREAM_DATA_INTERFACE_CSVFILE" title="Permalink to this definition">¶</a></dt>
-<dd><p>CSV file interface. </p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv231BGPSTREAM_FILTER_TYPE_COLLECTOR">
+                        <span id="BGPSTREAM_FILTER_TYPE_COLLECTOR"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea75a407504c7d5ca7a73028592ce440f3"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_COLLECTOR</code>
+                        = 2<a class="headerlink"
+                              href="#_CPPv231BGPSTREAM_FILTER_TYPE_COLLECTOR"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter records based on collector
+                        (e.g. </p>
 
-<dl class="member">
-<dt id="_CPPv230BGPSTREAM_DATA_INTERFACE_MYSQL">
-<span id="BGPSTREAM_DATA_INTERFACE_MYSQL"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aab9720f5758814a70bfe42a1c76134e77"></span><code class="descname">BGPSTREAM_DATA_INTERFACE_MYSQL</code> = 4<a class="headerlink" href="#_CPPv230BGPSTREAM_DATA_INTERFACE_MYSQL" title="Permalink to this definition">¶</a></dt>
-<dd><p>MySQL data interface. </p>
-</dd></dl>
+                        <p>&#8216;rrc01&#8217;) </p>
+                    </dd>
+                </dl>
 
-<dl class="member">
-<dt id="_CPPv231BGPSTREAM_DATA_INTERFACE_SQLITE">
-<span id="BGPSTREAM_DATA_INTERFACE_SQLITE"></span><span class="target" id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa153e343a7ee71afd10c3748ff55b7f10"></span><code class="descname">BGPSTREAM_DATA_INTERFACE_SQLITE</code> = 5<a class="headerlink" href="#_CPPv231BGPSTREAM_DATA_INTERFACE_SQLITE" title="Permalink to this definition">¶</a></dt>
-<dd><p>SQLITE file interface. </p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv233BGPSTREAM_FILTER_TYPE_RECORD_TYPE">
+                        <span id="BGPSTREAM_FILTER_TYPE_RECORD_TYPE"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea6c450394edc3bb3cacc126647905b8b2"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_RECORD_TYPE</code>
+                        = 3<a class="headerlink"
+                              href="#_CPPv233BGPSTREAM_FILTER_TYPE_RECORD_TYPE"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter records based on record type
+                        (e.g. </p>
 
-</dd></dl>
+                        <p>&#8216;updates&#8217;) </p>
+                    </dd>
+                </dl>
 
-</div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Data Structures</p>
-<dl class="type">
-<dt id="_CPPv231bgpstream_data_interface_info_t">
-<span id="bgpstream_data_interface_info_t"></span><span class="target" id="bgpstreambgpstream_8h_1a1e62891928e9c7b0b7427d0318b838b5"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv236struct_bgpstream_data_interface_info" title="struct_bgpstream_data_interface_info">struct_bgpstream_data_interface_info</a> <code class="descname">bgpstream_data_interface_info_t</code><a class="headerlink" href="#_CPPv231bgpstream_data_interface_info_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Structure that contains information about a BGP Stream Data Interface. </p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv235BGPSTREAM_FILTER_TYPE_ELEM_PEER_ASN">
+                        <span id="BGPSTREAM_FILTER_TYPE_ELEM_PEER_ASN"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0eaf6c792e905f8dd8895c40c79ab368da3"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_ELEM_PEER_ASN</code>
+                        = 4<a class="headerlink"
+                              href="#_CPPv235BGPSTREAM_FILTER_TYPE_ELEM_PEER_ASN"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter elems based on peer ASN. </p>
+                    </dd>
+                </dl>
 
-<dl class="type">
-<dt id="_CPPv233bgpstream_data_interface_option_t">
-<span id="bgpstream_data_interface_option_t"></span><span class="target" id="bgpstreambgpstream_8h_1af268c4f48509d3fca3c4822f2d127342"></span><em class="property">typedef </em><em class="property">struct</em> <a class="reference internal" href="#_CPPv238struct_bgpstream_data_interface_option" title="struct_bgpstream_data_interface_option">struct_bgpstream_data_interface_option</a> <code class="descname">bgpstream_data_interface_option_t</code><a class="headerlink" href="#_CPPv233bgpstream_data_interface_option_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Structure that represents BGP Stream Data Interface Option. </p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv233BGPSTREAM_FILTER_TYPE_ELEM_PREFIX">
+                        <span id="BGPSTREAM_FILTER_TYPE_ELEM_PREFIX"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea423abe0ebb79fb6763b6e62ff526627d"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_ELEM_PREFIX</code>
+                        = 5<a class="headerlink"
+                              href="#_CPPv233BGPSTREAM_FILTER_TYPE_ELEM_PREFIX"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter elems based on prefix. </p>
+                    </dd>
+                </dl>
 
-</div>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public API Functions</p>
-<dl class="function">
-<dt id="_CPPv216bgpstream_createv">
-<span id="bgpstream_create"></span><span class="target" id="bgpstreambgpstream_8h_1a23cc5fd936f0a7fc13fd8526e879851a"></span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<code class="descname">bgpstream_create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv216bgpstream_createv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a new BGP Stream instance. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>a pointer to a BGP Stream instance if successful, NULL otherwise </dd>
-</dl>
-</p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv236BGPSTREAM_FILTER_TYPE_ELEM_COMMUNITY">
+                        <span id="BGPSTREAM_FILTER_TYPE_ELEM_COMMUNITY"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1a9d7e43566d66777ac468d27b81305a0ea2668edfc732527792b5b71e12da4fdaa"></span><code
+                            class="descname">BGPSTREAM_FILTER_TYPE_ELEM_COMMUNITY</code>
+                        = 6<a class="headerlink"
+                              href="#_CPPv236BGPSTREAM_FILTER_TYPE_ELEM_COMMUNITY"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Filter elems based on the community
+                        attribute. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv220bgpstream_add_filterP11bgpstream_t23bgpstream_filter_type_tPKc">
-<span id="bgpstream_add_filter__bgpstream_tP.bgpstream_filter_type_t.cCP"></span><span class="target" id="bgpstreambgpstream_8h_1ab184e0236ef7c48f8ae9459c63d20398"></span>void <code class="descname">bgpstream_add_filter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv223bgpstream_filter_type_t" title="bgpstream_filter_type_t">bgpstream_filter_type_t</a> <em>filter_type</em>, <em class="property">const</em> char *<em>filter_value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv220bgpstream_add_filterP11bgpstream_t23bgpstream_filter_type_tPKc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a filter in order to select a subset of the bgp data available. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to filter </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">filter_type</span></code> - <p>the type of the filter to apply </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">filter_value</span></code> - <p>the value to set the filter to </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv231bgpstream_add_rib_period_filterP11bgpstream_t8uint32_t">
-<span id="bgpstream_add_rib_period_filter__bgpstream_tP.uint32_t"></span><span class="target" id="bgpstreambgpstream_8h_1a57d91d8a103720371e4facf6bb56e08c"></span>void <code class="descname">bgpstream_add_rib_period_filter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, uint32_t <em>period</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv231bgpstream_add_rib_period_filterP11bgpstream_t8uint32_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a filter to configure the minimum bgp time interval between RIB files that belong to the same collector. </p>
-<p>This information can be changed at run time.</p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to filter </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">period</span></code> - <p>time period (if zero, all available RIBs are processed) </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+        <dl class="type">
+            <dt id="_CPPv229bgpstream_data_interface_id_t">
+                <span id="bgpstream_data_interface_id_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9a"></span><em
+                    class="property">enum </em><code
+                    class="descname">bgpstream_data_interface_id_t</code><a
+                    class="headerlink"
+                    href="#_CPPv229bgpstream_data_interface_id_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Data Interface IDs. </p>
 
-<dl class="function">
-<dt id="_CPPv229bgpstream_add_interval_filterP11bgpstream_t8uint32_t8uint32_t">
-<span id="bgpstream_add_interval_filter__bgpstream_tP.uint32_t.uint32_t"></span><span class="target" id="bgpstreambgpstream_8h_1a9beac741a7685c996ad4b0fd2d33b794"></span>void <code class="descname">bgpstream_add_interval_filter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, uint32_t <em>begin_time</em>, uint32_t <em>end_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv229bgpstream_add_interval_filterP11bgpstream_t8uint32_t8uint32_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a filter to select a specific time range from the BGP data available. </p>
-<p>
-If end_time is set to BGPSTREAM_FOREVER, the stream will be set to live mode, and will process data forever. <dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to filter </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">begin_time</span></code> - <p>the first time that will match the filter (inclusive) </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">end_time</span></code> - <p>the last time that will match the filter (inclusive)</p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <p><em>Values:</em></p>
+                <dl class="member">
+                    <dt id="_CPPv231BGPSTREAM_DATA_INTERFACE_BROKER">
+                        <span id="BGPSTREAM_DATA_INTERFACE_BROKER"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aac8e514c5deebee712673677a3ccf66fe"></span><code
+                            class="descname">BGPSTREAM_DATA_INTERFACE_BROKER</code>
+                        = 1<a class="headerlink"
+                              href="#_CPPv231BGPSTREAM_DATA_INTERFACE_BROKER"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Broker data interface. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv229bgpstream_get_data_interfacesP11bgpstream_tPP29bgpstream_data_interface_id_t">
-<span id="bgpstream_get_data_interfaces__bgpstream_tP.bgpstream_data_interface_id_tPP"></span><span class="target" id="bgpstreambgpstream_8h_1a660c71af3b9e36bda80451c98028d6bd"></span>int <code class="descname">bgpstream_get_data_interfaces</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> **<em>if_ids</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv229bgpstream_get_data_interfacesP11bgpstream_tPP29bgpstream_data_interface_id_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a list of data interfaces that are currently supported. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the number of elements the the if_ids array</dd>
-<dt><strong>Note</strong></dt>
-<dd>the returned array belongs to BGP Stream. It must not be freed by the user. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to the BGP Stream instance in the returned array </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">if_ids</span></code> - <p>set to a borrowed pointer to an array of bgpstream_datasource_type_t values </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv235BGPSTREAM_DATA_INTERFACE_SINGLEFILE">
+                        <span id="BGPSTREAM_DATA_INTERFACE_SINGLEFILE"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa118449f8db5cf4549f6a38de43ee6038"></span><code
+                            class="descname">BGPSTREAM_DATA_INTERFACE_SINGLEFILE</code>
+                        = 2<a class="headerlink"
+                              href="#_CPPv235BGPSTREAM_DATA_INTERFACE_SINGLEFILE"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>Customlist interface. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv239bgpstream_get_data_interface_id_by_nameP11bgpstream_tPKc">
-<span id="bgpstream_get_data_interface_id_by_name__bgpstream_tP.cCP"></span><span class="target" id="bgpstreambgpstream_8h_1a067d165c5dd804a88c9f73ebd9bbb6c4"></span><a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <code class="descname">bgpstream_get_data_interface_id_by_name</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <em class="property">const</em> char *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv239bgpstream_get_data_interface_id_by_nameP11bgpstream_tPKc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the ID of the data interface with the given name. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the ID of the data interface with the given name, 0 if no matching interface was found </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of the data interface to retrieve the ID for </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv232BGPSTREAM_DATA_INTERFACE_CSVFILE">
+                        <span id="BGPSTREAM_DATA_INTERFACE_CSVFILE"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa3568bfff45b6a6eab2a3285be6911a35"></span><code
+                            class="descname">BGPSTREAM_DATA_INTERFACE_CSVFILE</code>
+                        = 3<a class="headerlink"
+                              href="#_CPPv232BGPSTREAM_DATA_INTERFACE_CSVFILE"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>CSV file interface. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv233bgpstream_get_data_interface_infoP11bgpstream_t29bgpstream_data_interface_id_t">
-<span id="bgpstream_get_data_interface_info__bgpstream_tP.bgpstream_data_interface_id_t"></span><span class="target" id="bgpstreambgpstream_8h_1a7ec02fc26e3a68ecd269a60d0bb4aee3"></span><a class="reference internal" href="#_CPPv231bgpstream_data_interface_info_t" title="bgpstream_data_interface_info_t">bgpstream_data_interface_info_t</a> *<code class="descname">bgpstream_get_data_interface_info</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <em>if_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv233bgpstream_get_data_interface_infoP11bgpstream_t29bgpstream_data_interface_id_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get information for the given data interface. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>borrowed pointer to an interface info structure </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">if_id</span></code> - <p>ID of the interface to get the name for </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv230BGPSTREAM_DATA_INTERFACE_MYSQL">
+                        <span id="BGPSTREAM_DATA_INTERFACE_MYSQL"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aab9720f5758814a70bfe42a1c76134e77"></span><code
+                            class="descname">BGPSTREAM_DATA_INTERFACE_MYSQL</code>
+                        = 4<a class="headerlink"
+                              href="#_CPPv230BGPSTREAM_DATA_INTERFACE_MYSQL"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>MySQL data interface. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv236bgpstream_get_data_interface_optionsP11bgpstream_t29bgpstream_data_interface_id_tPP33bgpstream_data_interface_option_t">
-<span id="bgpstream_get_data_interface_options__bgpstream_tP.bgpstream_data_interface_id_t.bgpstream_data_interface_option_tPP"></span><span class="target" id="bgpstreambgpstream_8h_1ac3e1c1eb8674361dddfc52d659996e7c"></span>int <code class="descname">bgpstream_get_data_interface_options</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <em>if_id</em>, <a class="reference internal" href="#_CPPv233bgpstream_data_interface_option_t" title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a> **<em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv236bgpstream_get_data_interface_optionsP11bgpstream_t29bgpstream_data_interface_id_tPP33bgpstream_data_interface_option_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a list of valid option types for the given data interface. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the number of elements in the opts array</dd>
-<dt><strong>Note</strong></dt>
-<dd>the returned array belongs to BGP Stream. It must not be freed by the user. </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">if_id</span></code> - <p>ID of the interface to get option names for in the returned array </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">opts</span></code> - <p>set to a borrowed pointer to an array of options </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <dl class="member">
+                    <dt id="_CPPv231BGPSTREAM_DATA_INTERFACE_SQLITE">
+                        <span id="BGPSTREAM_DATA_INTERFACE_SQLITE"></span><span
+                            class="target"
+                            id="bgpstreambgpstream_8h_1af9f5a7c92fcda4ce33cbf816458c5b9aa153e343a7ee71afd10c3748ff55b7f10"></span><code
+                            class="descname">BGPSTREAM_DATA_INTERFACE_SQLITE</code>
+                        = 5<a class="headerlink"
+                              href="#_CPPv231BGPSTREAM_DATA_INTERFACE_SQLITE"
+                              title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>SQLITE file interface. </p>
+                    </dd>
+                </dl>
 
-<dl class="function">
-<dt id="_CPPv243bgpstream_get_data_interface_option_by_nameP11bgpstream_t29bgpstream_data_interface_id_tPKc">
-<span id="bgpstream_get_data_interface_option_by_name__bgpstream_tP.bgpstream_data_interface_id_t.cCP"></span><span class="target" id="bgpstreambgpstream_8h_1a76478fea868363e2f682f466c1db3138"></span><a class="reference internal" href="#_CPPv233bgpstream_data_interface_option_t" title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a> *<code class="descname">bgpstream_get_data_interface_option_by_name</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <em>if_id</em>, <em class="property">const</em> char *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv243bgpstream_get_data_interface_option_by_nameP11bgpstream_t29bgpstream_data_interface_id_tPKc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the data interface option for the given data interface and option name. </p>
-<p><dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>pointer to the option information with the given name, NULL if either the interface ID is not valid, or the name does not match any options </dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">if_id</span></code> - <p>ID of the interface to get option info for </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">name</span></code> - <p>name of the option to retrieve </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv235bgpstream_set_data_interface_optionP11bgpstream_tP33bgpstream_data_interface_option_tPKc">
-<span id="bgpstream_set_data_interface_option__bgpstream_tP.bgpstream_data_interface_option_tP.cCP"></span><span class="target" id="bgpstreambgpstream_8h_1a7c170eb798f1024b544498c50a10fe06"></span>void <code class="descname">bgpstream_set_data_interface_option</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv233bgpstream_data_interface_option_t" title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a> *<em>option_type</em>, <em class="property">const</em> char *<em>option_value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv235bgpstream_set_data_interface_optionP11bgpstream_tP33bgpstream_data_interface_option_tPKc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set a data interface option. </p>
-<p>
-Use the bgpstream_get_data_interface_options function to discover the set of options for an interface. <dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to configure </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">option_type</span></code> - <p>pointer to the option to set </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">option_value</span></code> - <p>value to set the option to</p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+    </div>
+    <div class="breathe-sectiondef container">
+        <p class="breathe-sectiondef-title rubric">Public Data
+            Structures</p>
+        <dl class="type">
+            <dt id="_CPPv231bgpstream_data_interface_info_t">
+                <span id="bgpstream_data_interface_info_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a1e62891928e9c7b0b7427d0318b838b5"></span><em
+                    class="property">typedef </em><em
+                    class="property">struct</em> <a
+                    class="reference internal"
+                    href="#_CPPv236struct_bgpstream_data_interface_info"
+                    title="struct_bgpstream_data_interface_info">struct_bgpstream_data_interface_info</a>
+                <code class="descname">bgpstream_data_interface_info_t</code><a
+                    class="headerlink"
+                    href="#_CPPv231bgpstream_data_interface_info_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Structure that contains information about a BGP
+                Stream Data Interface. </p>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv231bgpstream_get_data_interface_idP11bgpstream_t">
-<span id="bgpstream_get_data_interface_id__bgpstream_tP"></span><span class="target" id="bgpstreambgpstream_8h_1ac37aec49a481fe567fd2aa266d3d93c5"></span><a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <code class="descname">bgpstream_get_data_interface_id</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv231bgpstream_get_data_interface_idP11bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the ID of the currently active data interface. </p>
-<p>
-If no data interface has been explicitly set, this function will return the ID of the default data interface. <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>the ID of the currently active data interface</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+        <dl class="type">
+            <dt id="_CPPv233bgpstream_data_interface_option_t">
+                <span id="bgpstream_data_interface_option_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1af268c4f48509d3fca3c4822f2d127342"></span><em
+                    class="property">typedef </em><em
+                    class="property">struct</em> <a
+                    class="reference internal"
+                    href="#_CPPv238struct_bgpstream_data_interface_option"
+                    title="struct_bgpstream_data_interface_option">struct_bgpstream_data_interface_option</a>
+                <code class="descname">bgpstream_data_interface_option_t</code><a
+                    class="headerlink"
+                    href="#_CPPv233bgpstream_data_interface_option_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Structure that represents BGP Stream Data
+                Interface Option. </p>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv228bgpstream_set_data_interfaceP11bgpstream_t29bgpstream_data_interface_id_t">
-<span id="bgpstream_set_data_interface__bgpstream_tP.bgpstream_data_interface_id_t"></span><span class="target" id="bgpstreambgpstream_8h_1a48e8a0a1a0b8627f65ee310525fe77ad"></span>void <code class="descname">bgpstream_set_data_interface</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <em>if_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv228bgpstream_set_data_interfaceP11bgpstream_t29bgpstream_data_interface_id_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the data interface that BGP Stream uses to find BGP data. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to configure </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">if_id</span></code> - <p>ID of the data interface to use </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+    </div>
+    <div class="breathe-sectiondef container">
+        <p class="breathe-sectiondef-title rubric">Public API
+            Functions</p>
+        <dl class="function">
+            <dt id="_CPPv216bgpstream_createv">
+                <span id="bgpstream_create"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a23cc5fd936f0a7fc13fd8526e879851a"></span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<code class="descname">bgpstream_create</code><span
+                    class="sig-paren">(</span><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv216bgpstream_createv"
+                                                 title="Permalink to this definition">¶</a>
+            </dt>
+            <dd><p>Create a new BGP Stream instance. </p>
 
-<dl class="function">
-<dt id="_CPPv223bgpstream_set_live_modeP11bgpstream_t">
-<span id="bgpstream_set_live_mode__bgpstream_tP"></span><span class="target" id="bgpstreambgpstream_8h_1a16676ed96b16dec1e2ac6d8f2a95e2e7"></span>void <code class="descname">bgpstream_set_live_mode</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv223bgpstream_set_live_modeP11bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Configure the interface to block waiting for new data instead of returning end-of-stream if no more data is available. </p>
-<p>
-Live mode is implicitly enabled when an interval end is set to BGPSTREAM_FOREVER. <dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to put into live mode</p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>a pointer to a BGP Stream instance if
+                        successful, NULL otherwise
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv215bgpstream_startP11bgpstream_t">
-<span id="bgpstream_start__bgpstream_tP"></span><span class="target" id="bgpstreambgpstream_8h_1ad5e4489c5dd07a902b1b54faaea7ab11"></span>int <code class="descname">bgpstream_start</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215bgpstream_startP11bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the given BGP Stream instance. </p>
-<p>
-This function must be called after all configuration functions, and before the first call to bgpstream_get_next_record. <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>0 if the stream was started successfully, -1 otherwise</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to start </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv220bgpstream_add_filterP11bgpstream_t23bgpstream_filter_type_tPKc">
+                <span id="bgpstream_add_filter__bgpstream_tP.bgpstream_filter_type_t.cCP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1ab184e0236ef7c48f8ae9459c63d20398"></span>void
+                <code class="descname">bgpstream_add_filter</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv223bgpstream_filter_type_t"
+                                 title="bgpstream_filter_type_t">bgpstream_filter_type_t</a>
+                <em>filter_type</em>, <em
+                    class="property">const</em> char *<em>filter_value</em><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv220bgpstream_add_filterP11bgpstream_t23bgpstream_filter_type_tPKc"
+                                                 title="Permalink to this definition">¶</a>
+            </dt>
+            <dd><p>Add a filter in order to select a subset of the
+                bgp data available. </p>
 
-<dl class="function">
-<dt id="_CPPv225bgpstream_get_next_recordP11bgpstream_tP18bgpstream_record_t">
-<span id="bgpstream_get_next_record__bgpstream_tP.bgpstream_record_tP"></span><span class="target" id="bgpstreambgpstream_8h_1aa48a25f6bb885d91c1421b475f4cf313"></span>int <code class="descname">bgpstream_get_next_record</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em>, <a class="reference internal" href="bgpstream_record.h.html#_CPPv218bgpstream_record_t" title="bgpstream_record_t">bgpstream_record_t</a> *<em>record</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv225bgpstream_get_next_recordP11bgpstream_tP18bgpstream_record_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve from the stream, the next record that matches configured filters. </p>
-<p>
-The record passed to this function may be reused for subsequent calls if state for previous records is not needed (i.e. the records are processed independently of each other). If records are not processed independently, then a new record must be created for each call to this function. <dl class="docutils">
-<dt><strong>Return</strong></dt>
-<dd>&gt;0 if a record was read successfully, 0 if end-of-stream has been reached, &lt;0 if an error occurred.</dd>
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to get record from </p>
-</li>
-<li><code class="first docutils literal"><span class="pre">record</span></code> - <p>pointer to a bgpstream record instance created using bgpstream_record_create </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to filter </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">filter_type</span></code>
+                                - <p>the type of the filter to
+                                    apply </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">filter_value</span></code>
+                                - <p>the value to set the filter
+                                    to </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-<dl class="function">
-<dt id="_CPPv214bgpstream_stopP11bgpstream_t">
-<span id="bgpstream_stop__bgpstream_tP"></span><span class="target" id="bgpstreambgpstream_8h_1a8302c7abbd9eb496175db32355f8dc67"></span>void <code class="descname">bgpstream_stop</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv214bgpstream_stopP11bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stop the given BGP Stream instance. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to stop </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv231bgpstream_add_rib_period_filterP11bgpstream_t8uint32_t">
+                <span id="bgpstream_add_rib_period_filter__bgpstream_tP.uint32_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a57d91d8a103720371e4facf6bb56e08c"></span>void
+                <code class="descname">bgpstream_add_rib_period_filter</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, uint32_t <em>period</em><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv231bgpstream_add_rib_period_filterP11bgpstream_t8uint32_t"
+                                                 title="Permalink to this definition">¶</a>
+            </dt>
+            <dd><p>Add a filter to configure the minimum bgp time
+                interval between RIB files that belong to the same
+                collector. </p>
 
-<dl class="function">
-<dt id="_CPPv217bgpstream_destroyP11bgpstream_t">
-<span id="bgpstream_destroy__bgpstream_tP"></span><span class="target" id="bgpstreambgpstream_8h_1a7f2df6c59c3a4d3d2f4cf407644412fa"></span>void <code class="descname">bgpstream_destroy</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a> *<em>bs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv217bgpstream_destroyP11bgpstream_t" title="Permalink to this definition">¶</a></dt>
-<dd><p>Destroy the given BGP Stream instance. </p>
-<p><dl class="docutils">
-<dt><strong>Parameters</strong></dt>
-<dd><ul class="breatheparameterlist first last">
-<li><code class="first docutils literal"><span class="pre">bs</span></code> - <p>pointer to a BGP Stream instance to destroy </p>
-</li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
+                <p>This information can be changed at run time.</p>
 
-</div>
-<dl class="class">
-<dt id="_CPPv236struct_bgpstream_data_interface_info">
-<span id="struct_bgpstream_data_interface_info"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__info"></span><em class="property">struct </em><code class="descname">struct_bgpstream_data_interface_info</code><a class="headerlink" href="#_CPPv236struct_bgpstream_data_interface_info" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;bgpstream.h&gt;</em><p>Structure that contains information about a BGP Stream Data Interface. </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="member">
-<dt id="_CPPv2N36struct_bgpstream_data_interface_info2idE">
-<span id="struct_bgpstream_data_interface_info::id__bgpstream_data_interface_id_t"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__info_1af496661be16c56476ccc4f7bb9f0389b"></span><a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <code class="descname">id</code><a class="headerlink" href="#_CPPv2N36struct_bgpstream_data_interface_info2idE" title="Permalink to this definition">¶</a></dt>
-<dd><p>The ID of this data interface. </p>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to filter </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">period</span></code>
+                                - <p>time period (if zero, all
+                                    available RIBs are
+                                    processed) </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-<dl class="member">
-<dt id="_CPPv2N36struct_bgpstream_data_interface_info4nameE">
-<span id="struct_bgpstream_data_interface_info::name__cP"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__info_1a96887f605d21c42357685cdc95ddae04"></span>char *<code class="descname">name</code><a class="headerlink" href="#_CPPv2N36struct_bgpstream_data_interface_info4nameE" title="Permalink to this definition">¶</a></dt>
-<dd><p>The name of this data interface. </p>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv229bgpstream_add_interval_filterP11bgpstream_t8uint32_t8uint32_t">
+                <span id="bgpstream_add_interval_filter__bgpstream_tP.uint32_t.uint32_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a9beac741a7685c996ad4b0fd2d33b794"></span>void
+                <code class="descname">bgpstream_add_interval_filter</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, uint32_t <em>begin_time</em>, uint32_t
+                <em>end_time</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv229bgpstream_add_interval_filterP11bgpstream_t8uint32_t8uint32_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Add a filter to select a specific time range from
+                the BGP data available. </p>
 
-<dl class="member">
-<dt id="_CPPv2N36struct_bgpstream_data_interface_info11descriptionE">
-<span id="struct_bgpstream_data_interface_info::description__cP"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__info_1afeb1a4ce1d28874c6369351dd5b1b897"></span>char *<code class="descname">description</code><a class="headerlink" href="#_CPPv2N36struct_bgpstream_data_interface_info11descriptionE" title="Permalink to this definition">¶</a></dt>
-<dd><p>A human-readable description of this data interface. </p>
-</dd></dl>
+                <p>
+                    If end_time is set to BGPSTREAM_FOREVER, the
+                    stream will be set to live mode, and will
+                    process data forever.
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to filter </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">begin_time</span></code>
+                                - <p>the first time that will match
+                                    the filter (inclusive) </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">end_time</span></code>
+                                - <p>the last time that will match
+                                    the filter (inclusive)</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-</div>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv229bgpstream_get_data_interfacesP11bgpstream_tPP29bgpstream_data_interface_id_t">
+                <span id="bgpstream_get_data_interfaces__bgpstream_tP.bgpstream_data_interface_id_tPP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a660c71af3b9e36bda80451c98028d6bd"></span>int
+                <code class="descname">bgpstream_get_data_interfaces</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv229bgpstream_data_interface_id_t"
+                                 title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                **<em>if_ids</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv229bgpstream_get_data_interfacesP11bgpstream_tPP29bgpstream_data_interface_id_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Get a list of data interfaces that are currently
+                supported. </p>
 
-<dl class="class">
-<dt id="_CPPv238struct_bgpstream_data_interface_option">
-<span id="struct_bgpstream_data_interface_option"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__option"></span><em class="property">struct </em><code class="descname">struct_bgpstream_data_interface_option</code><a class="headerlink" href="#_CPPv238struct_bgpstream_data_interface_option" title="Permalink to this definition">¶</a></dt>
-<dd><em>#include &lt;bgpstream.h&gt;</em><p>Structure that represents BGP Stream Data Interface Option. </p>
-<div class="breathe-sectiondef container">
-<p class="breathe-sectiondef-title rubric">Public Members</p>
-<dl class="member">
-<dt id="_CPPv2N38struct_bgpstream_data_interface_option5if_idE">
-<span id="struct_bgpstream_data_interface_option::if_id__bgpstream_data_interface_id_t"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__option_1a689b9cc2d095d8dff24cfddc67b79efa"></span><a class="reference internal" href="#_CPPv229bgpstream_data_interface_id_t" title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a> <code class="descname">if_id</code><a class="headerlink" href="#_CPPv2N38struct_bgpstream_data_interface_option5if_idE" title="Permalink to this definition">¶</a></dt>
-<dd><p>The ID of the data interface that this option applies to. </p>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>the number of elements the the if_ids
+                        array
+                    </dd>
+                    <dt><strong>Note</strong></dt>
+                    <dd>the returned array belongs to BGP Stream. It
+                        must not be freed by the user.
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to the BGP Stream
+                                    instance in the returned
+                                    array </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">if_ids</span></code>
+                                - <p>set to a borrowed pointer to an
+                                    array of
+                                    bgpstream_datasource_type_t
+                                    values </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-<dl class="member">
-<dt id="_CPPv2N38struct_bgpstream_data_interface_option2idE">
-<span id="struct_bgpstream_data_interface_option::id__i"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__option_1a39cead96cdb3da06e8902254317e6384"></span>int <code class="descname">id</code><a class="headerlink" href="#_CPPv2N38struct_bgpstream_data_interface_option2idE" title="Permalink to this definition">¶</a></dt>
-<dd><p>An internal, interface-specific ID for this option. </p>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv239bgpstream_get_data_interface_id_by_nameP11bgpstream_tPKc">
+                <span id="bgpstream_get_data_interface_id_by_name__bgpstream_tP.cCP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a067d165c5dd804a88c9f73ebd9bbb6c4"></span><a
+                    class="reference internal"
+                    href="#_CPPv229bgpstream_data_interface_id_t"
+                    title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <code class="descname">bgpstream_get_data_interface_id_by_name</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <em class="property">const</em> char *<em>name</em><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv239bgpstream_get_data_interface_id_by_nameP11bgpstream_tPKc"
+                                                 title="Permalink to this definition">¶</a>
+            </dt>
+            <dd><p>Get the ID of the data interface with the given
+                name. </p>
 
-<dl class="member">
-<dt id="_CPPv2N38struct_bgpstream_data_interface_option4nameE">
-<span id="struct_bgpstream_data_interface_option::name__cP"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__option_1af6f0ae59cdc8b4a35c5f41b218bb1560"></span>char *<code class="descname">name</code><a class="headerlink" href="#_CPPv2N38struct_bgpstream_data_interface_option4nameE" title="Permalink to this definition">¶</a></dt>
-<dd><p>The human-readable name of the option. </p>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>the ID of the data interface with the given
+                        name, 0 if no matching interface was found
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">name</span></code> -
+                                <p>name of the data interface to
+                                    retrieve the ID for </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
 
-<dl class="member">
-<dt id="_CPPv2N38struct_bgpstream_data_interface_option11descriptionE">
-<span id="struct_bgpstream_data_interface_option::description__cP"></span><span class="target" id="bgpstreamstructstruct__bgpstream__data__interface__option_1a81fa740806b4580d7ff083c68ac57e6f"></span>char *<code class="descname">description</code><a class="headerlink" href="#_CPPv2N38struct_bgpstream_data_interface_option11descriptionE" title="Permalink to this definition">¶</a></dt>
-<dd><p>A human-readable description of the option. </p>
-</dd></dl>
+        <dl class="function">
+            <dt id="_CPPv233bgpstream_get_data_interface_infoP11bgpstream_t29bgpstream_data_interface_id_t">
+                <span id="bgpstream_get_data_interface_info__bgpstream_tP.bgpstream_data_interface_id_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a7ec02fc26e3a68ecd269a60d0bb4aee3"></span><a
+                    class="reference internal"
+                    href="#_CPPv231bgpstream_data_interface_info_t"
+                    title="bgpstream_data_interface_info_t">bgpstream_data_interface_info_t</a>
+                *<code class="descname">bgpstream_get_data_interface_info</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv229bgpstream_data_interface_id_t"
+                                 title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <em>if_id</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv233bgpstream_get_data_interface_infoP11bgpstream_t29bgpstream_data_interface_id_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Get information for the given data
+                interface. </p>
 
-</div>
-</dd></dl>
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>borrowed pointer to an interface info
+                        structure
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream
+                                    instance </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">if_id</span></code>
+                                - <p>ID of the interface to get the
+                                    name for </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv236bgpstream_get_data_interface_optionsP11bgpstream_t29bgpstream_data_interface_id_tPP33bgpstream_data_interface_option_t">
+                <span id="bgpstream_get_data_interface_options__bgpstream_tP.bgpstream_data_interface_id_t.bgpstream_data_interface_option_tPP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1ac3e1c1eb8674361dddfc52d659996e7c"></span>int
+                <code class="descname">bgpstream_get_data_interface_options</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv229bgpstream_data_interface_id_t"
+                                 title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <em>if_id</em>, <a class="reference internal"
+                                   href="#_CPPv233bgpstream_data_interface_option_t"
+                                   title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a>
+                **<em>opts</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv236bgpstream_get_data_interface_optionsP11bgpstream_t29bgpstream_data_interface_id_tPP33bgpstream_data_interface_option_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Get a list of valid option types for the given
+                data interface. </p>
+
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>the number of elements in the opts array
+                    </dd>
+                    <dt><strong>Note</strong></dt>
+                    <dd>the returned array belongs to BGP Stream. It
+                        must not be freed by the user.
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream
+                                    instance </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">if_id</span></code>
+                                - <p>ID of the interface to get
+                                    option names for in the returned
+                                    array </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">opts</span></code> -
+                                <p>set to a borrowed pointer to an
+                                    array of options </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv243bgpstream_get_data_interface_option_by_nameP11bgpstream_t29bgpstream_data_interface_id_tPKc">
+                <span id="bgpstream_get_data_interface_option_by_name__bgpstream_tP.bgpstream_data_interface_id_t.cCP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a76478fea868363e2f682f466c1db3138"></span><a
+                    class="reference internal"
+                    href="#_CPPv233bgpstream_data_interface_option_t"
+                    title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a>
+                *<code class="descname">bgpstream_get_data_interface_option_by_name</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv229bgpstream_data_interface_id_t"
+                                 title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <em>if_id</em>, <em class="property">const</em> char
+                *<em>name</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv243bgpstream_get_data_interface_option_by_nameP11bgpstream_t29bgpstream_data_interface_id_tPKc"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Get the data interface option for the given data
+                interface and option name. </p>
+
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>pointer to the option information with the
+                        given name, NULL if either the interface ID
+                        is not valid, or the name does not match any
+                        options
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream
+                                    instance </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">if_id</span></code>
+                                - <p>ID of the interface to get
+                                    option info for </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">name</span></code> -
+                                <p>name of the option to
+                                    retrieve </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv235bgpstream_set_data_interface_optionP11bgpstream_tP33bgpstream_data_interface_option_tPKc">
+                <span id="bgpstream_set_data_interface_option__bgpstream_tP.bgpstream_data_interface_option_tP.cCP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a7c170eb798f1024b544498c50a10fe06"></span>void
+                <code class="descname">bgpstream_set_data_interface_option</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv233bgpstream_data_interface_option_t"
+                                 title="bgpstream_data_interface_option_t">bgpstream_data_interface_option_t</a>
+                *<em>option_type</em>, <em
+                    class="property">const</em> char *<em>option_value</em><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv235bgpstream_set_data_interface_optionP11bgpstream_tP33bgpstream_data_interface_option_tPKc"
+                                                 title="Permalink to this definition">¶</a>
+            </dt>
+            <dd><p>Set a data interface option. </p>
+
+                <p>
+                    Use the bgpstream_get_data_interface_options
+                    function to discover the set of options for an
+                    interface.
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to configure </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">option_type</span></code>
+                                - <p>pointer to the option to
+                                    set </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">option_value</span></code>
+                                - <p>value to set the option to</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv231bgpstream_get_data_interface_idP11bgpstream_t">
+                <span id="bgpstream_get_data_interface_id__bgpstream_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1ac37aec49a481fe567fd2aa266d3d93c5"></span><a
+                    class="reference internal"
+                    href="#_CPPv229bgpstream_data_interface_id_t"
+                    title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <code class="descname">bgpstream_get_data_interface_id</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv231bgpstream_get_data_interface_idP11bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Get the ID of the currently active data
+                interface. </p>
+
+                <p>
+                    If no data interface has been explicitly set,
+                    this function will return the ID of the default
+                    data interface.
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>the ID of the currently active data
+                        interface
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream
+                                    instance </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv228bgpstream_set_data_interfaceP11bgpstream_t29bgpstream_data_interface_id_t">
+                <span id="bgpstream_set_data_interface__bgpstream_tP.bgpstream_data_interface_id_t"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a48e8a0a1a0b8627f65ee310525fe77ad"></span>void
+                <code class="descname">bgpstream_set_data_interface</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="#_CPPv229bgpstream_data_interface_id_t"
+                                 title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                <em>if_id</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv228bgpstream_set_data_interfaceP11bgpstream_t29bgpstream_data_interface_id_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Set the data interface that BGP Stream uses to
+                find BGP data. </p>
+
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to configure </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">if_id</span></code>
+                                - <p>ID of the data interface to
+                                    use </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv223bgpstream_set_live_modeP11bgpstream_t">
+                <span id="bgpstream_set_live_mode__bgpstream_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a16676ed96b16dec1e2ac6d8f2a95e2e7"></span>void
+                <code class="descname">bgpstream_set_live_mode</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv223bgpstream_set_live_modeP11bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Configure the interface to block waiting for new
+                data instead of returning end-of-stream if no more
+                data is available. </p>
+
+                <p>
+                    Live mode is implicitly enabled when an interval
+                    end is set to BGPSTREAM_FOREVER.
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to put into live mode</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv215bgpstream_startP11bgpstream_t">
+                <span id="bgpstream_start__bgpstream_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1ad5e4489c5dd07a902b1b54faaea7ab11"></span>int
+                <code class="descname">bgpstream_start</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv215bgpstream_startP11bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Start the given BGP Stream instance. </p>
+
+                <p>
+                    This function must be called after all
+                    configuration functions, and before the first
+                    call to bgpstream_get_next_record.
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>0 if the stream was started successfully, -1
+                        otherwise
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to start </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv225bgpstream_get_next_recordP11bgpstream_tP18bgpstream_record_t">
+                <span id="bgpstream_get_next_record__bgpstream_tP.bgpstream_record_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1aa48a25f6bb885d91c1421b475f4cf313"></span>int
+                <code class="descname">bgpstream_get_next_record</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em>, <a class="reference internal"
+                                 href="bgpstream_record.h.html#_CPPv218bgpstream_record_t"
+                                 title="bgpstream_record_t">bgpstream_record_t</a>
+                *<em>record</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv225bgpstream_get_next_recordP11bgpstream_tP18bgpstream_record_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Retrieve from the stream, the next record that
+                matches configured filters. </p>
+
+                <p>
+                    The record passed to this function may be reused
+                    for subsequent calls if state for previous
+                    records is not needed (i.e. the records are
+                    processed independently of each other). If
+                    records are not processed independently, then a
+                    new record must be created for each call to this
+                    function.
+                <dl class="docutils">
+                    <dt><strong>Return</strong></dt>
+                    <dd>&gt;0 if a record was read successfully, 0
+                        if end-of-stream has been reached, &lt;0 if
+                        an error occurred.
+                    </dd>
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to get record from </p>
+                            </li>
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">record</span></code>
+                                - <p>pointer to a bgpstream record
+                                    instance created using
+                                    bgpstream_record_create </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv214bgpstream_stopP11bgpstream_t">
+                <span id="bgpstream_stop__bgpstream_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a8302c7abbd9eb496175db32355f8dc67"></span>void
+                <code class="descname">bgpstream_stop</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv214bgpstream_stopP11bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Stop the given BGP Stream instance. </p>
+
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to stop </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+        <dl class="function">
+            <dt id="_CPPv217bgpstream_destroyP11bgpstream_t">
+                <span id="bgpstream_destroy__bgpstream_tP"></span><span
+                    class="target"
+                    id="bgpstreambgpstream_8h_1a7f2df6c59c3a4d3d2f4cf407644412fa"></span>void
+                <code class="descname">bgpstream_destroy</code><span
+                    class="sig-paren">(</span><a
+                    class="reference internal"
+                    href="#_CPPv211bgpstream_t" title="bgpstream_t">bgpstream_t</a>
+                *<em>bs</em><span class="sig-paren">)</span><a
+                    class="headerlink"
+                    href="#_CPPv217bgpstream_destroyP11bgpstream_t"
+                    title="Permalink to this definition">¶</a></dt>
+            <dd><p>Destroy the given BGP Stream instance. </p>
+
+                <p>
+                <dl class="docutils">
+                    <dt><strong>Parameters</strong></dt>
+                    <dd>
+                        <ul class="breatheparameterlist first last">
+                            <li><code
+                                    class="first docutils literal"><span
+                                    class="pre">bs</span></code> -
+                                <p>pointer to a BGP Stream instance
+                                    to destroy </p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+                </p>
+            </dd>
+        </dl>
+
+    </div>
+    <dl class="class">
+        <dt id="_CPPv236struct_bgpstream_data_interface_info">
+            <span id="struct_bgpstream_data_interface_info"></span><span
+                class="target"
+                id="bgpstreamstructstruct__bgpstream__data__interface__info"></span><em
+                class="property">struct </em><code class="descname">struct_bgpstream_data_interface_info</code><a
+                class="headerlink"
+                href="#_CPPv236struct_bgpstream_data_interface_info"
+                title="Permalink to this definition">¶</a></dt>
+        <dd><em>#include &lt;bgpstream.h&gt;</em>
+
+            <p>Structure that contains information about a BGP
+                Stream Data Interface. </p>
+
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public
+                    Members</p>
+                <dl class="member">
+                    <dt id="_CPPv2N36struct_bgpstream_data_interface_info2idE">
+                        <span id="struct_bgpstream_data_interface_info::id__bgpstream_data_interface_id_t"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__info_1af496661be16c56476ccc4f7bb9f0389b"></span><a
+                            class="reference internal"
+                            href="#_CPPv229bgpstream_data_interface_id_t"
+                            title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                        <code class="descname">id</code><a
+                            class="headerlink"
+                            href="#_CPPv2N36struct_bgpstream_data_interface_info2idE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>The ID of this data interface. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N36struct_bgpstream_data_interface_info4nameE">
+                        <span id="struct_bgpstream_data_interface_info::name__cP"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__info_1a96887f605d21c42357685cdc95ddae04"></span>char
+                        *<code class="descname">name</code><a
+                            class="headerlink"
+                            href="#_CPPv2N36struct_bgpstream_data_interface_info4nameE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>The name of this data interface. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N36struct_bgpstream_data_interface_info11descriptionE">
+                        <span id="struct_bgpstream_data_interface_info::description__cP"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__info_1afeb1a4ce1d28874c6369351dd5b1b897"></span>char
+                        *<code class="descname">description</code><a
+                            class="headerlink"
+                            href="#_CPPv2N36struct_bgpstream_data_interface_info11descriptionE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>A human-readable description of this data
+                        interface. </p>
+                    </dd>
+                </dl>
+
+            </div>
+        </dd>
+    </dl>
+
+    <dl class="class">
+        <dt id="_CPPv238struct_bgpstream_data_interface_option">
+            <span id="struct_bgpstream_data_interface_option"></span><span
+                class="target"
+                id="bgpstreamstructstruct__bgpstream__data__interface__option"></span><em
+                class="property">struct </em><code class="descname">struct_bgpstream_data_interface_option</code><a
+                class="headerlink"
+                href="#_CPPv238struct_bgpstream_data_interface_option"
+                title="Permalink to this definition">¶</a></dt>
+        <dd><em>#include &lt;bgpstream.h&gt;</em>
+
+            <p>Structure that represents BGP Stream Data Interface
+                Option. </p>
+
+            <div class="breathe-sectiondef container">
+                <p class="breathe-sectiondef-title rubric">Public
+                    Members</p>
+                <dl class="member">
+                    <dt id="_CPPv2N38struct_bgpstream_data_interface_option5if_idE">
+                        <span id="struct_bgpstream_data_interface_option::if_id__bgpstream_data_interface_id_t"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__option_1a689b9cc2d095d8dff24cfddc67b79efa"></span><a
+                            class="reference internal"
+                            href="#_CPPv229bgpstream_data_interface_id_t"
+                            title="bgpstream_data_interface_id_t">bgpstream_data_interface_id_t</a>
+                        <code class="descname">if_id</code><a
+                            class="headerlink"
+                            href="#_CPPv2N38struct_bgpstream_data_interface_option5if_idE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>The ID of the data interface that this
+                        option applies to. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N38struct_bgpstream_data_interface_option2idE">
+                        <span id="struct_bgpstream_data_interface_option::id__i"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__option_1a39cead96cdb3da06e8902254317e6384"></span>int
+                        <code class="descname">id</code><a
+                            class="headerlink"
+                            href="#_CPPv2N38struct_bgpstream_data_interface_option2idE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>An internal, interface-specific ID for
+                        this option. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N38struct_bgpstream_data_interface_option4nameE">
+                        <span id="struct_bgpstream_data_interface_option::name__cP"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__option_1af6f0ae59cdc8b4a35c5f41b218bb1560"></span>char
+                        *<code class="descname">name</code><a
+                            class="headerlink"
+                            href="#_CPPv2N38struct_bgpstream_data_interface_option4nameE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>The human-readable name of the
+                        option. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N38struct_bgpstream_data_interface_option11descriptionE">
+                        <span id="struct_bgpstream_data_interface_option::description__cP"></span><span
+                            class="target"
+                            id="bgpstreamstructstruct__bgpstream__data__interface__option_1a81fa740806b4580d7ff083c68ac57e6f"></span>char
+                        *<code class="descname">description</code><a
+                            class="headerlink"
+                            href="#_CPPv2N38struct_bgpstream_data_interface_option11descriptionE"
+                            title="Permalink to this definition">¶</a>
+                    </dt>
+                    <dd><p>A human-readable description of the
+                        option. </p>
+                    </dd>
+                </dl>
+
+            </div>
+        </dd>
+    </dl>
 
 </div>
