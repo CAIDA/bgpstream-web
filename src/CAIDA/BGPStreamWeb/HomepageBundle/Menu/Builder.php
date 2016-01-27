@@ -35,6 +35,16 @@ class Builder
                         )
         );
 
+        $menu->addChild('news',
+                        array(
+                            'route'           => 'caida_bgpstream_web_homepage',
+                            'routeParameters' =>
+                                array(
+                                    'page' => 'news'
+                                )
+                        )
+        );
+
         $menu->addChild('components',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage',
