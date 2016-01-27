@@ -90,7 +90,7 @@ require(['jquery', 'moment'], function ($, moment) {
 
     $(function () {
         var hash = document.location.hash;
-        var prefix = "";
+        var prefix = "!";
         if (hash) {
             $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']').tab('show');
         }
