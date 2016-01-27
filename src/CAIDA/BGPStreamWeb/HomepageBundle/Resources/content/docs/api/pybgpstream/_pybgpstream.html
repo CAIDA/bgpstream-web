@@ -33,13 +33,13 @@
                             title="Permalink to this definition">¶</a>
                     </dt>
                     <dd><p>Add a filter to an unstarted BGP Stream
-                        instance. Only those records that
+                        instance. Only those records/elems that
                         match the filter(s) will be included in the
                         stream.</p>
 
                         <p>If multiple filters of the
                             <strong>same</strong> type are added, a
-                            record is considered
+                            record/elem is considered
                             a match if it matches
                             <strong>any</strong> of the filters.
                             E.g. if
@@ -55,7 +55,7 @@
 
                         <p>If multiple filters of
                             <strong>different</strong> types are
-                            added, a record is
+                            added, a record/elem is
                             considered a match if it matches
                             <strong>all</strong> of the filters.
                             E.g. if
@@ -67,6 +67,25 @@
                             the <cite>Route Views</cite>
                             project, <strong>and</strong> are <cite>updates</cite>
                             will be included.</p>
+
+                        <p><cite>project</cite>,
+                            <cite>collector</cite>, and <cite>record-type</cite>
+                            filter BGP records,
+                            whereas <cite>peer-asn</cite>, <cite>prefix</cite>,
+                            and <cite>community</cite> filter BGP
+                            elems. The <cite>prefix</cite> filter
+                            selects BGP elems related to the
+                            prefix or more specifics. The <cite>community</cite>
+                            filter is specified as
+                            a <cite>asn:value</cite> formatted
+                            string, the user can specify the ASn or
+                            the value and leave the other field not
+                            specified using the <cite>*</cite>.
+                            E.g. if <cite>add_filter(&#8216;community&#8217;,
+                                &#8216;*:300&#8217;)</cite> is used
+                            then all the BGP elems
+                            having at least one community with value
+                            <cite>300</cite> will be included.</p>
                         <table class="docutils field-list"
                                frame="void" rules="none">
                             <col class="field-name"/>
@@ -82,7 +101,10 @@
                                             The type of the filter,
                                             can be one of <cite>project</cite>,
                                             <cite>collector</cite>,
-                                            <cite>record-type</cite>
+                                            <cite>record-type</cite>,
+                                            <cite>peer-asn</cite>,
+                                            <cite>prefix</cite>,
+                                            <cite>community</cite>
                                         </li>
                                         <li><strong>value</strong> (<em>str</em>)
                                             &#8211; The value of the
@@ -889,6 +911,22 @@
                                                     <li>&#8216;prefix&#8217;:
                                                         The prefix
                                                         (basestring)
+                                                    </li>
+                                                    <li>&#8216;communities&#8217;:
+                                                        The
+                                                        communities
+                                                        (a list of
+                                                        dictionaries,
+                                                        each one
+                                                        representing
+                                                        a community;
+                                                        each
+                                                        dictionary
+                                                        has
+                                                        the <cite>asn</cite>
+                                                        and the
+                                                        <cite>value</cite>
+                                                        keys)
                                                     </li>
                                                 </ul>
                                             </dd>
