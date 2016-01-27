@@ -18,6 +18,9 @@
     <li role="presentation"><a href="#centos" aria-controls="centos"
                                role="tab"
                                data-toggle="tab">CentOS</a></li>
+    <li role="presentation"><a href="#arch" aria-controls="arch"
+                               role="tab"
+                               data-toggle="tab">Arch Linux</a></li>
     <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
                                data-toggle="tab">Mac OSX</a></li>
 </ul>
@@ -40,7 +43,7 @@
 
         <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
 $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
@@ -90,7 +93,7 @@ configure: Compiled with http read (libcurl) support: Yes</code></pre>
         <h2>2. Download and install BGPStream</h2>
 
 <pre><code>$ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
 $ tar zxf bgpstream-1.1.0.tar.gz
 $ cd bgpstream-1.1.0
 $ ./configure
@@ -170,7 +173,7 @@ $ sudo make install clean</code></pre>
 
 <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
 $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
@@ -189,7 +192,7 @@ $ sudo make install</code></pre>
         <h3>2. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
 $ tar zxf bgpstream-1.1.0.tar.gz
 $ cd bgpstream-1.1.0/
 $ ./configure
@@ -236,7 +239,7 @@ $ sudo make install</code></pre>
 
         <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
 $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
@@ -250,7 +253,7 @@ $ sudo ldconfig</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
         <pre><code>$ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
 $ tar zxf bgpstream-1.1.0.tar.gz
 $ cd bgpstream-1.1.0/
 $ ./configure
@@ -294,7 +297,7 @@ $ sudo ldconfig</code></pre>
 
         <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
 $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
@@ -308,7 +311,7 @@ $ sudo ldconfig</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
         <pre><code>$ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
 $ tar zxf bgpstream-1.1.0.tar.gz
 $ cd bgpstream-1.1.0/
 $ ./configure
@@ -330,6 +333,46 @@ $ sudo ldconfig</code></pre>
                 page</a> with any problems you encounter.</p>
 
     </div>
+
+    {# ---------- ARCH ---------- #}
+    <div role="tabpanel" class="tab-pane" id="arch">
+        <h2>Installing from source</h2>
+
+        <h3>1. Download and install <a
+                    href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
+        </h3>
+
+        <pre><code>$ mkdir ~/src
+$ cd ~/src/
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ tar zxf wandio-1.0.3.tar.gz
+$ cd wandio-1.0.3/
+$ ./configure --prefix=/usr
+$ make
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>See the generic install instructions for details on how to install
+            into a non-default location.</p>
+
+        <h3>3. Download and install BGPStream:</h3>
+
+        <pre><code>$ cd ~/src/
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ tar zxf bgpstream-1.1.0.tar.gz
+$ cd bgpstream-1.1.0/
+$ ./configure --prefix=/usr
+$ make
+$ make check
+$ sudo make install
+$ sudo ldconfig</code></pre>
+
+        <p>Please open an issue on our
+            <a href="https://github.com/caida/bgpstream/issues" target="_blank">GitHub
+                page</a> with any problems you encounter.</p>
+
+    </div>
+
 
     {# ---------- OSX ---------- #}
     <div role="tabpanel" class="tab-pane" id="osx">
