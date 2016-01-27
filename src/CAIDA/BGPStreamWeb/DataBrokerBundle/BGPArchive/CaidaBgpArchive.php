@@ -40,6 +40,10 @@ class CaidaBgpArchive implements BgpArchiveInterface {
 
     public function acceptBgpData($request, $row)
     {
+        // we're the only ones that serve caida-bmp data
+        if ($row->getCollector()->getProject()->getName() == 'caida-bmp') {
+            return true;
+        }
         // allow caida users to pull data directly from RV/RIS
         $preferCaida = $request->get('preferCaida', 'true');
         $preferCaida = $preferCaida == 'true' ? true : false;
