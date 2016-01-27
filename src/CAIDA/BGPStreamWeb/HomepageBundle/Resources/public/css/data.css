@@ -9,6 +9,10 @@ h2 > a:visited {
     height: 60px;
 }
 
+.dp-logo + .dp-logo {
+    padding-right: 20px;
+}
+
 .dp-tab-logo {
     height: 30px;
 }

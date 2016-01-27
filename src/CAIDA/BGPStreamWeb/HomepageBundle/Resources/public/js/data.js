@@ -72,6 +72,13 @@ require(['jquery', 'moment'], function ($, moment) {
         }
         buildTable('ris-tbody', risData);
 
+        var caidaBmpData = json.data.projects['caida-bmp'];
+        if (!caidaBmpData) {
+            onError('Missing CAIDA BMP data');
+            return;
+        }
+        buildTable('caida-bmp-tbody', caidaBmpData);
+
         $('.progress').hide();
         $('table').show();
     }
@@ -82,6 +89,17 @@ require(['jquery', 'moment'], function ($, moment) {
     }
 
     $(function () {
+        var hash = document.location.hash;
+        var prefix = "!";
+        if (hash) {
+            $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']').tab('show');
+        }
+
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash.replace("#", "#" + prefix);
+        });
+
         $.ajax({
             url: '/broker/meta/projects',
             type: 'GET',

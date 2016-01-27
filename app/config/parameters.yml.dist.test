@@ -17,4 +17,4 @@ parameters:
     secret:            4f6641f2823f944a8c1de1bb5ead58d662744dd7
 
     memcache_servers:
-        - { host: 127.0.0.208, tcp_port: 11213 } # test instance
+        - { host: 127.0.0.208, tcp_port: 12113 } # test instance
