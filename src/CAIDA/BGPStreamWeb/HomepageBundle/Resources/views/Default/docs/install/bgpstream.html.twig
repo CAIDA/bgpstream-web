@@ -360,7 +360,7 @@ $ sudo ldconfig</code></pre>
 
 <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
+$ curl -O http://research.wand.net.nz/software/wandio/wandio-1.0.3.tar.gz
 $ tar zxf wandio-1.0.3.tar.gz
 $ cd wandio-1.0.3/
 $ ./configure
@@ -373,7 +373,7 @@ $ sudo make install</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.1.0.tar.gz', absolute=true) }}
 $ tar zxf bgpstream-1.1.0.tar.gz
 $ cd bgpstream-1.1.0/
 $ ./configure
