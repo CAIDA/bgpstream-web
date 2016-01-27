@@ -72,6 +72,13 @@ require(['jquery', 'moment'], function ($, moment) {
         }
         buildTable('ris-tbody', risData);
 
+        var caidaBmpData = json.data.projects['caida-bmp'];
+        if (!caidaBmpData) {
+            onError('Missing CAIDA BMP data');
+            return;
+        }
+        buildTable('caida-bmp-tbody', caidaBmpData);
+
         $('.progress').hide();
         $('table').show();
     }
