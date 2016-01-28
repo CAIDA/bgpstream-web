@@ -48,9 +48,14 @@ Data interface options for 'broker':
    -t <type>      process records with only the given type (ribs, updates)*
    -w <start>[,<end>]
                   process records within the given time window
-                    (omitting the end parameter enables live mode)*
-   -P <period>    process a rib files every <period> seconds (bgp time)
-   -l            enable live mode (make blocking requests for BGP records)
+                  (omitting the end parameter enables live mode)*
+   -P <period>   process a rib files every <period> seconds (bgp
+                        time)
+   -j <peer ASN>  return valid elems originated by a specific peer ASN*
+   -k <prefix>    return valid elems associated with a specific prefix*
+   -y <community> return valid elems with the specified community*
+                  (format: asn:value, the '*' metacharacter is recognized)
+   -l             enable live mode (make blocking requests for BGP records)
                   allows bgpstream to be used to process data in
                   real-time
 ~~~
@@ -82,7 +87,7 @@ Below we provide details about the following formats:
 ### BGP Elem Format (default) {% verbatim %}{#elem}{% endverbatim %}
 
 ~~~
-<dump-type>|<elem-type>|<record-ts>|<project>|<collector>|<peer-ASn>|<peer-IP>|<prefix>|<next-hop-IP>|<AS-path>|<origin-AS>|<old-state>|<new-state>
+<dump-type>|<elem-type>|<record-ts>|<project>|<collector>|<peer-ASn>|<peer-IP>|<prefix>|<next-hop-IP>|<AS-path>|<origin-AS>|<communities>|<old-state>|<new-state>
 ~~~
 
 The **dump-type** field is one of:
@@ -116,13 +121,14 @@ Where the **dump-type** field is always set to **R**, and the
 ~~~
 $ bgpreader -w 1445306400,1445306402 -c route-views.sfmix
 R|B|1445306400|routeviews|route-views.sfmix
-R|R|1445306400|routeviews|route-views.sfmix|32354|206.197.187.5|1.0.0.0/24|206.197.187.5|32354 15169|15169||
+R|R|1445306400|routeviews|route-views.sfmix|32354|206.197.187.5|1.0.0.0/24|206.197.187.5|32354 15169|15169|||
 ...
-R|R|1445306401|routeviews|route-views.sfmix|14061|2001:504:30::ba01:4061:1|3803:b600::/32|2001:504:30::ba01:4061:1|14061 2914 3549 27751|27751||
+R|R|1445306401|routeviews|route-views.sfmix|14061|2001:504:30::ba01:4061:1|2c0f:ffd8::/32|2001:504:30::ba01:4061:1|14061 1299 33762|33762|1299:30000||
+R|R|1445306401|routeviews|route-views.sfmix|32354|2001:504:30::ba03:2354:1|2c0f:ffd8::/32|2001:504:30::ba00:6939:1|32354 6939 37105 33762|33762|||
+R|R|1445306401|routeviews|route-views.sfmix|14061|2001:504:30::ba01:4061:1|3803:b600::/32|2001:504:30::ba01:4061:1|14061 2914 3549 27751|27751|2914:420 2914:1008 2914:2000 2914:3000||
 R|E|1445306401|routeviews|route-views.sfmix
-U|A|1445306401|routeviews|route-views.sfmix|32354|2001:504:30::ba03:2354:1|2402:ef35::/32|2001:504:30::ba03:2354:1|32354 6939 6453 4755 7633|7633||
-U|A|1445306401|routeviews|route-views.sfmix|14061|2001:504:30::ba01:4061:1|2a02:158:200::/39|2001:504:30::ba01:4061:1|14061 2914 44946|44946||
-U|A|1445306401|routeviews|route-views.sfmix|14061|206.197.187.10|66.19.194.0/24|206.197.187.10|14061 2914 7029 6316|6316||
+U|A|1445306401|routeviews|route-views.sfmix|32354|2001:504:30::ba03:2354:1|2402:ef35::/32|2001:504:30::ba03:2354:1|32354 6939 6453 4755 7633|7633|||
+U|A|1445306401|routeviews|route-views.sfmix|14061|2001:504:30::ba01:4061:1|2a02:158:200::/39|2001:504:30::ba01:4061:1|14061 2914 44946|44946|2914:410 2914:1201 2914:2202 2914:3200||
 ...
 ~~~
 

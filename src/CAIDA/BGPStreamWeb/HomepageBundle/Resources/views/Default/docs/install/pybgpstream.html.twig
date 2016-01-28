@@ -28,9 +28,9 @@
 
     <pre><code>$ mkdir ~/src
 $ cd ~/src/
-$ wget {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-1.0.0.tar.gz', absolute=true) }}
-$ tar zxf pybgpstream-1.0.0.tar.gz
-$ cd pybgpstream-1.0.0
+$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-1.1.0.tar.gz', absolute=true) }}
+$ tar zxf pybgpstream-1.1.0.tar.gz
+$ cd pybgpstream-1.1.0
 $ python setup.py build_ext
 $ sudo python setup.py install</code></pre>
 
