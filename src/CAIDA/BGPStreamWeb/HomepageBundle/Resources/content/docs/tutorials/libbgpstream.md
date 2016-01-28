@@ -165,13 +165,16 @@ bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_COLLECTOR, "route-views2");
   
 bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_RECORD_TYPE, "updates");
 
+bgpstream_add_filter(bs, BGPSTREAM_FILTER_TYPE_ELEM_PREFIX, "2403:f600::/32");
+
+
 bgpstream_add_interval_filter(bs, 1407806410, 1407825135);
 ~~~
 
 <br>
-
+The prefix filter select _2403:f600::/32_ and more specifics.
 Finally, for each elem, the program prints out only the information
-associated with announcements and withdrawals related to the selected
+associated with announcements and withdrawals related to the exact
 prefix. 
 
 ~~~ .language-c
