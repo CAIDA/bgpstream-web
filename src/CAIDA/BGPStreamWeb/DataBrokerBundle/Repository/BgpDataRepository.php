@@ -64,6 +64,8 @@ class BgpDataRepository extends EntityRepository {
     {
         $where = '';
 
+        $future = 0;
+
         // if we've already tried to get data and the end of the constraint
         // interval is after the end of the last interval in the set, return null
         if($retryCnt > 0 &&
@@ -74,7 +76,7 @@ class BgpDataRepository extends EntityRepository {
              ($minInitialTime + $constraintLength) >
              $intervals->getLastInterval()->getEnd()))
         ) {
-            return null;
+            $future = 1;
         }
 
         // compute our constraint interval
@@ -104,7 +106,7 @@ class BgpDataRepository extends EntityRepository {
                                             $cnt,
                                             false);
 
-        return $where;
+        return [$where, $future];
     }
 
     private function buildTsWhere($responseTime, $dataAddedSince, $minInitialTime, &$parameters)
@@ -211,6 +213,7 @@ class BgpDataRepository extends EntityRepository {
         $retries = 0;
         $minInitialQueryTime = $minInitialTime;
         $constraintLength = static::QUERY_WINDOW;
+        $futureCnt = 0;
         while(!count($files)) {
 
             // set the correct minInitialTime and minInitialQueryTime
@@ -239,10 +242,13 @@ class BgpDataRepository extends EntityRepository {
 
             // build the fileTime where clause
             $timeParams = [];
-            $timeWhere  =
+            $res  =
                 $this->buildFileTimeWhere($intervals, $minInitialQueryTime, $constraintLength,
                                           $timeParams, $retries++, $responseTime);
-            if(!$timeWhere) { // there's no data!
+            $timeWhere = $res[0];
+            $futureCnt += $res[1];
+
+            if($futureCnt > 1) { // give up
                 return [];
             }
             $newFiles = $this->findDataByWhere($projects, $collectors, $types,
