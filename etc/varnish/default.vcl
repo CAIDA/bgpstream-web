@@ -6,6 +6,7 @@ vcl 4.0;
 #varnishd_listen=":8080"
 #varnishd_storage="malloc,10G"
 
+include "/usr/local/etc/varnish/sites-enabled/bgpstream.vcl";
 include "/usr/local/etc/varnish/sites-enabled/charthouse.vcl";
 
 sub vcl_recv {
@@ -37,5 +38,15 @@ sub vcl_deliver {
     if (req.http.X-Conf-Host == "charthouse.caida.org" ||
         req.http.X-Conf-Host == "charthouse-dev.caida.org") {
         call charthouse_vcl_deliver;
+    } else if (req.http.X-Conf-Host == "bgpstream.caida.org" ||
+              req.http.X-Conf-Host == "bgpstream-dev.caida.org") {
+        call bgpstream_vcl_deliver;
+    }
+}
+
+sub vcl_hash {
+    if (req.http.X-Conf-Host == "bgpstream.caida.org" ||
+        req.http.X-Conf-Host == "bgpstream-dev.caida.org") {
+        call bgpstream_vcl_hash;
     }
 }
