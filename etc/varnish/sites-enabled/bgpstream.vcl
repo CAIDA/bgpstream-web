@@ -5,13 +5,13 @@ backend bgpstream {
     .port = "8080";
 }
 
-acl comet {
-    "198.202.112.0/21";
-}
+//acl comet {
+//    "198.202.112.0/21"; // comet
+//}
 
 acl caida {
-    "192.172.226.0/24";
-    "198.202.64.0/18";
+    "192.172.226.0/24"; // caida-net
+    "198.202.64.0/18";  // sdsc
 }
 
 sub bgpstream_vcl_recv {
@@ -27,9 +27,7 @@ sub bgpstream_vcl_recv {
                                   "^(.*),.+$", "\1");
     }
 
-    if (std.ip(req.http.xff, "0.0.0.0") ~ comet) {
-        set req.http.X-bgp-archive = "comet";
-    } else if (std.ip(req.http.xff, "0.0.0.0") ~ caida) {
+    if (std.ip(req.http.xff, "0.0.0.0") ~ caida) {
         set req.http.X-bgp-archive = "caida";
     } else {
         set req.http.X-bgp-archive = "public";
