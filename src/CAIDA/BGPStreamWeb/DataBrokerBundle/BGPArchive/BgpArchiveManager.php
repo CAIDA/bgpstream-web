@@ -24,7 +24,7 @@ class BgpArchiveManager {
 
     public function __construct()
     {
-        $this->archives[] = new CometBgpArchive();
+        //$this->archives[] = new CometBgpArchive();
         $this->archives[] = new CaidaBgpArchive();
         $this->archives[] = new RouteviewsBgpArchive();
         $this->archives[] = new RisBgpArchive();
@@ -34,6 +34,7 @@ class BgpArchiveManager {
      * @param Request $request
      * @param BgpData[] $bgpdata
      * @return DumpFileSet
+     * @throws AccessDeniedHttpException
      */
     public function generateDumpFiles($request, $bgpdata)
     {
