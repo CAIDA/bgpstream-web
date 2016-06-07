@@ -5,9 +5,9 @@ backend bgpstream {
     .port = "8080";
 }
 
-acl comet {
-    "198.202.112.0/21"; // comet
-}
+//acl comet {
+//    "198.202.112.0/21"; // comet
+//}
 
 acl caida {
     "192.172.226.0/24"; // caida-net
