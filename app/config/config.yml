@@ -120,10 +120,10 @@ lsw_memcache:
             pool: default
             entity_manager: default          # the name of your entity_manager connection
             document_manager: default        # the name of your document_manager connection
-        #result_cache:
-        #    pool: default
-        #    entity_manager: [default, read]  # you may specify multiple entity_managers
-        #    prefix: "result_"                # you may specify a prefix for the entries
+        result_cache:
+            pool: default
+            entity_manager: [default, read]  # you may specify multiple entity_managers
+            prefix: "result_"                # you may specify a prefix for the entries
         query_cache:
             pool: default
             entity_manager: default
