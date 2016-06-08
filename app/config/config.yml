@@ -109,8 +109,8 @@ fos_http_cache:
                     overwrite: true
                     cache_control:
                         public: true
-                        max_age: 10
-                        s_maxage: 10
+                        max_age: 25
+                        s_maxage: 25
                     last_modified: "-1 hour"
                     vary: [Accept-Encoding]
 
