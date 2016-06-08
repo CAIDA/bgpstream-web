@@ -20,7 +20,7 @@ class DefaultController extends Controller
     const MAX_INTERVALS = 100;
 
     // the amount to round the response time by (used to facilitate caching)
-    const RESPONSE_TS_GRANULARITY = 60;
+    const RESPONSE_TS_GRANULARITY = 10;
 
     private $cacheParams;
 
@@ -258,9 +258,9 @@ class DefaultController extends Controller
 
         /* reset the response time to facilitate caching */
         $cacheStr = implode(array_merge($projects, array_merge($collectors, $intervals->getIntervals())));
-        $offset = crc32($cacheStr) % static::RESPONSE_TS_GRANULARITY;
-        $rounded = ((int)($response->getTime() / static::RESPONSE_TS_GRANULARITY)) * static::RESPONSE_TS_GRANULARITY;
-        $response->setTime($rounded - $offset);
+        $offsetTime = $response->getTime() - (crc32($cacheStr) % static::RESPONSE_TS_GRANULARITY);
+        $rounded = ((int)($offsetTime / static::RESPONSE_TS_GRANULARITY)) * static::RESPONSE_TS_GRANULARITY;
+        $response->setTime($rounded);
 
         /* guaranteed to be sorted by start time */
         $bgpdata =

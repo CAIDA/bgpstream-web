@@ -109,8 +109,8 @@ fos_http_cache:
                     overwrite: true
                     cache_control:
                         public: true
-                        max_age: 20
-                        s_maxage: 20
+                        max_age: 10
+                        s_maxage: 10
                     last_modified: "-1 hour"
                     vary: [Accept-Encoding]
 
@@ -120,10 +120,10 @@ lsw_memcache:
             pool: default
             entity_manager: default          # the name of your entity_manager connection
             document_manager: default        # the name of your document_manager connection
-        #result_cache:
-        #    pool: default
-        #    entity_manager: [default, read]  # you may specify multiple entity_managers
-        #    prefix: "result_"                # you may specify a prefix for the entries
+        result_cache:
+            pool: default
+            entity_manager: [default, read]  # you may specify multiple entity_managers
+            prefix: "result_"                # you may specify a prefix for the entries
         query_cache:
             pool: default
             entity_manager: default
