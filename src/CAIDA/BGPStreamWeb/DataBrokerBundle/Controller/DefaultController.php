@@ -20,7 +20,7 @@ class DefaultController extends Controller
     const MAX_INTERVALS = 100;
 
     // the amount to round the response time by (used to facilitate caching)
-    const RESPONSE_TS_GRANULARITY = 20;
+    const RESPONSE_TS_GRANULARITY = 15;
 
     private $cacheParams;
 
