@@ -12,6 +12,7 @@ class CaidaBgpArchive implements BgpArchiveInterface {
     private $allowedRanges = [
         '192.172.226.0/24', // CAIDA
         '198.202.64.0/18', // SDSC
+        '82.130.102.210/32', // ETH-Z (temporary for Thomas)
     ];
 
     /**
