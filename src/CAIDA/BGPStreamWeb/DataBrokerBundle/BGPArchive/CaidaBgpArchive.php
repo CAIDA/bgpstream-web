@@ -12,6 +12,7 @@ class CaidaBgpArchive implements BgpArchiveInterface {
     private $allowedRanges = [
         '192.172.226.0/24', // CAIDA
         '198.202.64.0/18', // SDSC
+        '82.130.102.0/24', // ETH-Z (temporary for Thomas)
     ];
 
     /**
@@ -50,6 +51,10 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         if(!$preferCaida) {
             return false;
         }
+
+        // 2016-08-18 temporary short-circuit to direct all users to caida data
+        return true;
+        /*
         $client_ip =
             isset($_SERVER['HTTP_X_REAL_IP']) ? $_SERVER['HTTP_X_REAL_IP'] :
                 @$_SERVER['REMOTE_ADDR'];
@@ -60,6 +65,7 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         }
 
         return false;
+        */
     }
 
     public function generateDumpFile($row)
