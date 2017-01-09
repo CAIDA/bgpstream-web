@@ -2,7 +2,7 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host:     loki-ge.caida.org
+    database_host:     
     database_port:
     database_name:     bgparchive
     database_user:     bgpstream
@@ -14,7 +14,7 @@ parameters:
     mailer_password:   ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            4f6641f2823f944a8c1de1bb5ead58d662744dd7
+    secret:            notasecret
 
     memcache_servers:
-        - { host: 127.0.0.208, tcp_port: 11211 } # production instance
+        - { host: 127.0.0.1, tcp_port: 11211 } 

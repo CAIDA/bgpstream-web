@@ -24,8 +24,7 @@ class BgpArchiveManager {
 
     public function __construct()
     {
-        //$this->archives[] = new CometBgpArchive();
-        $this->archives[] = new CaidaBgpArchive();
+        $this->archives[] = new LocalBgpArchive();
         $this->archives[] = new RouteviewsBgpArchive();
         $this->archives[] = new RisBgpArchive();
     }
