@@ -22,7 +22,7 @@
                                role="tab"
                                data-toggle="tab">Arch Linux</a></li>
     <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
-                               data-toggle="tab">Mac OSX</a></li>
+                               data-toggle="tab">macOS (Mac OSX)</a></li>
 </ul>
 
 <div class="tab-content">
@@ -108,7 +108,7 @@ $ make
             compliant C Compiler
             which supports the C99 standard. We have tested BGPStream on
             FreeBSD, Linux and
-            Mac OSX using a variety of common compiler versions. Please open
+            macOS using a variety of common compiler versions. Please open
             an issue on our
             <a href="https://github.com/caida/bgpstream/issues" target="_blank">GitHub
                 page</a> with any problems you encounter.</p>
@@ -423,6 +423,14 @@ $ ./configure
 $ make
 $ make check
 $ sudo make install</code></pre>
+
+        <p>If you get the following error:</p>
+        <pre><code>checking for library containing wandio_create... no
+configure: error: libwandio required (http://research.wand.net.nz/software/libwandio.php)</code></pre>
+        <p>But you have already installed wandio, then you may need to run:</p>
+        <pre><code>$ export C_INCLUDE_PATH="/usr/local/include:$C_INCLUDE_PATH"
+$ export LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"</code></pre>
+        <p>and then re-run configure.</p>
 
         <p>Please open an issue on our
             <a href="https://github.com/caida/bgpstream/issues" target="_blank">GitHub
