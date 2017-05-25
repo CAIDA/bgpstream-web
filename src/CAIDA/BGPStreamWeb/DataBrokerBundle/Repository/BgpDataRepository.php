@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityRepository;
 class BgpDataRepository extends EntityRepository {
 
     // max window of time to ask from the DB
-    const QUERY_WINDOW = 7200; // 2 hours
+    const QUERY_WINDOW = 3600*6; // 6 hours
 
     // max query window length when doing exponential expansion
     const QUERY_WINDOW_MAX = 2419200; // 28 days
