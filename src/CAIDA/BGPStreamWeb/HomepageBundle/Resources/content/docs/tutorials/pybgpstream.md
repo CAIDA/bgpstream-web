@@ -193,7 +193,7 @@ adoption of routing policies. The example is fully functioning and it
 can be  run using the following command: 
 
 ~~~
-$ python pybgpstream-moas.py
+$ python pybgpstream-aspath.py
    ...
    3549 27316 6 5
    3549 27314 3 3
