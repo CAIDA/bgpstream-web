@@ -1,0 +1,590 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>BGPStream V2 Private Beta</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div id="intro">
+                <p>
+                    Over the last year, we have
+                    been working on a new release of BGPStream. This version
+                    contains several new features including native support for
+                    true <a href="#bmp">real-time data access via BMP</a>,
+                    as well as a bunch of
+                    bug fixes, and performance improvements. See the <a
+                            href="#changes">Changes</a>
+                    section below for a more detailed list.
+                </p>
+                <p>
+                    Since there have been significant changes made to the core
+                    of BGPStream, we are making this pre-release snapshot of v2
+                    available to select users for testing and evaluation before
+                    making a full public beta release.
+                </p>
+                <p>
+                    See the <a href="#bmp">Live BMP Stream</a> section below for
+                    help accessing the new realtime BMP stream.
+                </p>
+            </div>
+            <div id="feedback">
+                <h2>Feedback</h2>
+                <p>
+                    We appreciate your support of this project, and your
+                    willingness to help us test the next version. Please
+                    create an issue on either the
+                    <a href="https://github.com/caida/libbgpstream" target="_blank">libBGPStream</a>
+                    or
+                    <a href="https://github.com/caida/pybgpstream" target="_blank">PyBGPStream</a>
+                    GitHub repos detailing any problems you have, or
+                    alternatively, contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                </p>
+            </div>
+            <div id="changes">
+                <h2>Changes</h2>
+                <h4>New Features</h4>
+                <ul>
+                    <li><i>Native BMP support</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports processing raw BMP data in
+                                the same way as MRT.
+                            </li>
+                            <li>
+                                Currently the "singlefile" and
+                                the new "kafka" and "beta-bmp-stream" data interfaces
+                                provide access to BMP data. The "singlefile"
+                                interface can be used to process local dumps of
+                                raw BMP data whereas the "kafka" interface can be
+                                used to access BMP (or MRT) data from a Kafka
+                                cluster.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Realtime data stream (via OpenBMP)</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports processing realtime BGP
+                                data from an OpenBMP collector.
+                            </li>
+                            <li>
+                                Access to
+                                private OpenBMP feeds is supported using the
+                                "kafka" data interface, whereas the
+                                "beta-bmp-stream" data interface may be used to
+                                access the public BMP stream provided as part
+                                of the BGPStream project.
+                            </li>
+                            <li>
+                                See the
+                                <a href="#bmp">BMP</a> section below for more
+                                information.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Local (optional) caching of dump files</i>
+                        <ul>
+                            <li>
+                                Data files processed by the broker can now be
+                                cached to a local directory which is checked
+                                before downloading a dump file.
+                            </li>
+                            <li>
+                                Previously using BGPStream to re-process
+                                data (e.g., when testing/debugging code), poor
+                                network connectivity could add overhead to
+                                processing time.
+                            </li>
+                            <li>
+                                The caching implementation is thread
+                                safe and can support parallel
+                                instances of BGPStream (either as threads or
+                                separate processes).
+                            </li>
+                            <li>
+                                The cache can be enabled by setting the
+                                <code>cache-dir</code> parameter of the "broker"
+                                data interface. E.g., by passing
+                                <code>-o cache-dir=/path/to/cache</code> to
+                                <code>bgpreader</code>, or by calling
+                                <code>stream.set_data_interface_option("broker", "cache-dir", "/path/to/cache")</code>
+                                from PyBGPStream.
+                            </li>
+                            <li>
+                                Thanks to Mingwei Zhang for contributing
+                                this feature.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>New (prototype) high-level PyBGPStream API</i>
+                        <ul>
+                            <li>
+                                There is now a high-level "Pythonic" API for
+                                accessing BGP data using BGPStream.
+                            </li>
+                            <li>
+                                Previously the only Python interface was
+                                <code>_pybgpstream</code>, a low-level, almost
+                                exact bindings to the libBGPStream C API.
+                            </li>
+                            <li>
+                                See the <a href="#api">API docs</a> below for
+                                more information.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>New filter interface</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports a "BPF-like" syntax
+                                for specifying filters.
+                            </li>
+                            <li>
+                                E.g., <code>collector route-views.sg and type ribs and prefix exact 192.172.226.0/24</code>
+                                would extract only RIB records matching the given prefix from the <code>route-views.sg</code> collector.
+                            </li>
+                            <li>
+                                For BGPReader, this feature may be accessed
+                                using the <code>-f</code> option.
+                            </li>
+                            <li>
+                                For PyBGPStream, filters can be specified either
+                                using the <code>filter</code> parameter to the
+                                <code>BGPStream</code> constructor, or by
+                                calling the <code>parse_filter_string</code>
+                                method on an existing stream.
+                            </li>
+                            <li>
+                                While the previous APIs for specifying filters
+                                are still available, this interface should be
+                                used as new filter types will only be available
+                                through this interface, and eventually the other
+                                filter methods will be deprecated.
+                            </li>
+                            <li>
+                                See the <a href="https://github.com/CAIDA/libbgpstream/blob/v2-beta/FILTERING" target="_blank">temporary documentation</a> for more information.
+                            </li>
+                            <li>
+                                Thanks to Shane Alcock for contributing this
+                                feature.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>Bug Fixes</h4>
+                <ul>
+                    <li><i>Patricia Tree Fixes</i>
+                        <ul>
+                            <li>
+                                We have made several fixes to the patricia
+                                trie implementation used by libBGPStream.
+                            </li>
+                            <li>
+                                For most users this only affected prefix
+                                filtering. Previously all prefix filters were
+                                treated as "ANY" filters (rather than
+                                MORE/EXACT/LESS).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>Performance Improvements</h4>
+                <ul>
+                    <li>
+                        <i>New MRT parser</i>
+                        <ul>
+                            <li>
+                                Along with developing a BMP parser, we also
+                                developed a new MRT parser,
+                                <a href="https://github.com/CAIDA/libparsebgp" target="_blank">libParseBGP</a>
+                                to replace the fork of libbgpdump we used in V1.
+                            </li>
+                            <li>
+                                libParseBGP should be much faster than
+                                libbgpdump (~30% faster in some tests we ran)
+                                and is designed to be easier to maintain and
+                                extend.
+                            </li>
+                            <li>
+                                It is possible/likely that there are some MRT
+                                peculiarities that are not correctly handled
+                                by libParseBGP (yet). If you come across any
+                                problems, please contact us.
+                            </li>
+                        </ul>
+                            </li>
+                    <li>
+                        <i>Completely re-designed resource management</i>
+                        <ul>
+                            <li>
+                                To support addition of other data formats (e.g.,
+                                BMP), and data transport mechanisms (e.g., Kafka),
+                                we completely re-designed the core resource
+                                management components of libBGPStream.
+                            </li>
+                            <li>
+                                In addition to simplifying adding support for
+                                new formats, the new implementation appears to
+                                perform ~10% better than V1.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>Improved Record API</i>
+                        <ul>
+                            <li>
+                                We
+                                changed the <code>get_next_record</code> API
+                                to return a borrowed pointer to an internal
+                                record structure, rather than filling a
+                                structure passed by the user.
+                            </li>
+                            <li>
+                                This minimizes memory allocations and copying
+                                within libBGPStream, improving performance.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>PyBGPStream Improvements</h4>
+                <ul>
+                    <li>BGPElem <code>fields</code> attribute is now cached so
+                    that subsequent field accesses do not needlessly rebuild
+                    the entire fields diectionary.</li>
+                    <li>By popular demand, communities in PyBGPStream are now
+                        returned as a set of "asn:value" strings</li>
+                </ul>
+                <h4>Misc. Improvements</h4>
+                <ul>
+                    <li>Added <code>bgpstream_pfx_copy</code> method</li>
+                    <li>Added <code>bgpstream_as_path_get_origin_val</code>
+                        method to extract origin ASN as simple integer. (Contributed by
+                        Samir Al-Sheikh.)</li>
+                    <li>No longer require time interval to be set. This
+                    simplifies use of the "singlefile" data interface.</li>
+                    <li>Added documentation of the AS Path string format.</li>
+                    <li>BGPReader data interface options are now specified as
+                    <code>-o &lt;param&gt;=&lt;value&gt;</code> rather than
+                        <code>-o &lt;param&gt;,&lt;value&gt;</code> which was
+                        weird syntax.</li>
+                </ul>
+            </div>
+            <div id="download">
+                <h2>Downloads</h2>
+                <h4>libBGPStream</h4>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Source Tarball</td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-1.tar.gz') }}">libbgpstream-2.0.0-beta-1.tar.gz</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clone on GitHub</td>
+                        <td><a href="https://github.com/CAIDA/libbgpstream/tree/v2-beta"
+                               target="_blank">libBGPStream (v2-beta branch)</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>PyBGPStream</h4>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Source Tarball</td>
+                        <td>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-1.tar.gz') }}">pybgpstream-2.0.0-beta-1.tar.gz</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Clone on GitHub</td>
+                        <td><a href="http://github.com/caida/pybgpstream/tree/v2-beta"
+                               target="_blank">PyBGPStream (v2-beta branch)</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="installing">
+                <h2>Installing libBGPStream and PyBGPStream</h2>
+                <p>
+                    The following instructions assume some familiarity with
+                    installing software from source and are specific to Ubuntu
+                    and macOS. For additional help, or help installing BGPStream
+                    on another OS, please contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                </p>
+                <p>
+                    Note: installing BGPStream V2 is very similar to installing
+                    v1, so you may find the detailed <a
+                            href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'}) }}">
+                        libBGPStream
+                    </a> and <a
+                            href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'pybgpstream'}) }}">
+                        PyBGPStream
+                    </a> install guides useful.
+                </p>
+                <p>
+                    Also, while the README for PyBGPStream suggests installing
+                    using pip, the v2 beta has not yet been uploaded to PyPI and
+                    must be installed from source.
+                </p>
+                <h3>Ubuntu Instructions</h3>
+                <p>1. Ensure dependencies are installed:</p>
+                <pre><code>sudo apt-get install build-essential zlib1g-dev libbz2-dev libcurl4-openssl-dev python-dev</code></pre>
+                <p>2. Install
+                    <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:</p>
+                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-1.0.4.tar.gz
+tar zxf wandio-1.0.4.tar.gz
+cd wandio-1.0.4/
+./configure
+make
+sudo make install
+sudo ldconfig</code></pre>
+                <p>3. Install <a
+                            href="https://github.com/edenhill/librdkafka/releases">rdkafka</a>:</p>
+                <pre><code>curl -O https://github.com/edenhill/librdkafka/archive/v0.11.1.tar.gz
+tar zxf v0.11.1.tar.gz
+cd librdkafka-0.11.1/
+./configure
+make
+sudo make install
+sudo ldconfig</code></pre>
+                <p>4. Install libBGPStream:</p>
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-1.tar.gz', absolute=true) }}
+tar zxf libbgpstream-2.0.0-beta-1.tar.gz
+cd libbgpstream-2.0.0/
+./configure
+make
+make check
+sudo make install
+sudo ldconfig</code></pre>
+                <p>5. Install PyBGPStream:</p>
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-1.tar.gz', absolute=true) }}
+tar zxf pybgpstream-2.0.0-beta-1.tar.gz
+cd pybgpstream-2.0.0/
+python setup.py build_ext
+sudo python setup.py install</code></pre>
+
+                <h3>macOS Instructions</h3>
+                <p>
+                    These instructions assume that you are using
+                    <a href="https://brew.sh" target="_blank">Homebrew</a>
+                    to manage packages. If you are not using a package manager,
+                    or are using MacPorts, follow steps 2 and 3 of the Ubuntu
+                    install instructions instead of step 1 below (but do not
+                    execute the <code>sudo ldconfig</code> commands).
+                </p>
+                <p>1. Install dependencies:</p>
+                <pre><code>brew install wandio librdkafka</code></pre>
+                <p>2. Install libBGPStream:</p>
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-1.tar.gz', absolute=true) }}
+tar zxf libbgpstream-2.0.0-beta-1.tar.gz
+cd libbgpstream-2.0.0/
+./configure
+make
+make check
+sudo make install</code></pre>
+                <p>3. Install PyBGPStream:</p>
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-1.tar.gz', absolute=true) }}
+tar zxf pybgpstream-2.0.0-beta-1.tar.gz
+cd pybgpstream-2.0.0/
+python setup.py build_ext
+sudo python setup.py install</code></pre>
+            </div>
+            <div id="api">
+                <h2>Upgrading Code</h2>
+                <p>
+                    There have been some changes made to the libBGPStream and
+                    PyBGPStream APIs. Below are some instructions for upgrading
+                    your code to work with BGPStream V2.
+                </p>
+                <h4>libBGPStream</h4>
+                <p>
+                    There have been several changes made to the C API, but all
+                    changes will result in compiler errors, so it should be
+                    safe to use the compiler to direct you to code that needs
+                    changing. You should use the
+                    <a href="https://github.com/CAIDA/libbgpstream/blob/v2-beta/tools/bgpreader.c">BGPReader code</a>
+                    as a reference for using the new API, and please contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>
+                    if you need further assistance.
+                </p>
+
+                <h4>PyBGPStream</h4>
+                <p>
+                    We have added a prototype high-level Python module,
+                    <code>pybgpstream</code> that should be used instead of
+                    the low-level <code>_pybgpstream</code> module.
+                    Below is a short working example using this API. See the
+                    bundled
+                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2-beta/examples/pybgpstream-template.py" target="_blank">sample template</a>
+                    for more information. We are still developing documentation
+                    for this module, so for now, the best reference is
+                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2-beta/pybgpstream/pybgpstream.py" target="_blank">the code</a>.
+                    Please create an issue (or PR!) on
+                    <a href="https://github.com/CAIDA/pybgpstream/issues" target="_blank">GitHub</a>
+                    if you have any suggestions for improving this interface.
+                </p>
+                <pre><code class="language-python">import pybgpstream
+stream = pybgpstream.BGPStream(
+    from_time="2017-07-07 00:00:00", until_time="2017-07-07 00:10:00 UTC",
+    collectors=["route-views.sg", "route-views.eqix"],
+    record_type="updates",
+    filter="peer 11666 and prefix more 210.180.0.0/16"
+)
+
+for elem in stream:
+    # record fields can be accessed directly from elem
+    # e.g. elem.time
+    # or via elem.record
+    # e.g. elem.record.time
+    print elem
+</code></pre>
+                <h4>_pybgpstream</h4>
+                <p>
+                    If you wish to continue using the <code>_pybgpstream</code>
+                    module, the API has changed slightly:
+                </p>
+                <p><b>1.</b> Change the import line from:</p>
+                <pre><code class="language-python">from _pybgpstream import BGPStream, BGPRecord, BGPElem</code></pre>
+                <p>to:</p>
+                <pre><code class="language-python">import _pybgpstream</code></pre>
+                <p>
+                    <b>2.</b> Change the line that creates an
+                    instance of BGPStream from something like:
+                </p>
+                <pre><code class="language-python">stream = BGPStream()</code></pre>
+                <p>
+                    to:
+                </p>
+                <pre><code class="language-python">stream = _pybgpstream.BGPStream()</code></pre>
+                <p>
+                    <b>3.</b> Delete the line that creates the BGPRecord
+                    instance:
+                </p>
+                <pre><code class="language-python">rec = BGPRecord()</code></pre>
+
+                <p>
+                    <b>4.</b> The "get_next_record" API has been changed to be the
+                    same as the "get_next_elem" API, so you will go from nested
+                    loops like this:
+                </p>
+
+                <pre><code class="language-python">while(stream.get_next_record(rec)):
+    elem = rec.get_next_elem()
+    while(elem):
+        # do something with the elem
+        elem = rec.get_next_elem()</code></pre>
+
+                <p>
+                    to this:
+                </p>
+
+                <pre><code class="language-python">rec = stream.get_next_record()
+while(rec):
+    elem = rec.get_next_elem()
+        while(elem):
+        # do something with the elem
+        elem = rec.get_next_elem()
+    rec = stream.get_next_record()</code></pre>
+
+                <h4>BGPReader</h4>
+                <p>To accommodate new fields in the underlying record and elem
+                structures (e.g., those specific to BMP data like "router"),
+                the record and elem ASCII formats have changed:</p>
+                <p>V1 Record Format (old)</p>
+                <pre><code>&lt;dump-type&gt;|&lt;dump-pos&gt;|&lt;project&gt;|&lt;collector&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
+                <p>V2 Record Format (new)</p>
+                <pre><code>&lt;type&gt;|&lt;dump-pos&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
+                <p>V1 Elem Format (old)</p>
+                <pre><code>&lt;dump-type&gt;|&lt;elem-type&gt;|&lt;record-ts&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
+  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
+  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
+                <p>V2 Elem Format (new)</p>
+                <pre><code>&lt;rec-type&gt;|&lt;elem-type&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
+  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
+  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
+                <p>Note that timestamps are now represented with sub-second
+                precision. E.g. <code>1499385779</code> is now represented as
+                    <code>1499385779.000000</code></p>
+            </div>
+            <div id="bmp">
+                <h2>Public Live BMP Stream</h2>
+                <p>
+                    As part of the BGPStream project, we have begun to provide
+                    a public BMP feed. Currently we are only providing data
+                    from a few Route Views and Cisco Research peers, but we
+                    expect additional peers to be added soon.
+                    (If you would like to contribute a feed, please contact us
+                    at
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.)
+                </p>
+                <p>
+                    We are providing access to these feeds by way of a
+                    publicly-accessible, read-only, Kafka cluster
+                    (<code>bmp.bgpstream.caida.org</code>) which contains
+                    raw BMP data encapsulated in a custom
+                    <a href="https://github.com/openbmp/openbmp" target="_blank">OpenBMP</a>
+                    message header.
+                    (We plan to contribute the code we developed to generate
+                    these headers back to the upstream OpenBMP repository.)
+                </p>
+                <p>
+                    Unfortunately this release does not support simultaneous
+                    processing of
+                    dump-based MRT data, and stream-based BMP data, but we plan
+                    to add this support in an upcoming beta release. For now
+                    you can work around this by using two stream instances.
+                </p>
+                <h3>Accessing the Stream</h3>
+                <p>
+                    In this release, access to this live BMP feed is provided
+                    by way of the temporary "beta-bmp-stream" data interface.
+                    See below for examples of how to use this interface.
+                </p>
+                <p>
+                    BGPStream will use a random
+                    <a href="https://kafka.apache.org/documentation/#intro_consumers" target="_blank">Kafka "consumer group"</a>
+                    unless the <code>group</code>
+                    data interface option is set for the "beta-bmp-stream" data
+                    interface. Setting the group option allows the stream
+                    to be effectively load-balanced over multiple instances of
+                    BGPStream. It also provides some amount of fault-tolerance
+                    since BGPStream will resume where it left off.
+                </p>
+                <h4>From BGPReader</h4>
+                <p>Accessing the feed from BGPReader is as simple as choosing
+                the "beta-bmp-stream" data interface:</p>
+                <pre><code>bgpreader -d beta-bmp-stream</code></pre>
+                <h4>From PyBGPStream</h4>
+                <pre><code class="language-python">import pybgpstream
+for elem in pybgpstream.BGPStream(data_interface="beta-bmp-stream"):
+    print elem</code></pre>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
+            <p class="text-muted">On this page:</p>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="#intro">Intro</a></li>
+                <li role="presentation"><a href="#changes">Feedback</a></li>
+                <li role="presentation"><a href="#changes">Changes</a></li>
+                <li role="presentation"><a href="#download">Downloads</a></li>
+                <li role="presentation"><a href="#installing">Installing</a></li>
+                <li role="presentation"><a href="#api">Upgrading Code</a></li>
+                <li role="presentation"><a href="#bmp">Live BMP Stream</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
