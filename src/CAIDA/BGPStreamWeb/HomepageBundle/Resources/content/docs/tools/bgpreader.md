@@ -8,7 +8,7 @@ BGP stream.
 Usage
 -----
 
-BGPReader requires the user to specify the stream time interval, and
+BGPReader requires the user to specify the stream time interval (in Unix epoch), and
 it accepts the following command line options: 
 
 ~~~
@@ -47,8 +47,8 @@ Data interface options for 'broker':
    -c <collector> process records from only the given collector*
    -t <type>      process records with only the given type (ribs, updates)*
    -w <start>[,<end>]
-                  process records within the given time window
-                  (omitting the end parameter enables live mode)*
+                  process records within the given time window specified as Unix
+                  epoch (omitting the end parameter enables live mode)*
    -P <period>   process a rib files every <period> seconds (bgp
                         time)
    -j <peer ASN>  return valid elems originated by a specific peer ASN*
