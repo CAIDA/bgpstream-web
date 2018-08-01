@@ -51,10 +51,6 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         if(!$preferCaida) {
             return false;
         }
-
-        // 2016-08-18 temporary short-circuit to direct all users to caida data
-        return true;
-        /*
         $client_ip =
             isset($_SERVER['HTTP_X_REAL_IP']) ? $_SERVER['HTTP_X_REAL_IP'] :
                 @$_SERVER['REMOTE_ADDR'];
@@ -65,7 +61,6 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         }
 
         return false;
-        */
     }
 
     public function generateDumpFile($row)

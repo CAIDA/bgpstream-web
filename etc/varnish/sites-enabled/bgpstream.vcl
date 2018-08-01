@@ -9,10 +9,10 @@ backend bgpstream {
 //    "198.202.112.0/21"; // comet
 //}
 
-//acl caida {
-//    "192.172.226.0/24"; // caida-net
-//    "198.202.64.0/18";  // sdsc
-//}
+acl caida {
+    "192.172.226.0/24"; // caida-net
+    "198.202.64.0/18";  // sdsc
+}
 
 sub bgpstream_vcl_recv {
     set req.backend_hint = bgpstream;
@@ -27,11 +27,11 @@ sub bgpstream_vcl_recv {
                                   "^(.*),.+$", "\1");
     }
 
-    //if (std.ip(req.http.xff, "0.0.0.0") ~ caida) {
+    if (std.ip(req.http.xff, "0.0.0.0") ~ caida) {
         set req.http.X-bgp-archive = "caida";
-    //} else {
-    //    set req.http.X-bgp-archive = "public";
-    //}
+    } else {
+        set req.http.X-bgp-archive = "public";
+    }
 }
 
 sub bgpstream_vcl_hash {
