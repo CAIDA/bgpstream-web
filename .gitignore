@@ -41,3 +41,5 @@
 
 # Capifony files
 /.rsync_cache/
+
+.DS_Store
