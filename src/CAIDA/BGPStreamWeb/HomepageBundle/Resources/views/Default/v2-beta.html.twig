@@ -302,13 +302,13 @@
                     <tr>
                         <td>Source Tarball</td>
                         <td>
-                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-2.tar.gz') }}">pybgpstream-2.0.0-beta-2.tar.gz</a>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz') }}">pybgpstream-2.0.0-beta-3.tar.gz</a>
                         </td>
                     </tr>
                     <tr>
                         <td>Clone on GitHub</td>
-                        <td><a href="http://github.com/caida/pybgpstream/tree/v2-beta"
-                               target="_blank">PyBGPStream (v2-beta branch)</a>
+                        <td><a href="https://github.com/CAIDA/pybgpstream/tree/v2.0-beta-3"
+                               target="_blank">PyBGPStream</a>
                         </td>
                     </tr>
                     </tbody>
@@ -369,8 +369,8 @@ make check
 sudo make install
 sudo ldconfig</code></pre>
                 <p>5. Install PyBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-2.tar.gz', absolute=true) }}
-tar zxf pybgpstream-2.0.0-beta-2.tar.gz
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz', absolute=true) }}
+tar zxf pybgpstream-2.0.0-beta-3.tar.gz
 cd pybgpstream-2.0.0/
 python setup.py build_ext
 sudo python setup.py install</code></pre>
@@ -395,8 +395,8 @@ make
 make check
 sudo make install</code></pre>
                 <p>3. Install PyBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-2.tar.gz', absolute=true) }}
-tar zxf pybgpstream-2.0.0-beta-2.tar.gz
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz', absolute=true) }}
+tar zxf pybgpstream-2.0.0-beta-3.tar.gz
 cd pybgpstream-2.0.0/
 python setup.py build_ext
 sudo python setup.py install</code></pre>
@@ -427,10 +427,10 @@ sudo python setup.py install</code></pre>
                     the low-level <code>_pybgpstream</code> module.
                     Below is a short working example using this API. See the
                     bundled
-                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2-beta/examples/pybgpstream-template.py" target="_blank">sample template</a>
+                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0-beta-3/examples/pybgpstream-template.py" target="_blank">sample template</a>
                     for more information. We are still developing documentation
                     for this module, so for now, the best reference is
-                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2-beta/pybgpstream/pybgpstream.py" target="_blank">the code</a>.
+                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0-beta-3/pybgpstream/pybgpstream.py" target="_blank">the code</a>.
                     Please create an issue (or PR!) on
                     <a href="https://github.com/CAIDA/pybgpstream/issues" target="_blank">GitHub</a>
                     if you have any suggestions for improving this interface.
