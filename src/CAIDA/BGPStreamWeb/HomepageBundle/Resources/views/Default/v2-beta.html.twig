@@ -65,7 +65,23 @@
                         </ul>
                     </li>
 
-                    <li><i>Realtime data stream (via OpenBMP)</i>
+                    <li><i>Realtime data stream via RIS Live</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports obtaining realtime BGP
+                                data from RIPE's <a href="https://ris-live.ripe.net/"> RIS Live BGP message stream </a>.
+                            </li>
+                            <li>
+                                Access to RIS Live stream is supported using the
+                                "ris-live" data interface.
+                            </li>
+                            <li>
+                                To start streaming using bgpreader: <code>bgpreader -d ris-live</code>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Realtime data stream via OpenBMP</i>
                         <ul>
                             <li>
                                 libBGPStream now supports obtaining realtime BGP
@@ -285,12 +301,12 @@
                     <tr>
                         <td>Source Tarball</td>
                         <td>
-                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-6.tar.gz') }}">libbgpstream-2.0.0-beta-6.tar.gz</a>
+                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-7.tar.gz') }}">libbgpstream-2.0.0-beta-7.tar.gz</a>
                         </td>
                     </tr>
                     <tr>
                         <td>Clone on GitHub</td>
-                        <td><a href="https://github.com/CAIDA/libbgpstream/tree/v2.0-beta-6"
+                        <td><a href="https://github.com/CAIDA/libbgpstream/tree/v2.0-beta-7"
                                target="_blank">libBGPStream</a>
                         </td>
                     </tr>
@@ -343,9 +359,9 @@
                 <pre><code>sudo apt-get install build-essential zlib1g-dev libbz2-dev libcurl4-openssl-dev python-dev</code></pre>
                 <p>2. Install
                     <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:</p>
-                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-4.1.2.tar.gz
-tar zxf wandio-4.1.2.tar.gz
-cd wandio-4.1.2/
+                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-4.2.1.tar.gz
+tar zxf wandio-4.2.1.tar.gz
+cd wandio-4.2.1/
 ./configure
 make
 sudo make install
@@ -384,17 +400,26 @@ sudo python setup.py install</code></pre>
                     install instructions instead of step 1 below (but do not
                     execute the <code>sudo ldconfig</code> commands).
                 </p>
-                <p>1. Install dependencies:</p>
+                <p>1. Install librdkafka:</p>
                 <pre><code>brew install wandio librdkafka</code></pre>
-                <p>2. Install libBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-6.tar.gz', absolute=true) }}
-tar zxf libbgpstream-2.0.0-beta-6.tar.gz
+                <p>2. Install
+                    <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:</p>
+                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-4.2.1.tar.gz
+tar zxf wandio-4.2.1.tar.gz
+cd wandio-4.2.1/
+./configure
+make
+sudo make install
+sudo ldconfig</code></pre>
+                <p>3. Install libBGPStream:</p>
+                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-7.tar.gz', absolute=true) }}
+tar zxf libbgpstream-2.0.0-beta-7.tar.gz
 cd libbgpstream-2.0.0/
 ./configure
 make
 make check
 sudo make install</code></pre>
-                <p>3. Install PyBGPStream:</p>
+                <p>4. Install PyBGPStream:</p>
                 <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz', absolute=true) }}
 tar zxf pybgpstream-2.0.0-beta-3.tar.gz
 cd pybgpstream-2.0.0/
@@ -414,7 +439,7 @@ sudo python setup.py install</code></pre>
                     changes will result in compiler errors, so it should be
                     safe to use the compiler to direct you to code that needs
                     changing. You should use the
-                    <a href="https://github.com/CAIDA/libbgpstream/blob/v2.0-beta-6/tools/bgpreader.c">BGPReader code</a>
+                    <a href="https://github.com/CAIDA/libbgpstream/blob/v2.0-beta-7/tools/bgpreader.c">BGPReader code</a>
                     as a reference for using the new API, and please contact
                     <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>
                     if you need further assistance.
