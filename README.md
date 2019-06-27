@@ -1,4 +1,5 @@
-bgpstream-web
+BGPStream website version 2
 =============
 
-A Symfony project created on August 6, 2015, 2:55 pm.
+- [ ] remove broker-related content
+- [ ] update documentation for version 2
