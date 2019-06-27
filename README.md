@@ -1,4 +1,5 @@
-bgpstream-web
+BGPStream website version 1
 =============
 
-A Symfony project created on August 6, 2015, 2:55 pm.
+This is the original version of BGPStream website, containing both the website
+itself and the BGPStream broker.
