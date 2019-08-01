@@ -1,6 +1,3 @@
-# BGPStream website version 2
-
-
 # Version 2 Changelog
 
 -   todo list
