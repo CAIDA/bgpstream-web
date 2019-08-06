@@ -344,42 +344,30 @@ $ sudo ldconfig</code></pre>
 
     {# ---------- ARCH ---------- #}
     <div role="tabpanel" class="tab-pane" id="arch">
-        <h2>Installing from source</h2>
+        <h2>Installing from the AUR</h2>
 
-        <h3>1. Download and install <a
+        <h3>1. Install <a
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
         </h3>
 
-        <pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -O https://research.wand.net.nz/software/wandio/wandio-4.0.0.tar.gz
-$ tar zxf wandio-4.0.0.tar.gz
-$ cd wandio-4.0.0/
-$ ./configure --prefix=/usr
-$ make
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>$ git clone https://aur.archlinux.org/libwandio.git
+$ cd libwandio
+$ makepkg -si</code></pre>
 
-        <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
+        <p><strong>Note:</strong> sudo is needed to run makepkg with the -i flag.</p>
 
         <p>See the generic install instructions for details on how to install
             into a non-default location.</p>
 
-        <h3>3. Download and install BGPStream:</h3>
+        <h3>2. Download and install BGPStream:</h3>
 
-        <pre><code>$ cd ~/src/
-$ curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/bgpstream-1.2.3.tar.gz', absolute=true) }}
-$ tar zxf bgpstream-1.2.3.tar.gz
-$ cd bgpstream-1.2.3/
-$ ./configure --prefix=/usr
-$ make
-$ make check
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>$ git clone https://aur.archlinux.org/bgpstream.git
+$ cd bgpstream
+$ makepkg -si</code></pre>
 
-        <p>Please open an issue on our
-            <a href="https://github.com/caida/bgpstream/issues" target="_blank">GitHub
-                page</a> with any problems you encounter.</p>
+        <p>Please submit a comment on the
+            <a href="https://aur.archlinux.org/packages/bgpstream">AUR page</a>
+              with any problems with building from the AUR.</p>
 
     </div>
 
