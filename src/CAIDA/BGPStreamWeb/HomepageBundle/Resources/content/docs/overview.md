@@ -18,7 +18,7 @@ There are three conceptual layers which are (from top-down):
 </a>
 </div>
 <div class="col-md-8">
-Components that process BGP data using libBGPStream. E.g. BGPReader, BGPCorsaro, PyBGPStream.
+Components that process BGP data using libBGPStream. E.g. BGPReader, PyBGPStream.
 </div>
 </div>
 <div class="row" style="padding-bottom: 15px;">
@@ -65,12 +65,13 @@ for an in-depth discussion of the architecture of BGPStream.
  instructions for more information about getting BGPStream.
  - We provide a set of
  [tutorials]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials'}) }})
- to get familiar with the libBGPStream and PyBGPStream APIs as well as the BGPReader and BGPCorsaro tools.
+ to get familiar with the libBGPStream, PyBGPStream APIs as well as the
+ BGPReader tool.
  - To learn more about the APIs, see the
  [reference documentation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api'})}}).
  - Also see the
  [usage information]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools'})}})
- for the BGPReader and BGPCorsaro tools.
+ for BGPReader.
  - We make available several
  [publications and presentations]({{ path('caida_bgpstream_web_homepage', {'page': 'pubs'}) }})
  about BGPStream.

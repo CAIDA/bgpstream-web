@@ -18,20 +18,6 @@ BGPReader
 </a>
 </div>
 <div class="col-md-6" markdown="1">
-BGPCorsaro
-----------
- - [Using the pfxmonitor plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#pfxmonitor)
- - [Creating a new plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#newplugin)
-
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}"
-    class="btn btn-primary btn-md">
-    Take the BGPCorsaro tutorial &raquo;
-</a>
-</div>
-</div>
-
-<div class="row" markdown="1">
-<div class="col-md-6" markdown="1">
 libBGPStream
 ------------
  - [Get familiar with the API: count the BGP elems]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'libbgpstream'})}}#api1)

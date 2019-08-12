@@ -10,7 +10,7 @@
 
 changes need to be applied to all pages
 
--   [ ] remove bgpcorsaro
+-   [X] remove bgpcorsaro
 -   [ ] update github urls
 
 

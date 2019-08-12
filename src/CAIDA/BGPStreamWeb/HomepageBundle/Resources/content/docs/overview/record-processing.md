@@ -7,8 +7,6 @@ The record processing layer consists of all components that use the
 We distribute BGPStream with several record processing components.
 
 * _BGPReader_, a command-line tool to output BGP data in ASCII format
-* _BGPCorsaro_, a tool that uses a modular plugin architecture to
-extract statistics or aggregate data in regular time bins
 * _PyBGPStream_, Python bindings to the libBGPStream API
 
 <a href="{{ path('caida_bgpstream_web_homepage', {'page': 'components'}) }}"
@@ -66,24 +64,6 @@ stream of data).
 
 * The pyBGPStream tutorials are available
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page':'tutorials', 'subpage':'pybgpstream'})}}">  here </a>
-
-
-<br>
-
-### BGPCorsaro   {% verbatim %}{#bgpcorsaro}{% endverbatim %}
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools'})}}">BGPCorsaro</a>
-is a a tool to continuously extract derived data from a BGP stream in
-regular time bins. Its architecture is based on a pipeline of plugins,
-which continuously process BGPStream records. BGPCorsaro is written in
-C in order to support high-speed analysis of historical or live data
-streams. 
-
-
-* The complete BGPCorsaro documentation is available at 
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page':'tools', 'subpage':'bgpcorsaro'})}}">  this page</a>
-
-* The BGPCorsaro tutorials are available
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page':'tutorials', 'subpage':'bgpcorsaro'})}}">  here </a>
 
 
 <br>

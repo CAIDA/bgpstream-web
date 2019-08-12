@@ -254,16 +254,6 @@ class Builder
                                          )
                                  )
         );
-        $t->addChild('{BGPCorsaro}',
-                                 array(
-                                     'route'           => 'caida_bgpstream_web_homepage_docs',
-                                     'routeParameters' =>
-                                         array(
-                                             'page'    => 'tools',
-                                             'subpage' => 'bgpcorsaro',
-                                         )
-                                 )
-        );
 
 
         /* C API */
@@ -370,16 +360,6 @@ class Builder
                                              array(
                                                  'page'    => 'tutorials',
                                                  'subpage' => 'bgpreader'
-                                             )
-                                     )
-        );
-        $menu['tutorials']->addChild('{BGPCorsaro}',
-                                     array(
-                                         'route'           => 'caida_bgpstream_web_homepage_docs',
-                                         'routeParameters' =>
-                                             array(
-                                                 'page'    => 'tutorials',
-                                                 'subpage' => 'bgpcorsaro'
                                              )
                                      )
         );

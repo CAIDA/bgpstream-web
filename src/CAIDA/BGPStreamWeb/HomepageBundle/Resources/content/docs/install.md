@@ -12,10 +12,7 @@ BGPStream Core contains the
 [libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }})
 C library, as
 well as the
-[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }})
-and
-[BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }})
-tools.
+[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}) tool.
 </p>
 <div>
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}}" class="btn btn-primary btn-md">Install BGPStream Core &raquo;</a>
