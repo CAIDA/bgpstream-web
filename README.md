@@ -6,12 +6,12 @@
 -   point data api to v2 broker
 
 
-# TODO General
+# General
 
 changes need to be applied to all pages
 
 -   [X] remove bgpcorsaro
--   [ ] update github urls
+-   [X] update github urls
 
 
 # TODO Home
@@ -131,3 +131,7 @@ Missing presentation
 
 
 # TODO Contact
+
+# TODO Before Release
+
+- [ ] make sure all the links/files exist

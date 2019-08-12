@@ -37,7 +37,7 @@ documenting the package.
 We also make all the PyBGPStream code available on GitHub, and encourage
 community contributions via Pull Requests.
 </p>
-<a href="https://github.com/caida/bgpstream"
+<a href="https://github.com/caida/pybgpstream"
     class="btn btn-primary btn-md">
     Browse the GitHub repository &raquo;
 </a>
