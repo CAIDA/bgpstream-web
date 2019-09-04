@@ -215,19 +215,27 @@ $ sudo make install</code></pre>
 
         <h2>Installing using apt</h2>
 
-        <h3>1. Install dependencies:</h3>
+        <h3>1. Setup apt repositories</h3>
+
+        <p><strong>Step by step:</strong></p>
+
+        Install dependencies
         <pre><code>sudo apt-get update
 sudo apt-get install -y curl apt-transport-https ssl-cert ca-certificates gnupg lsb-release </code></pre>
 
-        <h3>2. Install wandio repository:</h3>
+        Install wandio repository
         <pre><code>echo "deb https://dl.bintray.com/wand/general $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/wand.list
 curl --silent "https://bintray.com/user/downloadSubjectPublicKey?username=wand" | sudo apt-key add - </code></pre>
 
-        <h3>3. Install CAIDA repository:</h3>
+        Install CAIDA repository
         <pre><code>echo "deb https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}') $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/caida.list
 sudo wget -O /etc/apt/trusted.gpg.d/caida.gpg https://pkg.caida.org/os/ubuntu/keyring.gpg </code></pre>
 
-        <h3>4. Install BGPStream packages:</h3>
+        <p><strong>One-liner:</strong>
+        <pre><code>curl -s https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}')/bootstrap.sh </code></pre>
+        </p>
+
+        <h3>2. Install BGPStream packages:</h3>
         <pre><code>sudo apt update; sudo apt-get install bgpstream1-tools libbgpstream1 libbgpstream1-dev</code></pre>
 
         <h2>Installing from source</h2>
