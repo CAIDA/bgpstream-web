@@ -213,19 +213,22 @@ $ sudo make install</code></pre>
     {# ---------- UBUNTU ---------- #}
     <div role="tabpanel" class="tab-pane" id="ubuntu">
 
-        <div style="opacity: 0.5">
-        <h2>Installing from packages
-            <small>Coming Soon...</small>
-        </h2>
+        <h2>Installing using apt</h2>
 
-        <p>Install BGPStream by running:</p>
+        <h3>1. Install dependencies:</h3>
+        <pre><code>sudo apt-get update
+sudo apt-get install -y curl apt-transport-https ssl-cert ca-certificates gnupg lsb-release </code></pre>
 
-        <pre><code>$ sudo apt-get install bgpstream-dev bgpstream-tools</code></pre>
+        <h3>2. Install wandio repository:</h3>
+        <pre><code>echo "deb https://dl.bintray.com/wand/general $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/wand.list
+curl --silent "https://bintray.com/user/downloadSubjectPublicKey?username=wand" | sudo apt-key add - </code></pre>
 
-        <p>If you are planning to only use the PyBGPStream Python bindings,
-            then you need
-            not install the <code>bgpstream-tools</code> package.</p>
-        </div>
+        <h3>3. Install CAIDA repository:</h3>
+        <pre><code>echo "deb https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}') $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/caida.list
+sudo wget -O /etc/apt/trusted.gpg.d/caida.gpg https://pkg.caida.org/os/ubuntu/keyring.gpg </code></pre>
+
+        <h3>4. Install BGPStream packages:</h3>
+        <pre><code>sudo apt update; sudo apt-get install bgpstream-tools libbgpstream1 libbgpstream1-dev</code></pre>
 
         <h2>Installing from source</h2>
 
