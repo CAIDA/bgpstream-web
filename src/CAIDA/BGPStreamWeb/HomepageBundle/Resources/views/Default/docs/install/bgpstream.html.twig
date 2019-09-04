@@ -232,7 +232,7 @@ curl --silent "https://bintray.com/user/downloadSubjectPublicKey?username=wand" 
 sudo wget -O /etc/apt/trusted.gpg.d/caida.gpg https://pkg.caida.org/os/ubuntu/keyring.gpg </code></pre>
 
         <p><strong>One-liner:</strong>
-        <pre><code>curl -s https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}')/bootstrap.sh </code></pre>
+        <pre><code>curl -s https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}')/bootstrap.sh | bash </code></pre>
         </p>
 
         <h3>2. Install BGPStream packages:</h3>
