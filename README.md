@@ -6,7 +6,7 @@
 -   point data api to v2 broker
 
 
-# General
+# DONE General
 
 changes need to be applied to all pages
 
@@ -14,21 +14,23 @@ changes need to be applied to all pages
 -   [X] update github urls
 
 
-# TODO Home
+# DONE Home
 
 
-# TODO News
+# DONE News
 
--   [ ] V2 release
--   [ ] RIS-live stream added
-
-
-# TODO Components
+-   [X] V2 release
+-   [X] RIS-live stream added
 
 
-# TODO Download
+# DONE Components
 
--   [ ] Ubuntu installation guide
+
+# DONE Download
+
+-   [X] Ubuntu installation guide
+-   [X] added pointer to installation docs for platform-specific installations
+-   [X] remove readme and changelog links on download page
 
 
 # TODO Documentation
@@ -40,7 +42,7 @@ changes need to be applied to all pages
 
 Data access:
 
--   [ ] udpate broker description
+-   [ ] update broker description
 
 
 ## TODO Install
@@ -112,14 +114,14 @@ pybgpstream:
 -   [ ] update if necessary
 
 
-# TODO Publications
+# DONE Publications
 
 Missing technical report
 
 Missing presentation
 
--   [ ] <https://www.caida.org/publications/presentations/2017/bgpstream_irtf/>
--   [ ] <https://www.caida.org/publications/presentations/2017/bgpstream_openbmp_cisco/>
+-   [X] <https://www.caida.org/publications/presentations/2017/bgpstream_irtf/>
+-   [X] <https://www.caida.org/publications/presentations/2017/bgpstream_openbmp_cisco/>
 
 
 # TODO Data Providers
@@ -127,11 +129,13 @@ Missing presentation
 -   [ ] add live-stream information
 
 
-# TODO Acknowledgements
+# DONE Acknowledgements
 
 
-# TODO Contact
+# TODO What&rsquo;s New Page
 
-# TODO Before Release
+`src/CAIDA/BGPStreamWeb/HomepageBundle/Resources/views/Default/v2-whats-new.html.twig`
 
-- [ ] make sure all the links/files exist
+
+# DONE Contact
+
