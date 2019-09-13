@@ -31,7 +31,8 @@ We provide four data interfaces to identify BGP data available for processing:
 The BGPStream Broker is a web service that provides a unified query interface
 to retrieve streams of data from different public
 [Data Providers]({{ path('caida_bgpstream_web_homepage', {'page': 'data'})}})
-(i.e., Route Views, RIPE RIS). The broker interface enables several key features of BGPStream:
+(i.e., Route Views, RIPE RIS), as well as live-stream resources like RIS-Live and RouteViews BMP stream.
+The broker interface enables several key features of BGPStream:
 
  * Out-of-the-box access to Route Views and RIPE RIS data.
  * Load balancing between data archive mirrors.
