@@ -36,47 +36,45 @@ changes need to be applied to all pages
 # TODO Documentation
 
 
-## Overview
-
--   [ ] ordering of layers is different than pages
+## DONE Overview
 
 Data access:
 
--   [ ] update broker description
+-   [X] update broker description
 
 
-## TODO Install
+## DONE Install
 
 Generic:
 
--   [ ] update installation script
+-   [X] update installation script
 
 FreeBSD:
 
--   [ ] remove ports (if it is not coming soon)
+-   [X] remove ports (if it is not coming soon)
 
 Ubuntu/Debian
 
--   [ ] add installation guide
--   [ ] distribute Debian packages alone
+-   [X] add installation guide
+-   [X] distribute Debian packages alone
 
 CentOS:
 
--   [ ] remove RPM
+-   [X] remove RPM
 
 MacOS:
 
--   [ ] remove port installation
+-   [X] remove port installation
 
 PyBGPStream:
 
--   [ ] add installation guide for Ubuntu
+-   [X] add installation guide for Ubuntu
 
 
-## TODO Tools
+## DONE Tools
 
--   [ ] rename it to `BGPReader` since it only has that now
--   [ ] Update `BGPReader` tutorial
+-   [X] rename it to `BGPReader` since it only has that now
+-   [X] Update `BGPReader` tutorial
 
 
 ## TODO APIs
