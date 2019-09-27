@@ -77,23 +77,23 @@ PyBGPStream:
 -   [X] Update `BGPReader` tutorial
 
 
-## TODO APIs
+## DONE APIs
 
 
 ### libbgpstream
 
--   [ ] update header docs
+-   [X] update header docs
 
 
 ### pybgpstream
 
--   [ ] update `_pybgpstream` docs
+-   [X] update `_pybgpstream` docs
 
 
 ### metadata broker
 
--   [ ] update url
--   [ ] update data api
+-   [X] update url
+-   [X] update data api
 
 
 ## TODO Tutorials
@@ -111,6 +111,10 @@ pybgpstream:
 
 -   [ ] update if necessary
 
+## TODO Data Encoding
+
+- [ ] collect other items to encoding `bgpstream_*_snprintf` 
+- [ ] complete all items
 
 # DONE Publications
 
@@ -130,10 +134,14 @@ Missing presentation
 # DONE Acknowledgements
 
 
-# TODO What&rsquo;s New Page
+# DONE What's New Page
 
 `src/CAIDA/BGPStreamWeb/HomepageBundle/Resources/views/Default/v2-whats-new.html.twig`
 
 
 # DONE Contact
+
+# Other
+
+- [ ] "on this page" for most pages, see https://test.bgpstream.caida.org/docs/api/broker
 
