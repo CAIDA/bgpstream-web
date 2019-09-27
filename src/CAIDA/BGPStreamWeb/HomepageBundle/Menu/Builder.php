@@ -383,6 +383,15 @@ class Builder
                                              )
                                      )
         );
+        $menu->addChild('{Data Encoding}',
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page' => 'encoding'
+                    )
+            )
+        );
 
         return $menu;
     }
