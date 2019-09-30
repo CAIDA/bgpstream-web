@@ -1,11 +1,3 @@
-# Version 2 Changelog
-
--   todo list
--   remove broker-related content
--   remove data bundle dependency
--   point data api to v2 broker
-
-
 # DONE General
 
 changes need to be applied to all pages
