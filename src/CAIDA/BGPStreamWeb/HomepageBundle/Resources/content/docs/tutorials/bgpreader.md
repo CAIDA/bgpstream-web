@@ -22,7 +22,7 @@ Below we provide the following tutorials:
 * [BGP Stream elems observed by RIS collectors updates in 2 minutes](#sample2min)
 * [BGP Stream elems with filters](#elemfilters)
 * [RRC00 in real-time](#samplert)
-* [Realtime Live Stream from RIS Live](#ris-live)
+* [Realtime Stream from RIS Live](#ris-live)
 * [A day of RIS RRC04 and RRC05 BGP records](#sampleday)
 * [Other data interfaces: how to use singlefile](#other)
 
