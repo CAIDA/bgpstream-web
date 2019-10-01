@@ -11,7 +11,6 @@ main()
     return -1;
   }
 
-  /* Allocate memory for a re-usable bgprecord instance */
   bgpstream_record_t *rec;
 
   /* The broker interface is set by default */
