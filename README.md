@@ -92,16 +92,16 @@ PyBGPStream:
 
 bgpreader:
 
--   [ ] add live-stream example
+-   [X] add live-stream example
 -   [ ] add cache example
 
 libbgpstream:
 
--   [ ] update if necessary
+-   [X] update if necessary
 
 pybgpstream:
 
--   [ ] update if necessary
+-   [X] update if necessary
 
 ## TODO Data Encoding
 

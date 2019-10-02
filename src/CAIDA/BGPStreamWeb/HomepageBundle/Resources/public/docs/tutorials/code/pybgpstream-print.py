@@ -1,33 +1,16 @@
 #!/usr/bin/env python
 
-from _pybgpstream import BGPStream, BGPRecord, BGPElem
+import pybgpstream
+stream = pybgpstream.BGPStream(
+    from_time="2017-07-07 00:00:00", until_time="2017-07-07 00:10:00 UTC",
+    collectors=["route-views.sg", "route-views.eqix"],
+    record_type="updates",
+    filter="peer 11666 and prefix more 210.180.0.0/16"
+)
 
-# Create a new bgpstream instance and a reusable bgprecord instance
-stream = BGPStream()
-rec = BGPRecord()
-
-# Consider RIPE RRC 10 only
-stream.add_filter('collector','rrc11')
-
-# Consider this time interval:
-# Sat Aug  1 08:20:11 UTC 2015
-stream.add_interval_filter(1438417216,1438417216)
-
-# Start the stream
-stream.start()
-
-# Get next record
-while(stream.get_next_record(rec)):
-    # Print the record information only if it is not a valid record
-    if rec.status != "valid":
-        print rec.project, rec.collector, rec.type, rec.time, rec.status
-    else:
-        elem = rec.get_next_elem()
-        while(elem):
-            # Print record and elem information
-            print rec.project, rec.collector, rec.type, rec.time, rec.status,
-            print elem.type, elem.peer_address, elem.peer_asn, elem.fields
-            elem = rec.get_next_elem()
-
-
-
+for elem in stream:
+    # record fields can be accessed directly from elem
+    # e.g. elem.time
+    # or via elem.record
+    # e.g. elem.record.time
+    print elem
