@@ -64,20 +64,17 @@
         <tbody id="rv-tbody">
         </tbody>
     </table>
-    {#
-        <a target='_blank' class="btn btn-primary btn-xs"
-           href="#"
-           title="Download collector list as JSON">
-            <span class="glyphicon glyphicon-save"/> json
-        </a>
-    #}
     </div>
+
     <div role="tabpanel" class="tab-pane" id="ris">
     <h2>
         <img class="dp-logo pull-right"
              src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}">
         <a target="_blank" href="https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris" title="RIPE RIS">RIPE Routing Information Service</a> <small><code>ris</code></small>
     </h2>
+        <div>
+            <p>BGPStream also supports streaming from RIPE RIS-Live realtime BGP data. <a target="_blank" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live">Tutorial here.</a></p>
+        </div>
     <div class="progress progress-striped active">
         <div class="progress-bar" style="width: 100%">
             <span class="sr-only">Loading...</span>
@@ -97,6 +94,7 @@
         </tbody>
     </table>
     </div>
+
 </div>
 
 {% endblock %}
