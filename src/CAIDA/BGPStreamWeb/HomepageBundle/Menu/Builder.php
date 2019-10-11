@@ -172,13 +172,13 @@ class Builder
                                 )
                         )
         );
-        $menu['overview']->addChild('data access',
+        $menu['overview']->addChild('record processing',
             array(
                 'route' => 'caida_bgpstream_web_homepage_docs',
                 'routeParameters' =>
                     array(
                         'page' => 'overview',
-                        'subpage' => 'data-access'
+                        'subpage' => 'record-processing'
                     )
             )
         );
@@ -192,18 +192,16 @@ class Builder
                     )
             )
         );
-        $menu['overview']->addChild('record processing',
+        $menu['overview']->addChild('data access',
             array(
                 'route' => 'caida_bgpstream_web_homepage_docs',
                 'routeParameters' =>
                     array(
                         'page' => 'overview',
-                        'subpage' => 'record-processing'
+                        'subpage' => 'data-access'
                     )
             )
         );
-
-
         $menu->addChild('install',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage_docs',
