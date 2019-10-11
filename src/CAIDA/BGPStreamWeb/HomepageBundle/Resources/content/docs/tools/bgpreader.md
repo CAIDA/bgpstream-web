@@ -1,10 +1,17 @@
-
-# BGPReader
+BGPReader
+=====
 
 
 BGPReader is a command line tool that prints to standard output
 information about the BGP records and the BGP elems that are part of a
 BGP stream. 
+
+Users familiar with the BGPdump tool should find using BGPReader easy; BGPReader
+even supports the BGPdump `-m` output format, so in some cases BGPReader can be
+used as a drop-in replacement for BGPdump. Moreover, since BGPReader provides
+seamless out-of-the-box access to both the Route Views and RIS data archives,
+users no longer need to manually acquire data, simply provide a time interval to
+BGPReader and BGPStream will do the rest.
 
 ## Usage
 

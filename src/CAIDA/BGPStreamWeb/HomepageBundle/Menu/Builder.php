@@ -232,26 +232,27 @@ class Builder
                                    )
         );
 
-        $menu->addChild('{Tools}',
+        $menu->addChild('{BGPReader}',
                         array(
                             'route'           => 'caida_bgpstream_web_homepage_docs',
                             'routeParameters' =>
                                 array(
                                     'page' => 'tools',
+                                    'subpage' => 'bgpreader',
                                 )
                         )
         );
-        $t = $menu['{Tools}'];
-        $t->addChild('{BGPReader}',
-                                 array(
-                                     'route'           => 'caida_bgpstream_web_homepage_docs',
-                                     'routeParameters' =>
-                                         array(
-                                             'page'    => 'tools',
-                                             'subpage' => 'bgpreader',
-                                         )
-                                 )
-        );
+        // $t = $menu['{Tools}'];
+        // $t->addChild('{BGPReader}',
+        //                          array(
+        //                              'route'           => 'caida_bgpstream_web_homepage_docs',
+        //                              'routeParameters' =>
+        //                                  array(
+        //                                      'page'    => 'tools',
+        //                                      'subpage' => 'bgpreader',
+        //                                  )
+        //                          )
+        // );
 
 
         /* C API */
