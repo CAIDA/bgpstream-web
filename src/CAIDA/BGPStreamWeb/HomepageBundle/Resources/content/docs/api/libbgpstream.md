@@ -1,4 +1,4 @@
-libBGPStream (C API)
+C/C++ API (libBGPStream)
 ====================
 
 libBGPStream is the core of the BGPStream framework; all

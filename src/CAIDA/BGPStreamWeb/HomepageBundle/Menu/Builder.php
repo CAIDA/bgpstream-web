@@ -265,7 +265,7 @@ class Builder
                         )
         );
         $a = $menu['{APIs}'];
-        $a->addChild('{libBGPStream}',
+        $a->addChild('{C/C++}',
                                  array(
                                      'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>
@@ -275,7 +275,7 @@ class Builder
                                          )
                                  )
         );
-        $ac = $a['{libBGPStream}'];
+        $ac = $a['{C/C++}'];
         $ac->addChild('{bgpstream.h}',
                                   array(
                                       'route'           => 'caida_bgpstream_web_homepage_docs_api',
@@ -308,7 +308,7 @@ class Builder
         );
 
         /* Python API */
-        $a->addChild('{PyBGPStream}',
+        $a->addChild('{Python}',
                                  array(
                                      'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>
@@ -318,8 +318,8 @@ class Builder
                                          )
                                  )
         );
-        $ap = $a['{PyBGPStream}'];
-        $ap->addChild('{_pybgpstream}',
+        $ap = $a['{Python}'];
+        $ap->addChild('{low-level}',
                                        array(
                                            'route'           => 'caida_bgpstream_web_homepage_docs_api',
                                            'routeParameters' =>
@@ -330,8 +330,7 @@ class Builder
                                        )
         );
 
-
-        $a->addChild('{Metadata Broker}',
+        $a->addChild('{HTTP (Metadata)}',
                                  array(
                                      'route'           => 'caida_bgpstream_web_homepage_docs',
                                      'routeParameters' =>
