@@ -1,5 +1,14 @@
 {% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
 
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+        '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/home.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% block body %}
     <div class="jumbotron">
         <h1>
@@ -7,8 +16,20 @@
         </h1>
         <p class="lead">An open-source software framework for live and historical BGP data analysis, supporting <br class="hidden-xs hidden-sm"> <i>scientific research</i>, <i>operational monitoring</i>, and <i>post-event analysis</i>.</p>
 
-        <p><a class="btn btn-lg btn-success" href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}" role="button">Get BGPStream</a></p>
+        <p>
+            <a class="btn btn-lg btn-success" href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}" role="button">Get BGPStream</a>
+        </p>
+        <div  width="50%">
+            <div class="success callout small" style="display: inline-block">
+                <h5>BGPStream Version 2 is
+                    <a href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}">
+                    Available Now!
+                    </a>
+                </h5>
+            </div>
+        </div>
     </div>
+
 
     <div class="row">
         <div class="col-sm-6 col-md-4">
