@@ -22,6 +22,7 @@ Below we provide the following tutorials:
 * [BGP Stream elems observed by RIS collectors updates in 2 minutes](#sample2min)
 * [BGP Stream elems with filters](#elemfilters)
 * [RRC00 in real-time](#samplert)
+* [BGPStream with Cache](#cache)
 * [Realtime Stream from RIS Live](#ris-live)
 * [Realtime Stream from CAIDA BMP](#bmp)
 * [A day of RIS RRC04 and RRC05 BGP records](#sampleday)
@@ -179,8 +180,34 @@ U|A|1444929120|ris|rrc00|8758|212.25.27.44|62.112.24.0/21|212.25.27.44|8758 8220
 
 <br>
 
-The above command operates continuously. As soon as data from RRC00 becomes available to
-BGPStream it is printed out.
+## BGPStream with Local Cache {% verbatim %}{#cache}{% endverbatim %}
+
+BGPStream version 2 added support for local caching. Users can provide a cache directory to BGPStream,
+and BGPStream will use the directory to save resources used in the query.
+In BGPReader, you can enable cache feature by specifying a cache directory using
+`-o cache-dir=DIRECTORY` option.
+
+The following command put cached files to `/tmp/cache-test/` for a query of updates:
+```
+$ bgpreader -w 1444498442,1444498442 -c route-views.linx -m -o cache-dir=/tmp/cache-test
+BGP4MP|1444498442|A|195.66.224.175|13030|46.219.122.0/24|13030 5580 21011 31148 31148 31148|IGP|195.66.224.175|0|1|65123:276 65123:2000 65123:2002 65123:10016 13030:1 13030:7208 13030:50000 13030:51107|AG|31148 94.76.105.10|
+BGP4MP|1444498442|W|195.66.224.138|2914|209.212.8.0/24
+BGP4MP|1444498442|W|195.66.224.138|2914|205.151.210.0/23
+...
+```
+This command will cache the following files at `/tmp/cache-test`:
+```
+$ ls -l /tmp/cache-test
+total 6144
+drwxr-xr-x   3 USER  GROUP       96 Oct 18 12:51 ./
+drwxrwxrwt  33 root  GROUP     1056 Oct 18 12:51 ../
+-rw-r--r--   1 USER  GROUP  2466076 Oct 18 12:51 routeviews.route-views.linx.updates.1444498200.900.cache
+```
+
+The next time an query using the same resource will directly use the locally cached files instead of
+re-downloading from remote locations.
+
+<br>
 
 {#
 <br>
