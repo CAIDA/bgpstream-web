@@ -301,7 +301,7 @@
                     <tr>
                         <td>Source Tarball</td>
                         <td>
-                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-7.tar.gz') }}">libbgpstream-2.0.0-beta-7.tar.gz</a>
+                            <a href="https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz">libbgpstream-2.0.0-rc2.tar.gz</a>
                         </td>
                     </tr>
                     <tr>
@@ -318,7 +318,7 @@
                     <tr>
                         <td>Source Tarball</td>
                         <td>
-                            <a href="{{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz') }}">pybgpstream-2.0.0-beta-3.tar.gz</a>
+                            <a href="https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz">pybgpstream-2.0.0.tar.gz</a>
                         </td>
                     </tr>
                     <tr>
@@ -376,8 +376,8 @@ make
 sudo make install
 sudo ldconfig</code></pre>
                 <p>4. Install libBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-6.tar.gz', absolute=true) }}
-tar zxf libbgpstream-2.0.0-beta-6.tar.gz
+                <pre><code>curl -O https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz
+tar zxf libbgpstream-2.0.0-rc2.tar.gz
 cd libbgpstream-2.0.0/
 ./configure
 make
@@ -385,8 +385,8 @@ make check
 sudo make install
 sudo ldconfig</code></pre>
                 <p>5. Install PyBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz', absolute=true) }}
-tar zxf pybgpstream-2.0.0-beta-3.tar.gz
+                <pre><code>curl -O https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz
+tar zxf pybgpstream-2.0.0.tar.gz
 cd pybgpstream-2.0.0/
 python setup.py build_ext
 sudo python setup.py install</code></pre>
@@ -412,15 +412,15 @@ make
 sudo make install
 sudo ldconfig</code></pre>
                 <p>3. Install libBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/libbgpstream-2.0.0-beta-7.tar.gz', absolute=true) }}
-tar zxf libbgpstream-2.0.0-beta-7.tar.gz
+                <pre><code>curl -O https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz
+tar zxf libbgpstream-2.0.0-rc2.tar.gz
 cd libbgpstream-2.0.0/
 ./configure
 make
 make check
 sudo make install</code></pre>
                 <p>4. Install PyBGPStream:</p>
-                <pre><code>curl -O {{ asset('bundles/caidabgpstreamwebhomepage/dists/pybgpstream-2.0.0-beta-3.tar.gz', absolute=true) }}
+                <pre><code>curl -O https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz
 tar zxf pybgpstream-2.0.0-beta-3.tar.gz
 cd pybgpstream-2.0.0/
 python setup.py build_ext
