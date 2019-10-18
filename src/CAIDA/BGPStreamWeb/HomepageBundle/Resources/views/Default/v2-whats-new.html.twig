@@ -2,7 +2,7 @@
 
 {% block slimbody %}
     <div class="page-header">
-        <h1>What's New in BGPStream V2?</h1>
+        <h1>What's New in BGPStream V2</h1>
     </div>
 
     <div class="row">
@@ -77,6 +77,11 @@
                             <li>
                                 To start streaming using bgpreader, just specify that we want data from project "ris-live"
                                 without any time-window: <code>bgpreader -p ris-live</code>
+                            </li>
+                            <li>
+                                See the
+                                <a href="#ris-live">RIPE RIS-Live</a>
+                                tutorials below for more information.
                             </li>
                         </ul>
                     </li>
@@ -397,6 +402,20 @@ stream.set_data_interface_option("kafka", "topic", "openbmp.bmp_raw")
 for elem in stream:
     print elem</code></pre>
             </div>
+            <div id="ris-live">
+                <h2>RIPE RIS-Live Realtime BGP Stream</h2>
+                <p>
+                    In BGPStream version 2, we added the support for streaming directly from <a href="https://ris-live.ripe.net/">RIPE RIS-Live</a>.
+                    RIS-Live is a streaming service that offers real-time BGP messages collected from all RIPE RIS Route Collectors (RRCs).
+                </p>
+                <p>
+                    Using ris-live stream is super easy. You just need to start a stream with no time-interval specified,
+                    and use "ris-live" as the project for the stream.
+                </p>
+                <p>
+                    If you want to use BGPReader to access the stream, just do <code>bgpreader -p ris-live</code>. That's it!
+                </p>
+            </div>
         </div>
         <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
             <p class="text-muted">On this page:</p>
@@ -406,6 +425,7 @@ for elem in stream:
                 <li role="presentation"><a href="#changes">Changes</a></li>
                 <li role="presentation"><a href="#bmp">Public BMP Stream</a></li>
                 <li role="presentation"><a href="#bmp-private">Private BMP Stream</a></li>
+                <li role="presentation"><a href="#bmp-private">RIPE RIS-Live</a></li>
             </ul>
         </div>
     </div>
