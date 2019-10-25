@@ -330,11 +330,21 @@ class Builder
                                                )
                                        )
         );
+        $ap->addChild('{high-level}',
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs_api',
+                'routeParameters' =>
+                    array(
+                        'project' => 'pybgpstream',
+                        'file'    => 'pybgpstream.html'
+                    )
+            )
+        );
 
         $a->addChild('{HTTP (Metadata)}',
-                                 array(
-                                     'route'           => 'caida_bgpstream_web_homepage_docs',
-                                     'routeParameters' =>
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
                                          array(
                                              'page'    => 'api',
                                              'subpage' => 'broker'
