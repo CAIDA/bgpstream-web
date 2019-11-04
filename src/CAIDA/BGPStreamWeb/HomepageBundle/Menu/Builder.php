@@ -211,7 +211,7 @@ class Builder
                                 )
                         )
         );
-        $menu['install']->addChild('{BGPStream Core}',
+        $menu['install']->addChild('{libBGPStream}',
                                    array(
                                        'route'           => 'caida_bgpstream_web_homepage_docs',
                                        'routeParameters' =>
