@@ -46,6 +46,10 @@ class CaidaBgpArchive implements BgpArchiveInterface {
         if ($row->getCollector()->getProject()->getName() == 'caida-bmp') {
             return true;
         }
+        // FIXME: temporarily force all ris data to go through caida archive
+        if ($row->getCollector()->getProject()->getName() == 'ris') {
+            return true;
+        }
         // allow caida users to pull data directly from RV/RIS
         $preferCaida = $request->get('preferCaida', 'true');
         $preferCaida = $preferCaida == 'true' ? true : false;
