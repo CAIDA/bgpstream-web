@@ -116,5 +116,5 @@ Each resource used in BGPStream can be identified by the following unique string
 - `PROJECT`: project of the resource (e.g. routeviews or rrc) 
 - `COLLECTOR`: name of the collector (e.g. rrc02)
 - `RECORD_TYPE`: the type of records this resource contains `ribs` or `updates`
-- `INITIAL_TIME`: the start time of the resource, represented by the Unixtime in integer
+- `INITIAL_TIME`: the start time of the resource, represented by the Unix-time in integer
 - `DURATION`: the duration of data this resource includes, represented by number of seconds

@@ -23,7 +23,7 @@ We provide four data interfaces to identify BGP data available for processing:
   out-out-of-the box seamless access to public
   [Data Providers]({{ path('caida_bgpstream_web_homepage', {'page': 'data'})}})
  - [Single File](#singlefile), a data interface that provides access to individual MRT dump files (either local or via HTTP).
- - [CSV File](#csvfile), a psuedo-database suitable for using BGPStream with locally-available (e.g., private) data files.
+ - [CSV File](#csvfile), a pseudo-database suitable for using BGPStream with locally-available (e.g., private) data files.
  - [SQLite DB](#sqlite), like CSV file, but meta-data is stored in an SQLite DB, providing better scalability.
 
 ## BGPStream Broker {% verbatim %}{#broker}{% endverbatim %}
@@ -80,7 +80,7 @@ larger data sets, as well as providing better support for live mode (that is,
  updating the database with new files as they are available).
 
 In order to facilitate the insertion of data into an SQLite database with
-an approprate schema, we provide a script
+an appropriate schema, we provide a script
 ([tools/bgpstream_sqlite_mgmt.py](https://github.com/CAIDA/bgpstream/blob/master/tools/bgpstream_sqlite_mgmt.py))
 that adds new dump meta-data to the database.
 

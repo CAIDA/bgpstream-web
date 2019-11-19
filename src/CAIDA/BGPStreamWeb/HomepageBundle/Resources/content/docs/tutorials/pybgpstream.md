@@ -259,9 +259,9 @@ if len(hops) > 1 and hops[0] == peer:
 <br>
 
 Finally, for each peer and origin pair, the script uses the NetworkX
-utility functionst to compute the length of the shortest path between
+utility functions to compute the length of the shortest path between
 the two nodes in the simple undirected graph. The output juxtaposes the
-minimum lenght observed in BGP and the shortest path computed in the
+minimum length observed in BGP and the shortest path computed in the
 simple undirected graph.
 
 ~~~ .language-python
@@ -362,7 +362,7 @@ for c in communities:
 
 <br>
 
-Finally, the dictionary is outputed to standard output.
+Finally, the dictionary is written to standard output.
 
 ~~~ .language-python
 for ct in community_prefix:
