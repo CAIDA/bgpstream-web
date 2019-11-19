@@ -30,6 +30,6 @@ for rec in stream.records():
 # Print the list of MOAS prefix and their origin ASns
 for pfx in prefix_origin:
     if len(prefix_origin[pfx]) > 1:
-        print(pfx, ",".join(prefix_origin[pfx]))
+        print((pfx, ",".join(prefix_origin[pfx])))
 
 

@@ -30,7 +30,7 @@ for rec in stream.records():
                 as_graph.add_edge(hops[i],hops[i+1])
             # Update the AS path length between 'peer' and 'origin'
             bgp_lens[peer][origin] = \
-                min(filter(bool,[bgp_lens[peer][origin],len(hops)]))
+                min(list(filter(bool,[bgp_lens[peer][origin],len(hops)])))
 
 # For each 'peer' and 'origin' pair
 for peer in bgp_lens:
@@ -38,6 +38,6 @@ for peer in bgp_lens:
         # compute the shortest path in the NetworkX graph
         nxlen = len(nx.shortest_path(as_graph, peer, origin))
         # and compare it to the BGP hop length
-        print peer, origin, bgp_lens[peer][origin], nxlen
+        print((peer, origin, bgp_lens[peer][origin], nxlen))
 
 

@@ -29,5 +29,5 @@ for rec in stream.records():
 
 # Print the list of MOAS prefix and their origin ASns
 for ct in community_prefix:
-    print "Community:", ct, "==>", ",".join(community_prefix[ct])
+    print("Community:", ct, "==>", ",".join(community_prefix[ct]))
 

@@ -13,4 +13,4 @@ for elem in stream:
     # e.g. elem.time
     # or via elem.record
     # e.g. elem.record.time
-    print elem
+    print(elem)

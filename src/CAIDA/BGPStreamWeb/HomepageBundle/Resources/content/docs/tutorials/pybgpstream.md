@@ -65,7 +65,7 @@ for elem in stream:
     # e.g. elem.time
     # or via elem.record
     # e.g. elem.record.time
-    print elem
+    print(elem)
 ~~~
 
 <br>
@@ -268,7 +268,7 @@ simple undirected graph.
 for peer in bgp_lens:
     for origin in bgp_lens[peer]:
        nxlen = len(nx.shortest_path(as_graph, peer, origin))
-        print peer, origin, bgp_lens[peer][origin], nxlen
+        print(peer, origin, bgp_lens[peer][origin], nxlen)
 ~~~
 
 <br>
@@ -366,7 +366,7 @@ Finally, the dictionary is outputed to standard output.
 
 ~~~ .language-python
 for ct in community_prefix:
-    print "Community:", ct, "==>", ",".join(community_prefix[ct])
+    print("Community:", ct, "==>", ",".join(community_prefix[ct]))
 ~~~
 
 <br>
