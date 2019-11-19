@@ -2,7 +2,7 @@ BGPReader Tutorial
 ==================
 
 BGPReader is a command-line tool (_bgpreader_) that is installed as part of the
-[BGPStream Core]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}})
+[libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}})
 package.
 See the
 [BGPReader documentation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'})}})

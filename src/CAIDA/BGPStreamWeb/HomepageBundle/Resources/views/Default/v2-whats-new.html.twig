@@ -22,19 +22,12 @@
                     See the <a href="#bmp">Live BMP Stream</a> section below for
                     help accessing the new realtime BMP stream.
                 </p>
-            </div>
-            <div id="feedback">
-                <h2>Feedback</h2>
                 <p>
-                    We appreciate your support of this project, and your
-                    willingness to help us test the next version. Please
-                    create an issue on either the
-                    <a href="https://github.com/caida/libbgpstream" target="_blank">libBGPStream</a>
-                    or
-                    <a href="https://github.com/caida/pybgpstream" target="_blank">PyBGPStream</a>
-                    GitHub repos detailing any problems you have, or
-                    alternatively, contact
-                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                    <a class="btn btn-md btn-success"
+                       href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}"
+                       role="button">
+                        Get BGPStream V2
+                    </a>
                 </p>
             </div>
             <div id="changes">
@@ -416,16 +409,32 @@ for elem in stream:
                     If you want to use BGPReader to access the stream, just do <code>bgpreader -p ris-live</code>. That's it!
                 </p>
             </div>
+            <div id="feedback">
+                <h2>Feedback</h2>
+                <p>
+                    We appreciate your support of this project, and your
+                    willingness to help us test the next version. Please
+                    create an issue on either the
+                    <a href="https://github.com/caida/libbgpstream"
+                       target="_blank">libBGPStream</a>
+                    or
+                    <a href="https://github.com/caida/pybgpstream"
+                       target="_blank">PyBGPStream</a>
+                    GitHub repos detailing any problems you have, or
+                    alternatively, contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                </p>
+            </div>
         </div>
         <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
             <p class="text-muted">On this page:</p>
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="#intro">Intro</a></li>
-                <li role="presentation"><a href="#changes">Feedback</a></li>
                 <li role="presentation"><a href="#changes">Changes</a></li>
                 <li role="presentation"><a href="#bmp">Public BMP Stream</a></li>
                 <li role="presentation"><a href="#bmp-private">Private BMP Stream</a></li>
                 <li role="presentation"><a href="#bmp-private">RIPE RIS-Live</a></li>
+                <li role="presentation"><a href="#feedback">Feedback</a></li>
             </ul>
         </div>
     </div>
