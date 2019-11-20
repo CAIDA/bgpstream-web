@@ -92,7 +92,10 @@ require(['jquery', 'moment'], function ($, moment) {
         var hash = document.location.hash;
         var prefix = "!";
         if (hash) {
-            $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']').tab('show');
+            const hashTab = $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']');
+            if (hashTab && hashTab.tab) {
+                hashTab.tab('show');
+            }
         }
 
         // Change hash for page-reload
@@ -101,7 +104,7 @@ require(['jquery', 'moment'], function ($, moment) {
         });
 
         $.ajax({
-            url: '/broker/meta/projects',
+            url: 'https://broker.bgpstream.caida.org/v1/meta/projects',
             type: 'GET',
             dataType: 'json',
             timeout: 10000,
