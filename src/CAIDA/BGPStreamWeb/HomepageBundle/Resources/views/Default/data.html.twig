@@ -3,18 +3,18 @@
 {% block styleblock %}
     {{ parent() }}
     {% stylesheets
-    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/data.css'
-    filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
+        '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/data.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}
 
 {% block jsblock %}
     {{ parent() }}
     {% javascripts
-    '@CAIDABGPStreamWebHomepageBundle/Resources/public/js/data.js'
+        '@CAIDABGPStreamWebHomepageBundle/Resources/public/js/data.js'
     %}
-    <script src="{{ asset_url }}"></script>
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 
@@ -37,66 +37,108 @@
                                    role="tab" data-toggle="tab"><img
                         class="dp-tab-logo"
                         src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}"></a></li>
+        <li role="presentation"><a href="#ris-live" aria-controls="ris-live"
+                                   role="tab" data-toggle="tab" style="font-size: 20px">RIS-Live</a></li>
+        <li role="presentation"><a href="#caida-bmp" aria-controls="caida-bmp"
+                                   role="tab" data-toggle="tab" style="font-size: 20px">CAIDA-BMP</a></li>
     </ul>
 
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="routeviews">
-    <h2>
-        <img class="dp-logo pull-right"
-             src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}">
-        <a target="_blank" href="http://www.routeviews.org/" title="Route Views">Route Views</a> <small><code>routeviews</code></small>
-    </h2>
-    <div class="progress progress-striped active">
-        <div class="progress-bar" style="width: 100%">
-            <span class="sr-only">Loading...</span>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="routeviews">
+            <h2>
+                <img class="dp-logo pull-right"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}">
+                <a target="_blank" href="http://www.routeviews.org/" title="Route Views">Route Views</a> <small><code>routeviews</code></small>
+            </h2>
+            <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: 100%">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="col-md-2">Collector</th>
+                    <th class="col-md-2">Dump Type</th>
+                    <th class="col-md-2">Dump Frequency</th>
+                    <th class="col-md-3">First Dump</th>
+                    <th class="col-md-3">Latest Dump</th>
+                </tr>
+                </thead>
+                <tbody id="rv-tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="ris">
+            <h2>
+                <img class="dp-logo pull-right"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}">
+                <a target="_blank" href="https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris" title="RIPE RIS">RIPE Routing Information Service</a> <small><code>ris</code></small>
+            </h2>
+            <div>
+                <p>BGPStream also supports streaming from RIPE RIS-Live realtime BGP data. <a target="_blank" href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live">Tutorial here.</a></p>
+            </div>
+            <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: 100%">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="col-md-2">Collector</th>
+                    <th class="col-md-2">Dump Type</th>
+                    <th class="col-md-2">Dump Frequency</th>
+                    <th class="col-md-3">First Dump</th>
+                    <th class="col-md-3">Latest Dump</th>
+                </tr>
+                </thead>
+                <tbody id="ris-tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="ris-live">
+            <div>
+                <p>
+                    BGPStream provide direct access to RIPE NCC's <a href="https://ris-live.ripe.net/">RIS Live real-time BGP messages feed</a>.
+                </p>
+                <p>
+                    RIS live provides real-time information collected from RIPE RIS Route Collectors (RRCs).
+                    BGPStream supports direct access of the data stream and provide the same programming and user interface
+                    as well as output format.
+                </p>
+                <p>
+                    For more detailed usage of the RIS Live stream via BGPStream, please checkout our
+                    tutorial on <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live">accessing RIS-Live stream using <code>bgpreader</code></a> .
+                </p>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="caida-bmp">
+            <div>
+                <p>
+                    As part of the BGPStream project, we have begun to provide
+                    a public BMP feed. Currently we are only providing data
+                    from a few Route Views and Cisco Research peers, but we
+                    expect additional peers to be added soon.
+                    (If you would like to contribute a feed, please contact us
+                    at
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.)
+                </p>
+                <p>
+                    We are providing access to these feeds by way of a
+                    publicly-accessible, read-only, Kafka cluster
+                    (<code>bmp.bgpstream.caida.org:9092</code>) which contains
+                    raw BMP data encapsulated in a custom
+                    <a href="https://github.com/openbmp/openbmp" target="_blank">OpenBMP</a>
+                    message header.
+                    (We plan to contribute the code we developed to generate
+                    these headers back to the upstream OpenBMP repository.)
+                </p>
+            </div>
         </div>
     </div>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th class="col-md-2">Collector</th>
-            <th class="col-md-2">Dump Type</th>
-            <th class="col-md-2">Dump Frequency</th>
-            <th class="col-md-3">First Dump</th>
-            <th class="col-md-3">Latest Dump</th>
-        </tr>
-        </thead>
-        <tbody id="rv-tbody">
-        </tbody>
-    </table>
-    {#
-        <a target='_blank' class="btn btn-primary btn-xs"
-           href="#"
-           title="Download collector list as JSON">
-            <span class="glyphicon glyphicon-save"/> json
-        </a>
-    #}
-    </div>
-    <div role="tabpanel" class="tab-pane" id="ris">
-    <h2>
-        <img class="dp-logo pull-right"
-             src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}">
-        <a target="_blank" href="https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris" title="RIPE RIS">RIPE Routing Information Service</a> <small><code>ris</code></small>
-    </h2>
-    <div class="progress progress-striped active">
-        <div class="progress-bar" style="width: 100%">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th class="col-md-2">Collector</th>
-            <th class="col-md-2">Dump Type</th>
-            <th class="col-md-2">Dump Frequency</th>
-            <th class="col-md-3">First Dump</th>
-            <th class="col-md-3">Latest Dump</th>
-        </tr>
-        </thead>
-        <tbody id="ris-tbody">
-        </tbody>
-    </table>
-    </div>
-</div>
 
 {% endblock %}

@@ -1,169 +1,184 @@
 <div class="section" id="bgpstream-elem-h">
-    <h1>bgpstream_elem.h<a class="headerlink"
-                           href="#bgpstream-elem-h"
-                           title="Permalink to this headline">¶</a>
-    </h1>
-
-    <p>Header file that exposes the public interface of a bgpstream
-        elem. </p>
-
+    <h1>bgpstream_elem.h<a class="headerlink" href="#bgpstream-elem-h" title="Permalink to this headline">¶</a></h1>
+    <p>Header file that exposes the public interface of a bgpstream elem. </p>
     <p>
     <dl class="docutils">
         <dt><strong>Author</strong></dt>
         <dd>Chiara Orsini</dd>
     </dl>
     </p>
-    <div class="breathe-sectiondef container">
+    <div class="breathe-sectiondef docutils container">
         <p class="breathe-sectiondef-title rubric">Public Enums</p>
         <dl class="type">
             <dt id="_CPPv226bgpstream_elem_peerstate_t">
-                <span id="bgpstream_elem_peerstate_t"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362"></span><em
-                    class="property">enum </em><code
-                    class="descname">bgpstream_elem_peerstate_t</code><a
-                    class="headerlink"
-                    href="#_CPPv226bgpstream_elem_peerstate_t"
-                    title="Permalink to this definition">¶</a></dt>
+                <span id="bgpstream_elem_peerstate_t"></span><span class="target"
+                                                                   id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362"></span><em
+                    class="property">enum </em><code class="descname">bgpstream_elem_peerstate_t</code><a
+                    class="headerlink" href="#_CPPv226bgpstream_elem_peerstate_t"
+                    title="Permalink to this definition">¶</a><br/></dt>
             <dd><p>Peer state encodes the state of the peer: </p>
-
                 <p>
                 <ul class="simple">
                     <li>0 - the state of the peer is unknown</li>
-                    <li>[1-6] - the state encoded is one of the six
-                        FSM states described in RFC1771
-                    </li>
-                    <li>[7-8] - inactive state in which all routes
-                        are cleared, more infor in quagga
-                        documentation <a class="reference external"
-                                         href="http://goo.gl/NS9mSv">http://goo.gl/NS9mSv</a>
-                    </li>
+                    <li>[1-6] - the state encoded is one of the six FSM states described in RFC1771</li>
+                    <li>[7-8] - inactive state in which all routes are cleared, more infor in quagga documentation <a
+                            class="reference external" href="http://goo.gl/NS9mSv">http://goo.gl/NS9mSv</a></li>
                 </ul>
                 </p>
                 <p><em>Values:</em></p>
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv232BGPSTREAM_ELEM_PEERSTATE_UNKNOWN">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_UNKNOWN"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a02b25a73dac4840a188806bde5258906"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_UNKNOWN</code>
-                        = 0<a class="headerlink"
-                              href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_UNKNOWN"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a02b25a73dac4840a188806bde5258906"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_UNKNOWN</code> = 0<a class="headerlink"
+                                                                                           href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_UNKNOWN"
+                                                                                           title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state unknown. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv229BGPSTREAM_ELEM_PEERSTATE_IDLE">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_IDLE"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a4424d392dd98aaf8dbc21a2a9cdb5a6f"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_IDLE</code>
-                        = 1<a class="headerlink"
-                              href="#_CPPv229BGPSTREAM_ELEM_PEERSTATE_IDLE"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a4424d392dd98aaf8dbc21a2a9cdb5a6f"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_IDLE</code> = 1<a class="headerlink"
+                                                                                        href="#_CPPv229BGPSTREAM_ELEM_PEERSTATE_IDLE"
+                                                                                        title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state idle. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv232BGPSTREAM_ELEM_PEERSTATE_CONNECT">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_CONNECT"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362ac17e48fec3ab5cab0cc9960cba315d5f"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_CONNECT</code>
-                        = 2<a class="headerlink"
-                              href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_CONNECT"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362ac17e48fec3ab5cab0cc9960cba315d5f"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_CONNECT</code> = 2<a class="headerlink"
+                                                                                           href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_CONNECT"
+                                                                                           title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state connect. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv231BGPSTREAM_ELEM_PEERSTATE_ACTIVE">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_ACTIVE"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a1bf56c1211f89f2657f66cf844261d85"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_ACTIVE</code>
-                        = 3<a class="headerlink"
-                              href="#_CPPv231BGPSTREAM_ELEM_PEERSTATE_ACTIVE"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a1bf56c1211f89f2657f66cf844261d85"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_ACTIVE</code> = 3<a class="headerlink"
+                                                                                          href="#_CPPv231BGPSTREAM_ELEM_PEERSTATE_ACTIVE"
+                                                                                          title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state active. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv233BGPSTREAM_ELEM_PEERSTATE_OPENSENT">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_OPENSENT"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362adf2e754f6a3aa78ce6d2c9139a68cf4e"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_OPENSENT</code>
-                        = 4<a class="headerlink"
-                              href="#_CPPv233BGPSTREAM_ELEM_PEERSTATE_OPENSENT"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362adf2e754f6a3aa78ce6d2c9139a68cf4e"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_OPENSENT</code> = 4<a class="headerlink"
+                                                                                            href="#_CPPv233BGPSTREAM_ELEM_PEERSTATE_OPENSENT"
+                                                                                            title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state open-sent. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv236BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a069646e3d23d751f2db4d9667e522239"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM</code>
-                        = 5<a class="headerlink"
-                              href="#_CPPv236BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a069646e3d23d751f2db4d9667e522239"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM</code> = 5<a class="headerlink"
+                                                                                               href="#_CPPv236BGPSTREAM_ELEM_PEERSTATE_OPENCONFIRM"
+                                                                                               title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state open-confirm. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv236BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a00caa6b712e164807902fbc34406e011"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED</code>
-                        = 6<a class="headerlink"
-                              href="#_CPPv236BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a00caa6b712e164807902fbc34406e011"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED</code> = 6<a class="headerlink"
+                                                                                               href="#_CPPv236BGPSTREAM_ELEM_PEERSTATE_ESTABLISHED"
+                                                                                               title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state established. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv233BGPSTREAM_ELEM_PEERSTATE_CLEARING">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_CLEARING"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a2ea9cbaf91c71967ecc4506f19d57f6c"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_CLEARING</code>
-                        = 7<a class="headerlink"
-                              href="#_CPPv233BGPSTREAM_ELEM_PEERSTATE_CLEARING"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362a2ea9cbaf91c71967ecc4506f19d57f6c"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_CLEARING</code> = 7<a class="headerlink"
+                                                                                            href="#_CPPv233BGPSTREAM_ELEM_PEERSTATE_CLEARING"
+                                                                                            title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state clearing. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv232BGPSTREAM_ELEM_PEERSTATE_DELETED">
-                        <span id="BGPSTREAM_ELEM_PEERSTATE_DELETED"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362abb0a98ba30bc5c425a7f13dad4f14bcb"></span><code
-                            class="descname">BGPSTREAM_ELEM_PEERSTATE_DELETED</code>
-                        = 8<a class="headerlink"
-                              href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_DELETED"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a6085d3b457cbca8c879100993a7be362abb0a98ba30bc5c425a7f13dad4f14bcb"></span><code
+                            class="descname">BGPSTREAM_ELEM_PEERSTATE_DELETED</code> = 8<a class="headerlink"
+                                                                                           href="#_CPPv232BGPSTREAM_ELEM_PEERSTATE_DELETED"
+                                                                                           title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state clearing. </p>
+                    </dd>
+                </dl>
+
+            </dd>
+        </dl>
+
+        <dl class="type">
+            <dt id="_CPPv228bgpstream_elem_origin_type_t">
+                <span id="bgpstream_elem_origin_type_t"></span><span class="target"
+                                                                     id="bgpstream__elem_8h_1a8537ea1b7a35b5c17df2727d427b53b7"></span><em
+                    class="property">enum </em><code class="descname">bgpstream_elem_origin_type_t</code><a
+                    class="headerlink" href="#_CPPv228bgpstream_elem_origin_type_t"
+                    title="Permalink to this definition">¶</a><br/></dt>
+            <dd><p>BGP ORIGIN Path Attribute values. </p>
+                <p><em>Values:</em></p>
+                <dl class="enumerator">
+                    <dt id="_CPPv236BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_IGP">
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a8537ea1b7a35b5c17df2727d427b53b7ad1d7e6552faed2f23394366e4585993f"></span><code
+                            class="descname">BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_IGP</code> = 0<a class="headerlink"
+                                                                                               href="#_CPPv236BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_IGP"
+                                                                                               title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>IGP - Network Layer Reachability Information is interior to the originating AS. </p>
+                    </dd>
+                </dl>
+
+                <dl class="enumerator">
+                    <dt id="_CPPv236BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_EGP">
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a8537ea1b7a35b5c17df2727d427b53b7ab0ccbfbac5a0a5afacc873cbaf7a6c50"></span><code
+                            class="descname">BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_EGP</code> = 1<a class="headerlink"
+                                                                                               href="#_CPPv236BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_EGP"
+                                                                                               title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>EGP - Network Layer Reachability Information learned via the EGP protocol [RFC904]. </p>
+                    </dd>
+                </dl>
+
+                <dl class="enumerator">
+                    <dt id="_CPPv243BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_INCOMPLETE">
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a8537ea1b7a35b5c17df2727d427b53b7a5107ee70170cfb34d4873fbed4a9c77d"></span><code
+                            class="descname">BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_INCOMPLETE</code> = 2<a class="headerlink"
+                                                                                                      href="#_CPPv243BGPSTREAM_ELEM_BGP_UPDATE_ORIGIN_INCOMPLETE"
+                                                                                                      title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>INCOMPLETE - Network Layer Reachability Information learned by some other means. </p>
                     </dd>
                 </dl>
 
@@ -172,82 +187,69 @@
 
         <dl class="type">
             <dt id="_CPPv221bgpstream_elem_type_t">
-                <span id="bgpstream_elem_type_t"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7"></span><em
-                    class="property">enum </em><code
-                    class="descname">bgpstream_elem_type_t</code><a
-                    class="headerlink"
-                    href="#_CPPv221bgpstream_elem_type_t"
-                    title="Permalink to this definition">¶</a></dt>
+                <span id="bgpstream_elem_type_t"></span><span class="target"
+                                                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7"></span><em
+                    class="property">enum </em><code class="descname">bgpstream_elem_type_t</code><a class="headerlink"
+                                                                                                     href="#_CPPv221bgpstream_elem_type_t"
+                                                                                                     title="Permalink to this definition">¶</a><br/>
+            </dt>
             <dd><p>Elem types. </p>
-
                 <p><em>Values:</em></p>
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv227BGPSTREAM_ELEM_TYPE_UNKNOWN">
-                        <span id="BGPSTREAM_ELEM_TYPE_UNKNOWN"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a1b92098910a5b53113b55f93cd2a4951"></span><code
-                            class="descname">BGPSTREAM_ELEM_TYPE_UNKNOWN</code>
-                        = 0<a class="headerlink"
-                              href="#_CPPv227BGPSTREAM_ELEM_TYPE_UNKNOWN"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a1b92098910a5b53113b55f93cd2a4951"></span><code
+                            class="descname">BGPSTREAM_ELEM_TYPE_UNKNOWN</code> = 0<a class="headerlink"
+                                                                                      href="#_CPPv227BGPSTREAM_ELEM_TYPE_UNKNOWN"
+                                                                                      title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Unknown. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv223BGPSTREAM_ELEM_TYPE_RIB">
-                        <span id="BGPSTREAM_ELEM_TYPE_RIB"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7ad5c81f7d0c3c1cdd69cda7e8547a5b51"></span><code
-                            class="descname">BGPSTREAM_ELEM_TYPE_RIB</code>
-                        = 1<a class="headerlink"
-                              href="#_CPPv223BGPSTREAM_ELEM_TYPE_RIB"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7ad5c81f7d0c3c1cdd69cda7e8547a5b51"></span><code
+                            class="descname">BGPSTREAM_ELEM_TYPE_RIB</code> = 1<a class="headerlink"
+                                                                                  href="#_CPPv223BGPSTREAM_ELEM_TYPE_RIB"
+                                                                                  title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>RIB Entry. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv232BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT">
-                        <span id="BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a4898a962da7bb6c98051c0ef5ffc1573"></span><code
-                            class="descname">BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT</code>
-                        = 2<a class="headerlink"
-                              href="#_CPPv232BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a4898a962da7bb6c98051c0ef5ffc1573"></span><code
+                            class="descname">BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT</code> = 2<a class="headerlink"
+                                                                                           href="#_CPPv232BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT"
+                                                                                           title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Announcement. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv230BGPSTREAM_ELEM_TYPE_WITHDRAWAL">
-                        <span id="BGPSTREAM_ELEM_TYPE_WITHDRAWAL"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7ace4a6b8e65bcc8657c25ca415ea2573f"></span><code
-                            class="descname">BGPSTREAM_ELEM_TYPE_WITHDRAWAL</code>
-                        = 3<a class="headerlink"
-                              href="#_CPPv230BGPSTREAM_ELEM_TYPE_WITHDRAWAL"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7ace4a6b8e65bcc8657c25ca415ea2573f"></span><code
+                            class="descname">BGPSTREAM_ELEM_TYPE_WITHDRAWAL</code> = 3<a class="headerlink"
+                                                                                         href="#_CPPv230BGPSTREAM_ELEM_TYPE_WITHDRAWAL"
+                                                                                         title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Withdrawal. </p>
                     </dd>
                 </dl>
 
-                <dl class="member">
+                <dl class="enumerator">
                     <dt id="_CPPv229BGPSTREAM_ELEM_TYPE_PEERSTATE">
-                        <span id="BGPSTREAM_ELEM_TYPE_PEERSTATE"></span><span
-                            class="target"
-                            id="bgpstreambgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a4811684642d6ab91815b121046a970dc"></span><code
-                            class="descname">BGPSTREAM_ELEM_TYPE_PEERSTATE</code>
-                        = 4<a class="headerlink"
-                              href="#_CPPv229BGPSTREAM_ELEM_TYPE_PEERSTATE"
-                              title="Permalink to this definition">¶</a>
+                        <span class="target"
+                              id="bgpstream__elem_8h_1a7f6a79c98819e794da41d717ae9309f7a4811684642d6ab91815b121046a970dc"></span><code
+                            class="descname">BGPSTREAM_ELEM_TYPE_PEERSTATE</code> = 4<a class="headerlink"
+                                                                                        href="#_CPPv229BGPSTREAM_ELEM_TYPE_PEERSTATE"
+                                                                                        title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Peer state change. </p>
                     </dd>
@@ -256,54 +258,67 @@
             </dd>
         </dl>
 
+        <dl class="type">
+            <dt id="_CPPv223bgpstream_annotations_t">
+                <span id="bgpstream_annotations_t"></span><span class="target"
+                                                                id="bgpstream__elem_8h_1a0f0bc603354f183d714dd33e212055dd"></span><em
+                    class="property">typedef </em><em class="property">struct</em> <a class="reference internal"
+                                                                                      href="#_CPPv230struct_bgpstream_annotations_t"
+                                                                                      title="struct_bgpstream_annotations_t">struct_bgpstream_annotations_t</a>
+                <code class="descname">bgpstream_annotations_t</code><a class="headerlink"
+                                                                        href="#_CPPv223bgpstream_annotations_t"
+                                                                        title="Permalink to this definition">¶</a><br/>
+            </dt>
+            <dd></dd>
+        </dl>
+
+        <dl class="type">
+            <dt id="_CPPv227bgpstream_elem_aggregator_t">
+                <span id="bgpstream_elem_aggregator_t"></span><span class="target"
+                                                                    id="bgpstream__elem_8h_1af79804dea1c3df4d9dac47126f7507d0"></span><em
+                    class="property">typedef </em><em class="property">struct</em> <a class="reference internal"
+                                                                                      href="#_CPPv225bgpstream_elem_aggregator"
+                                                                                      title="bgpstream_elem_aggregator">bgpstream_elem_aggregator</a>
+                <code class="descname">bgpstream_elem_aggregator_t</code><a class="headerlink"
+                                                                            href="#_CPPv227bgpstream_elem_aggregator_t"
+                                                                            title="Permalink to this definition">¶</a><br/>
+            </dt>
+            <dd><p>Elem aggregator object. </p>
+            </dd>
+        </dl>
+
     </div>
-    <div class="breathe-sectiondef container">
-        <p class="breathe-sectiondef-title rubric">Public Data
-            Structures</p>
+    <div class="breathe-sectiondef docutils container">
+        <p class="breathe-sectiondef-title rubric">Public Data Structures</p>
         <dl class="type">
             <dt id="_CPPv216bgpstream_elem_t">
-                <span id="bgpstream_elem_t"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1ab966ed48e556bef46d38f9e3bc4ef9df"></span><em
-                    class="property">typedef </em><em
-                    class="property">struct</em> <a
-                    class="reference internal"
-                    href="#_CPPv223struct_bgpstream_elem_t"
-                    title="struct_bgpstream_elem_t">struct_bgpstream_elem_t</a>
-                <code class="descname">bgpstream_elem_t</code><a
-                    class="headerlink"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="Permalink to this definition">¶</a></dt>
+                <span id="bgpstream_elem_t"></span><span class="target"
+                                                         id="bgpstream__elem_8h_1ae120c1f03b58522ee32cefba65e97c28"></span><em
+                    class="property">typedef </em><em class="property">struct</em> <a class="reference internal"
+                                                                                      href="#_CPPv214bgpstream_elem"
+                                                                                      title="bgpstream_elem">bgpstream_elem</a>
+                <code class="descname">bgpstream_elem_t</code><a class="headerlink" href="#_CPPv216bgpstream_elem_t"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
             <dd><p>A BGP Stream Elem object. </p>
             </dd>
         </dl>
 
     </div>
-    <div class="breathe-sectiondef container">
-        <p class="breathe-sectiondef-title rubric">Public API
-            Functions</p>
+    <div class="breathe-sectiondef docutils container">
+        <p class="breathe-sectiondef-title rubric">Public API Functions</p>
         <dl class="function">
             <dt id="_CPPv221bgpstream_elem_createv">
-                <span id="bgpstream_elem_create"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a05701fab925fa91474553eb407888ccc"></span><a
-                    class="reference internal"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<code class="descname">bgpstream_elem_create</code><span
-                    class="sig-paren">(</span><span
-                    class="sig-paren">)</span><a class="headerlink"
-                                                 href="#_CPPv221bgpstream_elem_createv"
-                                                 title="Permalink to this definition">¶</a>
-            </dt>
+                <span id="bgpstream_elem_create__void"></span><span class="target"
+                                                                    id="bgpstream__elem_8h_1a04e7cb324ead836a994cb4cf8c85ab5e"></span><a
+                    class="reference internal" href="#_CPPv216bgpstream_elem_t" title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<code class="descname">bgpstream_elem_create</code><span class="sig-paren">(</span>void<span
+                    class="sig-paren">)</span><a class="headerlink" href="#_CPPv221bgpstream_elem_createv"
+                                                 title="Permalink to this definition">¶</a><br/></dt>
             <dd><p>Create a new BGP Stream Elem instance. </p>
-
                 <p>
                 <dl class="docutils">
                     <dt><strong>Return</strong></dt>
-                    <dd>a pointer to an Elem instance if successful,
-                        NULL otherwise
-                    </dd>
+                    <dd>a pointer to an Elem instance if successful, NULL otherwise</dd>
                 </dl>
                 </p>
             </dd>
@@ -311,30 +326,21 @@
 
         <dl class="function">
             <dt id="_CPPv222bgpstream_elem_destroyP16bgpstream_elem_t">
-                <span id="bgpstream_elem_destroy__bgpstream_elem_tP"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a505d5124d9c29d733b57a4121bd3f48c"></span>void
-                <code class="descname">bgpstream_elem_destroy</code><span
-                    class="sig-paren">(</span><a
-                    class="reference internal"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<em>elem</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv222bgpstream_elem_destroyP16bgpstream_elem_t"
-                    title="Permalink to this definition">¶</a></dt>
+                <span id="bgpstream_elem_destroy__bgpstream_elem_tP"></span><span class="target"
+                                                                                  id="bgpstream__elem_8h_1a505d5124d9c29d733b57a4121bd3f48c"></span>void
+                <code class="descname">bgpstream_elem_destroy</code><span class="sig-paren">(</span><a
+                    class="reference internal" href="#_CPPv216bgpstream_elem_t" title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<em>elem</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                 href="#_CPPv222bgpstream_elem_destroyP16bgpstream_elem_t"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
             <dd><p>Destroy the given BGP Stream Elem instance. </p>
-
                 <p>
                 <dl class="docutils">
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">elem</span></code> -
-                                <p>pointer to a BGP Stream Elem
-                                    instance to destroy </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">elem</span></code>: pointer to a BGP
+                                Stream Elem instance to destroy
                             </li>
                         </ul>
                     </dd>
@@ -345,30 +351,21 @@
 
         <dl class="function">
             <dt id="_CPPv220bgpstream_elem_clearP16bgpstream_elem_t">
-                <span id="bgpstream_elem_clear__bgpstream_elem_tP"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a0d14e8628f089a1266a5e7ceb13d864d"></span>void
-                <code class="descname">bgpstream_elem_clear</code><span
-                    class="sig-paren">(</span><a
-                    class="reference internal"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<em>elem</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv220bgpstream_elem_clearP16bgpstream_elem_t"
-                    title="Permalink to this definition">¶</a></dt>
+                <span id="bgpstream_elem_clear__bgpstream_elem_tP"></span><span class="target"
+                                                                                id="bgpstream__elem_8h_1a0d14e8628f089a1266a5e7ceb13d864d"></span>void
+                <code class="descname">bgpstream_elem_clear</code><span class="sig-paren">(</span><a
+                    class="reference internal" href="#_CPPv216bgpstream_elem_t" title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<em>elem</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                 href="#_CPPv220bgpstream_elem_clearP16bgpstream_elem_t"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
             <dd><p>Clear the given BGP Stream Elem instance. </p>
-
                 <p>
                 <dl class="docutils">
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">elem</span></code> -
-                                <p>pointer to a BGP Stream Elem
-                                    instance to clear </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">elem</span></code>: pointer to a BGP
+                                Stream Elem instance to clear
                             </li>
                         </ul>
                     </dd>
@@ -378,55 +375,34 @@
         </dl>
 
         <dl class="function">
-            <dt id="_CPPv219bgpstream_elem_copyP16bgpstream_elem_tP16bgpstream_elem_t">
-                <span id="bgpstream_elem_copy__bgpstream_elem_tP.bgpstream_elem_tP"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1acb4d05c103e8073309dea83c4270ede8"></span><a
-                    class="reference internal"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<code
-                    class="descname">bgpstream_elem_copy</code><span
-                    class="sig-paren">(</span><a
-                    class="reference internal"
-                    href="#_CPPv216bgpstream_elem_t"
-                    title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<em>dst</em>, <a class="reference internal"
-                                  href="#_CPPv216bgpstream_elem_t"
-                                  title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<em>src</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv219bgpstream_elem_copyP16bgpstream_elem_tP16bgpstream_elem_t"
-                    title="Permalink to this definition">¶</a></dt>
-            <dd><p>Copy the given BGP Stream Elem to the given
-                destination. </p>
-
+            <dt id="_CPPv219bgpstream_elem_copyP16bgpstream_elem_tPK16bgpstream_elem_t">
+                <span id="bgpstream_elem_copy__bgpstream_elem_tP.bgpstream_elem_tCP"></span><span class="target"
+                                                                                                  id="bgpstream__elem_8h_1a6c886bf8e7b4286481b936a532fe7100"></span><a
+                    class="reference internal" href="#_CPPv216bgpstream_elem_t" title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<code class="descname">bgpstream_elem_copy</code><span class="sig-paren">(</span><a
+                    class="reference internal" href="#_CPPv216bgpstream_elem_t" title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<em>dst</em>, <em class="property">const</em> <a class="reference internal"
+                                                                  href="#_CPPv216bgpstream_elem_t"
+                                                                  title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<em>src</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                href="#_CPPv219bgpstream_elem_copyP16bgpstream_elem_tPK16bgpstream_elem_t"
+                                                                title="Permalink to this definition">¶</a><br/></dt>
+            <dd><p>Copy the given BGP Stream Elem to the given destination. </p>
                 <p>
-                    The <code class="docutils literal"><span
-                        class="pre">dst</span></code> elem must have
-                    been created using bgpstream_elem_create, or if
-                    being re-used, cleared using
-                    bgpstream_elem_clear before calling this
-                    function.
+                    The <code class="docutils literal"><span class="pre">dst</span></code> elem must have been created
+                    using bgpstream_elem_create, or if being re-used, cleared using bgpstream_elem_clear before calling
+                    this function.
                 <dl class="docutils">
                     <dt><strong>Return</strong></dt>
-                    <dd>pointer to dst if successful, NULL
-                        otherwise
-                    </dd>
+                    <dd>pointer to dst if successful, NULL otherwise</dd>
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">dst</span></code> -
-                                <p>pointer to an elem to copy
-                                    into </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">dst</span></code>: pointer to an elem
+                                to copy into
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">src</span></code> -
-                                <p>pointer to an elem to copy
-                                    from </p>
+                            <li><code class="docutils literal"><span class="pre">src</span></code>: pointer to an elem
+                                to copy from
                             </li>
                         </ul>
                     </dd>
@@ -437,45 +413,30 @@
 
         <dl class="function">
             <dt id="_CPPv228bgpstream_elem_type_snprintfPc6size_t21bgpstream_elem_type_t">
-                <span id="bgpstream_elem_type_snprintf__cP.s.bgpstream_elem_type_t"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1a6f47f19ddeaa956805c5e838003c4bbd"></span>int
-                <code class="descname">bgpstream_elem_type_snprintf</code><span
-                    class="sig-paren">(</span>char *<em>buf</em>,
-                size_t <em>len</em>, <a class="reference internal"
-                                        href="#_CPPv221bgpstream_elem_type_t"
-                                        title="bgpstream_elem_type_t">bgpstream_elem_type_t</a>
-                <em>type</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv228bgpstream_elem_type_snprintfPc6size_t21bgpstream_elem_type_t"
-                    title="Permalink to this definition">¶</a></dt>
-            <dd><p>Write the string representation of the elem type
-                into the provided buffer. </p>
-
+                <span id="bgpstream_elem_type_snprintf__cP.s.bgpstream_elem_type_t"></span><span class="target"
+                                                                                                 id="bgpstream__elem_8h_1a6f47f19ddeaa956805c5e838003c4bbd"></span>int
+                <code class="descname">bgpstream_elem_type_snprintf</code><span class="sig-paren">(</span>char
+                *<em>buf</em>, size_t <em>len</em>, <a class="reference internal" href="#_CPPv221bgpstream_elem_type_t"
+                                                       title="bgpstream_elem_type_t">bgpstream_elem_type_t</a>
+                <em>type</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                href="#_CPPv228bgpstream_elem_type_snprintfPc6size_t21bgpstream_elem_type_t"
+                                                                title="Permalink to this definition">¶</a><br/></dt>
+            <dd><p>Write the string representation of the elem type into the provided buffer. </p>
                 <p>
                 <dl class="docutils">
                     <dt><strong>Return</strong></dt>
-                    <dd>the number of characters that would have
-                        been written if len was unlimited
-                    </dd>
+                    <dd>the number of characters that would have been written if len was unlimited</dd>
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">buf</span></code> -
-                                <p>pointer to a char array </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">buf</span></code>: pointer to a char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">len</span></code> -
-                                <p>length of the char array </p>
+                            <li><code class="docutils literal"><span class="pre">len</span></code>: length of the char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">type</span></code> -
-                                <p>BGP Stream Elem type to convert
-                                    to string </p>
+                            <li><code class="docutils literal"><span class="pre">type</span></code>: BGP Stream Elem
+                                type to convert to string
                             </li>
                         </ul>
                     </dd>
@@ -487,44 +448,29 @@
         <dl class="function">
             <dt id="_CPPv233bgpstream_elem_peerstate_snprintfPc6size_t26bgpstream_elem_peerstate_t">
                 <span id="bgpstream_elem_peerstate_snprintf__cP.s.bgpstream_elem_peerstate_t"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1af37a546b611685fa207541c134fa7b95"></span>int
-                <code class="descname">bgpstream_elem_peerstate_snprintf</code><span
-                    class="sig-paren">(</span>char *<em>buf</em>,
-                size_t <em>len</em>, <a class="reference internal"
-                                        href="#_CPPv226bgpstream_elem_peerstate_t"
-                                        title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a>
-                <em>state</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv233bgpstream_elem_peerstate_snprintfPc6size_t26bgpstream_elem_peerstate_t"
-                    title="Permalink to this definition">¶</a></dt>
-            <dd><p>Write the string representation of the elem
-                peerstate into the provided buffer. </p>
-
+                    class="target" id="bgpstream__elem_8h_1af37a546b611685fa207541c134fa7b95"></span>int <code
+                    class="descname">bgpstream_elem_peerstate_snprintf</code><span class="sig-paren">(</span>char *<em>buf</em>,
+                size_t <em>len</em>, <a class="reference internal" href="#_CPPv226bgpstream_elem_peerstate_t"
+                                        title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a> <em>state</em><span
+                    class="sig-paren">)</span><a class="headerlink"
+                                                 href="#_CPPv233bgpstream_elem_peerstate_snprintfPc6size_t26bgpstream_elem_peerstate_t"
+                                                 title="Permalink to this definition">¶</a><br/></dt>
+            <dd><p>Write the string representation of the elem peerstate into the provided buffer. </p>
                 <p>
                 <dl class="docutils">
                     <dt><strong>Return</strong></dt>
-                    <dd>the number of characters that would have
-                        been written if len was unlimited
-                    </dd>
+                    <dd>the number of characters that would have been written if len was unlimited</dd>
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">buf</span></code> -
-                                <p>pointer to a char array </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">buf</span></code>: pointer to a char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">len</span></code> -
-                                <p>length of the char array </p>
+                            <li><code class="docutils literal"><span class="pre">len</span></code>: length of the char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">state</span></code>
-                                - <p>BGP Stream Elem peerstate to
-                                    convert to string </p>
+                            <li><code class="docutils literal"><span class="pre">state</span></code>: BGP Stream Elem
+                                peerstate to convert to string
                             </li>
                         </ul>
                     </dd>
@@ -535,47 +481,31 @@
 
         <dl class="function">
             <dt id="_CPPv223bgpstream_elem_snprintfPc6size_tPK16bgpstream_elem_t">
-                <span id="bgpstream_elem_snprintf__cP.s.bgpstream_elem_tCP"></span><span
-                    class="target"
-                    id="bgpstreambgpstream__elem_8h_1aa8025da3057c0d61b7d9ce7a917a773f"></span>char
-                *<code
-                    class="descname">bgpstream_elem_snprintf</code><span
-                    class="sig-paren">(</span>char *<em>buf</em>,
-                size_t <em>len</em>, <em class="property">const</em>
-                <a class="reference internal"
-                   href="#_CPPv216bgpstream_elem_t"
-                   title="bgpstream_elem_t">bgpstream_elem_t</a>
-                *<em>elem</em><span class="sig-paren">)</span><a
-                    class="headerlink"
-                    href="#_CPPv223bgpstream_elem_snprintfPc6size_tPK16bgpstream_elem_t"
-                    title="Permalink to this definition">¶</a></dt>
-            <dd><p>Write the string representation of the elem into
-                the provided buffer. </p>
-
+                <span id="bgpstream_elem_snprintf__cP.s.bgpstream_elem_tCP"></span><span class="target"
+                                                                                         id="bgpstream__elem_8h_1aa8025da3057c0d61b7d9ce7a917a773f"></span>char
+                *<code class="descname">bgpstream_elem_snprintf</code><span class="sig-paren">(</span>char *<em>buf</em>,
+                size_t <em>len</em>, <em class="property">const</em> <a class="reference internal"
+                                                                        href="#_CPPv216bgpstream_elem_t"
+                                                                        title="bgpstream_elem_t">bgpstream_elem_t</a>
+                *<em>elem</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                 href="#_CPPv223bgpstream_elem_snprintfPc6size_tPK16bgpstream_elem_t"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
+            <dd><p>Write the string representation of the elem into the provided buffer. </p>
                 <p>
                 <dl class="docutils">
                     <dt><strong>Return</strong></dt>
-                    <dd>pointer to the start of the buffer if
-                        successful, NULL otherwise
-                    </dd>
+                    <dd>pointer to the start of the buffer if successful, NULL otherwise</dd>
                     <dt><strong>Parameters</strong></dt>
                     <dd>
-                        <ul class="breatheparameterlist first last">
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">buf</span></code> -
-                                <p>pointer to a char array </p>
+                        <ul class="breatheparameterlist first last simple">
+                            <li><code class="docutils literal"><span class="pre">buf</span></code>: pointer to a char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">len</span></code> -
-                                <p>length of the char array </p>
+                            <li><code class="docutils literal"><span class="pre">len</span></code>: length of the char
+                                array
                             </li>
-                            <li><code
-                                    class="first docutils literal"><span
-                                    class="pre">elem</span></code> -
-                                <p>pointer to a BGP Stream Elem to
-                                    convert to string </p>
+                            <li><code class="docutils literal"><span class="pre">elem</span></code>: pointer to a BGP
+                                Stream Elem to convert to string
                             </li>
                         </ul>
                     </dd>
@@ -586,186 +516,330 @@
 
     </div>
     <dl class="class">
-        <dt id="_CPPv223struct_bgpstream_elem_t">
-            <span id="struct_bgpstream_elem_t"></span><span
-                class="target"
-                id="bgpstreamstructstruct__bgpstream__elem__t"></span><em
-                class="property">struct </em><code class="descname">struct_bgpstream_elem_t</code><a
-                class="headerlink"
-                href="#_CPPv223struct_bgpstream_elem_t"
-                title="Permalink to this definition">¶</a></dt>
-        <dd><em>#include &lt;bgpstream_elem.h&gt;</em>
-
-            <p>A BGP Stream Elem object. </p>
-
-            <div class="breathe-sectiondef container">
-                <p class="breathe-sectiondef-title rubric">Public
-                    Members</p>
+        <dt id="_CPPv230struct_bgpstream_annotations_t">
+            <span id="struct_bgpstream_annotations_t"></span><span class="target"
+                                                                   id="structstruct__bgpstream__annotations__t"></span><em
+                class="property">struct </em><code class="descname">struct_bgpstream_annotations_t</code><a
+                class="headerlink" href="#_CPPv230struct_bgpstream_annotations_t"
+                title="Permalink to this definition">¶</a><br/></dt>
+        <dd>
+            <div class="breathe-sectiondef docutils container">
+                <p class="breathe-sectiondef-title rubric">Public Members</p>
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t4typeE">
-                        <span id="struct_bgpstream_elem_t::type__bgpstream_elem_type_t"></span><span
+                    <dt id="_CPPv2N30struct_bgpstream_annotations_t11rpki_activeE">
+                        <span id="struct_bgpstream_annotations_t::rpki_active__i"></span><span class="target"
+                                                                                               id="structstruct__bgpstream__annotations__t_1ac8b719d5bfbb3dbd2cbe4443a9299a83"></span>int
+                        <code class="descname">rpki_active</code><a class="headerlink"
+                                                                    href="#_CPPv2N30struct_bgpstream_annotations_t11rpki_activeE"
+                                                                    title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>RPKI active. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N30struct_bgpstream_annotations_t3cfgE">
+                        <span id="struct_bgpstream_annotations_t::cfg__struct_rpki_config_tP"></span><span
                             class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1ad2f182106e65e33fa8c575ebe70e58a4"></span><a
-                            class="reference internal"
-                            href="#_CPPv221bgpstream_elem_type_t"
-                            title="bgpstream_elem_type_t">bgpstream_elem_type_t</a>
-                        <code class="descname">type</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t4typeE"
-                            title="Permalink to this definition">¶</a>
+                            id="structstruct__bgpstream__annotations__t_1a07940f07903e4c047ec7abc2fd5ed613"></span><em
+                            class="property">struct</em> struct_rpki_config_t *<code class="descname">cfg</code><a
+                            class="headerlink" href="#_CPPv2N30struct_bgpstream_annotations_t3cfgE"
+                            title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>RPKI validation configuration. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N30struct_bgpstream_annotations_t9timestampE">
+                        <span id="struct_bgpstream_annotations_t::timestamp__uint32_t"></span><span class="target"
+                                                                                                    id="structstruct__bgpstream__annotations__t_1a1692f92a0bae8364a8cf23aded349646"></span>uint32_t
+                        <code class="descname">timestamp</code><a class="headerlink"
+                                                                  href="#_CPPv2N30struct_bgpstream_annotations_t9timestampE"
+                                                                  title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>Record timestamp. </p>
+                    </dd>
+                </dl>
+
+            </div>
+        </dd>
+    </dl>
+
+    <dl class="class">
+        <dt id="_CPPv225bgpstream_elem_aggregator">
+            <span id="bgpstream_elem_aggregator"></span><span class="target"
+                                                              id="structbgpstream__elem__aggregator"></span><em
+                class="property">struct </em><code class="descname">bgpstream_elem_aggregator</code><a
+                class="headerlink" href="#_CPPv225bgpstream_elem_aggregator"
+                title="Permalink to this definition">¶</a><br/></dt>
+        <dd><em>#include &lt;bgpstream_elem.h&gt;</em>
+            <p>Elem aggregator object. </p>
+            <div class="breathe-sectiondef docutils container">
+                <p class="breathe-sectiondef-title rubric">Public Members</p>
+                <dl class="member">
+                    <dt id="_CPPv2N25bgpstream_elem_aggregator14has_aggregatorE">
+                        <span id="bgpstream_elem_aggregator::has_aggregator__uint8_t"></span><span class="target"
+                                                                                                   id="structbgpstream__elem__aggregator_1a4a6cfca66712826a7812edb1f4fbca4c"></span>uint8_t
+                        <code class="descname">has_aggregator</code><a class="headerlink"
+                                                                       href="#_CPPv2N25bgpstream_elem_aggregator14has_aggregatorE"
+                                                                       title="Permalink to this definition">¶</a><br/>
                     </dt>
+                    <dd><p>Boolean value to check if aggregator field is set. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N25bgpstream_elem_aggregator14aggregator_asnE">
+                        <span id="bgpstream_elem_aggregator::aggregator_asn__uint32_t"></span><span class="target"
+                                                                                                    id="structbgpstream__elem__aggregator_1a8ffd7551d5788c3b1c3f8712146e7a90"></span>uint32_t
+                        <code class="descname">aggregator_asn</code><a class="headerlink"
+                                                                       href="#_CPPv2N25bgpstream_elem_aggregator14aggregator_asnE"
+                                                                       title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>Aggregator ASN. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N25bgpstream_elem_aggregator15aggregator_addrE">
+                        <span id="bgpstream_elem_aggregator::aggregator_addr__bgpstream_ip_addr_t"></span><span
+                            class="target"
+                            id="structbgpstream__elem__aggregator_1aa27c535967e21af36030e116e23ff193"></span>bgpstream_ip_addr_t
+                        <code class="descname">aggregator_addr</code><a class="headerlink"
+                                                                        href="#_CPPv2N25bgpstream_elem_aggregator15aggregator_addrE"
+                                                                        title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>Aggregator IP. </p>
+                    </dd>
+                </dl>
+
+            </div>
+        </dd>
+    </dl>
+
+    <dl class="class">
+        <dt id="_CPPv214bgpstream_elem">
+            <span id="bgpstream_elem"></span><span class="target" id="structbgpstream__elem"></span><em
+                class="property">struct </em><code class="descname">bgpstream_elem</code><a class="headerlink"
+                                                                                            href="#_CPPv214bgpstream_elem"
+                                                                                            title="Permalink to this definition">¶</a><br/>
+        </dt>
+        <dd><em>#include &lt;bgpstream_elem.h&gt;</em>
+            <p>A BGP Stream Elem object. </p>
+            <div class="breathe-sectiondef docutils container">
+                <p class="breathe-sectiondef-title rubric">Public Members</p>
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem4typeE">
+                        <span id="bgpstream_elem::type__bgpstream_elem_type_t"></span><span class="target"
+                                                                                            id="structbgpstream__elem_1ac1e55547a7cd3db8ac9de878a28826b0"></span><a
+                            class="reference internal" href="#_CPPv221bgpstream_elem_type_t"
+                            title="bgpstream_elem_type_t">bgpstream_elem_type_t</a> <code class="descname">type</code><a
+                            class="headerlink" href="#_CPPv2N14bgpstream_elem4typeE"
+                            title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>Type. </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t9timestampE">
-                        <span id="struct_bgpstream_elem_t::timestamp__uint32_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1ac0256b4d6565f82aa87cd50ed8315de3"></span>uint32_t
-                        <code class="descname">timestamp</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t9timestampE"
-                            title="Permalink to this definition">¶</a>
+                    <dt id="_CPPv2N14bgpstream_elem13orig_time_secE">
+                        <span id="bgpstream_elem::orig_time_sec__uint32_t"></span><span class="target"
+                                                                                        id="structbgpstream__elem_1aa6ff1dad6bcb162ff9f04f4e26bc882b"></span>uint32_t
+                        <code class="descname">orig_time_sec</code><a class="headerlink"
+                                                                      href="#_CPPv2N14bgpstream_elem13orig_time_secE"
+                                                                      title="Permalink to this definition">¶</a><br/>
                     </dt>
-                    <dd><p>Epoch time when this elem was generated
-                        by the collector. </p>
+                    <dd><p>Originated Time (seconds component). </p>
+                        <p>For RIB records, this is the time the prefix was heard (e.g., <a class="reference external"
+                                                                                            href="https://tools.ietf.org/html/rfc6396#section-4.3.4">https://tools.ietf.org/html/rfc6396#section-4.3.4</a>);
+                            for BMP messages, this is the timestamp in the Peer Header (see <a
+                                    class="reference external" href="https://tools.ietf.org/html/rfc7854#section-4.2">https://tools.ietf.org/html/rfc7854#section-4.2</a>).
+                            Care must be taken when using this value as it will often be zero (e.g., there is a bug in a
+                            Cisco implementation of BMP that does not set the time in the peer header), and even if it
+                            is set, its meaning is dependent on the data source.</p>
+                        <p>NOTE: This is NOT the same as the <code class="docutils literal"><span
+                                class="pre">time_sec</span></code> field in the record. It MUST NOT be used in place of
+                            that field. If you are unsure about which time to use, then you probably want the timestamp
+                            in the record structure. </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t12peer_addressE">
-                        <span id="struct_bgpstream_elem_t::peer_address__bgpstream_addr_storage_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1aba0b7add3a7c01104716f1e17db6f562"></span>bgpstream_addr_storage_t
-                        <code class="descname">peer_address</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t12peer_addressE"
-                            title="Permalink to this definition">¶</a>
+                    <dt id="_CPPv2N14bgpstream_elem14orig_time_usecE">
+                        <span id="bgpstream_elem::orig_time_usec__uint32_t"></span><span class="target"
+                                                                                         id="structbgpstream__elem_1a00adc73a243a70e4eb96c8bdb4089ace"></span>uint32_t
+                        <code class="descname">orig_time_usec</code><a class="headerlink"
+                                                                       href="#_CPPv2N14bgpstream_elem14orig_time_usecE"
+                                                                       title="Permalink to this definition">¶</a><br/>
                     </dt>
+                    <dd><p>Originated Time (microseconds component) </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem7peer_ipE">
+                        <span id="bgpstream_elem::peer_ip__bgpstream_ip_addr_t"></span><span class="target"
+                                                                                             id="structbgpstream__elem_1aaaa47e62c6dfb3aaa1c3099d9885f0b0"></span>bgpstream_ip_addr_t
+                        <code class="descname">peer_ip</code><a class="headerlink"
+                                                                href="#_CPPv2N14bgpstream_elem7peer_ipE"
+                                                                title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>Peer IP address. </p>
+                        <p>This is the IP address that the peer used to connect to the collector (or router in the case
+                            of BMP). </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t13peer_asnumberE">
-                        <span id="struct_bgpstream_elem_t::peer_asnumber__uint32_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1a926ef4461f23f813b024c0ef91e32b56"></span>uint32_t
-                        <code class="descname">peer_asnumber</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t13peer_asnumberE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem8peer_asnE">
+                        <span id="bgpstream_elem::peer_asn__uint32_t"></span><span class="target"
+                                                                                   id="structbgpstream__elem_1ac324cadfd158dfb04466f8297fa2f07d"></span>uint32_t
+                        <code class="descname">peer_asn</code><a class="headerlink"
+                                                                 href="#_CPPv2N14bgpstream_elem8peer_asnE"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>Peer AS number. </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t6prefixE">
-                        <span id="struct_bgpstream_elem_t::prefix__bgpstream_pfx_storage_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1a7100cbc6ae314da1bfd0a31cb321168e"></span>bgpstream_pfx_storage_t
-                        <code class="descname">prefix</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t6prefixE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem6prefixE">
+                        <span id="bgpstream_elem::prefix__bgpstream_pfx_t"></span><span class="target"
+                                                                                        id="structbgpstream__elem_1a6ff5b34f2515906817036cd4d2ffca85"></span>bgpstream_pfx_t
+                        <code class="descname">prefix</code><a class="headerlink"
+                                                               href="#_CPPv2N14bgpstream_elem6prefixE"
+                                                               title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>IP prefix. </p>
-
-                        <p>Available only for RIB, Announcement and
-                            Withdrawal elem types </p>
+                        <p>Available only for RIB, Announcement and Withdrawal elem types </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t7nexthopE">
-                        <span id="struct_bgpstream_elem_t::nexthop__bgpstream_addr_storage_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1ab93eb887ac3ff2c39538ff621376b69f"></span>bgpstream_addr_storage_t
-                        <code class="descname">nexthop</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t7nexthopE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem7nexthopE">
+                        <span id="bgpstream_elem::nexthop__bgpstream_ip_addr_t"></span><span class="target"
+                                                                                             id="structbgpstream__elem_1a31f7baf39627d2146633c357000948a3"></span>bgpstream_ip_addr_t
+                        <code class="descname">nexthop</code><a class="headerlink"
+                                                                href="#_CPPv2N14bgpstream_elem7nexthopE"
+                                                                title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>Next hop. </p>
-
-                        <p>Available only for RIB and Announcement
-                            elem types </p>
+                        <p>Available only for RIB and Announcement elem types </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t6aspathE">
-                        <span id="struct_bgpstream_elem_t::aspath__bgpstream_as_path_tP"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1aef4aeaeff46f4da07f2a97061a098af9"></span>bgpstream_as_path_t
-                        *<code class="descname">aspath</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t6aspathE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem7as_pathE">
+                        <span id="bgpstream_elem::as_path__bgpstream_as_path_tP"></span><span class="target"
+                                                                                              id="structbgpstream__elem_1a1f0c5078a281eb066b18a96a8ebcaa6d"></span>bgpstream_as_path_t
+                        *<code class="descname">as_path</code><a class="headerlink"
+                                                                 href="#_CPPv2N14bgpstream_elem7as_pathE"
+                                                                 title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>AS path. </p>
-
-                        <p>Available only for RIB and Announcement
-                            elem types </p>
+                        <p>Available only for RIB and Announcement elem types </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t11communitiesE">
-                        <span id="struct_bgpstream_elem_t::communities__bgpstream_community_set_tP"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1a3855b399030e2c2c44791a7745ff7e2e"></span>bgpstream_community_set_t
-                        *<code class="descname">communities</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t11communitiesE"
-                            title="Permalink to this definition">¶</a>
+                    <dt id="_CPPv2N14bgpstream_elem11communitiesE">
+                        <span id="bgpstream_elem::communities__bgpstream_community_set_tP"></span><span class="target"
+                                                                                                        id="structbgpstream__elem_1aeaf3e0a5f975fd94709159792f774ff3"></span>bgpstream_community_set_t
+                        *<code class="descname">communities</code><a class="headerlink"
+                                                                     href="#_CPPv2N14bgpstream_elem11communitiesE"
+                                                                     title="Permalink to this definition">¶</a><br/>
                     </dt>
                     <dd><p>Communities. </p>
-
-                        <p>Available only for RIB and Announcement
-                            elem types </p>
+                        <p>Available only for RIB and Announcement elem types </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t9old_stateE">
-                        <span id="struct_bgpstream_elem_t::old_state__bgpstream_elem_peerstate_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1a1154671bdf6a160a2723e0c660761212"></span><a
-                            class="reference internal"
-                            href="#_CPPv226bgpstream_elem_peerstate_t"
-                            title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a>
-                        <code class="descname">old_state</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t9old_stateE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem9old_stateE">
+                        <span id="bgpstream_elem::old_state__bgpstream_elem_peerstate_t"></span><span class="target"
+                                                                                                      id="structbgpstream__elem_1ae71ff7e9a1cf77c7a74cbf4bb8422e4f"></span><a
+                            class="reference internal" href="#_CPPv226bgpstream_elem_peerstate_t"
+                            title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a> <code class="descname">old_state</code><a
+                            class="headerlink" href="#_CPPv2N14bgpstream_elem9old_stateE"
+                            title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>Old peer state. </p>
-
-                        <p>Available only for the Peer-state elem
-                            type </p>
+                        <p>Available only for the Peer-state elem type </p>
                     </dd>
                 </dl>
 
                 <dl class="member">
-                    <dt id="_CPPv2N23struct_bgpstream_elem_t9new_stateE">
-                        <span id="struct_bgpstream_elem_t::new_state__bgpstream_elem_peerstate_t"></span><span
-                            class="target"
-                            id="bgpstreamstructstruct__bgpstream__elem__t_1a913a031a8e8993ace948ca10f8d80aac"></span><a
-                            class="reference internal"
-                            href="#_CPPv226bgpstream_elem_peerstate_t"
-                            title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a>
-                        <code class="descname">new_state</code><a
-                            class="headerlink"
-                            href="#_CPPv2N23struct_bgpstream_elem_t9new_stateE"
-                            title="Permalink to this definition">¶</a>
-                    </dt>
+                    <dt id="_CPPv2N14bgpstream_elem9new_stateE">
+                        <span id="bgpstream_elem::new_state__bgpstream_elem_peerstate_t"></span><span class="target"
+                                                                                                      id="structbgpstream__elem_1a15827cd84e11f671a992558de1db1472"></span><a
+                            class="reference internal" href="#_CPPv226bgpstream_elem_peerstate_t"
+                            title="bgpstream_elem_peerstate_t">bgpstream_elem_peerstate_t</a> <code class="descname">new_state</code><a
+                            class="headerlink" href="#_CPPv2N14bgpstream_elem9new_stateE"
+                            title="Permalink to this definition">¶</a><br/></dt>
                     <dd><p>New peer state. </p>
+                        <p>Available only for the Peer-state elem type </p>
+                    </dd>
+                </dl>
 
-                        <p>Available only for the Peer-state elem
-                            type </p>
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem11annotationsE">
+                        <span id="bgpstream_elem::annotations__bgpstream_annotations_t"></span><span class="target"
+                                                                                                     id="structbgpstream__elem_1a6c8f56b1319307e8ad121bcad9e75f5e"></span><a
+                            class="reference internal" href="#_CPPv223bgpstream_annotations_t"
+                            title="bgpstream_annotations_t">bgpstream_annotations_t</a> <code class="descname">annotations</code><a
+                            class="headerlink" href="#_CPPv2N14bgpstream_elem11annotationsE"
+                            title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>Annotations. </p>
+                        <p>Annotations from other libraries </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem6originE">
+                        <span id="bgpstream_elem::origin__bgpstream_elem_origin_type_t"></span><span class="target"
+                                                                                                     id="structbgpstream__elem_1a577ffe5f2b1125fdf97e31cc77e9b2f2"></span><a
+                            class="reference internal" href="#_CPPv228bgpstream_elem_origin_type_t"
+                            title="bgpstream_elem_origin_type_t">bgpstream_elem_origin_type_t</a> <code
+                            class="descname">origin</code><a class="headerlink" href="#_CPPv2N14bgpstream_elem6originE"
+                                                             title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>ORIGIN as-path attribute This attribute indicates where the update comes from: internal
+                        network (IGP), external network (EGP), or other means (INCOMPLETE). </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem3medE">
+                        <span id="bgpstream_elem::med__uint32_t"></span><span class="target"
+                                                                              id="structbgpstream__elem_1aa107a7860cead7894df5361f07443b8a"></span>uint32_t
+                        <code class="descname">med</code><a class="headerlink" href="#_CPPv2N14bgpstream_elem3medE"
+                                                            title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>MED attribute. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem10local_prefE">
+                        <span id="bgpstream_elem::local_pref__uint32_t"></span><span class="target"
+                                                                                     id="structbgpstream__elem_1a663c16eae217f35fcaa40c630843b075"></span>uint32_t
+                        <code class="descname">local_pref</code><a class="headerlink"
+                                                                   href="#_CPPv2N14bgpstream_elem10local_prefE"
+                                                                   title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>LOCAL_PREF attribute. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem16atomic_aggregateE">
+                        <span id="bgpstream_elem::atomic_aggregate__uint8_t"></span><span class="target"
+                                                                                          id="structbgpstream__elem_1add25b8c3c17bdef126c9006b1772a3bb"></span>uint8_t
+                        <code class="descname">atomic_aggregate</code><a class="headerlink"
+                                                                         href="#_CPPv2N14bgpstream_elem16atomic_aggregateE"
+                                                                         title="Permalink to this definition">¶</a><br/>
+                    </dt>
+                    <dd><p>Atomic aggregate attribute. </p>
+                    </dd>
+                </dl>
+
+                <dl class="member">
+                    <dt id="_CPPv2N14bgpstream_elem10aggregatorE">
+                        <span id="bgpstream_elem::aggregator__bgpstream_elem_aggregator_t"></span><span class="target"
+                                                                                                        id="structbgpstream__elem_1ad97826c6e16cbc6dee98e904aa25bdfe"></span><a
+                            class="reference internal" href="#_CPPv227bgpstream_elem_aggregator_t"
+                            title="bgpstream_elem_aggregator_t">bgpstream_elem_aggregator_t</a> <code class="descname">aggregator</code><a
+                            class="headerlink" href="#_CPPv2N14bgpstream_elem10aggregatorE"
+                            title="Permalink to this definition">¶</a><br/></dt>
+                    <dd><p>Atomic aggregate attribute. </p>
                     </dd>
                 </dl>
 

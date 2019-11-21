@@ -2,7 +2,7 @@
 
 {% block slimbody %}
     <div class="page-header">
-        <h1>BGPStream V2 Private Beta</h1>
+        <h1>What's New in BGPStream V2</h1>
     </div>
 
     <div class="row">
@@ -19,28 +19,15 @@
                     section below for a more detailed list.
                 </p>
                 <p>
-                    Since there have been significant changes made to the core
-                    of BGPStream, we are making this pre-release snapshot of v2
-                    available to selected users for testing and evaluation before
-                    making a full public beta release.
-                </p>
-                <p>
                     See the <a href="#bmp">Live BMP Stream</a> section below for
                     help accessing the new realtime BMP stream.
                 </p>
-            </div>
-            <div id="feedback">
-                <h2>Feedback</h2>
                 <p>
-                    We appreciate your support of this project, and your
-                    willingness to help us test the next version. Please
-                    create an issue on either the
-                    <a href="https://github.com/caida/libbgpstream" target="_blank">libBGPStream</a>
-                    or
-                    <a href="https://github.com/caida/pybgpstream" target="_blank">PyBGPStream</a>
-                    GitHub repos detailing any problems you have, or
-                    alternatively, contact
-                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                    <a class="btn btn-md btn-success"
+                       href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}"
+                       role="button">
+                        Get BGPStream V2
+                    </a>
                 </p>
             </div>
             <div id="changes">
@@ -72,11 +59,22 @@
                                 data from RIPE's <a href="https://ris-live.ripe.net/"> RIS Live BGP message stream </a>.
                             </li>
                             <li>
-                                Access to RIS Live stream is supported using the
-                                "ris-live" data interface.
+                                RIS Live stream access point is retrieved from data broker and is directly accessible
+                                using our new "http" transport.
                             </li>
                             <li>
-                                To start streaming using bgpreader: <code>bgpreader -d ris-live</code>
+                                bgpreader now default to live-stream mode if no time window is specified,
+                                which include all archive data as they come in,
+                                as well as live stream data sources like RIS-Live and OpenBMP stream.
+                            </li>
+                            <li>
+                                To start streaming using bgpreader, just specify that we want data from project "ris-live"
+                                without any time-window: <code>bgpreader -p ris-live</code>
+                            </li>
+                            <li>
+                                See the
+                                <a href="#ris-live">RIPE RIS-Live</a>
+                                tutorials below for more information.
                             </li>
                         </ul>
                     </li>
@@ -91,9 +89,9 @@
                                 Access to
                                 private OpenBMP feeds is supported using the
                                 "kafka" data interface, whereas the
-                                "beta-bmp-stream" data interface may be used to
+                                "broker" data interface may be used to
                                 access the public BMP stream provided as part
-                                of the BGPStream project.
+                                of the CAIDA BGPStream project.
                             </li>
                             <li>
                                 See the
@@ -275,7 +273,7 @@
                 <ul>
                     <li>BGPElem <code>fields</code> attribute is now cached so
                     that subsequent field accesses do not needlessly rebuild
-                    the entire fields diectionary.</li>
+                    the entire fields dictionary.</li>
                     <li>By popular demand, communities in PyBGPStream are now
                         returned as a set of "asn:value" strings</li>
                 </ul>
@@ -292,259 +290,6 @@
                     <code>-o &lt;param&gt;=&lt;value&gt;</code> rather than
                         <code>-o &lt;param&gt;,&lt;value&gt;</code>.</li>
                 </ul>
-            </div>
-            <div id="download">
-                <h2>Downloads</h2>
-                <h4>libBGPStream</h4>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>Source Tarball</td>
-                        <td>
-                            <a href="https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz">libbgpstream-2.0.0-rc2.tar.gz</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Clone on GitHub</td>
-                        <td><a href="https://github.com/CAIDA/libbgpstream/tree/v2.0-beta-7"
-                               target="_blank">libBGPStream</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <h4>PyBGPStream</h4>
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>Source Tarball</td>
-                        <td>
-                            <a href="https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz">pybgpstream-2.0.0.tar.gz</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Clone on GitHub</td>
-                        <td><a href="https://github.com/CAIDA/pybgpstream/tree/v2.0-beta-3"
-                               target="_blank">PyBGPStream</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="installing">
-                <h2>Installing libBGPStream and PyBGPStream</h2>
-                <p>
-                    The following instructions assume some familiarity with
-                    installing software from source and are specific to Ubuntu
-                    and macOS. For additional help, or help installing BGPStream
-                    on another OS, please contact
-                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
-                </p>
-                <p>
-                    Note: installing BGPStream V2 is very similar to installing
-                    v1, so you may find the detailed <a
-                            href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'}) }}">
-                        libBGPStream
-                    </a> and <a
-                            href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'pybgpstream'}) }}">
-                        PyBGPStream
-                    </a> install guides useful.
-                </p>
-                <p>
-                    Also, while the README for PyBGPStream suggests installing
-                    using pip, the v2 beta has not yet been uploaded to PyPI and
-                    must be installed from source.
-                </p>
-                <h3>Ubuntu Instructions</h3>
-                <p>1. Ensure dependencies are installed:</p>
-                <pre><code>sudo apt-get install build-essential zlib1g-dev libbz2-dev libcurl4-openssl-dev python-dev</code></pre>
-                <p>2. Install
-                    <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:</p>
-                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-4.2.1.tar.gz
-tar zxf wandio-4.2.1.tar.gz
-cd wandio-4.2.1/
-./configure
-make
-sudo make install
-sudo ldconfig</code></pre>
-                <p>3. Install <a
-                            href="https://github.com/edenhill/librdkafka/releases">rdkafka</a>:</p>
-                <pre><code>curl -LO https://github.com/edenhill/librdkafka/archive/v0.11.1.tar.gz
-tar zxf v0.11.1.tar.gz
-cd librdkafka-0.11.1/
-./configure
-make
-sudo make install
-sudo ldconfig</code></pre>
-                <p>4. Install libBGPStream:</p>
-                <pre><code>curl -O https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz
-tar zxf libbgpstream-2.0.0-rc2.tar.gz
-cd libbgpstream-2.0.0/
-./configure
-make
-make check
-sudo make install
-sudo ldconfig</code></pre>
-                <p>5. Install PyBGPStream:</p>
-                <pre><code>curl -O https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz
-tar zxf pybgpstream-2.0.0.tar.gz
-cd pybgpstream-2.0.0/
-python setup.py build_ext
-sudo python setup.py install</code></pre>
-
-                <h3>macOS Instructions</h3>
-                <p>
-                    These instructions assume that you are using
-                    <a href="https://brew.sh" target="_blank">Homebrew</a>
-                    to manage packages. If you are not using a package manager,
-                    or are using MacPorts, follow steps 2 and 3 of the Ubuntu
-                    install instructions instead of step 1 below (but do not
-                    execute the <code>sudo ldconfig</code> commands).
-                </p>
-                <p>1. Install librdkafka:</p>
-                <pre><code>brew install wandio librdkafka</code></pre>
-                <p>2. Install
-                    <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:</p>
-                <pre><code>curl -O https://research.wand.net.nz/software/wandio/wandio-4.2.1.tar.gz
-tar zxf wandio-4.2.1.tar.gz
-cd wandio-4.2.1/
-./configure
-make
-sudo make install
-sudo ldconfig</code></pre>
-                <p>3. Install libBGPStream:</p>
-                <pre><code>curl -O https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc2/libbgpstream-2.0.0-rc2.tar.gz
-tar zxf libbgpstream-2.0.0-rc2.tar.gz
-cd libbgpstream-2.0.0/
-./configure
-make
-make check
-sudo make install</code></pre>
-                <p>4. Install PyBGPStream:</p>
-                <pre><code>curl -O https://github.com/CAIDA/pybgpstream/releases/download/v2.0/pybgpstream-2.0.0.tar.gz
-tar zxf pybgpstream-2.0.0-beta-3.tar.gz
-cd pybgpstream-2.0.0/
-python setup.py build_ext
-sudo python setup.py install</code></pre>
-            </div>
-            <div id="api">
-                <h2>Upgrading Code</h2>
-                <p>
-                    There have been some changes made to the libBGPStream and
-                    PyBGPStream APIs. Below are some instructions for upgrading
-                    your code to work with BGPStream V2.
-                </p>
-                <h4>libBGPStream</h4>
-                <p>
-                    There have been several changes made to the C API, but all
-                    changes will result in compiler errors, so it should be
-                    safe to use the compiler to direct you to code that needs
-                    changing. You should use the
-                    <a href="https://github.com/CAIDA/libbgpstream/blob/v2.0-beta-7/tools/bgpreader.c">BGPReader code</a>
-                    as a reference for using the new API, and please contact
-                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>
-                    if you need further assistance.
-                </p>
-
-                <h4>PyBGPStream</h4>
-                <p>
-                    We have added a prototype high-level Python module,
-                    <code>pybgpstream</code> that should be used instead of
-                    the low-level <code>_pybgpstream</code> module.
-                    Below is a short working example using this API. See the
-                    bundled
-                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0-beta-3/examples/pybgpstream-template.py" target="_blank">sample template</a>
-                    for more information. We are still developing documentation
-                    for this module, so for now, the best reference is
-                    <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0-beta-3/pybgpstream/pybgpstream.py" target="_blank">the code</a>.
-                    Please create an issue (or PR!) on
-                    <a href="https://github.com/CAIDA/pybgpstream/issues" target="_blank">GitHub</a>
-                    if you have any suggestions for improving this interface.
-                </p>
-                <pre><code class="language-python">import pybgpstream
-stream = pybgpstream.BGPStream(
-    from_time="2017-07-07 00:00:00", until_time="2017-07-07 00:10:00 UTC",
-    collectors=["route-views.sg", "route-views.eqix"],
-    record_type="updates",
-    filter="peer 11666 and prefix more 210.180.0.0/16"
-)
-
-for elem in stream:
-    # record fields can be accessed directly from elem
-    # e.g. elem.time
-    # or via elem.record
-    # e.g. elem.record.time
-    print elem
-</code></pre>
-                <h4>_pybgpstream</h4>
-                <p>
-                    If you wish to continue using the <code>_pybgpstream</code>
-                    module, the API has changed slightly:
-                </p>
-                <p><b>1.</b> Change the import line from:</p>
-                <pre><code class="language-python">from _pybgpstream import BGPStream, BGPRecord, BGPElem</code></pre>
-                <p>to:</p>
-                <pre><code class="language-python">import _pybgpstream</code></pre>
-                <p>
-                    <b>2.</b> Change the line that creates an
-                    instance of BGPStream from something like:
-                </p>
-                <pre><code class="language-python">stream = BGPStream()</code></pre>
-                <p>
-                    to:
-                </p>
-                <pre><code class="language-python">stream = _pybgpstream.BGPStream()</code></pre>
-                <p>
-                    <b>3.</b> Delete the line that creates the BGPRecord
-                    instance:
-                </p>
-                <pre><code class="language-python">rec = BGPRecord()</code></pre>
-
-                <p>
-                    <b>4.</b> The "get_next_record" API has been changed to be the
-                    same as the "get_next_elem" API, so you will go from nested
-                    loops like this:
-                </p>
-
-                <pre><code class="language-python">while(stream.get_next_record(rec)):
-    elem = rec.get_next_elem()
-    while(elem):
-        # do something with the elem
-        elem = rec.get_next_elem()</code></pre>
-
-                <p>
-                    to this:
-                </p>
-
-                <pre><code class="language-python">rec = stream.get_next_record()
-while(rec):
-    elem = rec.get_next_elem()
-        while(elem):
-        # do something with the elem
-        elem = rec.get_next_elem()
-    rec = stream.get_next_record()</code></pre>
-
-                <h4>BGPReader</h4>
-                <p>To accommodate new fields in the underlying record and elem
-                structures (e.g., those specific to BMP data like "router"),
-                the record and elem ASCII formats have changed:</p>
-                <p>V1 Record Format (old)</p>
-                <pre><code>&lt;dump-type&gt;|&lt;dump-pos&gt;|&lt;project&gt;|&lt;collector&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
-                <p>V2 Record Format (new)</p>
-                <pre><code>&lt;type&gt;|&lt;dump-pos&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
-  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
-                <p>V1 Elem Format (old)</p>
-                <pre><code>&lt;dump-type&gt;|&lt;elem-type&gt;|&lt;record-ts&gt;| \
-  &lt;project&gt;|&lt;collector&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
-  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
-  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
-                <p>V2 Elem Format (new)</p>
-                <pre><code>&lt;rec-type&gt;|&lt;elem-type&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
-  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
-  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
-  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
-                <p>Note that timestamps are now represented with sub-second
-                precision. E.g. <code>1499385779</code> is now represented as
-                    <code>1499385779.000000</code></p>
             </div>
             <div id="bmp">
                 <h2>Public Live BMP Stream</h2>
@@ -592,8 +337,8 @@ while(rec):
                 </p>
                 <h4>From BGPReader</h4>
                 <p>Accessing the feed from BGPReader is as simple as choosing
-                the "beta-bmp-stream" data interface:</p>
-                <pre><code>bgpreader -d beta-bmp-stream</code></pre>
+                the "caida" project without time-window:</p>
+                <pre><code>bgpreader -p caida</code></pre>
                 <h4>From PyBGPStream</h4>
                 <pre><code class="language-python">import pybgpstream
 for elem in pybgpstream.BGPStream(data_interface="beta-bmp-stream"):
@@ -650,18 +395,46 @@ stream.set_data_interface_option("kafka", "topic", "openbmp.bmp_raw")
 for elem in stream:
     print elem</code></pre>
             </div>
+            <div id="ris-live">
+                <h2>RIPE RIS-Live Realtime BGP Stream</h2>
+                <p>
+                    In BGPStream version 2, we added the support for streaming directly from <a href="https://ris-live.ripe.net/">RIPE RIS-Live</a>.
+                    RIS-Live is a streaming service that offers real-time BGP messages collected from all RIPE RIS Route Collectors (RRCs).
+                </p>
+                <p>
+                    Using ris-live stream is super easy. You just need to start a stream with no time-interval specified,
+                    and use "ris-live" as the project for the stream.
+                </p>
+                <p>
+                    If you want to use BGPReader to access the stream, just do <code>bgpreader -p ris-live</code>. That's it!
+                </p>
+            </div>
+            <div id="feedback">
+                <h2>Feedback</h2>
+                <p>
+                    We appreciate your support of this project, and your
+                    willingness to help us test the next version. Please
+                    create an issue on either the
+                    <a href="https://github.com/caida/libbgpstream"
+                       target="_blank">libBGPStream</a>
+                    or
+                    <a href="https://github.com/caida/pybgpstream"
+                       target="_blank">PyBGPStream</a>
+                    GitHub repos detailing any problems you have, or
+                    alternatively, contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                </p>
+            </div>
         </div>
         <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
             <p class="text-muted">On this page:</p>
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="#intro">Intro</a></li>
-                <li role="presentation"><a href="#changes">Feedback</a></li>
                 <li role="presentation"><a href="#changes">Changes</a></li>
-                <li role="presentation"><a href="#download">Downloads</a></li>
-                <li role="presentation"><a href="#installing">Installing</a></li>
-                <li role="presentation"><a href="#api">Upgrading Code</a></li>
                 <li role="presentation"><a href="#bmp">Public BMP Stream</a></li>
                 <li role="presentation"><a href="#bmp-private">Private BMP Stream</a></li>
+                <li role="presentation"><a href="#bmp-private">RIPE RIS-Live</a></li>
+                <li role="presentation"><a href="#feedback">Feedback</a></li>
             </ul>
         </div>
     </div>

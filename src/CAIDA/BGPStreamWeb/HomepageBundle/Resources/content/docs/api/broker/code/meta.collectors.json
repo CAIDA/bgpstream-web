@@ -1,5 +1,5 @@
 {
-  "time": 1445365080,
+  "time": 1569619339,
   "type": "meta",
   "error": null,
   "queryParameters": {
@@ -15,13 +15,13 @@
             "dumpPeriod": 7200,
             "dumpDuration": 120,
             "oldestDumpTime": "1004114880",
-            "latestDumpTime": "1445364000"
+            "latestDumpTime": "1569614400"
           },
           "updates": {
             "dumpPeriod": 900,
             "dumpDuration": 900,
             "oldestDumpTime": "1004102520",
-            "latestDumpTime": "1445364000"
+            "latestDumpTime": "1569618000"
           }
         }
       }

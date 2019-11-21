@@ -8,7 +8,7 @@ a C API, and
 [PyBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'pybgpstream'})}})
  a Python API.
 
-libBGPStream
+C/C++ (libBGPStream)
 ------------
 
 libBGPStream is the core of the BGPStream framework; all [tools]({{
@@ -23,7 +23,7 @@ possible.
     Read more about libBGPStream &raquo;
 </a>
 
-PyBGPStream
+Python (PyBGPStream)
 -----------
 
 PyBGPStream is our Python bindings to the libBGPStream C API. It offers the same

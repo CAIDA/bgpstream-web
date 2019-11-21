@@ -1,72 +1,138 @@
 <div class="section" id="pybgpstream">
-    <h1>_pybgpstream<a class="headerlink" href="#pybgpstream"
-                       title="Permalink to this headline">¶</a></h1>
+    <h1>_pybgpstream<a class="headerlink" href="#pybgpstream" title="Permalink to this headline">¶</a></h1>
     <p>This document describes the API of the _pybgpstream module, a low-level
-        (almost) direct interface to the C <cite>libbgpstream</cite> library.
-    </p>
+        (almost) direct interface to the C <cite>libbgpstream</cite> library.</p>
     <span class="target" id="module-_pybgpstream"></span>
     <div class="section" id="bgpstream">
-        <h2>BGPStream<a class="headerlink" href="#bgpstream"
-                        title="Permalink to this headline">¶</a></h2>
+        <h2>BGPStream<a class="headerlink" href="#bgpstream" title="Permalink to this headline">¶</a></h2>
         <dl class="class">
             <dt id="_pybgpstream.BGPStream">
-                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code
-                    class="descname">BGPStream</code><a class="headerlink"
-                                                        href="#_pybgpstream.BGPStream"
-                                                        title="Permalink to this definition">¶</a>
-            </dt>
-            <dd><p>The BGP Stream class provides a single stream of BGP
-                Records.</p>
+                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code class="descname">BGPStream</code><a
+                    class="headerlink" href="#_pybgpstream.BGPStream" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGP Stream class provides a single stream of BGP Records.</p>
+                <dl class="method">
+                    <dt id="_pybgpstream.BGPStream.parse_filter_string">
+                        <code class="descname">parse_filter_string</code><span
+                            class="sig-paren">(</span><em>fstring</em><span class="sig-paren">)</span><a
+                            class="headerlink" href="#_pybgpstream.BGPStream.parse_filter_string"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Adds filters to an unstarted BGP Stream instance, based on the filter
+                        string provided. Only those record/elements that match the filter(s)
+                        will be included in the stream.</p>
+                        <p>If multiple filters of the <strong>same</strong> type are added, a record/elem is
+                            considered a match if it matches <strong>any</strong> of the filters. For example,
+                            if a filter string <cite>project routeviews and project ris</cite> is used, then
+                            records that are from either the <cite>Route Views</cite> <strong>or</strong> the
+                            <cite>RIS</cite> project
+                            will be included.</p>
+                        <p>If filters of <strong>different</strong> types are added, a record/elem is considered
+                            a match only if it matches <strong>all</strong> of the filters. For example, if a
+                            filter string <cite>project routeviews and prefix exact 1.2.3.0/24</cite> is used,
+                            then only records that are both from the <cite>Route Views</cite> project
+                            <strong>and</strong>
+                            have a prefix of 1.2.3.0/24 are included.</p>
+                        <p>More information of the specifics of the filter string language and
+                            the filtering methods that it supports can be found with the libbgpstream
+                            documentation.</p>
+                        <table class="docutils field-list" frame="void" rules="none">
+                            <col class="field-name"/>
+                            <col class="field-body"/>
+                            <tbody valign="top">
+                            <tr class="field-odd field">
+                                <th class="field-name">Parameters:</th>
+                                <td class="field-body"><p class="first"><strong>fstring</strong> (<em>str</em>) – The
+                                    filter string</p>
+                                </td>
+                            </tr>
+                            <tr class="field-even field">
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body">
+                                    <ul class="first last simple">
+                                        <li><strong>TypeError</strong> – if the filter string is not a basestring</li>
+                                        <li><strong>ValueError</strong> – if the filter string is invalid or badly
+                                            formed
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+
+                <dl class="method">
+                    <dt>
+                        <code class="descname">parse_filter_string</code><span class="sig-paren">(</span><em>filter</em><span
+                            class="sig-paren">)</span></dt>
+                    <dd><p>Add filters by parsing the given filter string.</p>
+                        <p>TODO: finish documentation</p>
+                        <table class="docutils field-list" frame="void" rules="none">
+                            <col class="field-name"/>
+                            <col class="field-body"/>
+                            <tbody valign="top">
+                            <tr class="field-odd field">
+                                <th class="field-name">Parameters:</th>
+                                <td class="field-body"><strong>filter</strong> (<em>str</em>) – filter string</td>
+                            </tr>
+                            <tr class="field-even field">
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body"><strong>ValueError</strong> – if the filter cannot be parsed</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </dd>
+                </dl>
+
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.add_filter">
-                        <code class="descname">add_filter</code><span
-                            class="sig-paren">(</span><em>type</em>,
-                        <em>value</em><span class="sig-paren">)</span><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPStream.add_filter"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>Add a filter to an unstarted BGP Stream instance.
-                        Only those records/elems that
-                        match the filter(s) will be included in the stream.</p>
-                        <p>If multiple filters of the <strong>same</strong> type
-                            are added, a record/elem is considered
-                            a match if it matches <strong>any</strong> of the
-                            filters. E.g. if
-                            <cite>add_filter(&#8216;project&#8217;, &#8216;routeviews&#8217;)</cite>
-                            and <cite>add_filter(&#8216;project&#8217;, &#8216;ris&#8217;)</cite>
-                            are used, then records that are from either the
-                            <cite>Route Views</cite>, <strong>or</strong> the
+                        <code class="descname">add_filter</code><span class="sig-paren">(</span><em>type</em>,
+                        <em>value</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                         href="#_pybgpstream.BGPStream.add_filter"
+                                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>NOTE: This method is deprecated in favor of <cite>parse_filter_string</cite>.</p>
+                        <p>Add a filter to an unstarted BGP Stream instance. Only those records/elems that
+                            match the filter(s) will be included in the stream.</p>
+                        <p>If multiple filters of the <strong>same</strong> type are added, a record/elem is considered
+                            a match if it matches <strong>any</strong> of the filters. E.g. if
+                            <cite>add_filter(‘project’, ‘routeviews’)</cite> and <cite>add_filter(‘project’,
+                                ‘ris’)</cite>
+                            are used, then records that are from either the <cite>Route Views</cite>,
+                            <strong>or</strong> the
                             <cite>RIS</cite> project will be included.</p>
-                        <p>If multiple filters of <strong>different</strong>
-                            types are added, a record/elem is
-                            considered a match if it matches
-                            <strong>all</strong> of the filters. E.g. if
-                            <cite>add_filter(&#8216;project&#8217;, &#8216;routeviews&#8217;)</cite>
-                            and <cite>add_filter(&#8216;record-type&#8217;,
-                                &#8216;updates&#8217;)</cite> are used, then
-                            records that are both from the <cite>Route
-                                Views</cite>
-                            project, <strong>and</strong> are
-                            <cite>updates</cite> will be included.</p>
-                        <p><cite>project</cite>, <cite>collector</cite>, and
-                            <cite>record-type</cite> filter BGP records,
-                            whereas <cite>peer-asn</cite>, <cite>prefix</cite>,
-                            and <cite>community</cite> filter BGP
-                            elems. The <cite>prefix</cite> filter selects BGP
-                            elems related to the
-                            prefix or more specifics. The <cite>community</cite>
-                            filter is specified as
-                            a <cite>asn:value</cite> formatted string, the user
-                            can specify the ASn or
-                            the value and leave the other field not specified
-                            using the <cite>*</cite>.
-                            E.g. if <cite>add_filter(&#8216;community&#8217;,
-                                &#8216;*:300&#8217;)</cite> is used then all the
-                            BGP elems
-                            having at least one community with value
-                            <cite>300</cite> will be included.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <p>If multiple filters of <strong>different</strong> types are added, a record/elem is
+                            considered a match if it matches <strong>all</strong> of the filters. E.g. if
+                            <cite>add_filter(‘project’, ‘routeviews’)</cite> and <cite>add_filter(‘record-type’,
+                                ‘updates’)</cite> are used, then records that are both from the <cite>Route Views</cite>
+                            project, <strong>and</strong> are <cite>updates</cite> will be included.</p>
+                        <p><cite>project</cite>, <cite>collector</cite>, and <cite>record-type</cite> filter BGP
+                            records,
+                            whereas <cite>peer-asn</cite>, <cite>prefix-exact</cite>, <cite>prefix-more</cite>, <cite>prefix-less</cite>,
+                            <cite>prefix-any</cite>, <cite>aspath</cite>, <cite>ipversion</cite>, <cite>elemtype</cite>
+                            and <cite>community</cite> filter
+                            BGP elems.</p>
+                        <p>The <cite>prefix-*</cite> filters selects BGP elems related to the
+                            prefix. <cite>prefix-exact</cite> will only match if the exact prefix appears in
+                            the element. <cite>prefix-more</cite> will match if the exact prefix or a more
+                            specific prefix is observed. <cite>prefix-less</cite> will match if the exact prefix
+                            or a less specific prefix is observed. <cite>prefix-any</cite> with match if any
+                            relevant prefix is observed, either more or less specific.</p>
+                        <p>The <cite>aspath</cite> filter is specifed as a regular expression and will match
+                            if the AS path matches the regular expression. <cite>^</cite> can be used to
+                            represent the start of an AS path and <cite>$</cite> can be used to represent the
+                            end of an AS path. <cite>_</cite> can be used to separate adjacent ASNs in the
+                            path. E.g. if the filter value <cite>^681_1444_</cite> is used, only elements with
+                            an AS path beginning with AS681 followed by AS1444 will be included.</p>
+                        <p>The <cite>ipversion</cite> filter can be used to limit the stream to IPv4 or IPv6
+                            prefixes only. Use <cite>4</cite> to get IPv4 only and <cite>6</cite> to get IPv6 only.</p>
+                        <p>The <cite>elemtype</cite> filter can be used to limit the stream to only certain
+                            element types. Possible element types are <cite>ribs</cite>, <cite>withdrawals</cite>,
+                            <cite>announcements</cite> and <cite>peerstates</cite>.</p>
+                        <p>The <cite>community</cite> filter is specified as
+                            a <cite>asn:value</cite> formatted string, the user can specify the ASn or
+                            the value and leave the other field not specified using the <cite>*</cite>.
+                            E.g. if <cite>add_filter(‘community’, ‘*:300’)</cite> is used then all the BGP elems
+                            having at least one community with value <cite>300</cite> will be included.</p>
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
@@ -74,16 +140,14 @@
                                 <th class="field-name">Parameters:</th>
                                 <td class="field-body">
                                     <ul class="first simple">
-                                        <li><strong>type</strong> (<em>str</em>)
-                                            &#8211; The type of the filter, can
-                                            be one of <cite>project</cite>,
-                                            <cite>collector</cite>, <cite>record-type</cite>,
-                                            <cite>peer-asn</cite>,
-                                            <cite>prefix</cite>,
-                                            <cite>community</cite></li>
-                                        <li><strong>value</strong> (<em>str</em>)
-                                            &#8211; The value of the filter
+                                        <li><strong>type</strong> (<em>str</em>) – The type of the filter, can be one of
+                                            <cite>project</cite>,
+                                            <cite>collector</cite>, <cite>record-type</cite>, <cite>peer-asn</cite>,
+                                            <cite>prefix-exact</cite>,
+                                            <cite>prefix-more</cite>, <cite>prefix-less</cite>, <cite>prefix-any</cite>,
+                                            <cite>ipversion</cite>, <cite>aspath</cite>, <cite>community</cite>, <cite>elemtype</cite>
                                         </li>
+                                        <li><strong>value</strong> (<em>str</em>) – The value of the filter</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -91,13 +155,8 @@
                                 <th class="field-name">Raises:</th>
                                 <td class="field-body">
                                     <ul class="first last simple">
-                                        <li><strong>TypeError</strong> &#8211;
-                                            if the type or value are not
-                                            basestrings
-                                        </li>
-                                        <li><strong>ValueError</strong> &#8211;
-                                            if the type is not valid
-                                        </li>
+                                        <li><strong>TypeError</strong> – if the type or value are not basestrings</li>
+                                        <li><strong>ValueError</strong> – if the type is not valid</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -109,38 +168,26 @@
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.add_rib_period_filter">
                         <code class="descname">add_rib_period_filter</code><span
-                            class="sig-paren">(</span><em>period</em><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPStream.add_rib_period_filter"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Set the RIB period filter for the current stream.
-                        Configure the
-                        minimum BGP time interval between two consecutive RIB
-                        files
-                        that belong to the same collector. This information can
-                        be
+                            class="sig-paren">(</span><em>period</em><span class="sig-paren">)</span><a
+                            class="headerlink" href="#_pybgpstream.BGPStream.add_rib_period_filter"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Set the RIB period filter for the current stream. Configure the
+                        minimum BGP time interval between two consecutive RIB files
+                        that belong to the same collector. This information can be
                         modified once the stream has started.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
                             <tr class="field-odd field">
                                 <th class="field-name">Parameters:</th>
-                                <td class="field-body"><strong>period</strong> (<em>int</em>)
-                                    &#8211; the period (in seconds)
+                                <td class="field-body"><strong>period</strong> (<em>int</em>) – the period (in seconds)
                                 </td>
                             </tr>
                             <tr class="field-even field">
-                                <th class="field-name" colspan="2">Raises
-                                    TypeError:
-                                </th>
-                            </tr>
-                            <tr class="field-even field">
-                                <td>&nbsp;</td>
-                                <td class="field-body">if the start or end
-                                    period is not int
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body"><strong>TypeError</strong> – if the start or end period is not
+                                    int
                                 </td>
                             </tr>
                             </tbody>
@@ -150,24 +197,17 @@
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.add_interval_filter">
-                        <code class="descname">add_interval_filter</code><span
-                            class="sig-paren">(</span><em>start</em>,
-                        <em>stop</em><span class="sig-paren">)</span><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPStream.add_interval_filter"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>Add an interval filter to an unstarted BGP Stream
-                        instance. Only those
-                        records that fall within the given interval will be
-                        included in the
-                        stream. Setting the <cite>stop</cite> parameter to
-                        <cite>0</cite> will enable live mode and
+                        <code class="descname">add_interval_filter</code><span class="sig-paren">(</span><em>start</em>,
+                        <em>stop</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                        href="#_pybgpstream.BGPStream.add_interval_filter"
+                                                                        title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Add an interval filter to an unstarted BGP Stream instance. Only those
+                        records that fall within the given interval will be included in the
+                        stream. Setting the <cite>stop</cite> parameter to <cite>0</cite> will enable live mode and
                         effectively set an endless interval.</p>
-                        <p>If multiple interval filters are added, then a record
-                            is included if it is
+                        <p>If multiple interval filters are added, then a record is included if it is
                             inside <strong>any</strong> of the intervals.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
@@ -175,26 +215,19 @@
                                 <th class="field-name">Parameters:</th>
                                 <td class="field-body">
                                     <ul class="first simple">
-                                        <li><strong>start</strong> (<em>int</em>)
-                                            &#8211; The start time of the
-                                            interval (inclusive)
+                                        <li><strong>start</strong> (<em>int</em>) – The start time of the interval
+                                            (inclusive)
                                         </li>
-                                        <li><strong>stop</strong> (<em>int</em>)
-                                            &#8211; The end time of the interval
+                                        <li><strong>stop</strong> (<em>int</em>) – The end time of the interval
                                             (inclusive)
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr class="field-even field">
-                                <th class="field-name" colspan="2">Raises
-                                    TypeError:
-                                </th>
-                            </tr>
-                            <tr class="field-even field">
-                                <td>&nbsp;</td>
-                                <td class="field-body"><p class="first last">if
-                                    the start or end times are not ints</p>
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body"><p class="first last"><strong>TypeError</strong> – if the start
+                                    or end times are not ints</p>
                                 </td>
                             </tr>
                             </tbody>
@@ -204,53 +237,39 @@
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.get_data_interfaces">
-                        <code class="descname">get_data_interfaces</code><span
-                            class="sig-paren">(</span><span
+                        <code class="descname">get_data_interfaces</code><span class="sig-paren">(</span><span
                             class="sig-paren">)</span><a class="headerlink"
                                                          href="#_pybgpstream.BGPStream.get_data_interfaces"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Gets a list of information about the available data
-                        interfaces.
-                        Each item in the list will have three fields:
-                        <cite>id</cite>, <cite>name</cite>, and
-                        <cite>description</cite>. The value of the
-                        <cite>name</cite> field can be used in subsequent
-                        calls to <a class="reference internal"
-                                    href="#_pybgpstream.BGPStream.set_data_interface"
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Gets a list of information about the available data interfaces.
+                        Each item in the list will have three fields: <cite>id</cite>, <cite>name</cite>, and
+                        <cite>description</cite>. The value of the <cite>name</cite> field can be used in subsequent
+                        calls to <a class="reference internal" href="#_pybgpstream.BGPStream.set_data_interface"
                                     title="_pybgpstream.BGPStream.set_data_interface"><code
                                 class="xref py py-meth docutils literal"><span
-                                class="pre">set_data_interface()</span></code></a>.
-                    </p>
+                                class="pre">set_data_interface()</span></code></a>.</p>
                     </dd>
                 </dl>
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.set_data_interface">
-                        <code class="descname">set_data_interface</code><span
-                            class="sig-paren">(</span><em>interface_name</em><span
+                        <code class="descname">set_data_interface</code><span class="sig-paren">(</span><em>interface_name</em><span
                             class="sig-paren">)</span><a class="headerlink"
                                                          href="#_pybgpstream.BGPStream.set_data_interface"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Sets the data interface to stream BGP Records
-                        from.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Sets the data interface to stream BGP Records from.</p>
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
                             <tr class="field-odd field">
                                 <th class="field-name">Parameters:</th>
-                                <td class="field-body"><p class="first"><strong>interface_name</strong>
-                                    (<em>str</em>) &#8211; The data interface to
-                                    use, must be one of the
+                                <td class="field-body"><p class="first"><strong>interface_name</strong> (<em>str</em>) –
+                                    The data interface to use, must be one of the
                                     <cite>name</cite> fields in the result of
-                                    <a class="reference internal"
-                                       href="#_pybgpstream.BGPStream.get_data_interfaces"
+                                    <a class="reference internal" href="#_pybgpstream.BGPStream.get_data_interfaces"
                                        title="_pybgpstream.BGPStream.get_data_interfaces"><code
-                                            class="xref py py-meth docutils literal"><span
-                                            class="pre">get_data_interfaces()</span></code></a>.
+                                            class="xref py py-meth docutils literal"><span class="pre">get_data_interfaces()</span></code></a>.
                                 </p>
                                 </td>
                             </tr>
@@ -258,12 +277,8 @@
                                 <th class="field-name">Raises:</th>
                                 <td class="field-body">
                                     <ul class="first last simple">
-                                        <li><strong>TypeError</strong> &#8211;
-                                            if the interface is not a basestring
-                                        </li>
-                                        <li><strong>ValueError</strong> &#8211;
-                                            if the given interface is not valid
-                                        </li>
+                                        <li><strong>TypeError</strong> – if the interface is not a basestring</li>
+                                        <li><strong>ValueError</strong> – if the given interface is not valid</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -274,65 +289,48 @@
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.get_data_interface_options">
-                        <code class="descname">get_data_interface_options</code><span
-                            class="sig-paren">(</span><em>interface_name</em><span
+                        <code class="descname">get_data_interface_options</code><span class="sig-paren">(</span><em>interface_name</em><span
                             class="sig-paren">)</span><a class="headerlink"
                                                          href="#_pybgpstream.BGPStream.get_data_interface_options"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Gets a dictionary of options for the given data
-                        interface. (Availabie data
-                        interfaces may be discovered using <a
-                                class="reference internal"
-                                href="#_pybgpstream.BGPStream.get_data_interfaces"
-                                title="_pybgpstream.BGPStream.get_data_interfaces"><code
-                                class="xref py py-meth docutils literal"><span
-                                class="pre">get_data_interfaces()</span></code></a>.)
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Gets a dictionary of options for the given data interface. (Availabie data
+                        interfaces may be discovered using <a class="reference internal"
+                                                              href="#_pybgpstream.BGPStream.get_data_interfaces"
+                                                              title="_pybgpstream.BGPStream.get_data_interfaces"><code
+                                class="xref py py-meth docutils literal"><span class="pre">get_data_interfaces()</span></code></a>.)
                     </p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
                             <tr class="field-odd field">
                                 <th class="field-name">Parameters:</th>
-                                <td class="field-body"><p class="first"><strong>interface_name</strong>
-                                    (<em>str</em>) &#8211; The data interface to
-                                    use, must be one of the
+                                <td class="field-body"><p class="first"><strong>interface_name</strong> (<em>str</em>) –
+                                    The data interface to use, must be one of the
                                     <cite>name</cite> fields in the result of
-                                    <a class="reference internal"
-                                       href="#_pybgpstream.BGPStream.get_data_interfaces"
+                                    <a class="reference internal" href="#_pybgpstream.BGPStream.get_data_interfaces"
                                        title="_pybgpstream.BGPStream.get_data_interfaces"><code
-                                            class="xref py py-meth docutils literal"><span
-                                            class="pre">get_data_interfaces()</span></code></a>.
+                                            class="xref py py-meth docutils literal"><span class="pre">get_data_interfaces()</span></code></a>.
                                 </p>
                                 </td>
                             </tr>
                             <tr class="field-even field">
                                 <th class="field-name">Returns:</th>
-                                <td class="field-body"><p class="first">A
-                                    dictionary of options for the given data
+                                <td class="field-body"><p class="first">A dictionary of options for the given data
                                     interface.</p>
                                 </td>
                             </tr>
                             <tr class="field-odd field">
                                 <th class="field-name">Return type:</th>
-                                <td class="field-body"><p class="first">
-                                    dictionary</p>
+                                <td class="field-body"><p class="first">dictionary</p>
                                 </td>
                             </tr>
                             <tr class="field-even field">
                                 <th class="field-name">Raises:</th>
                                 <td class="field-body">
                                     <ul class="first last simple">
-                                        <li><strong>TypeError</strong> &#8211;
-                                            if interface_name is not a
-                                            basestring
-                                        </li>
-                                        <li><strong>ValueError</strong> &#8211;
-                                            if the given interface name is not
-                                            valid
-                                        </li>
+                                        <li><strong>TypeError</strong> – if interface_name is not a basestring</li>
+                                        <li><strong>ValueError</strong> – if the given interface name is not valid</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -343,16 +341,13 @@
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.set_data_interface_option">
-                        <code class="descname">set_data_interface_option</code><span
-                            class="sig-paren">(</span><em>interface_name</em>,
-                        <em>opt_name</em>, <em>opt_value</em><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPStream.set_data_interface_option"
-                                                         title="Permalink to this definition">¶</a>
+                        <code class="descname">set_data_interface_option</code><span class="sig-paren">(</span><em>interface_name</em>,
+                        <em>opt_name</em>, <em>opt_value</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                                                href="#_pybgpstream.BGPStream.set_data_interface_option"
+                                                                                                title="Permalink to this definition">¶</a>
                     </dt>
                     <dd><p>Sets a data interface option.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
@@ -360,34 +355,25 @@
                                 <th class="field-name">Parameters:</th>
                                 <td class="field-body">
                                     <ul class="first simple">
-                                        <li><strong>interface_name</strong>
-                                            (<em>str</em>) &#8211; The data
-                                            interface to use, must be one of the
-                                            <cite>name</cite> fields in the
-                                            result of
+                                        <li><strong>interface_name</strong> (<em>str</em>) – The data interface to use,
+                                            must be one of the
+                                            <cite>name</cite> fields in the result of
                                             <a class="reference internal"
                                                href="#_pybgpstream.BGPStream.get_data_interfaces"
                                                title="_pybgpstream.BGPStream.get_data_interfaces"><code
-                                                    class="xref py py-meth docutils literal"><span
-                                                    class="pre">get_data_interfaces()</span></code></a>.
+                                                    class="xref py py-meth docutils literal"><span class="pre">get_data_interfaces()</span></code></a>.
                                         </li>
-                                        <li><strong>opt_name</strong>
-                                            (<em>str</em>) &#8211; The option to
-                                            set, must be one of the
-                                            <cite>name</cite> fields
+                                        <li><strong>opt_name</strong> (<em>str</em>) – The option to set, must be one of
+                                            the <cite>name</cite> fields
                                             in the result of
                                             <a class="reference internal"
                                                href="#_pybgpstream.BGPStream.get_data_interface_options"
                                                title="_pybgpstream.BGPStream.get_data_interface_options"><code
-                                                    class="xref py py-meth docutils literal"><span
-                                                    class="pre">get_data_interface_options()</span></code></a>
+                                                    class="xref py py-meth docutils literal"><span class="pre">get_data_interface_options()</span></code></a>
                                             for the given
                                             data interface.
                                         </li>
-                                        <li><strong>opt_value</strong>
-                                            (<em>str</em>) &#8211; The option
-                                            value to set.
-                                        </li>
+                                        <li><strong>opt_value</strong> (<em>str</em>) – The option value to set.</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -395,13 +381,10 @@
                                 <th class="field-name">Raises:</th>
                                 <td class="field-body">
                                     <ul class="first last simple">
-                                        <li><strong>TypeError</strong> &#8211;
-                                            if any of the parameters are not
-                                            basestrings
+                                        <li><strong>TypeError</strong> – if any of the parameters are not basestrings
                                         </li>
-                                        <li><strong>ValueError</strong> &#8211;
-                                            if the given data interface, or
-                                            option name is not
+                                        <li><strong>ValueError</strong> – if the given data interface, or option name is
+                                            not
                                             valid
                                         </li>
                                     </ul>
@@ -414,90 +397,63 @@
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.set_live_mode">
-                        <code class="descname">set_live_mode</code><span
-                            class="sig-paren">(</span><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPStream.set_live_mode"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Enables live mode. When this option is used, the
-                        stream will block
-                        waiting for new data to arrive if the end of the
-                        interval has not been
-                        reached. In this way a stream can be used to monitor
-                        realtime data (i.e. a
-                        call to <a class="reference internal"
-                                   href="#_pybgpstream.BGPStream.get_next_record"
+                        <code class="descname">set_live_mode</code><span class="sig-paren">(</span><span
+                            class="sig-paren">)</span><a class="headerlink" href="#_pybgpstream.BGPStream.set_live_mode"
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Enables live mode. When this option is used, the stream will block
+                        waiting for new data to arrive if the end of the interval has not been
+                        reached. In this way a stream can be used to monitor realtime data (i.e. a
+                        call to <a class="reference internal" href="#_pybgpstream.BGPStream.get_next_record"
                                    title="_pybgpstream.BGPStream.get_next_record"><code
                                 class="xref py py-meth docutils literal"><span
-                                class="pre">get_next_record()</span></code></a>
-                        will block until new data is
+                                class="pre">get_next_record()</span></code></a> will block until new data is
                         available.)</p>
                     </dd>
                 </dl>
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.start">
-                        <code class="descname">start</code><span
-                            class="sig-paren">(</span><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPStream.start"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Starts the stream. This method must be called
-                        <strong>after</strong> all configuration
-                        options have been set (e.g. filters, options, etc.), and
-                        <strong>before</strong> the
-                        first call to <a class="reference internal"
-                                         href="#_pybgpstream.BGPStream.get_next_record"
+                        <code class="descname">start</code><span class="sig-paren">(</span><span
+                            class="sig-paren">)</span><a class="headerlink" href="#_pybgpstream.BGPStream.start"
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Starts the stream. This method must be called <strong>after</strong> all configuration
+                        options have been set (e.g. filters, options, etc.), and <strong>before</strong> the
+                        first call to <a class="reference internal" href="#_pybgpstream.BGPStream.get_next_record"
                                          title="_pybgpstream.BGPStream.get_next_record"><code
                                 class="xref py py-meth docutils literal"><span
-                                class="pre">get_next_record()</span></code></a>.
-                    </p>
+                                class="pre">get_next_record()</span></code></a>.</p>
                     </dd>
                 </dl>
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPStream.get_next_record">
                         <code class="descname">get_next_record</code><span
-                            class="sig-paren">(</span><em>record</em><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPStream.get_next_record"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Retrieves the next record from the stream, and stores
-                        the result into the
-                        given record object. Passing a record instance helps
-                        reduce the allocation
-                        overhead of this method. If the records are processing
-                        independently of
-                        each other, then the same record instance may be used
-                        for subsequent calls
-                        to this method. If the blocking mode is enabled, then
-                        this method may
-                        block if the stream reaches the end of the data
-                        available in the archive,
+                            class="sig-paren">(</span><em>record</em><span class="sig-paren">)</span><a
+                            class="headerlink" href="#_pybgpstream.BGPStream.get_next_record"
+                            title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Retrieves the next record from the stream, and stores the result into the
+                        given record object. Passing a record instance helps reduce the allocation
+                        overhead of this method. If the records are processing independently of
+                        each other, then the same record instance may be used for subsequent calls
+                        to this method. If the blocking mode is enabled, then this method may
+                        block if the stream reaches the end of the data available in the archive,
                         and the end of the interval(s) has not been reached.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
                             <tr class="field-odd field">
                                 <th class="field-name">Parameters:</th>
-                                <td class="field-body"><strong>record</strong> (<a
-                                        class="reference internal"
-                                        href="#_pybgpstream.BGPRecord"
-                                        title="_pybgpstream.BGPRecord"><em>BGPRecord</em></a>)
-                                    &#8211; A record instance into which the
-                                    next record from
+                                <td class="field-body"><strong>record</strong> (<a class="reference internal"
+                                                                                   href="#_pybgpstream.BGPRecord"
+                                                                                   title="_pybgpstream.BGPRecord"><em>BGPRecord</em></a>)
+                                    – A record instance into which the next record from
                                     the stream is stored.
                                 </td>
                             </tr>
                             <tr class="field-even field">
                                 <th class="field-name">Returns:</th>
-                                <td class="field-body">True if there are more
-                                    records in the stream, False if the end of
+                                <td class="field-body">True if there are more records in the stream, False if the end of
                                     the stream has been reached.
                                 </td>
                             </tr>
@@ -506,18 +462,11 @@
                                 <td class="field-body">bool</td>
                             </tr>
                             <tr class="field-even field">
-                                <th class="field-name" colspan="2">Raises
-                                    RuntimeError:
-                                </th>
-                            </tr>
-                            <tr class="field-even field">
-                                <td>&nbsp;</td>
-                                <td class="field-body">if the provided record
-                                    instance is invalid, if the
-                                    stream has not been started, or if the
-                                    stream
-                                    encounters an error retrieving the next
-                                    record
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body"><strong>RuntimeError</strong> – if the provided record instance
+                                    is invalid, if the
+                                    stream has not been started, or if the stream
+                                    encounters an error retrieving the next record
                                 </td>
                             </tr>
                             </tbody>
@@ -530,161 +479,126 @@
 
     </div>
     <div class="section" id="bgprecord">
-        <h2>BGPRecord<a class="headerlink" href="#bgprecord"
-                        title="Permalink to this headline">¶</a></h2>
+        <h2>BGPRecord<a class="headerlink" href="#bgprecord" title="Permalink to this headline">¶</a></h2>
         <dl class="class">
             <dt id="_pybgpstream.BGPRecord">
-                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code
-                    class="descname">BGPRecord</code><a class="headerlink"
-                                                        href="#_pybgpstream.BGPRecord"
-                                                        title="Permalink to this definition">¶</a>
-            </dt>
-            <dd><p>The BGP Record class represents a single record obtained from
-                a BGP
+                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code class="descname">BGPRecord</code><a
+                    class="headerlink" href="#_pybgpstream.BGPRecord" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGP Record class represents a single record obtained from a BGP
                 Stream.</p>
                 <p>All attributes are read-only.</p>
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.project">
-                        <code class="descname">project</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPRecord.project"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The name of the project that created the record. <em>(basestring,
-                        readonly)</em></p>
+                        <code class="descname">project</code><a class="headerlink"
+                                                                href="#_pybgpstream.BGPRecord.project"
+                                                                title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The name of the project that created the record, or <cite>None</cite> if
+                        unset. <em>(basestring, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.collector">
-                        <code class="descname">collector</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPRecord.collector"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The name of the collector that created the record.
-                        <em>(basestring, readonly)</em></p>
+                        <code class="descname">collector</code><a class="headerlink"
+                                                                  href="#_pybgpstream.BGPRecord.collector"
+                                                                  title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The name of the collector that created the record, or <cite>None</cite> if
+                        unset. <em>(basestring, readonly)</em></p>
+                    </dd>
+                </dl>
+
+                <dl class="attribute">
+                    <dt id="_pybgpstream.BGPRecord.router">
+                        <code class="descname">router</code><a class="headerlink" href="#_pybgpstream.BGPRecord.router"
+                                                               title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The name of the router that created the record, or <cite>None</cite> if unset. (Only
+                        used when accessing data from an OpenBMP kafka stream.) <em>(basestring,
+                            readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.type">
-                        <code class="descname">type</code><a class="headerlink"
-                                                             href="#_pybgpstream.BGPRecord.type"
-                                                             title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>The type of the record, can be one of &#8216;update&#8217;,
-                        &#8216;rib&#8217;, or &#8216;unknown&#8217;.
+                        <code class="descname">type</code><a class="headerlink" href="#_pybgpstream.BGPRecord.type"
+                                                             title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The type of the record, can be one of ‘update’, ‘rib’, or ‘unknown’.
                         <em>(basestring, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
-                    <dt id="_pybgpstream.BGPRecord.dump_time">
-                        <code class="descname">dump_time</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPRecord.dump_time"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The time associated with the dump that contained the
-                        record (e.g. the
-                        beginning of the MRT file that the record was found in.)
-                        <em>(int, readonly)</em></p>
-                    </dd>
-                </dl>
-
-                <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.time">
-                        <code class="descname">time</code><a class="headerlink"
-                                                             href="#_pybgpstream.BGPRecord.time"
-                                                             title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>The time that the record represents (i.e. the time
-                        the record was
-                        generated by the collector). <em>(int, readonly)</em>
-                    </p>
+                        <code class="descname">time</code><a class="headerlink" href="#_pybgpstream.BGPRecord.time"
+                                                             title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The time that the record represents (i.e. the time the record was
+                        generated by the collector). <em>(int, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.status">
-                        <code class="descname">status</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPRecord.status"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The status of the record, can be one of &#8216;valid&#8217;,
-                        &#8216;filtered-source&#8217;,
-                        &#8216;empty-source&#8217;, &#8216;corrupted-source&#8217;,
-                        &#8216;unknown&#8217;. <em>(basestring, readonly)</em>
-                    </p>
+                        <code class="descname">status</code><a class="headerlink" href="#_pybgpstream.BGPRecord.status"
+                                                               title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The status of the record, can be one of ‘valid’, ‘filtered-source’,
+                        ‘empty-source’, ‘corrupted-source’, ‘unknown’. <em>(basestring, readonly)</em></p>
+                    </dd>
+                </dl>
+
+                <dl class="attribute">
+                    <dt id="_pybgpstream.BGPRecord.dump_time">
+                        <code class="descname">dump_time</code><a class="headerlink"
+                                                                  href="#_pybgpstream.BGPRecord.dump_time"
+                                                                  title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The time associated with the dump that contained the record (e.g. the
+                        beginning of the MRT file that the record was found in.) <em>(int, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPRecord.dump_position">
-                        <code class="descname">dump_position</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPRecord.dump_position"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The position that this record was found in the dump,
-                        can be one of
-                        &#8216;start&#8217;, &#8216;middle&#8217;, &#8216;end&#8217;,
-                        &#8216;unknown&#8217;. <em>(basestring, readonly)</em>
-                    </p>
+                        <code class="descname">dump_position</code><a class="headerlink"
+                                                                      href="#_pybgpstream.BGPRecord.dump_position"
+                                                                      title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The position that this record was found in the dump, can be one of
+                        ‘start’, ‘middle’, ‘end’, ‘unknown’. <em>(basestring, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="method">
                     <dt id="_pybgpstream.BGPRecord.get_next_elem">
-                        <code class="descname">get_next_elem</code><span
-                            class="sig-paren">(</span><span
-                            class="sig-paren">)</span><a class="headerlink"
-                                                         href="#_pybgpstream.BGPRecord.get_next_elem"
-                                                         title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>Get the next <a class="reference internal"
-                                           href="#_pybgpstream.BGPElem"
-                                           title="_pybgpstream.BGPElem"><code
-                            class="xref py py-class docutils literal"><span
-                            class="pre">BGPElem</span></code></a> from this
-                        record. Will return
-                        <code class="xref py py-class docutils literal"><span
-                                class="pre">None</span></code> when all the
-                        elems have been read.</p>
-                        <table class="docutils field-list" frame="void"
-                               rules="none">
+                        <code class="descname">get_next_elem</code><span class="sig-paren">(</span><span
+                            class="sig-paren">)</span><a class="headerlink" href="#_pybgpstream.BGPRecord.get_next_elem"
+                                                         title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Get the next <a class="reference internal" href="#_pybgpstream.BGPElem"
+                                           title="_pybgpstream.BGPElem"><code class="xref py py-class docutils literal"><span
+                            class="pre">BGPElem</span></code></a> from this record. Will return
+                        <code class="xref py py-class docutils literal"><span class="pre">None</span></code> when all
+                        the elems have been read.</p>
+                        <table class="docutils field-list" frame="void" rules="none">
                             <col class="field-name"/>
                             <col class="field-body"/>
                             <tbody valign="top">
                             <tr class="field-odd field">
                                 <th class="field-name">Returns:</th>
-                                <td class="field-body">a <a
-                                        class="reference internal"
-                                        href="#_pybgpstream.BGPElem"
-                                        title="_pybgpstream.BGPElem"><code
+                                <td class="field-body">a <a class="reference internal" href="#_pybgpstream.BGPElem"
+                                                            title="_pybgpstream.BGPElem"><code
                                         class="xref py py-class docutils literal"><span
-                                        class="pre">BGPElem</span></code></a>
-                                    object, or <cite>None</cite> if there are no
-                                    more
+                                        class="pre">BGPElem</span></code></a> object, or <cite>None</cite> if there are
+                                    no more
                                     elems to read.
                                 </td>
                             </tr>
                             <tr class="field-even field">
                                 <th class="field-name">Return type:</th>
-                                <td class="field-body"><a
-                                        class="reference internal"
-                                        href="#_pybgpstream.BGPElem"
-                                        title="_pybgpstream.BGPElem"><code
+                                <td class="field-body"><a class="reference internal" href="#_pybgpstream.BGPElem"
+                                                          title="_pybgpstream.BGPElem"><code
                                         class="xref py py-class docutils literal"><span
-                                        class="pre">BGPElem</span></code></a>
-                                </td>
+                                        class="pre">BGPElem</span></code></a></td>
                             </tr>
                             <tr class="field-odd field">
-                                <th class="field-name" colspan="2">Raises
-                                    RuntimeError:
-                                </th>
-                            </tr>
-                            <tr class="field-odd field">
-                                <td>&nbsp;</td>
-                                <td class="field-body">if a BGPElem object could
-                                    not be created
+                                <th class="field-name">Raises:</th>
+                                <td class="field-body"><strong>RuntimeError</strong> – if a BGPElem object could not be
+                                    created
                                 </td>
                             </tr>
                             </tbody>
@@ -697,84 +611,56 @@
 
     </div>
     <div class="section" id="bgpelem">
-        <h2>BGPElem<a class="headerlink" href="#bgpelem"
-                      title="Permalink to this headline">¶</a></h2>
+        <h2>BGPElem<a class="headerlink" href="#bgpelem" title="Permalink to this headline">¶</a></h2>
         <dl class="class">
             <dt id="_pybgpstream.BGPElem">
-                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code
-                    class="descname">BGPElem</code><a class="headerlink"
-                                                      href="#_pybgpstream.BGPElem"
-                                                      title="Permalink to this definition">¶</a>
-            </dt>
-            <dd><p>The BGP Elem class represents a single element obtained from
-                a BGP Record
-                instance using the <a class="reference internal"
-                                      href="#_pybgpstream.BGPRecord.get_next_elem"
+                <em class="property">class </em><code class="descclassname">_pybgpstream.</code><code class="descname">BGPElem</code><a
+                    class="headerlink" href="#_pybgpstream.BGPElem" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGP Elem class represents a single element obtained from a BGP Record
+                instance using the <a class="reference internal" href="#_pybgpstream.BGPRecord.get_next_elem"
                                       title="_pybgpstream.BGPRecord.get_next_elem"><code
                         class="xref py py-meth docutils literal"><span
-                        class="pre">BGPRecord.get_next_elem()</span></code></a>
-                method.</p>
+                        class="pre">BGPRecord.get_next_elem()</span></code></a> method.</p>
+                <p>In version 2, a BGPElem object no longer contains a <cite>time</cite> field. This
+                    information was duplicated from the record and is now to be accessed from
+                    there instead.</p>
                 <p>All attributes are read-only.</p>
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPElem.type">
-                        <code class="descname">type</code><a class="headerlink"
-                                                             href="#_pybgpstream.BGPElem.type"
-                                                             title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>The type of the element, can be one of &#8216;R&#8217;
-                        (rib), &#8216;A&#8217; (announcement),
-                        &#8216;W&#8217; (withdrawal), &#8216;S&#8217;
-                        (peerstate), &#8216;&#8217; (unknown). <em>(basestring,
-                            readonly)</em></p>
-                    </dd>
-                </dl>
-
-                <dl class="attribute">
-                    <dt id="_pybgpstream.BGPElem.time">
-                        <code class="descname">time</code><a class="headerlink"
-                                                             href="#_pybgpstream.BGPElem.time"
-                                                             title="Permalink to this definition">¶</a>
-                    </dt>
-                    <dd><p>The time that the element represents. <em>(int,
-                        readonly)</em></p>
+                        <code class="descname">type</code><a class="headerlink" href="#_pybgpstream.BGPElem.type"
+                                                             title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The type of the element, can be one of ‘rib’, ‘announcement’,
+                        ‘withdrawal’, ‘peerstate’, ‘unknown’. <em>(basestring, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPElem.peer_address">
-                        <code class="descname">peer_address</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPElem.peer_address"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The IP address of the peer that this element was
-                        received
+                        <code class="descname">peer_address</code><a class="headerlink"
+                                                                     href="#_pybgpstream.BGPElem.peer_address"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The IP address of the peer that this element was received
                         from. <em>(basestring, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPElem.peer_asn">
-                        <code class="descname">peer_asn</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPElem.peer_asn"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>The ASN of the peer that this element was received
-                        from. <em>(int, readonly)</em></p>
+                        <code class="descname">peer_asn</code><a class="headerlink"
+                                                                 href="#_pybgpstream.BGPElem.peer_asn"
+                                                                 title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The ASN of the peer that this element was received from. <em>(int, readonly)</em></p>
                     </dd>
                 </dl>
 
                 <dl class="attribute">
                     <dt id="_pybgpstream.BGPElem.fields">
-                        <code class="descname">fields</code><a
-                            class="headerlink"
-                            href="#_pybgpstream.BGPElem.fields"
-                            title="Permalink to this definition">¶</a></dt>
-                    <dd><p>A dictionary of fields that differ depending on the
-                        <a class="reference internal"
-                           href="#_pybgpstream.BGPElem.type"
-                           title="_pybgpstream.BGPElem.type"><code
-                                class="xref py py-attr docutils literal"><span
-                                class="pre">type</span></code></a> of the
+                        <code class="descname">fields</code><a class="headerlink" href="#_pybgpstream.BGPElem.fields"
+                                                               title="Permalink to this definition">¶</a></dt>
+                    <dd><p>A dictionary of fields that differ depending on the <a class="reference internal"
+                                                                                  href="#_pybgpstream.BGPElem.type"
+                                                                                  title="_pybgpstream.BGPElem.type"><code
+                            class="xref py py-attr docutils literal"><span class="pre">type</span></code></a> of the
                         element. <em>(dict, readonly)</em></p>
                         <dl class="docutils">
                             <dt>Fields for each type are:</dt>
@@ -782,32 +668,17 @@
                                 <ul class="first last">
                                     <li>
                                         <dl class="first docutils">
-                                            <dt><em>rib</em>,
-                                                <em>announcement</em>:
-                                            </dt>
+                                            <dt><em>rib</em>, <em>announcement</em>:</dt>
                                             <dd>
-                                                <ul class="first last simple">
-                                                    <li>&#8216;next-hop&#8217;:
-                                                        The next-hop IP address
-                                                        (basestring)
-                                                    </li>
-                                                    <li>&#8216;as-path&#8217;:
-                                                        The AS path (basestring)
-                                                    </li>
-                                                    <li>&#8216;prefix&#8217;:
-                                                        The prefix (basestring)
-                                                    </li>
-                                                    <li>&#8216;communities&#8217;:
-                                                        The communities (a list
-                                                        of dictionaries,
-                                                        each one representing a
-                                                        community; each
-                                                        dictionary has
-                                                        the <cite>asn</cite> and
-                                                        the <cite>value</cite>
-                                                        keys)
+                                                <ul class="first simple">
+                                                    <li>‘next-hop’: The next-hop IP address (basestring)</li>
+                                                    <li>‘as-path’: The AS path (basestring)</li>
+                                                    <li>‘prefix’: The prefix (basestring)</li>
+                                                    <li>‘communities’: The communities (a set of strings in the
+                                                        canonical
                                                     </li>
                                                 </ul>
+                                                <p class="last">“asn:value” format)</p>
                                             </dd>
                                         </dl>
                                     </li>
@@ -816,9 +687,7 @@
                                             <dt><em>withdrawal</em></dt>
                                             <dd>
                                                 <ul class="first last simple">
-                                                    <li>&#8216;prefix&#8217;:
-                                                        The prefix (basestring)
-                                                    </li>
+                                                    <li>‘prefix’: The prefix (basestring)</li>
                                                 </ul>
                                             </dd>
                                         </dl>
@@ -828,23 +697,12 @@
                                             <dt><em>peerstate</em></dt>
                                             <dd>
                                                 <ul class="first last simple">
-                                                    <li>&#8216;old-state&#8217;:
-                                                        The old state of the
-                                                        peer, can be one of
-                                                        &#8216;idle&#8217;,
-                                                        &#8216;connect&#8217;,
-                                                        &#8216;active&#8217;,
-                                                        &#8216;open-sent&#8217;,
-                                                        &#8216;open-confirm&#8217;,
-                                                        &#8216;established&#8217;.
+                                                    <li>‘old-state’: The old state of the peer, can be one of ‘idle’,
+                                                        ‘connect’, ‘active’, ‘open-sent’, ‘open-confirm’, ‘established’.
                                                         (basestring)
                                                     </li>
-                                                    <li>&#8216;new-state&#8217;:
-                                                        The new state of the
-                                                        peer, shares the same
-                                                        possible
-                                                        values as old-state.
-                                                        (basestring)
+                                                    <li>‘new-state’: The new state of the peer, shares the same possible
+                                                        values as old-state. (basestring)
                                                     </li>
                                                 </ul>
                                             </dd>
