@@ -92,7 +92,10 @@ require(['jquery', 'moment'], function ($, moment) {
         var hash = document.location.hash;
         var prefix = "!";
         if (hash) {
-            $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']').tab('show');
+            const hashTab = $('.nav-tabs a[href=' + hash.replace(prefix, "") + ']');
+            if (hashTab && hashTab.tab) {
+                hashTab.tab('show');
+            }
         }
 
         // Change hash for page-reload
