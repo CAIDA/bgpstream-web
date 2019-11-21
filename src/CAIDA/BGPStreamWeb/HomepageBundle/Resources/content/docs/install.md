@@ -1,24 +1,21 @@
 Installing BGPStream
 ====================
 
-The BGPStream framework is comprised of two software packages: _BGPStream Core_
+The BGPStream framework is comprised of two software packages: _libBGPStream_
 and _PyBGPStream_.
 
 <div class="row" markdown="1">
 <div class="col-md-6" markdown="1">
-<h2>BGPStream Core</h2>
+<h2>libBGPStream</h2>
 <p markdown="1">
-BGPStream Core contains the
+libBGPStream contains the
 [libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }})
 C library, as
 well as the
-[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }})
-and
-[BGPCorsaro]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpcorsaro'}) }})
-tools.
+[BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}) tool.
 </p>
 <div>
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}}" class="btn btn-primary btn-md">Install BGPStream Core &raquo;</a>
+<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}}" class="btn btn-primary btn-md">Install libBGPStream &raquo;</a>
 </div>
 </div>
 <div class="col-md-6" markdown="1">

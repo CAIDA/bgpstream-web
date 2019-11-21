@@ -1,4 +1,4 @@
-PyBGPStream (Python API)
+Python API (PyBGPStream)
 ========================
 
 PyBGPStream is our Python bindings to the libBGPStream C API. It offers the same
@@ -27,17 +27,25 @@ code.
 For more <b>experienced users</b>, we provide an extensive API reference manual,
 documenting the package.
 </p>
+<p>
 <a href="{{ path('caida_bgpstream_web_homepage_docs_api', {'project': 'pybgpstream', 'file': '_pybgpstream.html'})}}"
     class="btn btn-primary btn-md">
-    Read the API reference manual &raquo;
+    Low-level API reference &raquo;
 </a>
+</p>
+<p>
+<a href="{{ path('caida_bgpstream_web_homepage_docs_api', {'project': 'pybgpstream', 'file': 'pybgpstream.html'})}}"
+    class="btn btn-primary btn-md">
+    High-level API reference &raquo;
+</a>
+</p>
 </div>
 <div class="col-md-4">
 <p>
 We also make all the PyBGPStream code available on GitHub, and encourage
 community contributions via Pull Requests.
 </p>
-<a href="https://github.com/caida/bgpstream"
+<a href="https://github.com/caida/pybgpstream"
     class="btn btn-primary btn-md">
     Browse the GitHub repository &raquo;
 </a>

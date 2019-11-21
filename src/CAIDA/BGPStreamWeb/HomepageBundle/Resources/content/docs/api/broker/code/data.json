@@ -1,5 +1,5 @@
 {
-  "time": 1445366456,
+  "time": 1569619950,
   "type": "data",
   "error": null,
   "queryParameters": {
@@ -11,35 +11,69 @@
       "rrc03"
     ],
     "collector": null,
-    "intervals": [
-      "1438819200,1438819200"
-    ],
     "types": [
       "updates"
     ],
     "type": null,
+    "resourceTypes": [],
+    "resourceType": null,
     "minInitialTime": null,
-    "dataAddedSince": null
+    "dataAddedSince": null,
+    "intervals": [
+      "1438819200,1438819200"
+    ],
+    "debug": {
+      "numResources": 4,
+      "intervals": [
+        "1438819200,1438819200"
+      ]
+    }
   },
   "data": {
-    "dumpFiles": [
+    "resources": [
       {
-        "urlType": "simple",
-        "url": "http:\/\/archive.routeviews.org\/bgpdata\/2015.08\/UPDATES\/updates.20150805.2345.bz2",
+        "url": "http:\/\/bgp-archive.caida.org\/routeviews\/route-views2\/updates\/2015\/08\/05\/routeviews.route-views2.updates.1438818300.bz2",
+        "format": "mrt",
+        "transport": "file",
         "project": "routeviews",
         "collector": "route-views2",
         "type": "updates",
         "initialTime": 1438818300,
-        "duration": 900
+        "duration": 900,
+        "attr": []
       },
       {
-        "urlType": "simple",
-        "url": "http:\/\/data.ris.ripe.net\/rrc03\/2015.08\/updates.20150805.2355.gz",
+        "url": "http:\/\/bgp-archive.caida.org\/ris\/rrc03\/updates\/2015\/08\/05\/ris.rrc03.updates.1438818900.gz",
+        "format": "mrt",
+        "transport": "file",
         "project": "ris",
         "collector": "rrc03",
         "type": "updates",
         "initialTime": 1438818900,
-        "duration": 300
+        "duration": 300,
+        "attr": []
+      },
+      {
+        "url": "http:\/\/bgp-archive.caida.org\/routeviews\/route-views2\/updates\/2015\/08\/06\/routeviews.route-views2.updates.1438819200.bz2",
+        "format": "mrt",
+        "transport": "file",
+        "project": "routeviews",
+        "collector": "route-views2",
+        "type": "updates",
+        "initialTime": 1438819200,
+        "duration": 900,
+        "attr": []
+      },
+      {
+        "url": "http:\/\/bgp-archive.caida.org\/ris\/rrc03\/updates\/2015\/08\/06\/ris.rrc03.updates.1438819200.gz",
+        "format": "mrt",
+        "transport": "file",
+        "project": "ris",
+        "collector": "rrc03",
+        "type": "updates",
+        "initialTime": 1438819200,
+        "duration": 300,
+        "attr": []
       }
     ]
   }

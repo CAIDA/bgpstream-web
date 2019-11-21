@@ -11,13 +11,7 @@ main()
     return -1;
   }
 
-  /* Allocate memory for a re-usable bgprecord instance */
-  bgpstream_record_t *bs_record = bgpstream_record_create();
-  if(bs_record == NULL)
-    {
-      fprintf(stderr, "ERROR: Could not create BGPStream record\n");
-      return -1;
-    }
+  bgpstream_record_t *rec;
 
   /* The broker interface is set by default */
 
@@ -38,35 +32,31 @@ main()
     return -1;
   }
 
+  int ret;
   int get_next_ret = 0;
   int elem_counter = 0;
 
   /* Pointer to a bgpstream elem, memory is borrowed from bgpstream,
    * use the elem_copy function to own the memory */
-  bgpstream_elem_t *bs_elem = NULL;
+  bgpstream_elem_t *elem;
 
   /* Read the stream of records */
-  do
+  while((ret = bgpstream_get_next_record(bs, &rec))>0)
     {
       /* Get next record */
-      get_next_ret = bgpstream_get_next_record(bs, bs_record);
       /* Check if there are new records and if they are valid records */
-      if(get_next_ret && bs_record->status == BGPSTREAM_RECORD_STATUS_VALID_RECORD)
+      if(rec->status == BGPSTREAM_RECORD_STATUS_VALID_RECORD)
         {
           /* Get next elem in the record */
-          while((bs_elem = bgpstream_record_get_next_elem (bs_record)) != NULL)
+          while(bgpstream_record_get_next_elem (rec, &elem)>0)
             {
               elem_counter++;
             }
         }
     }
-  while(get_next_ret > 0);
 
   /* Print the number of elems */
   printf("\tRead %d elems\n", elem_counter);
-
-  /* De-allocate memory for the bgpstream record */
-  bgpstream_record_destroy(bs_record);
 
   /* De-allocate memory for the bgpstream */
   bgpstream_destroy(bs);
