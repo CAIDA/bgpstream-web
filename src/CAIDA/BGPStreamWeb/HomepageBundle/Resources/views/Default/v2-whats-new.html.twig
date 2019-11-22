@@ -312,28 +312,12 @@
                     (We plan to contribute the code we developed to generate
                     these headers back to the upstream OpenBMP repository.)
                 </p>
-                <p>
-                    Unfortunately this release does not support simultaneous
-                    processing of
-                    dump-based MRT data, and stream-based BMP data, but we plan
-                    to add this support in an upcoming beta release. For now
-                    you can work around this by using two stream instances.
-                </p>
                 <h3>Accessing the Stream</h3>
                 <p>
-                    In this release, access to this live BMP feed is provided
-                    by way of the temporary "beta-bmp-stream" data interface.
-                    See below for examples of how to use this interface.
-                </p>
-                <p>
-                    BGPStream will use a random
-                    <a href="https://kafka.apache.org/documentation/#intro_consumers" target="_blank">Kafka "consumer group"</a>
-                    unless the <code>group</code>
-                    data interface option is set for the "beta-bmp-stream" data
-                    interface. Setting the group option allows the stream
-                    to be effectively load-balanced over multiple instances of
-                    BGPStream. It also provides some amount of fault-tolerance
-                    since BGPStream will resume where it left off.
+                    In this release, access to this live BMP feed is available via the broker data interface alongside
+                    the traditional MRT-based data from Route Views and RIPE RIS.
+                    This data has <code>caida</code> as the project name, so can be filtered using the standard
+                    project filters. See below for examples of how to use this interface.
                 </p>
                 <h4>From BGPReader</h4>
                 <p>Accessing the feed from BGPReader is as simple as choosing
@@ -341,8 +325,8 @@
                 <pre><code>bgpreader -p caida</code></pre>
                 <h4>From PyBGPStream</h4>
                 <pre><code class="language-python">import pybgpstream
-for elem in pybgpstream.BGPStream(data_interface="beta-bmp-stream"):
-    print elem</code></pre>
+for elem in pybgpstream.BGPStream(project="caida"):
+    print(elem)</code></pre>
             </div>
             <div id="bmp-private">
                 <h2>Private OpenBMP Collector</h2>
@@ -372,8 +356,8 @@ for elem in pybgpstream.BGPStream(data_interface="beta-bmp-stream"):
                 <h4>3. Install BGPStream</h4>
                 <p>
                     See the
-                    <a href="#installing">BGPStream Install instructions</a>
-                    above for more information.
+                    <a href="{{ path('caida_bgpstream_web_homepage', {'page': 'docs', 'subpage': 'install'}) }}">BGPStream Install instructions</a>
+                    for more information.
                 </p>
                 <h5>5. Configure BGPStream to stream data from your collector</h5>
                 <p>
@@ -393,7 +377,7 @@ stream = pybgpstream.BGPStream(data_interface="kafka")
 stream.set_data_interface_option("kafka", "brokers", "&lt;docker_host&gt;:9092")
 stream.set_data_interface_option("kafka", "topic", "openbmp.bmp_raw")
 for elem in stream:
-    print elem</code></pre>
+    print(elem)</code></pre>
             </div>
             <div id="ris-live">
                 <h2>RIPE RIS-Live Realtime BGP Stream</h2>
