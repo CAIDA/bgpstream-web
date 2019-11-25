@@ -104,7 +104,7 @@ require(['jquery', 'moment'], function ($, moment) {
         });
 
         $.ajax({
-            url: 'https://broker.bgpstream.caida.org/v1/meta/projects',
+            url: 'https://broker.bgpstream.caida.org/v2/meta/projects',
             type: 'GET',
             dataType: 'json',
             timeout: 10000,

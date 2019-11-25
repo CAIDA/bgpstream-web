@@ -1,0 +1,425 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:base.html.twig' %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>What's New in BGPStream V2</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div id="intro">
+                <p>
+                    Over the last several years, we have
+                    been working on a new release of BGPStream. This version
+                    contains several new features including native support for
+                    true <a href="#bmp">real-time data access via BMP</a>,
+                    as well as a bunch of
+                    bug fixes, and performance improvements. See the <a
+                            href="#changes">Changes</a>
+                    section below for a more detailed list.
+                </p>
+                <p>
+                    See the <a href="#bmp">Live BMP Stream</a> section below for
+                    help accessing the new realtime BMP stream.
+                </p>
+                <p>
+                    <a class="btn btn-md btn-success"
+                       href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}"
+                       role="button">
+                        Get BGPStream V2
+                    </a>
+                </p>
+            </div>
+            <div id="changes">
+                <h2>Changes</h2>
+                <h4>New Features</h4>
+                <ul>
+                    <li><i>Native BMP support</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports processing raw BMP data in
+                                the same way as MRT.
+                            </li>
+                            <li>
+                                Currently the "singlefile" and
+                                the new "kafka" and "beta-bmp-stream" data interfaces
+                                provide access to BMP data. The "singlefile"
+                                interface can be used to process local dumps of
+                                raw BMP data whereas the "kafka" interface can be
+                                used to access BMP (or MRT) data from a Kafka
+                                cluster.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Realtime data stream via RIS Live</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports obtaining realtime BGP
+                                data from RIPE's <a href="https://ris-live.ripe.net/"> RIS Live BGP message stream </a>.
+                            </li>
+                            <li>
+                                RIS Live stream access point is retrieved from data broker and is directly accessible
+                                using our new "http" transport.
+                            </li>
+                            <li>
+                                bgpreader now default to live-stream mode if no time window is specified,
+                                which include all archive data as they come in,
+                                as well as live stream data sources like RIS-Live and OpenBMP stream.
+                            </li>
+                            <li>
+                                To start streaming using bgpreader, just specify that we want data from project "ris-live"
+                                without any time-window: <code>bgpreader -p ris-live</code>
+                            </li>
+                            <li>
+                                See the
+                                <a href="#ris-live">RIPE RIS-Live</a>
+                                tutorials below for more information.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Realtime data stream via OpenBMP</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports obtaining realtime BGP
+                                data from a Kafka cluster.
+                            </li>
+                            <li>
+                                Access to
+                                private OpenBMP feeds is supported using the
+                                "kafka" data interface, whereas the
+                                "broker" data interface may be used to
+                                access the public BMP stream provided as part
+                                of the CAIDA BGPStream project.
+                            </li>
+                            <li>
+                                See the
+                                <a href="#bmp">Public BMP Stream</a> and
+                                <a href="#bmp-private">Private BMP Stream</a>
+                                tutorials below for more information.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Local caching of dump files (optional)</i>
+                        <ul>
+                            <li>
+                                Data files processed by the broker can now be
+                                cached to a local directory which is checked
+                                before downloading a dump file.
+                            </li>
+                            <li>
+                                Previously, when using BGPStream to repeatedly
+                                process the same data (e.g., when
+                                testing/debugging code), poor network
+                                connectivity could add overhead to processing
+                                time.
+                            </li>
+                            <li>
+                                The caching implementation is thread
+                                safe and can support parallel
+                                instances of BGPStream (either as threads or
+                                separate processes).
+                            </li>
+                            <li>
+                                The cache can be enabled by setting the
+                                <code>cache-dir</code> parameter of the "broker"
+                                data interface. E.g., by passing
+                                <code>-o cache-dir=/path/to/cache</code> to
+                                <code>bgpreader</code>, or by calling
+                                <code>stream.set_data_interface_option("broker", "cache-dir", "/path/to/cache")</code>
+                                from PyBGPStream.
+                            </li>
+                            <li>
+                                Thanks to Mingwei Zhang for contributing
+                                this feature.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>New high-level PyBGPStream API (prototype)</i>
+                        <ul>
+                            <li>
+                                There is now a high-level "Pythonic" API for
+                                accessing BGP data using BGPStream.
+                            </li>
+                            <li>
+                                Previously the only Python interface was
+                                <code>_pybgpstream</code>, a low-level, almost
+                                exact bindings to the libBGPStream C API.
+                            </li>
+                            <li>
+                                See the <a href="#api">API docs</a> below for
+                                more information.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>New filter interface</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports a "BPF-like" syntax
+                                for specifying filters.
+                            </li>
+                            <li>
+                                E.g., <code>collector route-views.sg and type ribs and prefix exact 192.172.226.0/24</code>
+                                would extract only RIB records matching the given prefix from the <code>route-views.sg</code> collector.
+                            </li>
+                            <li>
+                                For BGPReader, this feature may be accessed
+                                using the <code>-f</code> option.
+                            </li>
+                            <li>
+                                For PyBGPStream, filters can be specified either
+                                using the <code>filter</code> parameter to the
+                                <code>BGPStream</code> constructor, or by
+                                calling the <code>parse_filter_string</code>
+                                method on an existing stream.
+                            </li>
+                            <li>
+                                While the previous APIs for specifying filters
+                                are still available, this interface should be
+                                used as new filter types will only be available
+                                through this interface, and eventually the other
+                                filter methods will be deprecated.
+                            </li>
+                            <li>
+                                See the <a href="https://github.com/CAIDA/libbgpstream/blob/v2-beta/FILTERING" target="_blank">temporary documentation</a> for more information.
+                            </li>
+                            <li>
+                                Thanks to Shane Alcock for contributing this
+                                feature.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>Bug Fixes</h4>
+                <ul>
+                    <li><i>Patricia Tree Fixes</i>
+                        <ul>
+                            <li>
+                                We have made several fixes to the patricia
+                                trie implementation used by libBGPStream.
+                            </li>
+                            <li>
+                                For most users this only affected prefix
+                                filtering. Previously all prefix filters were
+                                treated as "ANY" filters (rather than
+                                MORE/EXACT/LESS).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>Performance Improvements</h4>
+                <ul>
+                    <li>
+                        <i>New MRT parser</i>
+                        <ul>
+                            <li>
+                                Along with developing a BMP parser, we also
+                                developed a new MRT parser,
+                                <a href="https://github.com/CAIDA/libparsebgp" target="_blank">libParseBGP</a>
+                                to replace the fork of libbgpdump we used in V1.
+                            </li>
+                            <li>
+                                libParseBGP should be much faster than
+                                libbgpdump (~30% faster in some tests we ran)
+                                and is designed to be easier to maintain and
+                                extend.
+                            </li>
+                            <li>
+                                It is possible/likely that there are some MRT
+                                peculiarities that are not correctly handled
+                                by libParseBGP (yet). If you come across any
+                                problems, please contact us.
+                            </li>
+                        </ul>
+                            </li>
+                    <li>
+                        <i>Completely re-designed resource management</i>
+                        <ul>
+                            <li>
+                                To support addition of other data formats (e.g.,
+                                BMP), and data transport mechanisms (e.g., Kafka),
+                                we completely re-designed the core resource
+                                management components of libBGPStream.
+                            </li>
+                            <li>
+                                In addition to simplifying adding support for
+                                new formats, the new implementation appears to
+                                perform ~10% better than V1.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i>Improved Record API</i>
+                        <ul>
+                            <li>
+                                We
+                                changed the <code>get_next_record</code> API
+                                to return a borrowed pointer to an internal
+                                record structure, rather than filling a
+                                structure passed by the user.
+                            </li>
+                            <li>
+                                This minimizes memory allocations and copying
+                                within libBGPStream, improving performance.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>PyBGPStream Improvements</h4>
+                <ul>
+                    <li>BGPElem <code>fields</code> attribute is now cached so
+                    that subsequent field accesses do not needlessly rebuild
+                    the entire fields dictionary.</li>
+                    <li>By popular demand, communities in PyBGPStream are now
+                        returned as a set of "asn:value" strings</li>
+                </ul>
+                <h4>Misc. Improvements</h4>
+                <ul>
+                    <li>Added <code>bgpstream_pfx_copy</code> method</li>
+                    <li>Added <code>bgpstream_as_path_get_origin_val</code>
+                        method to extract origin ASN as simple integer. (Contributed by
+                        Samir Al-Sheikh.)</li>
+                    <li>No longer require time interval to be set. This
+                    simplifies use of the "singlefile" data interface.</li>
+                    <li>Added documentation of the AS Path string format.</li>
+                    <li>BGPReader data interface options are now specified as
+                    <code>-o &lt;param&gt;=&lt;value&gt;</code> rather than
+                        <code>-o &lt;param&gt;,&lt;value&gt;</code>.</li>
+                </ul>
+            </div>
+            <div id="bmp">
+                <h2>Public Live BMP Stream</h2>
+                <p>
+                    As part of the BGPStream project, we have begun to provide
+                    a public BMP feed. Currently we are only providing data
+                    from a few Route Views and Cisco Research peers, but we
+                    expect additional peers to be added soon.
+                    (If you would like to contribute a feed, please contact us
+                    at
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.)
+                </p>
+                <p>
+                    We are providing access to these feeds by way of a
+                    publicly-accessible, read-only, Kafka cluster
+                    (<code>bmp.bgpstream.caida.org:9092</code>) which contains
+                    raw BMP data encapsulated in a custom
+                    <a href="https://github.com/openbmp/openbmp" target="_blank">OpenBMP</a>
+                    message header.
+                    (We plan to contribute the code we developed to generate
+                    these headers back to the upstream OpenBMP repository.)
+                </p>
+                <h3>Accessing the Stream</h3>
+                <p>
+                    In this release, access to this live BMP feed is available via the broker data interface alongside
+                    the traditional MRT-based data from Route Views and RIPE RIS.
+                    This data has <code>caida</code> as the project name, so can be filtered using the standard
+                    project filters. See below for examples of how to use this interface.
+                </p>
+                <h4>From BGPReader</h4>
+                <p>Accessing the feed from BGPReader is as simple as choosing
+                the "caida" project without time-window:</p>
+                <pre><code>bgpreader -p caida</code></pre>
+                <h4>From PyBGPStream</h4>
+                <pre><code class="language-python">import pybgpstream
+for elem in pybgpstream.BGPStream(project="caida"):
+    print(elem)</code></pre>
+            </div>
+            <div id="bmp-private">
+                <h2>Private OpenBMP Collector</h2>
+                <p>
+                    If you have a router that you would like to monitor using
+                    OpenBMP and BGPStream, you can use the dockerized OpenBMP
+                    deployment from the OpenBMP project, and then simply
+                    configure the "kafka" data interface of BGPStream to
+                    stream data from your collector.
+                </p>
+                <h4>1. Setting up the OpenBMP collector</h4>
+                <p>
+                    You will first need to deploy and configure an OpenBMP
+                    collector and Kafka instance. The easiest way to do this
+                    is using the docker container provided by the OpenBMP
+                    project. See the
+                    <a href="https://github.com/OpenBMP/openbmp/blob/master/docs/INSTALL.md">OpenBMP documentation</a>
+                    for a detailed tutorial. (You do not need to run any
+                    consumers to use OpenBMP with BGPStream.)
+                </p>
+                <h4>2. Configure router to send BMP data to the collector</h4>
+                <p>
+                    See the OpenBMP documentation for some
+                    <a href="https://github.com/OpenBMP/openbmp/blob/master/docs/ROUTER_CONFIG.md">sample router
+                        configurations</a>.
+                </p>
+                <h4>3. Install BGPStream</h4>
+                <p>
+                    See the
+                    <a href="{{ path('caida_bgpstream_web_homepage', {'page': 'docs', 'subpage': 'install'}) }}">BGPStream Install instructions</a>
+                    for more information.
+                </p>
+                <h5>5. Configure BGPStream to stream data from your collector</h5>
+                <p>
+                    Use the "kafka" data interface of BGPStream, and configure
+                    it to point to your OpenBMP Kafka instance.
+                </p>
+                <p>
+                    For example, if you are using the BGPReader CLI:
+                </p>
+                <pre><code>bgpreader -d kafka \
+  -o brokers=&lt;docker_host&gt;:9092 \
+  -o topic=openbmp.bmp_raw</code></pre>
+                <p>Or, if you are using the PyBGPStream Python API here is a minimal
+                    working example:</p>
+                <pre><code class="language-python">import pybgpstream
+stream = pybgpstream.BGPStream(data_interface="kafka")
+stream.set_data_interface_option("kafka", "brokers", "&lt;docker_host&gt;:9092")
+stream.set_data_interface_option("kafka", "topic", "openbmp.bmp_raw")
+for elem in stream:
+    print(elem)</code></pre>
+            </div>
+            <div id="ris-live">
+                <h2>RIPE RIS-Live Realtime BGP Stream</h2>
+                <p>
+                    In BGPStream version 2, we added the support for streaming directly from <a href="https://ris-live.ripe.net/">RIPE RIS-Live</a>.
+                    RIS-Live is a streaming service that offers real-time BGP messages collected from all RIPE RIS Route Collectors (RRCs).
+                </p>
+                <p>
+                    Using ris-live stream is super easy. You just need to start a stream with no time-interval specified,
+                    and use "ris-live" as the project for the stream.
+                </p>
+                <p>
+                    If you want to use BGPReader to access the stream, just do <code>bgpreader -p ris-live</code>. That's it!
+                </p>
+            </div>
+            <div id="feedback">
+                <h2>Feedback</h2>
+                <p>
+                    We appreciate your support of this project, and your
+                    willingness to help us test the next version. Please
+                    create an issue on either the
+                    <a href="https://github.com/caida/libbgpstream"
+                       target="_blank">libBGPStream</a>
+                    or
+                    <a href="https://github.com/caida/pybgpstream"
+                       target="_blank">PyBGPStream</a>
+                    GitHub repos detailing any problems you have, or
+                    alternatively, contact
+                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
+            <p class="text-muted">On this page:</p>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="#intro">Intro</a></li>
+                <li role="presentation"><a href="#changes">Changes</a></li>
+                <li role="presentation"><a href="#bmp">Public BMP Stream</a></li>
+                <li role="presentation"><a href="#bmp-private">Private BMP Stream</a></li>
+                <li role="presentation"><a href="#bmp-private">RIPE RIS-Live</a></li>
+                <li role="presentation"><a href="#feedback">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

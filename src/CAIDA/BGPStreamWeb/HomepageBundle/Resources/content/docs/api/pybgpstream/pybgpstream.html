@@ -1,0 +1,235 @@
+<div class="section" id="pybgpstream">
+    <h1>pybgpstream<a class="headerlink" href="#pybgpstream" title="Permalink to this headline">¶</a></h1>
+    <p>This document describes the API of the pybgpstream module, a high-level
+        interface to the C <cite>libbgpstream</cite> library, providing a more user-friendly
+        interaction with the low-level <cite>_pybgpstream</cite> API.</p>
+    <span class="target" id="module-pybgpstream"></span><div class="section" id="example">
+    <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+    <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pybgpstream</span>
+
+<span class="c1"># create and configure the stream</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">pybgpstream</span><span class="o">.</span><span class="n">BGPStream</span><span class="p">(</span>
+   <span class="n">from_time</span><span class="o">=</span><span class="s2">&quot;2017-07-07 00:00:00&quot;</span><span class="p">,</span> <span class="n">until_time</span><span class="o">=</span><span class="s2">&quot;2017-07-07 00:10:00 UTC&quot;</span><span class="p">,</span>
+   <span class="n">collectors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;route-views.sg&quot;</span><span class="p">,</span> <span class="s2">&quot;route-views.eqix&quot;</span><span class="p">],</span>
+   <span class="n">record_type</span><span class="o">=</span><span class="s2">&quot;updates&quot;</span><span class="p">,</span>
+   <span class="nb">filter</span><span class="o">=</span><span class="s2">&quot;peer 11666 and prefix more 210.180.0.0/16&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># add any additional (or dynamic) filters</span>
+<span class="c1"># e.g. from peer AS 11666 regarding the more-specifics of 210.180.0.0/16:</span>
+<span class="c1"># stream.parse_filter_string(&quot;peer 11666 and prefix more 210.180.0.0/16&quot;)</span>
+<span class="c1"># or using the old filter interface:</span>
+<span class="c1"># stream.add_filter(&quot;peer-asn&quot;, &quot;11666&quot;)</span>
+<span class="c1"># stream.add_filter(&quot;prefix-more&quot;, &quot;210.180.0.0/16&quot;)</span>
+
+<span class="c1"># read elems</span>
+<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+   <span class="c1"># record fields can be accessed directly from elem</span>
+   <span class="c1"># e.g. elem.time</span>
+   <span class="c1"># or via elem.record</span>
+   <span class="c1"># e.g. elem.record.time</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
+
+<span class="c1"># alternatively, records and elems can be read in nested loops:</span>
+<span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">records</span><span class="p">():</span>
+   <span class="c1"># do something with rec (e.g., choose to continue based on timestamp)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Received </span><span class="si">%s</span><span class="s2"> record at time </span><span class="si">%d</span><span class="s2"> from collector </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">rec</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">rec</span><span class="o">.</span><span class="n">collector</span><span class="p">))</span>
+   <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">rec</span><span class="p">:</span>
+      <span class="c1"># do something with rec and/or elem</span>
+      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;  Elem Type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">elem</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+</pre></div>
+    </td></tr></table></div>
+</div>
+    <div class="section" id="bgpstream">
+        <h2>BGPStream<a class="headerlink" href="#bgpstream" title="Permalink to this headline">¶</a></h2>
+        <dl class="class">
+            <dt id="pybgpstream.BGPStream">
+                <em class="property">class </em><code class="descclassname">pybgpstream.</code><code class="descname">BGPStream</code><a class="headerlink" href="#pybgpstream.BGPStream" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGP Stream class provides a single stream of BGP Records.</p>
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.from_time">
+                        <code class="descname">from_time</code><a class="headerlink" href="#pybgpstream.BGPStream.from_time" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Specify the beginning time of the stream.
+                        The time string is parsed using <cite>dateutil.parser.parse</cite> function.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.until_time">
+                        <code class="descname">until_time</code><a class="headerlink" href="#pybgpstream.BGPStream.until_time" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Specify the ending time of the stream
+                        The time string is parsed using <cite>dateutil.parser.parse</cite> function.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.data_interface">
+                        <code class="descname">data_interface</code><a class="headerlink" href="#pybgpstream.BGPStream.data_interface" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Specify the <cite>data_interface</cite> BGPStream should use for retrieving and processing data.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.project">
+                        <code class="descname">project</code><a class="headerlink" href="#pybgpstream.BGPStream.project" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Name of the project to retrive the data from.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.projects">
+                        <code class="descname">projects</code><a class="headerlink" href="#pybgpstream.BGPStream.projects" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Name of the projects to retrive the data from.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.collector">
+                        <code class="descname">collector</code><a class="headerlink" href="#pybgpstream.BGPStream.collector" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Name of the collector to retrive the data from.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.collectors">
+                        <code class="descname">collectors</code><a class="headerlink" href="#pybgpstream.BGPStream.collectors" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Name of the collectors to retrive the data from.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.record_type">
+                        <code class="descname">record_type</code><a class="headerlink" href="#pybgpstream.BGPStream.record_type" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Specify type of the record type to process: <cite>update</cite>, or <cite>rib</cite>.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.recode_types">
+                        <code class="descname">recode_types</code><a class="headerlink" href="#pybgpstream.BGPStream.recode_types" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Specify type of the record types to process: <cite>update</cite>, or <cite>rib</cite>.</p>
+                    </dd></dl>
+
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPStream.filter">
+                        <code class="descname">filter</code><a class="headerlink" href="#pybgpstream.BGPStream.filter" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The filter string.</p>
+                    </dd></dl>
+
+                <dl class="method">
+                    <dt id="pybgpstream.BGPStream.records">
+                        <code class="descname">records</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pybgpstream.BGPStream.records" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>Returns a stream of Record objects.</p>
+                    </dd></dl>
+
+            </dd></dl>
+
+    </div>
+    <div class="section" id="bgprecord">
+        <h2>BGPRecord<a class="headerlink" href="#bgprecord" title="Permalink to this headline">¶</a></h2>
+        <dl class="class">
+            <dt id="pybgpstream.BGPRecord">
+                <em class="property">class </em><code class="descclassname">pybgpstream.</code><code class="descname">BGPRecord</code><a class="headerlink" href="#pybgpstream.BGPRecord" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGPRecord is a wrapper around low-level <cite>_pybgpstream.BGPRecord</cite>.</p>
+                <p>All attributes are read-only.</p>
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPRecord.rec">
+                        <code class="descname">rec</code><a class="headerlink" href="#pybgpstream.BGPRecord.rec" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The corresponding <cite>_pybgpstream.BGPRecord</cite>.</p>
+                    </dd></dl>
+
+                <dl class="method">
+                    <dt id="pybgpstream.BGPRecord.__str__">
+                        <code class="descname">__str__</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#pybgpstream.BGPRecord.__str__" title="Permalink to this definition">¶</a></dt>
+                    <dd><div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%f</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_position</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">router_ip</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dump_time</span><span class="p">)</span>
+</pre></div>
+                    </td></tr></table></div>
+                    </dd></dl>
+
+            </dd></dl>
+
+    </div>
+    <div class="section" id="bgpelem">
+        <h2>BGPElem<a class="headerlink" href="#bgpelem" title="Permalink to this headline">¶</a></h2>
+        <dl class="class">
+            <dt id="pybgpstream.BGPElem">
+                <em class="property">class </em><code class="descclassname">pybgpstream.</code><code class="descname">BGPElem</code><a class="headerlink" href="#pybgpstream.BGPElem" title="Permalink to this definition">¶</a></dt>
+            <dd><p>The BGPElem is a wrapper around low-level <cite>_pybgpstream.BGPElem</cite>.</p>
+                <p>All attributes are read-only.</p>
+                <dl class="attribute">
+                    <dt id="pybgpstream.BGPElem.record">
+                        <code class="descname">record</code><a class="headerlink" href="#pybgpstream.BGPElem.record" title="Permalink to this definition">¶</a></dt>
+                    <dd><p>The BGPRecord that contains the current BGPElem.</p>
+                    </dd></dl>
+
+                <dl class="method">
+                    <dt id="pybgpstream.BGPElem.__str__">
+                        <code class="descname">__str__</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#pybgpstream.BGPElem.__str__" title="Permalink to this definition">¶</a></dt>
+                    <dd><div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%f</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">record_type</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">collector</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">router</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">router_ip</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">peer_asn</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">peer_address</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_field</span><span class="p">(</span><span class="s2">&quot;prefix&quot;</span><span class="p">),</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_field</span><span class="p">(</span><span class="s2">&quot;next-hop&quot;</span><span class="p">),</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_field</span><span class="p">(</span><span class="s2">&quot;as-path&quot;</span><span class="p">),</span>
+    <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s2">&quot;communities&quot;</span><span class="p">])</span> <span class="k">if</span> <span class="s2">&quot;communities&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="k">else</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_field</span><span class="p">(</span><span class="s2">&quot;old-state&quot;</span><span class="p">),</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_field</span><span class="p">(</span><span class="s2">&quot;new-state&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+                    </td></tr></table></div>
+                    </dd></dl>
+
+            </dd></dl>
+
+    </div>
+</div>

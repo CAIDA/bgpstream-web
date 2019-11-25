@@ -35,7 +35,7 @@
             <table class="table">
                 <tr>
                     <td><b>Public Broker URL</b></td>
-                    <td><code>https://bgpstream.caida.org/broker</code></td>
+                    <td><code>https://broker.bgpstream.caida.org/v2 </code></td>
                 </tr>
             </table>
 
@@ -109,8 +109,8 @@
 
             <h4>Example Result
                 <small><a target="_blank"
-                          href="https://bgpstream.caida.org/broker/meta/projects/ris?human">
-                        https://bgpstream.caida.org/broker/meta/projects/ris?human
+                          href="https://broker.bgpstream.caida.org/v2/meta/projects/ris?human">
+                        https://broker.bgpstream.caida.org/v2/meta/projects/ris?human
                     </a></small>
             </h4>
             <pre><code
@@ -168,8 +168,8 @@
 
             <h4>Example Result
                 <small><a target="_blank"
-                          href="https://bgpstream.caida.org/broker/meta/collectors/route-views2?human">
-                        https://bgpstream.caida.org/broker/meta/collectors/route-views2?human
+                          href="https://broker.bgpstream.caida.org/v2/meta/collectors/route-views2?human">
+                        https://broker.bgpstream.caida.org/v2/meta/collectors/route-views2?human
                     </a></small>
             </h4>
     <pre><code
@@ -250,6 +250,34 @@
                     <td><i>all types</i></td>
                 </tr>
                 <tr>
+                    <td>resourceType</td>
+                    <td>Resource type to retrieve</td>
+                    <td>String</td>
+                    <td><code>stream</code>, <code>batch</code></td>
+                    <td><i>all resources</i></td>
+                </tr>
+                <tr>
+                    <td>resourceTypes</td>
+                    <td>Resource types to retrieve</td>
+                    <td>Array</td>
+                    <td><code>stream</code>, <code>batch</code></td>
+                    <td><i>all resources</i></td>
+                </tr>
+                <tr>
+                    <td>routers</td>
+                    <td>Filter resources by routers</td>
+                    <td>Array</td>
+                    <td>router IPs</td>
+                    <td><i>none</i></td>
+                </tr>
+                <tr>
+                    <td>peer_asns</td>
+                    <td>Filter resources by peer AS numbers</td>
+                    <td>Array</td>
+                    <td>peer ASNs</td>
+                    <td><i>none</i></td>
+                </tr>
+                <tr>
                     <td>minInitialTime</td>
                     <td>Start time of the current window</td>
                     <td>Epoch seconds</td>
@@ -275,8 +303,8 @@
 
             <h4>Example Result<br>
                 <small><a target="_blank"
-                          href="https://bgpstream.caida.org/broker/data?human&intervals[]=1438819200,1438819200&collectors[]=route-views2&collectors[]=rrc03&types[]=updates">
-                        https://bgpstream.caida.org/broker/data?human&intervals[]=1438819200,1438819200&collectors[]=route-views2&collectors[]=rrc03&types[]=updates
+                          href="https://broker.bgpstream.caida.org/v2/data?human&intervals[]=1438819200,1438819200&collectors[]=route-views2&collectors[]=rrc03&types[]=updates">
+                        https://broker.bgpstream.caida.org/v2/data?human&intervals[]=1438819200,1438819200&collectors[]=route-views2&collectors[]=rrc03&types[]=updates
                     </a></small>
             </h4>
     <pre><code

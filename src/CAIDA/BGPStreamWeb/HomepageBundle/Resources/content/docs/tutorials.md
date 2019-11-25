@@ -10,6 +10,7 @@ BGPReader
 ---------
  - [Replace BGPdump with BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#dump2reader)
  - [Isolate data using filters]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#elemfilters)
+ - [Realtime stream from RIS Live]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live)
  - [Read a local file]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#other)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}"
@@ -17,20 +18,6 @@ BGPReader
     Take the BGPReader tutorial &raquo;
 </a>
 </div>
-<div class="col-md-6" markdown="1">
-BGPCorsaro
-----------
- - [Using the pfxmonitor plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#pfxmonitor)
- - [Creating a new plugin]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}#newplugin)
-
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpcorsaro'})}}"
-    class="btn btn-primary btn-md">
-    Take the BGPCorsaro tutorial &raquo;
-</a>
-</div>
-</div>
-
-<div class="row" markdown="1">
 <div class="col-md-6" markdown="1">
 libBGPStream
 ------------

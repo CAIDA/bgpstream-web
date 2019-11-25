@@ -1,4 +1,3 @@
-bgpstream-web
-=============
+# BGPStream Website
 
-A Symfony project created on August 6, 2015, 2:55 pm.
+This repo is solely responsible for the website. For `bgpstream-broker`, please go to https://github.com/CAIDA/bgpstream-broker.

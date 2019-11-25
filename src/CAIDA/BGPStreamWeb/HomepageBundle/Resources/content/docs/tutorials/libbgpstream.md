@@ -7,8 +7,11 @@ stream of BGP records.
 
 Below we provide the following tutorials:
 
-* [Get familiar with the API: count the BGP elems](#api1) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/bgpstream-tutorial.c') }}))
-* [Prefix monitoring](#api2) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/bgpstream-pfx-mon.c') }}))
+* [Get familiar with the API: count the BGP elems](#api1) ([code][code-1])
+* [Prefix monitoring](#api2) ([code][code-2])
+
+[code-1]:{{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/bgpstream-tutorial.c') }}
+[code-2]:{{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/bgpstream-pfx-mon.c') }}
 
 <br>
 
@@ -17,7 +20,8 @@ Below we provide the following tutorials:
 In this example we show how to use most of the C library API functions
 to count the BGP elems in the current stream.
 The example is fully functioning and it can be compiled
-and run using the following commands:
+and run using the following commands
+([example code][code-1]):
 
 ~~~ 
 $ gcc ./bgpstream-tutorial.c  -lbgpstream -o ./tutorial
@@ -36,13 +40,12 @@ the filters (collectors, record type, and time).
 ### Step by step description
 
 The first step in each program using libBGPStream, is to allocate
-memory for a BGPStream instance and for a BGPStream record. The latter
-is a re-usable memory allocation that is going to contain the most
-recent record read. 
+memory for a BGPStream instance and for a pointer for BGPStream record. 
+The latter is a pointer pointing to the most recent record read. 
 
 ~~~ .language-c
 bgpstream_t *bs = bs = bgpstream_create();
-bgpstream_record_t *bs_record = bgpstream_record_create();
+bgpstream_record_t *rec;
 ~~~
 
 <br>
@@ -69,38 +72,34 @@ bgpstream_add_interval_filter(bs,1286705410,1286709071);
 <br>
 
 At this point we can start the stream, and repeatedly ask for new
-BGP records and BGP elems (the *bs_elem* pointer points to memory that is borrowed
+BGP records and BGP elems (the *elem* pointer points to memory that is borrowed
 from BGPStream, one has to use the API copy function to own the
 memory). Each time a valid record is read, we extract the
 elems that it contains, and we increment a counter.
 
 
 ~~~ .language-c
-bgpstream_elem_t *bs_elem = NULL;
+bgpstream_elem_t *elem;
 
-do
-  {  
-   get_next_ret = bgpstream_get_next_record(bs, bs_record);
-   if(get_next_ret && bs_record->status == BGPSTREAM_RECORD_STATUS_VALID_RECORD)
+while((ret = bgpstream_get_next_record(bs, &rec))>0)
+{
+  if(rec->status == BGPSTREAM_RECORD_STATUS_VALID_RECORD)
     {
-     while((bs_elem = bgpstream_record_get_next_elem (bs_record)) != NULL)
-      {
-       elem_counter++;
-      }
+      while(bgpstream_record_get_next_elem (rec, &elem)>0)
+        {
+          elem_counter++;
+        }
     }
-  }
-while(get_next_ret > 0);
+}
 ~~~
 
 <br>
 
-Once the entire stream has been read, we can print the results, and de-allocate the memory
-allocated for the BGPStream record and the BGPStream instance.
+Once the entire stream has been read, we can print the results, and de-allocate the memory the BGPStream instance.
 
 ~~~ .language-c
 printf("\tRead %d elems\n", elem_counter);
 
-bgpstream_record_destroy(bs_record);
 bgpstream_destroy(bs);
 ~~~
 
@@ -130,13 +129,13 @@ and run using the following commands:
 ~~~
 $ gcc ./bgpstream-pfx-mon.c  -lbgpstream -o ./pfx-monitoring
 $ ./pfx-monitoring
-   U|A|1407813784|ris|rrc00|6881|2a02:38::2|2403:f600::/32|2a02:38::2|6881 6939 4826 38456 55722|55722||
-   U|W|1407813784|ris|rrc00|50300|2a00:1c10:10::8|2403:f600::/32|||||
-   U|A|1407813786|ris|rrc00|57381|2001:67c:24e4:1::1|2403:f600::/32|2001:67c:24e4:1::1|57381 50304 10026 38456 55722|55722||
-   ...
-   U|A|1407814216|ris|rrc00|57381|2001:67c:24e4:1::1|2403:f600::/32|2001:67c:24e4:1::1|57381 42708 10026 38456 55722|55722||
-   U|A|1407814218|ris|rrc00|29608|2a01:678::2|2403:f600::/32|2a01:678::2|29608 6939 4826 38456 55722|55722||
-   U|A|1407814228|ris|rrc00|45896|2001:df0:2e8:1000::1|2403:f600::/32|2001:df0:2e8:1000::1|45896 4826 38456 55722|55722||
+U|A|1407813784.000000|ris|rrc00|||6881|2a02:38::2|2403:f600::/32|2a02:38::2|6881 6939 4826 38456 55722|55722|||
+U|W|1407813784.000000|ris|rrc00|||50300|2a00:1c10:10::8|2403:f600::/32||||||
+U|A|1407813786.000000|ris|rrc00|||57381|2001:67c:24e4:1::1|2403:f600::/32|2001:67c:24e4:1::1|57381 50304 10026 38456 55722|55722|||
+...
+U|A|1407814216.000000|ris|rrc00|||57381|2001:67c:24e4:1::1|2403:f600::/32|2001:67c:24e4:1::1|57381 42708 10026 38456 55722|55722|||
+U|A|1407814218.000000|ris|rrc00|||29608|2a01:678::2|2403:f600::/32|2a01:678::2|29608 6939 4826 38456 55722|55722|29608:40090||
+U|A|1407814228.000000|ris|rrc00|||45896|2001:df0:2e8:1000::1|2403:f600::/32|2001:df0:2e8:1000::1|45896 4826 38456 55722|55722|19996:2001 19996:19996||
 ~~~
   
 <br>
@@ -149,7 +148,7 @@ monitor. The user can provide the prefix as a string and then convert
 it into the BGPStream prefix data structure using the BGPStream utils.
 
 ~~~ .language-c
-bgpstream_pfx_storage_t my_pfx;
+bgpstream_pfx_t my_pfx;
 bgpstream_str2pfx( "2403:f600::/32", &my_pfx);
 ~~~
 
@@ -180,7 +179,7 @@ prefix.
 ~~~ .language-c
 if (( elem->type == BGPSTREAM_ELEM_TYPE_ANNOUNCEMENT ||
       elem->type == BGPSTREAM_ELEM_TYPE_WITHDRAWAL) &&
-      bgpstream_pfx_storage_equal(&my_pfx, &elem->prefix))
+      bgpstream_pfx_equal(&my_pfx, &elem->prefix))
       { 
        bgpstream_record_elem_snprintf(buffer, 1024, record, elem);
        fprintf(stdout, "%s\n", buffer);

@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new Lsw\MemcacheBundle\LswMemcacheBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-            new CAIDA\BGPStreamWeb\DataBrokerBundle\CAIDABGPStreamWebDataBrokerBundle(),
             new CAIDA\BGPStreamWeb\HomepageBundle\CAIDABGPStreamWebHomepageBundle(),
         );
 
