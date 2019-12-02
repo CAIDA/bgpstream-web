@@ -391,6 +391,16 @@ class Builder
                                              )
                                      )
         );
+        $menu['tutorials']->addChild('{Docker}',
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page'    => 'tutorials',
+                        'subpage' => 'docker'
+                    )
+            )
+        );
         $menu->addChild('{Data Encoding}',
             array(
                 'route'           => 'caida_bgpstream_web_homepage_docs',
