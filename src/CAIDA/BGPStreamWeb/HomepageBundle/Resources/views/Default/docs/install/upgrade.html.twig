@@ -50,7 +50,7 @@ for elem in stream:
     # e.g. elem.time
     # or via elem.record
     # e.g. elem.record.time
-    print elem
+    print(elem)
 </code></pre>
     <h4>_pybgpstream</h4>
     <p>
@@ -96,8 +96,8 @@ for elem in stream:
 while(rec):
     elem = rec.get_next_elem()
         while(elem):
-        # do something with the elem
-        elem = rec.get_next_elem()
+            # do something with the elem
+            elem = rec.get_next_elem()
     rec = stream.get_next_record()</code></pre>
 
     <h4>BGPReader</h4>
