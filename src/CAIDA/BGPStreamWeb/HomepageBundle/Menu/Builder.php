@@ -231,11 +231,21 @@ class Builder
                                            )
                                    )
         );
+        $menu['install']->addChild('{Upgrade from Version 1}',
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
+                    array(
+                        'page'    => 'install',
+                        'subpage' => 'upgrade'
+                    )
+            )
+        );
 
         $menu->addChild('{BGPReader}',
-                        array(
-                            'route'           => 'caida_bgpstream_web_homepage_docs',
-                            'routeParameters' =>
+            array(
+                'route'           => 'caida_bgpstream_web_homepage_docs',
+                'routeParameters' =>
                                 array(
                                     'page' => 'tools',
                                     'subpage' => 'bgpreader',

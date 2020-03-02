@@ -5,18 +5,19 @@ The BGPStream framework is comprised of two software packages: _libBGPStream_
 and _PyBGPStream_.
 
 <div class="row" markdown="1">
+
 <div class="col-md-6" markdown="1">
 <h2>libBGPStream</h2>
 <p markdown="1">
 libBGPStream contains the
 [libBGPStream]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'api', 'subpage': 'libbgpstream'}) }})
-C library, as
-well as the
+C library, as well as the
 [BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tools', 'subpage': 'bgpreader'}) }}) tool.
 </p>
 <div>
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}}" class="btn btn-primary btn-md">Install libBGPStream &raquo;</a>
+    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'bgpstream'})}}" class="btn btn-primary btn-md">Install libBGPStream &raquo;</a>
 </div>
+
 </div>
 <div class="col-md-6" markdown="1">
 <h2>PyBGPStream</h2>
@@ -26,7 +27,18 @@ PyBGPStream is a Python package with bindings to the
 library, allowing BGPStream to be used directly from Python scripts.
 </p>
 <div>
-<a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'pybgpstream'})}}" class="btn btn-primary btn-md">Install PyBGPStream &raquo;</a>
+    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'pybgpstream'})}}" class="btn btn-primary btn-md">Install PyBGPStream &raquo;</a>
 </div>
 </div>
+
+<div class="col-md-6" markdown="1">
+<h2>Upgrade Guide</h2>
+<p markdown="1">
+The following guide provides tutorials on how to upgrade from libbgpstream version 1 to version 2
+</p>
+<div>
+    <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'install', 'subpage': 'upgrade'})}}" class="btn btn-primary btn-md">Upgrade libBGPStream &raquo;</a>
+</div>
+</div>
+
 </div>
