@@ -1,0 +1,126 @@
+{% extends 'CAIDABGPStreamWebHomepageBundle:Default:docs/base.html.twig' %}
+
+{% block slimbody %}
+    <div class="page-header">
+        <h1>Upgrade libBGPStream</h1>
+    </div>
+
+    <p>
+        There have been some changes made to the libBGPStream and
+        PyBGPStream APIs. Below are some instructions for upgrading
+        your code to work with BGPStream V2.
+    </p>
+    <h4>libBGPStream</h4>
+    <p>
+        There have been several changes made to the C API, but all
+        changes will result in compiler errors, so it should be
+        safe to use the compiler to direct you to code that needs
+        changing. You should use the
+        <a href="https://github.com/CAIDA/libbgpstream/blob/v2.0-rc3/tools/bgpreader.c">BGPReader code</a>
+        as a reference for using the new API, and please contact
+        <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>
+        if you need further assistance.
+    </p>
+
+    <h4>PyBGPStream</h4>
+    <p>
+        We have added a prototype high-level Python module,
+        <code>pybgpstream</code> that should be used instead of
+        the low-level <code>_pybgpstream</code> module.
+        Below is a short working example using this API. See the
+        bundled
+        <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0/examples/pybgpstream-template.py" target="_blank">sample template</a>
+        for more information. We are still developing documentation
+        for this module, so for now, the best reference is
+        <a href="https://github.com/CAIDA/pybgpstream/blob/v2.0/pybgpstream/pybgpstream.py" target="_blank">the code</a>.
+        Please create an issue (or PR!) on
+        <a href="https://github.com/CAIDA/pybgpstream/issues" target="_blank">GitHub</a>
+        if you have any suggestions for improving this interface.
+    </p>
+    <pre><code class="language-python">import pybgpstream
+stream = pybgpstream.BGPStream(
+    from_time="2017-07-07 00:00:00", until_time="2017-07-07 00:10:00 UTC",
+    collectors=["route-views.sg", "route-views.eqix"],
+    record_type="updates",
+    filter="peer 11666 and prefix more 210.180.0.0/16"
+)
+
+for elem in stream:
+    # record fields can be accessed directly from elem
+    # e.g. elem.time
+    # or via elem.record
+    # e.g. elem.record.time
+    print elem
+</code></pre>
+    <h4>_pybgpstream</h4>
+    <p>
+        If you wish to continue using the <code>_pybgpstream</code>
+        module, the API has changed slightly:
+    </p>
+    <p><b>1.</b> Change the import line from:</p>
+    <pre><code class="language-python">from _pybgpstream import BGPStream, BGPRecord, BGPElem</code></pre>
+    <p>to:</p>
+    <pre><code class="language-python">import _pybgpstream</code></pre>
+    <p>
+        <b>2.</b> Change the line that creates an
+        instance of BGPStream from something like:
+    </p>
+    <pre><code class="language-python">stream = BGPStream()</code></pre>
+    <p>
+        to:
+    </p>
+    <pre><code class="language-python">stream = _pybgpstream.BGPStream()</code></pre>
+    <p>
+        <b>3.</b> Delete the line that creates the BGPRecord
+        instance:
+    </p>
+    <pre><code class="language-python">rec = BGPRecord()</code></pre>
+
+    <p>
+        <b>4.</b> The "get_next_record" API has been changed to be the
+        same as the "get_next_elem" API, so you will go from nested
+        loops like this:
+    </p>
+
+    <pre><code class="language-python">while(stream.get_next_record(rec)):
+    elem = rec.get_next_elem()
+    while(elem):
+        # do something with the elem
+        elem = rec.get_next_elem()</code></pre>
+
+    <p>
+        to this:
+    </p>
+
+    <pre><code class="language-python">rec = stream.get_next_record()
+while(rec):
+    elem = rec.get_next_elem()
+        while(elem):
+        # do something with the elem
+        elem = rec.get_next_elem()
+    rec = stream.get_next_record()</code></pre>
+
+    <h4>BGPReader</h4>
+    <p>To accommodate new fields in the underlying record and elem
+        structures (e.g., those specific to BMP data like "router"),
+        the record and elem ASCII formats have changed:</p>
+    <p>V1 Record Format (old)</p>
+    <pre><code>&lt;dump-type&gt;|&lt;dump-pos&gt;|&lt;project&gt;|&lt;collector&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
+    <p>V2 Record Format (new)</p>
+    <pre><code>&lt;type&gt;|&lt;dump-pos&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;status&gt;|&lt;dump-time&gt;</code></pre>
+    <p>V1 Elem Format (old)</p>
+    <pre><code>&lt;dump-type&gt;|&lt;elem-type&gt;|&lt;record-ts&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
+  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
+  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
+    <p>V2 Elem Format (new)</p>
+    <pre><code>&lt;rec-type&gt;|&lt;elem-type&gt;|&lt;rec-ts-sec&gt;.&lt;rec-ts-usec&gt;| \
+  &lt;project&gt;|&lt;collector&gt;|&lt;router&gt;|&lt;router-ip&gt;|&lt;peer-ASN&gt;|&lt;peer-IP&gt;| \
+  &lt;prefix&gt;|&lt;next-hop-IP&gt;|&lt;AS-path&gt;|&lt;origin-AS&gt;| \
+  &lt;communities&gt;|&lt;old-state&gt;|&lt;new-state&gt;</code></pre>
+    <p>Note that timestamps are now represented with sub-second
+        precision. E.g. <code>1499385779</code> is now represented as
+        <code>1499385779.000000</code></p>
+
+{% endblock %}
