@@ -5,7 +5,8 @@ require(['jquery', 'moment'], function ($, moment) {
     function buildTable(tbodyId, data) {
         var tbody = $('#' + tbodyId);
 
-        for (var collector in data.collectors) {
+        var cNames = Object.keys(data.collectors).sort();
+        cNames.forEach(function (collector) {
             if (data.collectors.hasOwnProperty(collector)) {
                 var info = data.collectors[collector];
 
@@ -48,7 +49,7 @@ require(['jquery', 'moment'], function ($, moment) {
                     }
                 }
             }
-        }
+        });
     }
 
     function onData(json) {
