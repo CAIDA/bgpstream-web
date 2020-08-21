@@ -265,7 +265,7 @@ U|A|1569948264.680000|ris-live|rrc07|||6667|194.68.123.136|185.137.56.0/22|194.6
 In BGPStream version 2, we added support for streaming from BMP source. 
 Currently, CAIDA provides a public BMP stream, and you can access it by
 ~~~
-$ bgpreader -p caida
+$ bgpreader -p caida-bmp
 WARN: No time window specified, defaulting to live mode
 U|A|1571427802.802131|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|202.70.88.0/21|12.0.1.63|7018 6453 23752|23752|7018:5000 7018:31023||
 U|A|1571427803.349627|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|103.116.164.0/24|12.0.1.63|7018 3491 9498 10075 136224 136224 136224 137889|137889|7018:5000 7018:37232||

@@ -349,16 +349,16 @@
                 <p>
                     In this release, access to this live BMP feed is available via the broker data interface alongside
                     the traditional MRT-based data from Route Views and RIPE RIS.
-                    This data has <code>caida</code> as the project name, so can be filtered using the standard
+                    This data has <code>caida-bmp</code> as the project name, so can be filtered using the standard
                     project filters. See below for examples of how to use this interface.
                 </p>
                 <h4>From BGPReader</h4>
                 <p>Accessing the feed from BGPReader is as simple as choosing
-                the "caida" project without time-window:</p>
-                <pre><code>bgpreader -p caida</code></pre>
+                the "caida-bmp" project without time-window:</p>
+                <pre><code>bgpreader -p caida-bmp</code></pre>
                 <h4>From PyBGPStream</h4>
                 <pre><code class="language-python">import pybgpstream
-for elem in pybgpstream.BGPStream(project="caida"):
+for elem in pybgpstream.BGPStream(project="caida-bmp"):
     print(elem)</code></pre>
             </div>
             <div id="bmp-private">
