@@ -39,8 +39,6 @@
                         src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}"></a></li>
         <li role="presentation"><a href="#ris-live" aria-controls="ris-live"
                                    role="tab" data-toggle="tab" style="font-size: 20px">RIS-Live</a></li>
-        <li role="presentation"><a href="#caida-bmp" aria-controls="caida-bmp"
-                                   role="tab" data-toggle="tab" style="font-size: 20px">CAIDA-BMP</a></li>
     </ul>
 
     <div class="tab-content">
@@ -116,29 +114,6 @@
             </div>
         </div>
 
-        <div role="tabpanel" class="tab-pane" id="caida-bmp">
-            <div>
-                <p>
-                    As part of the BGPStream project, we have begun to provide
-                    a public BMP feed. Currently we are only providing data
-                    from a few Route Views and Cisco Research peers, but we
-                    expect additional peers to be added soon.
-                    (If you would like to contribute a feed, please contact us
-                    at
-                    <a href="mailto:bgpstream-info@caida.org">bgpstream-info@caida.org</a>.)
-                </p>
-                <p>
-                    We are providing access to these feeds by way of a
-                    publicly-accessible, read-only, Kafka cluster
-                    (<code>bmp.bgpstream.caida.org:9092</code>) which contains
-                    raw BMP data encapsulated in a custom
-                    <a href="https://github.com/openbmp/openbmp" target="_blank">OpenBMP</a>
-                    message header.
-                    (We plan to contribute the code we developed to generate
-                    these headers back to the upstream OpenBMP repository.)
-                </p>
-            </div>
-        </div>
     </div>
 
 {% endblock %}
