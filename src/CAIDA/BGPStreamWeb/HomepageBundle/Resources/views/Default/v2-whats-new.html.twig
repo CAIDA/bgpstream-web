@@ -316,6 +316,13 @@
                     <code>-o &lt;param&gt;=&lt;value&gt;</code> rather than
                         <code>-o &lt;param&gt;,&lt;value&gt;</code>.</li>
                 </ul>
+                <h4>Known Issues</h4>
+                <ul>
+                    <li>RIS live stream disconnects when mixing batch and real-time resources
+                        (<a href="https://github.com/CAIDA/libbgpstream/issues/116">#116</a>)</li>
+                    <li>Kafka transport appears to block when consuming from non-existent topic
+                        (<a href="https://github.com/CAIDA/libbgpstream/issues/127">#127</a>)</li>
+                </ul>
             </div>
             <div id="bmp">
                 <h2>Public Live BMP Stream</h2>
