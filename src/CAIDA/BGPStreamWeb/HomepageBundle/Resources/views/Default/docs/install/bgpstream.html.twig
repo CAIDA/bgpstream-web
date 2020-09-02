@@ -6,27 +6,16 @@
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#generic"
-                                              aria-controls="generic"
-                                              role="tab" data-toggle="tab">Generic
-            Unix</a></li>
-    <li role="presentation"><a href="#freebsd" aria-controls="freebsd"
-                               role="tab" data-toggle="tab">FreeBSD</a></li>
-    <li role="presentation"><a href="#ubuntu" aria-controls="ubuntu"
-                               role="tab"
-                               data-toggle="tab">Ubuntu/Debian</a></li>
-    <li role="presentation"><a href="#centos" aria-controls="centos"
-                               role="tab"
-                               data-toggle="tab">CentOS</a></li>
-    <li role="presentation"><a href="#arch" aria-controls="arch"
-                               role="tab"
-                               data-toggle="tab">Arch Linux</a></li>
-    <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
-                               data-toggle="tab">macOS (Mac OSX)</a></li>
+    <li role="presentation" class="active"><a href="#ubuntu" aria-controls="ubuntu" role="tab" data-toggle="tab">Ubuntu/Debian</a></li>
+    <li role="presentation"><a href="#freebsd" aria-controls="freebsd" role="tab" data-toggle="tab">FreeBSD</a></li>
+    <li role="presentation"><a href="#osx" aria-controls="osx" role="tab" data-toggle="tab">macOS (Mac OSX)</a></li>
+    <li role="presentation"><a href="#centos" aria-controls="centos" role="tab" data-toggle="tab">CentOS</a></li>
+    <li role="presentation"><a href="#arch" aria-controls="arch" role="tab" data-toggle="tab">Arch Linux</a></li>
+    <li role="presentation"><a href="#generic" aria-controls="generic" role="tab" data-toggle="tab"> Generic Unix </a> </li>
 </ul>
 
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="generic">
+    <div role="tabpanel" class="tab-pane" id="generic">
         <h2>1. Install Dependencies</h2>
         <h3>Required Libraries</h3>
 
@@ -211,7 +200,7 @@ $ sudo make install</code></pre>
     </div>
 
     {# ---------- UBUNTU ---------- #}
-    <div role="tabpanel" class="tab-pane" id="ubuntu">
+    <div role="tabpanel" class="tab-pane active" id="ubuntu">
 
         <h2>Installing using apt</h2>
 
