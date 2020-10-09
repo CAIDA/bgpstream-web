@@ -133,7 +133,7 @@ require(['jquery', 'moment'], function ($, moment) {
             url: 'https://broker.bgpstream.caida.org/v2/meta/projects',
             type: 'GET',
             dataType: 'json',
-            timeout: 10000,
+            timeout: 30000,
             success: function (json) {
                 if (json.hasOwnProperty('error') && json.error) {
                     onError(json.error);

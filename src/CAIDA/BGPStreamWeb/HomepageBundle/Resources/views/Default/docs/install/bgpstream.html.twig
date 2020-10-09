@@ -6,27 +6,16 @@
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#generic"
-                                              aria-controls="generic"
-                                              role="tab" data-toggle="tab">Generic
-            Unix</a></li>
-    <li role="presentation"><a href="#freebsd" aria-controls="freebsd"
-                               role="tab" data-toggle="tab">FreeBSD</a></li>
-    <li role="presentation"><a href="#ubuntu" aria-controls="ubuntu"
-                               role="tab"
-                               data-toggle="tab">Ubuntu/Debian</a></li>
-    <li role="presentation"><a href="#centos" aria-controls="centos"
-                               role="tab"
-                               data-toggle="tab">CentOS</a></li>
-    <li role="presentation"><a href="#arch" aria-controls="arch"
-                               role="tab"
-                               data-toggle="tab">Arch Linux</a></li>
-    <li role="presentation"><a href="#osx" aria-controls="osx" role="tab"
-                               data-toggle="tab">macOS (Mac OSX)</a></li>
+    <li role="presentation" id="ubuntu-tab"><a href="#ubuntu" aria-controls="ubuntu" role="tab" data-toggle="tab">Ubuntu/Debian</a></li>
+    <li role="presentation" id="freebsd-tab"><a href="#freebsd" aria-controls="freebsd" role="tab" data-toggle="tab">FreeBSD</a></li>
+    <li role="presentation" id="osx-tab"><a href="#osx" aria-controls="osx" role="tab" data-toggle="tab">macOS (Mac OSX)</a></li>
+    <li role="presentation" id="centos-tab"><a href="#centos" aria-controls="centos" role="tab" data-toggle="tab">CentOS</a></li>
+    <li role="presentation" id="arch-tab"><a href="#arch" aria-controls="arch" role="tab" data-toggle="tab">Arch Linux</a></li>
+    <li role="presentation" id="generic-tab"><a href="#generic" aria-controls="generic" role="tab" data-toggle="tab"> Generic Unix </a> </li>
 </ul>
 
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="generic">
+    <div role="tabpanel" class="tab-pane" id="generic">
         <h2>1. Install Dependencies</h2>
         <h3>Required Libraries</h3>
 
@@ -95,8 +84,8 @@ configure: Compiled with http read (libcurl) support: Yes</code></pre>
         <h2>2. Download and install BGPStream</h2>
 
 <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc5/libbgpstream-2.0.0-rc5.tar.gz
-$ tar zxf libbgpstream-2.0.0-rc5.tar.gz
+$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0.0/libbgpstream-2.0.0.tar.gz
+$ tar zxf libbgpstream-2.0.0.tar.gz
 $ cd libbgpstream-2.0.0
 $ ./configure
 $ make
@@ -196,8 +185,8 @@ $ sudo make install</code></pre>
         <h3>2. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc5/libbgpstream-2.0.0-rc5.tar.gz
-$ tar zxf libbgpstream-2.0.0-rc5.tar.gz
+$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0.0/libbgpstream-2.0.0.tar.gz
+$ tar zxf libbgpstream-2.0.0.tar.gz
 $ cd libbgpstream-2.0.0/
 $ ./configure
 $ make
@@ -270,8 +259,8 @@ $ sudo ldconfig</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
         <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc5/libbgpstream-2.0.0-rc5.tar.gz
-$ tar zxf libbgpstream-2.0.0-rc5.tar.gz
+$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0.0/libbgpstream-2.0.0.tar.gz
+$ tar zxf libbgpstream-2.0.0.tar.gz
 $ cd libbgpstream-2.0.0/
 $ ./configure
 $ make
@@ -316,8 +305,8 @@ $ sudo ldconfig</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
         <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc5/libbgpstream-2.0.0-rc5.tar.gz
-$ tar zxf libbgpstream-2.0.0-rc5.tar.gz
+$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0.0/libbgpstream-2.0.0.tar.gz
+$ tar zxf libbgpstream-2.0.0.tar.gz
 $ cd libbgpstream-2.0.0/
 $ ./configure
 $ make
@@ -413,8 +402,8 @@ $ sudo make install</code></pre>
         <h3>3. Download and install BGPStream:</h3>
 
 <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0-rc5/libbgpstream-2.0.0-rc5.tar.gz
-$ tar zxf libbgpstream-2.0.0-rc5.tar.gz
+$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.0.0/libbgpstream-2.0.0.tar.gz
+$ tar zxf libbgpstream-2.0.0.tar.gz
 $ cd libbgpstream-2.0.0/
 $ ./configure
 $ make
@@ -435,4 +424,27 @@ $ export LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"</code></pre>
 
     </div>
 </div>
+
+    <script>
+        // make sure the correct tab is active on load
+
+        // get current distro name as anchor
+        let available_distros = ["ubuntu", "freebsd", "osx", "centos", "generic"];
+        let anchor = window.location.hash.substr(1);
+        if(!available_distros.includes(anchor)){
+            anchor=available_distros[0];
+        }
+
+        // set the distro's content and tab as active
+        document.getElementById(anchor).classList.add("active");
+        document.getElementById(anchor+"-tab").classList.add("active");
+
+        // update url anchor when changing the tabs
+        for(let distro of available_distros){
+            document.getElementById(distro+"-tab").onclick = function() {
+                history.pushState(null,null,'#'+distro);
+            };
+        }
+    </script>
+
 {% endblock %}

@@ -23,20 +23,16 @@
                     help accessing the new realtime BMP stream.
                 </p>
                 <p>
-                    <b>Pre-release available now.</b> The V2 API is now stable and
+                    <b>Release available now.</b> The V2 API is now stable and
                     has been tested by many beta testers (including the
                     <a href="https://github.com/FORTH-ICS-INSPIRE/artemis">ARTEMIS</a>
-                    project). We're still working on ironing out some lingering
-                    stability issues with the RIS Live stream, but in the
-                    meantime we have made the first public release of the
-                    V2 series (Release Candidate 2). Click the button below to
-                    get started with BGPStream V2.
+                    project). Click the button below to get started with BGPStream V2.
                 </p>
                 <p>
                     <a class="btn btn-md btn-success"
                        href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}"
                        role="button">
-                        Download BGPStream V2 (RC5)
+                        Download BGPStream V2.0.0
                     </a>
                 </p>
             </div>
@@ -52,7 +48,7 @@
                             </li>
                             <li>
                                 Currently the "singlefile" and
-                                the new "kafka" and "beta-bmp-stream" data interfaces
+                                the new "kafka" data interfaces
                                 provide access to BMP data. The "singlefile"
                                 interface can be used to process local dumps of
                                 raw BMP data whereas the "kafka" interface can be
@@ -195,7 +191,7 @@
                                 filter methods will be deprecated.
                             </li>
                             <li>
-                                See the <a href="https://github.com/CAIDA/libbgpstream/blob/v2-beta/FILTERING" target="_blank">temporary documentation</a> for more information.
+                                See the <a href="https://github.com/CAIDA/libbgpstream/blob/master/FILTERING" target="_blank">documentation</a> for more information.
                             </li>
                             <li>
                                 Thanks to Shane Alcock for contributing this
@@ -320,6 +316,13 @@
                     <code>-o &lt;param&gt;=&lt;value&gt;</code> rather than
                         <code>-o &lt;param&gt;,&lt;value&gt;</code>.</li>
                 </ul>
+                <h4>Known Issues</h4>
+                <ul>
+                    <li>RIS live stream disconnects when mixing batch and real-time resources
+                        (<a href="https://github.com/CAIDA/libbgpstream/issues/116">#116</a>)</li>
+                    <li>Kafka transport appears to block when consuming from non-existent topic
+                        (<a href="https://github.com/CAIDA/libbgpstream/issues/127">#127</a>)</li>
+                </ul>
             </div>
             <div id="bmp">
                 <h2>Public Live BMP Stream</h2>
@@ -346,16 +349,16 @@
                 <p>
                     In this release, access to this live BMP feed is available via the broker data interface alongside
                     the traditional MRT-based data from Route Views and RIPE RIS.
-                    This data has <code>caida</code> as the project name, so can be filtered using the standard
+                    This data has <code>caida-bmp</code> as the project name, so can be filtered using the standard
                     project filters. See below for examples of how to use this interface.
                 </p>
                 <h4>From BGPReader</h4>
                 <p>Accessing the feed from BGPReader is as simple as choosing
-                the "caida" project without time-window:</p>
-                <pre><code>bgpreader -p caida</code></pre>
+                the "caida-bmp" project without time-window:</p>
+                <pre><code>bgpreader -p caida-bmp</code></pre>
                 <h4>From PyBGPStream</h4>
                 <pre><code class="language-python">import pybgpstream
-for elem in pybgpstream.BGPStream(project="caida"):
+for elem in pybgpstream.BGPStream(project="caida-bmp"):
     print(elem)</code></pre>
             </div>
             <div id="bmp-private">
