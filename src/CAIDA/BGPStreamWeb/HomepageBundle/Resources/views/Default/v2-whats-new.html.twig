@@ -12,14 +12,14 @@
                     Over the last several years, we have
                     been working on a new release of BGPStream. This version
                     contains several new features including native support for
-                    true <a href="#bmp">real-time data access via BMP</a>,
+                    true <a href="#bmp-private">real-time data access via BMP</a>,
                     as well as a bunch of
                     bug fixes, and performance improvements. See the <a
                             href="#changes">Changes</a>
                     section below for a more detailed list.
                 </p>
                 <p>
-                    See the <a href="#bmp">Live BMP Stream</a> section below for
+                    See the <a href="#bmp-private">Live BMP Stream</a> section below for
                     help accessing the new realtime BMP stream.
                 </p>
                 <p>
@@ -66,7 +66,7 @@
                             </li>
                             <li>
                                 RIS Live stream access point is retrieved from data broker and is directly accessible
-                                using our new "http" transport.
+                                using "kafka" transport.
                             </li>
                             <li>
                                 bgpreader now default to live-stream mode if no time window is specified,
@@ -78,9 +78,29 @@
                                 without any time-window: <code>bgpreader -p ris-live</code>
                             </li>
                             <li>
-                                See the
-                                <a href="#ris-live">RIPE RIS-Live</a>
-                                tutorials below for more information.
+                                For more detailed usage of the RIS Live stream via BGPStream, please checkout our
+                                tutorial on accessing live stream data source <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams">using <code>bgpreader</code></a> and <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#live-streams">using <code>pybgpstream</code></a>.
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><i>Realtime data stream via RouteViews BMP stream</i>
+                        <ul>
+                            <li>
+                                libBGPStream now supports obtaining realtime BGP
+                                data from RouteViews' BMP message stream.
+                            </li>
+                            <li>
+                                RouteViews stream access point is retrieved from data broker and is directly accessible
+                                using our new "http" transport.
+                            </li>
+                            <li>
+                                To start streaming using bgpreader, just specify that we want data from project "routeviews-stream"
+                                without any time-window: <code>bgpreader -p routeviews-stream</code>
+                            </li>
+                            <li>
+                                For more detailed usage of the RouteViews BMP stream via BGPStream, please checkout our
+                                tutorial on accessing live stream data source <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams">using <code>bgpreader</code></a> and <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#live-streams">using <code>pybgpstream</code></a>.
                             </li>
                         </ul>
                     </li>
@@ -101,7 +121,6 @@
                             </li>
                             <li>
                                 See the
-                                <a href="#bmp">Public BMP Stream</a> and
                                 <a href="#bmp-private">Private BMP Stream</a>
                                 tutorials below for more information.
                             </li>
@@ -412,20 +431,7 @@ stream.set_data_interface_option("kafka", "topic", "openbmp.bmp_raw")
 for elem in stream:
     print(elem)</code></pre>
             </div>
-            <div id="ris-live">
-                <h2>RIPE RIS-Live Realtime BGP Stream</h2>
-                <p>
-                    In BGPStream version 2, we added the support for streaming directly from <a href="https://ris-live.ripe.net/">RIPE RIS-Live</a>.
-                    RIS-Live is a streaming service that offers real-time BGP messages collected from all RIPE RIS Route Collectors (RRCs).
-                </p>
-                <p>
-                    Using ris-live stream is super easy. You just need to start a stream with no time-interval specified,
-                    and use "ris-live" as the project for the stream.
-                </p>
-                <p>
-                    If you want to use BGPReader to access the stream, just do <code>bgpreader -p ris-live</code>. That's it!
-                </p>
-            </div>
+
             <div id="feedback">
                 <h2>Feedback</h2>
                 <p>
@@ -448,9 +454,7 @@ for elem in stream:
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="#intro">Intro</a></li>
                 <li role="presentation"><a href="#changes">Changes</a></li>
-                <li role="presentation"><a href="#bmp">Public BMP Stream</a></li>
                 <li role="presentation"><a href="#bmp-private">Private BMP Stream</a></li>
-                <li role="presentation"><a href="#bmp-private">RIPE RIS-Live</a></li>
                 <li role="presentation"><a href="#feedback">Feedback</a></li>
             </ul>
         </div>
