@@ -28,17 +28,28 @@
     <hr>
 
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#routeviews"
-                                                  aria-controls="routeviews"
-                                                  role="tab" data-toggle="tab"><img
-                        class="dp-tab-logo"
-                        src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}"> Route Views</a></li>
-        <li role="presentation"><a href="#ris" aria-controls="ris"
-                                   role="tab" data-toggle="tab"><img
-                        class="dp-tab-logo"
-                        src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}"></a></li>
-        <li role="presentation"><a href="#ris-live" aria-controls="ris-live"
-                                   role="tab" data-toggle="tab" style="font-size: 20px">RIS-Live</a></li>
+        <li role="presentation" class="active">
+            <a href="#routeviews" aria-controls="routeviews" role="tab" data-toggle="tab">
+                <img class="dp-tab-logo" src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}"> Route Views
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#routeviews-stream" aria-controls="routeviews-stream" role="tab" data-toggle="tab">
+                <img class="dp-tab-logo" src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}"> Route Views Stream
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#ris" aria-controls="ris" role="tab" data-toggle="tab">
+                <img class="dp-tab-logo" src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}"> RIS
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#ris-live" aria-controls="ris-live" role="tab" data-toggle="tab">
+                <img class="dp-tab-logo" src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}"> RIS Live
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content">
@@ -66,6 +77,21 @@
                 <tbody id="rv-tbody">
                 </tbody>
             </table>
+        </div>
+
+        <div role="tabpanel" class="tab-pane active" id="routeviews-stream">
+            <h2>
+                <img class="dp-logo pull-right"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/routeviews.png') }}">
+                <a target="_blank" href="http://www.routeviews.org/" title="Route Views">Route Views BMP Stream</a> <small><code>routeviews-stream</code></small>
+            </h2>
+            <div>
+                <p> BGPStream provide direct access to Route View's BMP live stream. </p>
+                <p>
+                    For more detailed usage of the RouteViews BMP stream via BGPStream, please checkout our
+                    tutorial on accessing live stream data source <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams">using <code>bgpreader</code></a> and <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#live-streams">using <code>pybgpstream</code></a>.
+                </p>
+            </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="ris">
@@ -98,6 +124,11 @@
         </div>
 
         <div role="tabpanel" class="tab-pane" id="ris-live">
+            <h2>
+                <img class="dp-logo pull-right"
+                     src="{{ asset('bundles/caidabgpstreamwebhomepage/images/logos/ripe-ncc-logo.png') }}">
+                <a target="_blank" href="https://www.ripe.net/analyse/internet-measurements/routing-information-service-ris" title="RIPE RIS">RIPE RIS Live</a> <small><code>ris-live</code></small>
+            </h2>
             <div>
                 <p>
                     BGPStream provide direct access to RIPE NCC's <a href="https://ris-live.ripe.net/">RIS Live real-time BGP messages feed</a>.
@@ -109,7 +140,7 @@
                 </p>
                 <p>
                     For more detailed usage of the RIS Live stream via BGPStream, please checkout our
-                    tutorial on <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live">accessing RIS-Live stream using <code>bgpreader</code></a> .
+                    tutorial on accessing live stream data source <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams">using <code>bgpreader</code></a> and <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#live-streams">using <code>pybgpstream</code></a>.
                 </p>
             </div>
         </div>
