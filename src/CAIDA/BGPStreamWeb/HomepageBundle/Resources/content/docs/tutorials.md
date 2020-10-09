@@ -10,7 +10,7 @@ BGPReader
 ---------
  - [Replace BGPdump with BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#dump2reader)
  - [Isolate data using filters]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#elemfilters)
- - [Realtime stream from RIS Live]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#ris-live)
+ - [Realtime streams from RouteViews and RIPE RIS]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams)
  - [Read a local file]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#other)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}"
@@ -38,6 +38,7 @@ PyBGPStream
  - [Print the MOAS prefixes]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#moas)
  - [Measuring the extent of AS path inflation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#aspath)
  - [Studying the communities]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#communities)
+ - [Accessing realtime streams]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#live-streams)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}"
       class="btn btn-primary btn-md">
