@@ -19,13 +19,13 @@
         <h2>1. Install Dependencies</h2>
         <h3>Required Libraries</h3>
 
-        <p>First, install the following dependencies of <a
-                    href="http://research.wand.net.nz/software/libwandio.php">wandio</a> using your favorite package manager (see the OS-specific instructions for more details):</p>
+        <p>First, install the following dependencies using your favorite package manager or from source code:</p>
 
         <ul>
             <li><a href="http://www.bzip.org/" target="_blank">libbz2</a></li>
             <li><a href="http://www.zlib.net/" target="_blank">zlib</a></li>
             <li><a href="http://curl.haxx.se/libcurl/" target="_blank">libcurl</a> (&gt; 7.18.0)</li>
+            <li><a href="https://github.com/edenhill/librdkafka" target="_blank">librdkafka</a> (&gt; 0.11.6)</li>
         </ul>
 
         <p>Then, install wandio as follows:</p>
@@ -231,7 +231,9 @@ sudo wget -O /etc/apt/trusted.gpg.d/caida.gpg https://pkg.caida.org/os/ubuntu/ke
 
         <h3>1. Install dependencies:</h3>
 
-        <pre><code>$ sudo apt-get install zlib1g-dev libbz2-dev libcurl4-openssl-dev</code></pre>
+        <pre><code>sudo apt-get install build-essential curl zlib1g-dev libbz2-dev libcurl4-openssl-dev librdkafka-dev</code></pre>
+
+        NOTE: The minimum required version of librdkafka is 0.11.6.
 
         <h3>2. Download and install <a
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
