@@ -30,13 +30,13 @@
 
         <p>Then, install wandio as follows:</p>
 
-        <pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
-$ tar zxf wandio-4.2.3.tar.gz
-$ cd wandio-4.2.3/
-$ ./configure
-$ make
+        <pre><code>mkdir ~/src
+cd ~/src/
+curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
+tar zxf wandio-4.2.3.tar.gz
+cd wandio-4.2.3/
+./configure
+make
 # make install</code></pre>
 
         <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
@@ -56,21 +56,21 @@ configure: Compiled with http read (libcurl) support: Yes</code></pre>
             Note: If you do not want to install system-wide, then you can
             specify an installation directory (<code>/INSTALL/PATH</code>) as follows:
         </p>
-        <pre><code>$ ./configure --prefix=/INSTALL/PATH</code></pre>
+        <pre><code>./configure --prefix=/INSTALL/PATH</code></pre>
         <p>
             Then, depending on your OS, you may need to set <code>LD_LIBRRAY_PATH</code> as follows:
         </p>
-        <pre><code>$ export LD_LIBRARY_PATH="/INSTALL/PATH/lib:$LD_LIBRARY_PATH"</code></pre>
+        <pre><code>export LD_LIBRARY_PATH="/INSTALL/PATH/lib:$LD_LIBRARY_PATH"</code></pre>
 
         <p>If required libraries are not in the system library paths,
             specify their paths when running <code>configure</code> as
             follows:</p>
 
-        <pre><code>$ ./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'</code></pre>
+        <pre><code>./configure CPPFLAGS='-I/path/to/deps/include' LDFLAGS='-L/path/to/deps/lib'</code></pre>
 
         <p>
             You may test that wandio works by running
-            <code>$ wandiocat http://google.com</code>
+            <code>wandiocat http://google.com</code>
         </p>
 
         <h3>Optional Libraries</h3>
@@ -83,12 +83,12 @@ configure: Compiled with http read (libcurl) support: Yes</code></pre>
 
         <h2>2. Download and install BGPStream</h2>
 
-<pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
-$ tar zxf libbgpstream-2.1.0.tar.gz
-$ cd libbgpstream-2.1.0
-$ ./configure
-$ make
+<pre><code>cd ~/src/
+curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
+tar zxf libbgpstream-2.1.0.tar.gz
+cd libbgpstream-2.1.0
+./configure
+make
 # make install
 </code></pre>
 
@@ -115,8 +115,8 @@ $ make
         <p>BGPStream is available from FreeBSD ports at
             <code>net/bgpstream</code>:</p>
 
-<pre><code>$ cd /usr/ports/net/bgpstream
-$ sudo make install clean</code></pre>
+<pre><code>cd /usr/ports/net/bgpstream
+sudo make install clean</code></pre>
 
         <p>(BGPStream is a fairly new port, you may need to run
             <code>portsnap fetch update</code> first.)</p>
@@ -125,7 +125,7 @@ $ sudo make install clean</code></pre>
             manager (<code>pkg</code>), you can install BGPStream by
             running:</p>
 
-        <pre><code>$ sudo pkg install bgpstream</code></pre>
+        <pre><code>sudo pkg install bgpstream</code></pre>
 
         <p>The port will install all required dependencies (usually just
             <em>libcurl</em> and <em>libwandio</em>).</p>
@@ -135,26 +135,26 @@ $ sudo make install clean</code></pre>
 
         <h3>1. Install <em>wandio</em>:</h3>
 
-        <pre><code>$ cd /usr/ports/devel/wandio
-$ sudo make install clean</code></pre>
+        <pre><code>cd /usr/ports/devel/wandio
+sudo make install clean</code></pre>
 
         <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
 
         {#
         <p><em>or</em></p>
 
-        <pre><code>$ sudo pkg install wandio</code></pre>
+        <pre><code>sudo pkg install wandio</code></pre>
         #}
 
         {#
         <h3>1. Install <em>libcurl</em>:</h3>
 
-        <pre><code>$ cd /usr/ports/ftp/curl
-$ sudo make install clean</code></pre>
+        <pre><code>cd /usr/ports/ftp/curl
+sudo make install clean</code></pre>
 
         <p><em>or</em></p>
 
-        <pre><code>$ sudo pkg install curl</code></pre>
+        <pre><code>sudo pkg install curl</code></pre>
 
         <h3>2. Download and install
             <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
@@ -164,18 +164,18 @@ $ sudo make install clean</code></pre>
         <a href="https://github.com/caida/libbgpstream/issues" target="_blank">GitHub
             page</a> with any problems you encounter.</p>
 
-<pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
-$ tar zxf wandio-4.2.3.tar.gz
-$ cd wandio-4.2.3/
-$ ./configure
-$ make
-$ sudo make install</code></pre>
+<pre><code>mkdir ~/src
+cd ~/src/
+curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
+tar zxf wandio-4.2.3.tar.gz
+cd wandio-4.2.3/
+./configure
+make
+sudo make install</code></pre>
 
         <p>
             You may test that wandio works by running
-            <code>$ wandiocat http://google.com</code>
+            <code>wandiocat http://google.com</code>
         </p>
 
         <p>See the generic install instructions for details on how to install
@@ -184,14 +184,14 @@ $ sudo make install</code></pre>
 
         <h3>2. Download and install BGPStream:</h3>
 
-<pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
-$ tar zxf libbgpstream-2.1.0.tar.gz
-$ cd libbgpstream-2.1.0/
-$ ./configure
-$ make
-$ make check
-$ sudo make install</code></pre>
+<pre><code>cd ~/src/
+curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
+tar zxf libbgpstream-2.1.0.tar.gz
+cd libbgpstream-2.1.0/
+./configure
+make
+make check
+sudo make install</code></pre>
 
         <p>Please open an issue on our
             <a href="https://github.com/caida/libbgpstream/issues" target="_blank">GitHub
@@ -243,15 +243,15 @@ sudo wget -O /etc/apt/trusted.gpg.d/caida.gpg https://pkg.caida.org/os/ubuntu/ke
             package. It is
             currently an out-of-date version of wandio.</p>
 
-        <pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
-$ tar zxf wandio-4.2.3.tar.gz
-$ cd wandio-4.2.3/
-$ ./configure
-$ make
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>mkdir ~/src
+cd ~/src/
+curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
+tar zxf wandio-4.2.3.tar.gz
+cd wandio-4.2.3/
+./configure
+make
+sudo make install
+sudo ldconfig</code></pre>
 
         <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
 
@@ -260,15 +260,15 @@ $ sudo ldconfig</code></pre>
 
         <h3>3. Download and install BGPStream:</h3>
 
-        <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
-$ tar zxf libbgpstream-2.1.0.tar.gz
-$ cd libbgpstream-2.1.0/
-$ ./configure
-$ make
-$ make check
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>cd ~/src/
+curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
+tar zxf libbgpstream-2.1.0.tar.gz
+cd libbgpstream-2.1.0/
+./configure
+make
+make check
+sudo make install
+sudo ldconfig</code></pre>
 
         <p>Please open an issue on our
             <a href="https://github.com/caida/libbgpstream/issues" target="_blank">GitHub
@@ -283,21 +283,21 @@ $ sudo ldconfig</code></pre>
 
         <h3>1. Install dependencies:</h3>
 
-        <pre><code>$ sudo yum install zlib-devel bzip2-devel libcurl-devel</code></pre>
+        <pre><code>sudo yum install zlib-devel bzip2-devel libcurl-devel</code></pre>
 
         <h3>2. Download and install <a
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
         </h3>
 
-        <pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
-$ tar zxf wandio-4.2.3.tar.gz
-$ cd wandio-4.2.3/
-$ ./configure
-$ make
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>mkdir ~/src
+cd ~/src/
+curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
+tar zxf wandio-4.2.3.tar.gz
+cd wandio-4.2.3/
+./configure
+make
+sudo make install
+sudo ldconfig</code></pre>
 
         <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
 
@@ -306,23 +306,23 @@ $ sudo ldconfig</code></pre>
 
         <h3>3. Download and install BGPStream:</h3>
 
-        <pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
-$ tar zxf libbgpstream-2.1.0.tar.gz
-$ cd libbgpstream-2.1.0/
-$ ./configure
-$ make
-$ make check
-$ sudo make install
-$ sudo ldconfig</code></pre>
+        <pre><code>cd ~/src/
+curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
+tar zxf libbgpstream-2.1.0.tar.gz
+cd libbgpstream-2.1.0/
+./configure
+make
+make check
+sudo make install
+sudo ldconfig</code></pre>
 
         <p>If you get the following error:</p>
         <pre><code>checking for wandio HTTP support... configure: error: wandio HTTP support required (install libcurl before building wandio)</code></pre>
         <p>and <code>config.log</code> contains an error like:</p>
         <pre><code>wandiocat: error while loading shared libraries: libwandio.so.1: cannot open shared object file: No such directory</code></pre>
         <p>Then you may need to run</p>
-        <pre><code>$ sudo sh -c 'echo /usr/local/lib > /etc/ld.so.conf.d/usrlocal.conf'
-$ sudo ldconfig</code></pre>
+        <pre><code>sudo sh -c 'echo /usr/local/lib > /etc/ld.so.conf.d/usrlocal.conf'
+sudo ldconfig</code></pre>
 
         <p>Please open an issue on our
             <a href="https://github.com/caida/libbgpstream/issues" target="_blank">GitHub
@@ -338,9 +338,9 @@ $ sudo ldconfig</code></pre>
                     href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
         </h3>
 
-        <pre><code>$ git clone https://aur.archlinux.org/libwandio.git
-$ cd libwandio
-$ makepkg -si</code></pre>
+        <pre><code>git clone https://aur.archlinux.org/libwandio.git
+cd libwandio
+makepkg -si</code></pre>
 
         <p><strong>Note:</strong> sudo is needed to run makepkg with the -i flag.</p>
 
@@ -349,9 +349,9 @@ $ makepkg -si</code></pre>
 
         <h3>2. Download and install BGPStream:</h3>
 
-        <pre><code>$ git clone https://aur.archlinux.org/bgpstream.git
-$ cd bgpstream
-$ makepkg -si</code></pre>
+        <pre><code>git clone https://aur.archlinux.org/bgpstream.git
+cd bgpstream
+makepkg -si</code></pre>
 
         <p>Please submit a comment on the
             <a href="https://aur.archlinux.org/packages/bgpstream">AUR page</a>
@@ -370,7 +370,7 @@ $ makepkg -si</code></pre>
 
         <p>Install BGPStream by running:</p>
 
-        <pre><code>$ brew install bgpstream</code></pre>
+        <pre><code>brew install bgpstream</code></pre>
         </div>
 
         <h2>Installing from source</h2>
@@ -378,23 +378,23 @@ $ makepkg -si</code></pre>
         <h3>1. Install <em>libcurl</em>:</h3>
 
         <p>Using MacPorts:</p>
-        <pre><code>$ sudo port install curl</code></pre>
+        <pre><code>sudo port install curl</code></pre>
 
         <p>or, using Homebrew:</p>
-        <pre><code>$ brew install curl</code></pre>
+        <pre><code>brew install curl</code></pre>
 
         <h3>2. Download and install
             <a href="http://research.wand.net.nz/software/libwandio.php">wandio</a>:
         </h3>
 
-<pre><code>$ mkdir ~/src
-$ cd ~/src/
-$ curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
-$ tar zxf wandio-4.2.3.tar.gz
-$ cd wandio-4.2.3/
-$ ./configure
-$ make
-$ sudo make install</code></pre>
+<pre><code>mkdir ~/src
+cd ~/src/
+curl -LO https://research.wand.net.nz/software/wandio/wandio-4.2.3.tar.gz
+tar zxf wandio-4.2.3.tar.gz
+cd wandio-4.2.3/
+./configure
+make
+sudo make install</code></pre>
 
         <p><strong>Note:</strong> download timeout failures could happen if using earlier versions of wandio  (&lt;1.0.5)</p>
 
@@ -403,21 +403,21 @@ $ sudo make install</code></pre>
 
         <h3>3. Download and install BGPStream:</h3>
 
-<pre><code>$ cd ~/src/
-$ curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
-$ tar zxf libbgpstream-2.1.0.tar.gz
-$ cd libbgpstream-2.1.0/
-$ ./configure
-$ make
-$ make check
-$ sudo make install</code></pre>
+<pre><code>cd ~/src/
+curl -LO https://github.com/CAIDA/libbgpstream/releases/download/v2.1.0/libbgpstream-2.1.0.tar.gz
+tar zxf libbgpstream-2.1.0.tar.gz
+cd libbgpstream-2.1.0/
+./configure
+make
+make check
+sudo make install</code></pre>
 
         <p>If you get the following error:</p>
         <pre><code>checking for library containing wandio_create... no
 configure: error: libwandio required (http://research.wand.net.nz/software/libwandio.php)</code></pre>
         <p>But you have already installed wandio, then you may need to run:</p>
-        <pre><code>$ export C_INCLUDE_PATH="/usr/local/include:$C_INCLUDE_PATH"
-$ export LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"</code></pre>
+        <pre><code>export C_INCLUDE_PATH="/usr/local/include:$C_INCLUDE_PATH"
+export LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"</code></pre>
         <p>and then re-run configure.</p>
 
         <p>Please open an issue on our
