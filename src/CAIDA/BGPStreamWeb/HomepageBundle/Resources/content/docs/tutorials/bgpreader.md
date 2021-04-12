@@ -23,7 +23,7 @@ Below we provide the following tutorials:
 * [BGP Stream elems with filters](#elemfilters)
 * [RRC00 in real-time](#samplert)
 * [BGPStream with Cache](#cache)
-* [Realtime Streams from RouteViews and RIS](#live-streams)
+* [Realtime Streams from Route Views and RIS](#live-streams)
 * [A day of RIS RRC04 and RRC05 BGP records](#sampleday)
 * [Other data interfaces: how to use singlefile](#other)
 
@@ -238,17 +238,17 @@ records of type rib and 4,384,306 BGPStream records of type update.
 #}
 
 <br/>
-## Realtime Live Streams from RouteViews and RIPE RIS {% verbatim %}{#live-streams}{% endverbatim %}
+## Realtime Live Streams from Route Views and RIPE RIS {% verbatim %}{#live-streams}{% endverbatim %}
 
-Both RouteViews and RIPE NCC serves realtime live stream data to the public.
-RouteViews provides a BMP livestream from many of its peers, and RIPE RIS provides
+Both Route Views and RIPE NCC serve realtime live stream data to the public.
+Route Views provides a BMP live stream from many of its peers and RIPE RIS provides
 [RIS Live](https://ris-live.ripe.net/). 
-In BGPStream version 2, we added support for both stream sources. 
+In BGPStream version 2, we added support for both live stream sources. 
 
-To access the streams data, user just need to set project (`-p`) to `routeviews-stream` for RouteViews BMP stream or 
-`ris-live` for RIS Live stream.
+To access the live stream data, a user just needs to set project (`-p`) to `routeviews-stream` for the Route Views BMP stream or 
+`ris-live` for the RIS Live stream.
 
-The following command will start a real-time live stream from RouteViews BMP stream.
+The following command will start a real-time live stream from Route Views BMP stream.
 ~~~
 $ bgpreader -p routeviews-stream
 WARN: No time window specified, defaulting to live mode

@@ -10,7 +10,7 @@ BGPReader
 ---------
  - [Replace BGPdump with BGPReader]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#dump2reader)
  - [Isolate data using filters]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#elemfilters)
- - [Realtime streams from RouteViews and RIPE RIS]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams)
+ - [Realtime streams from Route Views and RIPE RIS]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#live-streams)
  - [Read a local file]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}#other)
  
 <a href="{{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'bgpreader'})}}"

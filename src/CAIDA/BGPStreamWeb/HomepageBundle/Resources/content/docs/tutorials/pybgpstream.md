@@ -388,11 +388,11 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-communi
 
 ## Accessing live stream data sources ##   {% verbatim %}{#live-streams}{% endverbatim %}
 
-In this example, we show how to use pybgpstream to access real-time stream data from
-RouteViews and RIPE RIS. The example programs print out real-time BGP updates received from
-RouteViews BMP Stream (`routeivews-stream`) and RIPE RIS Live (`ris-live`).
+In this example, we show how to use pybgpstream to access live data streams from
+Route Views and RIPE RIS. The example programs print out real-time BGP updates received from
+Route Views BMP Stream (`routeivews-stream`) and RIPE RIS Live (`ris-live`).
 
-To access these live stream data sources are as simple as setting the `project` or `projects` field to 
+Accessing these live stream data sources is as simple as setting the `project` or `projects` field to 
 `routeviews-stream` or `ris-live` when initiating a `BGPStream` object in your script.
 
 ### Route Views Stream 
