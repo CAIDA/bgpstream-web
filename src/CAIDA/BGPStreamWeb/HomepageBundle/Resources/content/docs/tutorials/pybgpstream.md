@@ -10,6 +10,10 @@ Below we provide the following tutorials:
 * [Print the MOAS prefixes](#moas) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
 * [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py') }}))
 * [Studying the communities](#communities) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-communities.py') }}))
+* [Accessing live-stream data sources](#live-streams) (
+[routeviews-stream code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-routeviews-stream.py')}})
+[ris-live code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-ris-live.py')}})
+)
 
 <br>
 
@@ -382,4 +386,32 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-communi
 ~~~
 
 
+## Accessing live stream data sources ##   {% verbatim %}{#live-streams}{% endverbatim %}
 
+In this example, we show how to use pybgpstream to access live data streams from
+Route Views and RIPE RIS. The example programs print out real-time BGP updates received from
+Route Views BMP Stream (`routeivews-stream`) and RIPE RIS Live (`ris-live`).
+
+Accessing these live stream data sources is as simple as setting the `project` or `projects` field to 
+`routeviews-stream` or `ris-live` when initiating a `BGPStream` object in your script.
+
+### Route Views Stream 
+
+
+Route Views Stream [code]({{
+asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-routeviews-stream.py')
+}}).
+
+~~~ .language-python
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-routeviews-stream.py' %}
+~~~
+
+### RIPE RIS Live
+
+RIPE RIS Live [code]({{
+asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-ris-live.py')
+}}).
+
+~~~ .language-python
+{% include '@CAIDABGPStreamWebHomepageBundle/Resources/public/docs/tutorials/code/pybgpstream-ris-live.py' %}
+~~~

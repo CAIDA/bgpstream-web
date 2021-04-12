@@ -23,8 +23,7 @@ Below we provide the following tutorials:
 * [BGP Stream elems with filters](#elemfilters)
 * [RRC00 in real-time](#samplert)
 * [BGPStream with Cache](#cache)
-* [Realtime Stream from RIS Live](#ris-live)
-* [Realtime Stream from CAIDA BMP](#bmp)
+* [Realtime Streams from Route Views and RIS](#live-streams)
 * [A day of RIS RRC04 and RRC05 BGP records](#sampleday)
 * [Other data interfaces: how to use singlefile](#other)
 
@@ -239,10 +238,33 @@ records of type rib and 4,384,306 BGPStream records of type update.
 #}
 
 <br/>
-## Realtime Live Stream from RIS Live {% verbatim %}{#ris-live}{% endverbatim %}
+## Realtime Live Streams from Route Views and RIPE RIS {% verbatim %}{#live-streams}{% endverbatim %}
 
-RIPE NCC provides live-stream data, i.e. [RIS Live](https://ris-live.ripe.net/). 
-In BGPStream version 2, we added support for RIS Live data stream. 
+Both Route Views and RIPE NCC serve realtime live stream data to the public.
+Route Views provides a BMP live stream from many of its peers and RIPE RIS provides
+[RIS Live](https://ris-live.ripe.net/). 
+In BGPStream version 2, we added support for both live stream sources. 
+
+To access the live stream data, a user just needs to set project (`-p`) to `routeviews-stream` for the Route Views BMP stream or 
+`ris-live` for the RIS Live stream.
+
+The following command will start a real-time live stream from Route Views BMP stream.
+~~~
+$ bgpreader -p routeviews-stream
+WARN: No time window specified, defaulting to live mode
+U|A|1602281859.663705|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|114.5.9.0/24|187.16.220.216|6447 52873 12956 6453 4761|4761|||
+U|A|1602281859.663713|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|64.68.236.0/22|187.16.220.216|6447 52873 12956 3356 13904 13904 13904 13904 13904 13904|13904|||
+U|A|1602281860.068754|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|64.68.236.0/22|187.16.220.216|6447 52873 12956 3356 13904|13904|||
+U|A|1602281860.077008|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|184.27.202.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077026|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|104.77.0.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077031|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|204.93.46.0/23|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077036|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|23.10.241.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077041|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|173.223.54.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077045|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|104.77.131.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+U|A|1602281860.077051|routeviews-stream|is-ah-bmp1|saopaulo2|200.160.6.203|52873|187.16.220.216|184.51.121.0/24|187.16.220.216|6447 52873 12956 3257|3257|||
+...
+~~~
+
 The following command will start a real-time live stream from RIS Live.
 ~~~
 $ bgpreader -p ris-live
@@ -256,25 +278,6 @@ U|A|1569948264.660000|ris-live|rrc15|||42473|187.16.216.121|209.177.171.0/24|187
 U|A|1569948264.680000|ris-live|rrc07|||6667|194.68.123.136|177.136.12.0/24|194.68.123.136|6667 3491 7738 52871|52871|6667:3001 6667:4004 6667:5209||
 U|A|1569948264.680000|ris-live|rrc07|||6667|2001:7f8:d:ff::136|2404:5780:3::/48|2001:7f8:d:ff::136|6667 174 20473 9558|9558|174:21001 174:22013 6667:3004 6667:4005 6667:5009 6667:6000||
 U|A|1569948264.680000|ris-live|rrc07|||6667|194.68.123.136|185.137.56.0/22|194.68.123.136|6667 29119|29119|6667:3001 6667:4004 6667:5209||
-...
-~~~
-
-<br/>
-## Realtime Live Stream from CAIDA Public BMP Feed {% verbatim %}{#bmp}{% endverbatim %}
-
-In BGPStream version 2, we added support for streaming from BMP source. 
-Currently, CAIDA provides a public BMP stream, and you can access it by
-~~~
-$ bgpreader -p caida-bmp
-WARN: No time window specified, defaulting to live mode
-U|A|1571427802.802131|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|202.70.88.0/21|12.0.1.63|7018 6453 23752|23752|7018:5000 7018:31023||
-U|A|1571427803.349627|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|103.116.164.0/24|12.0.1.63|7018 3491 9498 10075 136224 136224 136224 137889|137889|7018:5000 7018:37232||
-U|A|1571427803.448261|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|202.70.88.0/21|12.0.1.63|7018 2914 9498 23752|23752|7018:5000 7018:31023||
-U|W|1571427803.448473|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|6939|2001:470:0:1a::1|2404:5780:3::/48||||||
-U|A|1571427803.596304|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|202.70.88.0/21|12.0.1.63|7018 3491 9498 23752|23752|7018:5000 7018:37232||
-U|A|1571427803.793456|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|6939|2001:470:0:1a::1|2404:5780:3::/48|2001:470:0:1a::1|6939 3356 20473 20473 9558|9558|||
-U|A|1571427803.891382|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|8.39.125.0/24|12.0.1.63|7018 6453 13335|13335|7018:5000 7018:37232||
-U|A|1571427803.891382|caida|bmp.bgpstream.caida.org|route-views.routeviews.org|128.223.51.103|7018|12.0.1.63|162.158.25.0/24|12.0.1.63|7018 6453 13335|13335|7018:5000 7018:37232||...
 ...
 ~~~
 
