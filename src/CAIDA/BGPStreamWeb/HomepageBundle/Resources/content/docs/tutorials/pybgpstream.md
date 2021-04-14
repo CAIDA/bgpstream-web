@@ -86,6 +86,18 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-print.p
 
 <br>
 
+## Cache the MRT files ##   {% verbatim %}{#cache}{% endverbatim %}
+
+Data files processed by the broker can now be cached to a local directory which is checked before downloading a dump file.
+Previously, when using BGPStream to repeatedly process the same data (e.g., when testing/debugging code), poor network connectivity could add overhead to processing time.
+The caching implementation is thread safe and can support parallel instances of BGPStream (either as threads or separate processes).
+The cache can be enabled by setting the  cache-dir parameter of the "broker" data interface by calling 
+~~~
+stream.set_data_interface_option("broker", "cache-dir", "/path/to/cache")
+~~~
+
+<br>
+
 ## Print the MOAS prefixes ##   {% verbatim %}{#moas}{% endverbatim %}
 
 In this second tutorial we show  how to use pybgpstream to output
