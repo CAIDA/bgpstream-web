@@ -4,8 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/",
-            "SymfonyStandard\\": "app/SymfonyStandard/"
+            "": "src/"
         }
     },
     "require": {
@@ -23,7 +22,8 @@
         "friendsofsymfony/http-cache-bundle": "~1.2",
         "leaseweb/memcache-bundle": "dev-master",
         "knplabs/knp-menu": "@stable",
-        "knplabs/knp-menu-bundle": "@stable"
+        "knplabs/knp-menu-bundle": "@stable",
+        "knplabs/knp-markdown-bundle": "^1.7.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
