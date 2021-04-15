@@ -35,7 +35,7 @@ libBGPStream
 PyBGPStream
 -----------
  - [Get familiar with the API]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#print)
- - [Cache the MRT files]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#cache)
+ - [Enable caching of downloaded MRT files]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#cache)
  - [Print the MOAS prefixes]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#moas)
  - [Measuring the extent of AS path inflation]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#aspath)
  - [Studying the communities]({{ path('caida_bgpstream_web_homepage_docs', {'page': 'tutorials', 'subpage': 'pybgpstream'})}}#communities)
