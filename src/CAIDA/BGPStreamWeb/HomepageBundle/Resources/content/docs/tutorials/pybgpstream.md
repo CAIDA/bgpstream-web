@@ -7,6 +7,7 @@ provides a Python interface to the libBGPStream C library.
 Below we provide the following tutorials:
 
 * [Get familiar with the API](#print) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
+* [Enable caching of downloaded MRT files](#cache) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
 * [Print the MOAS prefixes](#moas) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-moas.py') }}))
 * [Measuring the extent of AS path inflation](#aspath) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-aspath.py') }}))
 * [Studying the communities](#communities) ([code]({{ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-communities.py') }}))
@@ -86,7 +87,7 @@ asset('bundles/caidabgpstreamwebhomepage/docs/tutorials/code/pybgpstream-print.p
 
 <br>
 
-## Cache the MRT files ##   {% verbatim %}{#cache}{% endverbatim %}
+## Enable caching of downloaded MRT files ##   {% verbatim %}{#cache}{% endverbatim %}
 
 Data files processed by the broker can now be cached to a local directory which is checked before downloading a dump file.
 Previously, when using BGPStream to repeatedly process the same data (e.g., when testing/debugging code), poor network connectivity could add overhead to processing time.
