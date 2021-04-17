@@ -1,5 +1,14 @@
 {% extends '@CAIDABGPStreamWebHomepage/Menu/nav_base.html.twig' %}
 
+{% block styleblock %}
+    {{ parent() }}
+    {% stylesheets
+    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/topnav.css'
+    filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
 {% macro attributes(attributes) %}
 {% for name, value in attributes %}
     {%- if value is not none and value is not sameas(false) -%}
@@ -84,6 +93,7 @@
 
         <ul {{ knp_menu.attributes(listAttributes) }}>
             {{ block('children') }}
+            {{ block('search') }}
         </ul>
     {% endif %}
 {% endblock %}
@@ -168,4 +178,12 @@
         {% else %}
             {{ block('label')|title }}
         {% endif %}<b class="caret"></b></a>
+{% endblock %}
+
+{% block search %}
+  <li{{ knp_menu.attributes(attributes) }}>
+    <form method="GET" action="https://duckduckgo.com/" id="search">
+      <input name="q" value="" placeholder="Search" type="text" id="ddg-site-search"><input name="sites" value="bgpstream.caida.org" type="hidden"><input value="Search" type="submit" id="ddg-search-button">
+    </form>
+  </li>
 {% endblock %}
