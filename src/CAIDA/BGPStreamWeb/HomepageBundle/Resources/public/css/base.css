@@ -192,11 +192,10 @@ pre {
 }
 
 #ddg-site-search {
-    height: 3rem;
     width: 9rem;
-    margin-top: 1rem;
+    margin-top: 1.4rem;
     margin-left: 1rem;
 }
 #ddg-site-search, #ddg-search-button {
-    font-size: 11px;
+    font-size: 1rem;
 }
