@@ -1,14 +1,5 @@
 {% extends '@CAIDABGPStreamWebHomepage/Menu/nav_base.html.twig' %}
 
-{% block styleblock %}
-    {{ parent() }}
-    {% stylesheets
-    '@CAIDABGPStreamWebHomepageBundle/Resources/public/css/topnav.css'
-    filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-{% endblock %}
-
 {% macro attributes(attributes) %}
 {% for name, value in attributes %}
     {%- if value is not none and value is not sameas(false) -%}
