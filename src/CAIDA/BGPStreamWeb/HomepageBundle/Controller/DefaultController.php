@@ -37,6 +37,11 @@ class DefaultController extends Controller
             $page = 'home';
         }
 
+        /* redirect v2-beta page to v2-whats-new page */
+        if($page=="v2-beta"){
+            $page = "v2-whats-new";
+        }
+
         if(isset($subpage)) {
             $twig =
                 "CAIDABGPStreamWebHomepageBundle:Default:$page.$subpage.html.twig";

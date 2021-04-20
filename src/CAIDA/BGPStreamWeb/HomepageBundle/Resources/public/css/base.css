@@ -190,3 +190,12 @@ pre {
         float: none;
     }
 }
+
+#ddg-site-search {
+    width: 9rem;
+    margin-top: 1.4rem;
+    margin-left: 1rem;
+}
+#ddg-site-search, #ddg-search-button {
+    font-size: 1rem;
+}

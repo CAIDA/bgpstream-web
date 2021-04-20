@@ -9,14 +9,10 @@
         <div class="col-md-8">
             <div id="intro">
                 <p>
-                    Over the last several years, we have
-                    been working on a new release of BGPStream. This version
-                    contains several new features including native support for
-                    true <a href="#bmp-private">real-time data access via BMP</a>,
-                    as well as a bunch of
-                    bug fixes, and performance improvements. See the <a
-                            href="#changes">Changes</a>
-                    section below for a more detailed list.
+                    BGPStream V2 adds several new features, including native support for true real-time data access
+                    via BMP and performance improvements.
+                    See the <a href="#changes">Changes</a> section below for a summary
+                    and <a href="https://github.com/CAIDA/libbgpstream/releases">the GitHub releases page</a>  for details.
                 </p>
                 <p>
                     See the <a href="#bmp-private">Live BMP Stream</a> section below for
@@ -32,13 +28,40 @@
                     <a class="btn btn-md btn-success"
                        href="{{ path('caida_bgpstream_web_homepage', {'page': 'download'}) }}"
                        role="button">
-                        Download BGPStream V2
+                        Download BGPStream V2.2.0
                     </a>
                 </p>
             </div>
             <div id="changes">
                 <h2>Changes</h2>
-                <h4>New Features</h4>
+                <h4>New Features and Improvements in 2.2.0</h4>
+                <ul>
+                    <li><i>Improved Kafka transport</i>
+                        <ul>
+                            <li>Kakfa transport performance improvement</li>
+                            <li>Kakfa now tries blocking for a while before returning an EOF</li>
+                            <li>Prefers round-robin rebalance strategy</li>
+                        </ul>
+                    </li>
+                    <li><i>Imporved message parsing</i>
+                        <ul>
+                            <li>Ensure BGPStream can move past invalid messages</li>
+                            <li>Fix "incompatible pointer type" warning in pfx_set code</li>
+                            <li>Prefers round-robin rebalance strategy</li>
+                            <li>Support RFC 8050 MRT Additional Path extension</li>
+                            <li>Fix parsing of missing OPEN/UPDATE messages</li>
+                        </ul>
+                </ul>
+
+                <h4>New Features and Improvements in 2.1.0</h4>
+                <ul>
+                    <li><i>Iteration over prefix set</i>
+                        <ul>
+                            <li>Added utility functions to iterate over a prefix set (<a href="https://github.com/CAIDA/libbgpstream/commit/e3c20135a12739c4220ce84b0cf6d1f7534016ff">detailed changes</a>)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h4>New Features and Improvements in 2.0.0 </h4>
                 <ul>
                     <li><i>Native BMP support</i>
                         <ul>
