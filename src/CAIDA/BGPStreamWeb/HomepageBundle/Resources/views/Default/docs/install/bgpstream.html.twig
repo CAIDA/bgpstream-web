@@ -213,8 +213,7 @@ $ sudo make install</code></pre>
 sudo apt-get install -y curl apt-transport-https ssl-cert ca-certificates gnupg lsb-release </code></pre>
 
         Install wandio repository
-        <pre><code>echo "deb https://dl.bintray.com/wand/general $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/wand.list
-curl --silent "https://bintray.com/user/downloadSubjectPublicKey?username=wand" | sudo apt-key add - </code></pre>
+        <pre><code> curl -1sLf 'https://dl.cloudsmith.io/public/wand/libwandio/cfg/setup/bash.deb.sh' | sudo -E bash </code></pre>
 
         Install CAIDA repository
         <pre><code>echo "deb https://pkg.caida.org/os/$(lsb_release -si|awk '{print tolower($0)}') $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/caida.list
